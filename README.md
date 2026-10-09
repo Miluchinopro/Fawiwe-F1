@@ -2,7 +2,7 @@
 
 Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**, de 1950 a 2026.
 
-**Creado por Miluchino.**
+**Creado por Miluchino.** Hecho con la ayuda de [Claude](https://claude.ai) 🤖.
 
 ## 🎮 Jugar
 - Abrí `index.html` (la página con el juego adentro) o `juego.html` (solo el juego).
