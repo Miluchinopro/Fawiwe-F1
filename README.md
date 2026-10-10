@@ -1,4 +1,4 @@
-# 🏎️ FAWIWE F1 · Prototipo 1.2
+# 🏎️ FAWIWE F1 · Prototipo 1.3
 
 Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**, de 1950 a 2026.
 
@@ -20,6 +20,11 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 - Dos jugadores en la misma compu o celu, cada uno con su equipo o su piloto.
 - Clasificación en vivo y transmisión de la carrera con los dos autos: cada uno juega su estrategia, sus pases y su entrada a boxes.
 - Cara a cara antes de cada carrera, duelo después y carrera rápida a dos.
+- **Largada a dos**: los dos largan al mismo tiempo (teclas A y L, o cada uno toca su mitad de la pantalla).
+- **Duelo en pista**: si los dos autos quedan pegados, cada uno elige en secreto por dónde atacar o defender.
+- **Pasá el celu**: una pantalla tapada entre turnos para que nadie espíe la jugada del otro.
+- **Apuestas del paddock**: antes de largar, cada uno apuesta (terminar adelante, podio o puntos).
+- **Copa del duelo**: gráfico de la temporada, copas ganadas y una tarjeta del duelo para compartir.
 
 ## 📱 En el celular
 - **Instalalo como app**: en el navegador tocá «Instalar app» o «Agregar a la pantalla de inicio». Funciona sin internet después de la primera vez.
