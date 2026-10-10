@@ -1,9 +1,9 @@
-<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.0 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.0" srcdoc="&lt;!doctype html&gt;
+<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.1 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.1" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;es&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
-&lt;title&gt;FAWIWE F1 · Prototipo 1.0&lt;/title&gt;
+&lt;title&gt;FAWIWE F1 · Prototipo 1.1&lt;/title&gt;
 &lt;style&gt;
 @import url(&#x27;https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap&#x27;);
 *{box-sizing:border-box}body{margin:0;background:#090909;color:#eee;font-family:&quot;Inter&quot;,Arial,sans-serif}h1,h2,h3,.logo,.rank,.luxury-banner,button,.tutorial-box h3{font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif}header{background:linear-gradient(120deg,#090909,#300b08);padding:18px 5%;border-bottom:3px solid #d9b650;position:sticky;top:0;z-index:9}.logo{font-size:48px;font-weight:1000;letter-spacing:6px}
@@ -2026,10 +2026,77 @@ body.fw-reduce .v7-fw,body.fw-reduce .v7-checker{animation:none!important}
 .v11-cool .q{align-items:center}
 .v11-coolb{background:#111!important;border:1px solid #fff;animation:none!important}
 @media (max-width:760px){ .v11-vs{grid-template-columns:1fr;gap:8px} .v11-side{flex-direction:row;justify-content:center;padding:8px} .v11-side svg{width:64px} .v11-mid i{font-size:30px} .v11-radar canvas{width:120px;height:120px} }
+
+/* ===== V142 · celular ===== */
+/* 1-2) celular acostado: radio en una esquina y pantallas que se pueden recorrer */
+@media (max-height:520px) and (orientation:landscape){
+  #fwRadioToast,body.v10-dec #fwRadioToast{top:auto!important;bottom:8px!important;left:auto!important;right:8px!important;min-width:0!important;max-width:44vw!important;transform:translateY(20px)!important;padding:6px 10px!important}
+  #fwRadioToast.show,body.v10-dec #fwRadioToast.show{transform:none!important}
+  body.v10-dec #fwRadioToast{bottom:auto!important;top:8px!important;max-width:38vw!important}
+  #fwRadioToast .fr-txt{font-size:12px!important;line-height:1.3}
+  #resultOverlay,#v7Champ,#v11Face,#v5Launch,#seasonChangesOverlay,#v9QuickEnd,#v6Quick,#v4Chal,#hofOverlay{align-items:flex-start!important;overflow-y:auto!important;padding:10px!important}
+  .result-card,.v7-champ-card,.v11-face,.v9-qe-card{margin:auto!important}
+  .result-card{padding:16px 16px!important}
+  #resultTitle{font-size:26px!important}
+  .v7-champ-card h1{font-size:30px!important;margin:4px 0!important}.v7-trophy{font-size:44px!important}
+  .v11-vs{grid-template-columns:1fr auto 1fr!important}.v11-side{flex-direction:column!important;padding:6px!important}.v11-side svg{width:60px!important}.v11-quote{margin:8px auto 4px!important;font-size:15px!important}
+  #dlMap{height:150px!important}
+}
+#resultGridTable{max-height:none!important}
+#resultOverlay{overflow-y:auto}
+/* 3) encabezado compacto */
+@media (max-width:700px){
+  body.dash #dashTop{flex-direction:column;align-items:stretch;gap:8px;padding:10px 10px 10px 58px!important}
+  body.dash #dashTitle{font-size:21px!important}
+  body.dash #dashSub{font-size:10px!important;letter-spacing:.1em!important}
+  body.dash #dashTop&gt;*{min-width:0;max-width:100%}
+  body.dash #dashBtns{display:flex;flex-wrap:nowrap;gap:6px;margin-left:-48px;width:calc(100% + 48px);max-width:none}
+  body.dash #dashBtns button{padding:9px 0!important;min-width:0;width:42px;font-size:18px!important;line-height:1;flex:0 0 42px}
+  body.dash #dashBtns #dashCta{flex:1 1 auto;width:auto;min-width:0;font-size:13px!important;padding:11px 8px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  body.dash #dashTitle{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+/* 9) botones grandes en los momentos jugables */
+@media (pointer:coarse){
+  .v7-sides .lv-btn,.v7-qte .lv-btn,.v7-start .lv-btn,.v7-rs .lv-btn,.v9-pe .lv-btn,.v11-vsc .lv-btn,.v11-yel .lv-btn,.dl-duel .lv-btn,.ex-pit .lv-btn{min-height:58px;font-size:17px!important;padding:12px 16px!important}
+  .v7-sides{display:grid!important;grid-template-columns:1fr 1fr;gap:10px}
+  .v7-qte&gt;.lv-btn.red,.v7-start .lv-btn,.v7-rs .lv-btn,.v9-pe .lv-btn,.v11-vsc .lv-btn,.v11-yel .lv-btn,.dl-duel&gt;.lv-btn{width:100%}
+  .v9-plan{min-height:64px}
+}
+/* 13) ahorro de batería */
+body.fw-eco .f1-track-bg,body.fw-eco .gold-glow,body.fw-eco .v7-fw,body.fw-eco .hc-sky{display:none!important}
+body.fw-eco #fwRadioToast .fr-tag i{animation:none!important}
+/* 14) barra de abajo */
+#v12Nav{position:fixed;left:0;right:0;bottom:0;z-index:58;display:grid;grid-template-columns:repeat(4,1fr);background:#0f0f15f5;border-top:1px solid #2a2a33;padding:4px 4px calc(4px + env(safe-area-inset-bottom));backdrop-filter:blur(6px)}
+#v12Nav button{background:none!important;border:0!important;box-shadow:none!important;color:#cfcfd6!important;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0!important;font:700 11px Arial,sans-serif!important;letter-spacing:.02em;min-height:52px;border-radius:10px!important}
+#v12Nav button i{font-style:normal;font-size:20px;line-height:1}
+#v12Nav button:active{background:#1d1d27!important}
+body.v12-hasnav{padding-bottom:70px}
+body.v12-hasnav #fwFooter{display:none!important}
+/* 16) modo una mano: las decisiones abajo */
+@media (max-width:900px){
+  body.fw-onehand #dlDecision:not(:empty),body.fw-onehand #engLiveDecision:not(:empty),body.fw-onehand #qlDecision:not(:empty){position:fixed;left:8px;right:8px;bottom:8px;z-index:1000001;max-height:56vh;overflow-y:auto;border-radius:14px;box-shadow:0 -10px 40px #000c}
+}
+body.fw-onehand.v10-dec #fwRadioToast{top:8px!important;bottom:auto!important}
+/* 5) &quot;Tu carrera&quot; desplegable */
+.dl-sum.v12-fold:not(.v12-open) p:nth-of-type(n+6){display:none}
+.v12-more{display:block;margin:8px auto 2px;font-size:12px!important}
+/* 10) aviso para girar */
+#v12Rot{position:sticky;top:0;z-index:5;margin:0 0 8px;background:#1d1d27;border:1px solid #38bdf8;color:#e0f2fe;border-radius:10px;padding:8px 36px 8px 12px;font-size:13px;font-weight:700}
+#v12Rot button{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none!important;border:0!important;box-shadow:none!important;color:#fff!important;font-size:16px;padding:4px 8px!important}
+/* 11-12) cartel de cómo doblar */
+.v12-steer{background:#14532d;color:#dcfce7;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:800;text-align:center;margin:0 auto 8px;width:max-content;max-width:100%}
+.v12-h{margin:14px 0 6px}
+.v12-armed{color:#facc15!important;font-weight:900!important}
+/* tablas anchas: se desplazan solas en vez de correr toda la pantalla */
+@media (max-width:700px){
+  [id$=&quot;Standings&quot;],#driverStandings,#game .card .table-wrap{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+  #game .card table{font-size:12.5px}
+}
+html,body{overflow-x:clip}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
-&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.0 🏁&lt;/div&gt;
+&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.1 🏁&lt;/div&gt;
 &lt;div id=&quot;introScreen&quot; class=&quot;ci-wait&quot; onclick=&quot;skipIntroCinematic(event)&quot;&gt;
   &lt;div class=&quot;ci-gate&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ci-gate-btn&quot; onclick=&quot;event.stopPropagation();ciBegin()&quot;&gt;▶ Tocá para empezar&lt;/button&gt;&lt;span&gt;🔊 Con música y sonido&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;ci-layer ci-present&quot;&gt;&lt;div class=&quot;bc-plate&quot;&gt;&lt;svg class=&quot;bc-lines&quot; viewBox=&quot;0 0 400 300&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;6&quot; y=&quot;6&quot; width=&quot;388&quot; height=&quot;288&quot; rx=&quot;60&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.25s&quot;/&gt;&lt;rect x=&quot;18&quot; y=&quot;18&quot; width=&quot;364&quot; height=&quot;264&quot; rx=&quot;50&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.37s&quot;/&gt;&lt;rect x=&quot;30&quot; y=&quot;30&quot; width=&quot;340&quot; height=&quot;240&quot; rx=&quot;40&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.49s&quot;/&gt;&lt;rect x=&quot;42&quot; y=&quot;42&quot; width=&quot;316&quot; height=&quot;216&quot; rx=&quot;30&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.61s&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;k&quot;&gt;FAWIWE RACING TEAM&lt;/div&gt;&lt;b&gt;Presenta&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
@@ -25409,6 +25476,287 @@ function v11Tut() {
   if (document.readyState !== &quot;loading&quot;) setTimeout(v11Tut, 0); else document.addEventListener(&quot;DOMContentLoaded&quot;, v11Tut);
   const rd = window.render;
   if (typeof rd === &quot;function&quot;) { render = function () { const r = rd.apply(this, arguments); try { v11Tut(); } catch (e) {} return r; }; window.render = render; }
+})();
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · V142 — paquete de CELULAR (16)
+   Horizontal · encabezado compacto · radio sin tapar · &quot;Tu carrera&quot; desplegable · vibración ·
+   pantalla completa · app instalable · botones grandes · aviso para girar · cómo doblar
+   (botones / deslizar / inclinar) · ahorro de batería · barra de abajo · doble toque · una mano
+   ===================================================================================== */
+function v12Opt() { try { return v4A11y(); } catch (e) { return {}; } }
+function v12Touch() { return window.matchMedia &amp;&amp; matchMedia(&quot;(pointer:coarse)&quot;).matches; }
+function v12Small() { return Math.min(innerWidth, innerHeight) &lt; 600; }
+
+/* ---------------- 6) vibración ---------------- */
+function v12Vib(p) { try { if (v12Opt().noVib || !navigator.vibrate) return; navigator.vibrate(p); } catch (e) {} }
+if (typeof dlFeed === &quot;function&quot;) {
+  const o = dlFeed;
+  dlFeed = function (lap, txt, mine, cls) {
+    try { if (DL &amp;&amp; !DL.skip &amp;&amp; mine) { if (cls === &quot;ok&quot;) v12Vib(40); else if (cls === &quot;bad&quot;) v12Vib([70, 40, 70]); } } catch (e) {}
+    return o.apply(this, arguments);
+  };
+}
+if (typeof v7StartHit === &quot;function&quot;) { const o = v7StartHit; v7StartHit = function () { v12Vib(30); return o.apply(this, arguments); }; }
+if (typeof v7QteOpen === &quot;function&quot;) { const o = v7QteOpen; v7QteOpen = function () { const r = o.apply(this, arguments); if (r) v12Vib([20, 30, 20]); return r; }; }
+if (typeof v7Flag === &quot;function&quot;) { const o = v7Flag; v7Flag = function () { v12Vib([90, 50, 90, 50, 220]); return o.apply(this, arguments); }; }
+if (typeof eraEnd === &quot;function&quot;) { const o = eraEnd; eraEnd = function (ok) { v12Vib(ok ? 40 : 140); return o.apply(this, arguments); }; }
+
+/* ---------------- 7) pantalla completa · 8) instalar como app ---------------- */
+function v12Full() {
+  try {
+    const d = document, el = d.documentElement;
+    if (d.fullscreenElement || d.webkitFullscreenElement) { (d.exitFullscreen || d.webkitExitFullscreen).call(d); return; }
+    const req = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (req) { const p = req.call(el); if (p &amp;&amp; p.catch) p.catch(() =&gt; v12FullParent()); } else v12FullParent();
+  } catch (e) { v12FullParent(); }
+}
+function v12FullParent() { try { if (window.parent !== window) window.parent.postMessage({ fw: &quot;fullscreen&quot; }, &quot;*&quot;); else v9Toast(&quot;Tu navegador no deja usar pantalla completa acá.&quot;); } catch (e) {} }
+function v12Install() {
+  try { if (window.parent !== window) { window.parent.postMessage({ fw: &quot;install&quot; }, &quot;*&quot;); return; } } catch (e) {}
+  if (window._v12Prompt) { window._v12Prompt.prompt(); window._v12Prompt = null; return; }
+  v12InstallHelp();
+}
+function v12InstallHelp() {
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  v9Toast(ios ? &quot;📲 En iPhone: tocá Compartir (□↑) y después «Agregar a inicio».&quot; : &quot;📲 En el menú del navegador (⋮) tocá «Instalar app» o «Agregar a la pantalla de inicio».&quot;);
+}
+window.addEventListener(&quot;beforeinstallprompt&quot;, e =&gt; { e.preventDefault(); window._v12Prompt = e; });
+
+/* ---------------- 12) inclinar · 11) deslizar: cómo doblar ---------------- */
+function v12Steer() { return v12Opt().steer || &quot;btn&quot;; }
+function v12Mini() { const st = document.getElementById(&quot;eraStage&quot;); return st &amp;&amp; st.getClientRects().length &gt; 0 &amp;&amp; typeof ERA !== &quot;undefined&quot; &amp;&amp; ERA &amp;&amp; !ERA.dead ? st : null; }
+const V12K = { L: false, R: false };
+function v12Key(dir, down) {
+  const k = dir &lt; 0 ? &quot;L&quot; : &quot;R&quot;;
+  if (V12K[k] === down) return;
+  V12K[k] = down;
+  const key = dir &lt; 0 ? &quot;ArrowLeft&quot; : &quot;ArrowRight&quot;;
+  try { document.dispatchEvent(new KeyboardEvent(down ? &quot;keydown&quot; : &quot;keyup&quot;, { key, code: key, bubbles: true })); } catch (e) {}
+}
+function v12ReleaseAll() { v12Key(-1, false); v12Key(1, false); }
+// deslizar el dedo
+(function () {
+  let x0 = null, dir = 0;
+  document.addEventListener(&quot;touchstart&quot;, e =&gt; {
+    if (v12Steer() !== &quot;swipe&quot; || !v12Mini()) return;
+    if (e.target.closest(&quot;button&quot;)) return;
+    x0 = e.touches[0].clientX; dir = 0;
+  }, { passive: true });
+  document.addEventListener(&quot;touchmove&quot;, e =&gt; {
+    if (x0 == null || !v12Mini()) return;
+    const dx = e.touches[0].clientX - x0;
+    const nd = dx &lt; -22 ? -1 : dx &gt; 22 ? 1 : 0;
+    if (nd !== dir) { if (dir) v12Key(dir, false); if (nd) v12Key(nd, true); dir = nd; }
+  }, { passive: true });
+  const end = () =&gt; { if (x0 == null) return; if (dir) v12Key(dir, false); x0 = null; dir = 0; };
+  document.addEventListener(&quot;touchend&quot;, end, { passive: true });
+  document.addEventListener(&quot;touchcancel&quot;, end, { passive: true });
+})();
+// inclinar el celu
+let v12TiltOn = false;
+function v12TiltStart() {
+  if (v12TiltOn) return;
+  const go = () =&gt; {
+    v12TiltOn = true;
+    window.addEventListener(&quot;deviceorientation&quot;, ev =&gt; {
+      if (v12Steer() !== &quot;tilt&quot; || !v12Mini()) { v12ReleaseAll(); return; }
+      const ang = (screen.orientation &amp;&amp; screen.orientation.angle) || window.orientation || 0;
+      let t = Math.abs(ang) === 90 ? (ang &gt; 0 ? ev.beta : -ev.beta) : ev.gamma;
+      if (t == null) return;
+      const lim = 12;
+      if (t &lt; -lim) { v12Key(1, false); v12Key(-1, true); }
+      else if (t &gt; lim) { v12Key(-1, false); v12Key(1, true); }
+      else v12ReleaseAll();
+    });
+  };
+  try {
+    if (typeof DeviceOrientationEvent !== &quot;undefined&quot; &amp;&amp; typeof DeviceOrientationEvent.requestPermission === &quot;function&quot;) {
+      DeviceOrientationEvent.requestPermission().then(r =&gt; { if (r === &quot;granted&quot;) go(); else v9Toast(&quot;Sin permiso para el sensor: seguís con botones.&quot;); }).catch(() =&gt; {});
+    } else go();
+  } catch (e) {}
+}
+function v12SetSteer(v) {
+  v4A11ySet(&quot;steer&quot;, v);
+  if (v === &quot;tilt&quot;) v12TiltStart();
+  v9Toast(v === &quot;tilt&quot; ? &quot;📱 Inclinás el celu para doblar.&quot; : v === &quot;swipe&quot; ? &quot;👆 Deslizás el dedo para doblar.&quot; : &quot;🔘 Doblás con los botones.&quot;);
+}
+// cartel en los minijuegos: cómo estás doblando
+setInterval(() =&gt; {
+  try {
+    const st = v12Mini();
+    if (!st) { if (V12K.L || V12K.R) v12ReleaseAll(); return; }
+    const m = v12Steer();
+    let chip = st.querySelector(&quot;.v12-steer&quot;);
+    if (m === &quot;btn&quot; || !v12Touch()) { if (chip) chip.remove(); return; }
+    if (!/◀|IZQ|doblar|←/.test(st.textContent)) { if (chip) chip.remove(); return; }
+    if (!chip) { chip = document.createElement(&quot;div&quot;); chip.className = &quot;v12-steer&quot;; st.insertBefore(chip, st.firstChild); }
+    const t = m === &quot;tilt&quot; ? &quot;📱 Inclinás el celu para doblar&quot; : &quot;👆 Deslizá el dedo para doblar&quot;;
+    if (chip.textContent !== t) chip.textContent = t;
+  } catch (e) {}
+}, 400);
+try { if (v12Steer() === &quot;tilt&quot; &amp;&amp; !(typeof DeviceOrientationEvent !== &quot;undefined&quot; &amp;&amp; DeviceOrientationEvent.requestPermission)) v12TiltStart(); } catch (e) {}
+
+/* ---------------- ajustes: todo junto en Accesibilidad ---------------- */
+if (typeof v4A11yHtml === &quot;function&quot;) {
+  const o = v4A11yHtml;
+  v4A11yHtml = function () {
+    const h = o.apply(this, arguments), A = v12Opt();
+    const st = A.steer || &quot;btn&quot;;
+    const add = `&lt;h3 class=&quot;v12-h&quot;&gt;📱 Celular&lt;/h3&gt;
+      &lt;label&gt;🕹️ Cómo doblar en los minijuegos &lt;select onchange=&quot;v12SetSteer(this.value)&quot;&gt;&lt;option value=&quot;btn&quot; ${st === &quot;btn&quot; ? &quot;selected&quot; : &quot;&quot;}&gt;Botones&lt;/option&gt;&lt;option value=&quot;swipe&quot; ${st === &quot;swipe&quot; ? &quot;selected&quot; : &quot;&quot;}&gt;Deslizar el dedo&lt;/option&gt;&lt;option value=&quot;tilt&quot; ${st === &quot;tilt&quot; ? &quot;selected&quot; : &quot;&quot;}&gt;Inclinar el celu&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
+      &lt;label class=&quot;ng-check&quot;&gt;&lt;input type=&quot;checkbox&quot; ${A.noVib ? &quot;&quot; : &quot;checked&quot;} onchange=&quot;v4A11ySet(&#x27;noVib&#x27;, !this.checked)&quot;&gt; &lt;span&gt;📳 Vibrar en los momentos importantes&lt;/span&gt;&lt;/label&gt;
+      &lt;label class=&quot;ng-check&quot;&gt;&lt;input type=&quot;checkbox&quot; ${A.eco ? &quot;checked&quot; : &quot;&quot;} onchange=&quot;v4A11ySet(&#x27;eco&#x27;, this.checked)&quot;&gt; &lt;span&gt;🔋 Ahorro de batería (menos animaciones y efectos)&lt;/span&gt;&lt;/label&gt;
+      &lt;label class=&quot;ng-check&quot;&gt;&lt;input type=&quot;checkbox&quot; ${A.onehand ? &quot;checked&quot; : &quot;&quot;} onchange=&quot;v4A11ySet(&#x27;onehand&#x27;, this.checked)&quot;&gt; &lt;span&gt;🤚 Modo una mano (las decisiones aparecen abajo)&lt;/span&gt;&lt;/label&gt;
+      &lt;label class=&quot;ng-check&quot;&gt;&lt;input type=&quot;checkbox&quot; ${A.noDbl ? &quot;&quot; : &quot;checked&quot;} onchange=&quot;v4A11ySet(&#x27;noDbl&#x27;, !this.checked)&quot;&gt; &lt;span&gt;👆👆 Tocar dos veces para saltar cinemáticas&lt;/span&gt;&lt;/label&gt;
+      &lt;div class=&quot;v6-res-btns&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;lv-btn&quot; onclick=&quot;v12Full()&quot;&gt;⛶ Pantalla completa&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;lv-btn&quot; onclick=&quot;v12Install()&quot;&gt;📲 Instalar como app&lt;/button&gt;&lt;/div&gt;`;
+    return h.replace(/&lt;\/div&gt;\s*$/, add + &quot;&lt;/div&gt;&quot;);
+  };
+}
+if (typeof v4A11yApply === &quot;function&quot;) {
+  const o = v4A11yApply;
+  v4A11yApply = function () {
+    const r = o.apply(this, arguments);
+    try { const A = v12Opt(); document.body.classList.toggle(&quot;fw-eco&quot;, !!A.eco); if (A.eco) document.body.classList.add(&quot;fw-reduce&quot;); document.body.classList.toggle(&quot;fw-onehand&quot;, !!A.onehand); } catch (e) {}
+    return r;
+  };
+  try { v4A11yApply(); } catch (e) {}
+}
+
+/* ---------------- 13) ahorro de batería: mapa más liviano ---------------- */
+if (typeof fwMapDraw === &quot;function&quot;) {
+  const o = fwMapDraw;
+  let last = 0;
+  fwMapDraw = function () {
+    if (document.body.classList.contains(&quot;fw-eco&quot;)) { const n = performance.now(); if (n - last &lt; 110) return; last = n; }
+    return o.apply(this, arguments);
+  };
+}
+
+/* ---------------- 3) encabezado compacto · 14) barra de abajo ---------------- */
+function v12Header() {
+  try {
+    const box = document.getElementById(&quot;dashBtns&quot;); if (!box) return;
+    const narrow = innerWidth &lt; 700;
+    box.querySelectorAll(&quot;button:not(#dashCta)&quot;).forEach(b =&gt; {
+      if (!b.dataset.full) { b.dataset.full = b.innerHTML; b.title = b.textContent.trim(); }
+      const ic = (b.textContent.trim().match(/^\S+/) || [&quot;&quot;])[0];
+      if (narrow &amp;&amp; b.dataset.mode !== &quot;ic&quot;) { b.textContent = ic; b.dataset.mode = &quot;ic&quot;; b.setAttribute(&quot;aria-label&quot;, b.title); }
+      else if (!narrow &amp;&amp; b.dataset.mode === &quot;ic&quot;) { b.innerHTML = b.dataset.full; b.dataset.mode = &quot;&quot;; }
+    });
+    const cta = document.getElementById(&quot;dashCta&quot;);
+    if (cta) { if (!cta.dataset.full) cta.dataset.full = cta.innerHTML; const want = narrow ? &quot;SESIÓN ▶&quot; : cta.dataset.full; if (cta.innerHTML !== want) cta.innerHTML = want; }
+    if (!document.getElementById(&quot;v12Full&quot;) &amp;&amp; v12Touch()) box.insertAdjacentHTML(&quot;afterbegin&quot;, `&lt;button type=&quot;button&quot; id=&quot;v12Full&quot; class=&quot;btn-tutorial&quot; title=&quot;Pantalla completa&quot; aria-label=&quot;Pantalla completa&quot; onclick=&quot;v12Full()&quot;&gt;⛶&lt;/button&gt;`);
+  } catch (e) {}
+}
+function v12Nav() {
+  try {
+    const on = document.body.classList.contains(&quot;dash&quot;) &amp;&amp; innerWidth &lt; 900;
+    let nav = document.getElementById(&quot;v12Nav&quot;);
+    if (!on) { if (nav) nav.remove(); document.body.classList.remove(&quot;v12-hasnav&quot;); return; }
+    if (!nav) {
+      nav = document.createElement(&quot;nav&quot;); nav.id = &quot;v12Nav&quot;; nav.setAttribute(&quot;aria-label&quot;, &quot;Navegación&quot;);
+      const drv = typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; s.playerMode === &quot;driver&quot;;
+      nav.innerHTML = `&lt;button type=&quot;button&quot; onclick=&quot;dashGo(&#x27;#jobCard&#x27;)&quot;&gt;&lt;i&gt;🏁&lt;/i&gt;&lt;span&gt;Sesión&lt;/span&gt;&lt;/button&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;dashGo(&#x27;${drv ? &quot;#drvContractCard&quot; : &quot;#driversCard&quot;}&#x27;)&quot;&gt;&lt;i&gt;${drv ? &quot;📝&quot; : &quot;👥&quot;}&lt;/i&gt;&lt;span&gt;${drv ? &quot;Contrato&quot; : &quot;Equipo&quot;}&lt;/span&gt;&lt;/button&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;dashGo(&#x27;h2:title_season_circuits&#x27;)&quot;&gt;&lt;i&gt;📅&lt;/i&gt;&lt;span&gt;Calendario&lt;/span&gt;&lt;/button&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;document.body.classList.toggle(&#x27;dash-nav-open&#x27;)&quot;&gt;&lt;i&gt;☰&lt;/i&gt;&lt;span&gt;Más&lt;/span&gt;&lt;/button&gt;`;
+      document.body.appendChild(nav);
+    }
+    document.body.classList.add(&quot;v12-hasnav&quot;);
+  } catch (e) {}
+}
+setInterval(() =&gt; { v12Header(); v12Nav(); }, 700);
+window.addEventListener(&quot;resize&quot;, () =&gt; { v12Header(); v12Nav(); });
+
+/* ---------------- 4) la radio no queda encima de pantallas nuevas ---------------- */
+if (typeof fwRadioToast === &quot;function&quot;) {
+  const o = fwRadioToast;
+  fwRadioToast = function () { const r = o.apply(this, arguments); try { const el = document.getElementById(&quot;fwRadioToast&quot;); if (el) el._v12 = performance.now(); } catch (e) {} return r; };
+}
+(function () {
+  const IDS = [&quot;hofOverlay&quot;, &quot;v5Launch&quot;, &quot;v6Quick&quot;, &quot;v4Chal&quot;, &quot;v4ChalOv&quot;, &quot;podOverlay&quot;, &quot;v7Champ&quot;, &quot;v6Share&quot;, &quot;seasonChangesOverlay&quot;, &quot;v9QuickEnd&quot;, &quot;v10Space&quot;, &quot;gameTutorialBox&quot;, &quot;saveMenuBox&quot;];
+  const seen = {};
+  setInterval(() =&gt; {
+    try {
+      const now = performance.now(), t = document.getElementById(&quot;fwRadioToast&quot;);
+      IDS.forEach(id =&gt; {
+        const el = document.getElementById(id);
+        const vis = el &amp;&amp; (el.classList.contains(&quot;show&quot;) || (id === &quot;gameTutorialBox&quot; &amp;&amp; !el.classList.contains(&quot;hidden&quot;)));
+        if (vis &amp;&amp; !seen[id]) seen[id] = now; else if (!vis) seen[id] = 0;
+        if (vis &amp;&amp; t &amp;&amp; t.classList.contains(&quot;show&quot;) &amp;&amp; (t._v12 || 0) &lt; seen[id] - 50) t.classList.remove(&quot;show&quot;);
+      });
+    } catch (e) {}
+  }, 250);
+})();
+
+/* ---------------- 5) &quot;Tu carrera&quot; desplegable ---------------- */
+setInterval(() =&gt; {
+  try {
+    const sum = document.querySelector(&quot;#resultOverlay.show .dl-sum&quot;);
+    if (!sum || sum.dataset.v12) return;
+    sum.dataset.v12 = 1;
+    const ps = [...sum.querySelectorAll(&quot;p&quot;)];
+    if (ps.length &lt;= 5) return;
+    sum.classList.add(&quot;v12-fold&quot;);
+    const b = document.createElement(&quot;button&quot;); b.type = &quot;button&quot;; b.className = &quot;lv-btn v12-more&quot;;
+    b.textContent = &quot;▼ Ver toda la carrera (&quot; + ps.length + &quot; momentos)&quot;;
+    b.onclick = () =&gt; { const open = sum.classList.toggle(&quot;v12-open&quot;); b.textContent = open ? &quot;▲ Ver menos&quot; : &quot;▼ Ver toda la carrera (&quot; + ps.length + &quot; momentos)&quot;; };
+    sum.appendChild(b);
+  } catch (e) {}
+}, 400);
+
+/* ---------------- 10) aviso para girar el celu ---------------- */
+setInterval(() =&gt; {
+  try {
+    const ov = document.getElementById(&quot;dlOverlay&quot;);
+    const on = ov &amp;&amp; ov.classList.contains(&quot;show&quot;) &amp;&amp; v12Touch() &amp;&amp; innerWidth &lt; 520 &amp;&amp; innerHeight &gt; innerWidth;
+    let chip = document.getElementById(&quot;v12Rot&quot;);
+    let done = false; try { done = sessionStorage.getItem(&quot;fw_rot&quot;) === &quot;1&quot;; } catch (e) {}
+    if (!on || done || (DL &amp;&amp; DL.phase !== &quot;run&quot;)) { if (chip) chip.remove(); return; }
+    if (!chip) {
+      chip = document.createElement(&quot;div&quot;); chip.id = &quot;v12Rot&quot;;
+      chip.innerHTML = `🔄 Girá el celu para ver la carrera más grande &lt;button type=&quot;button&quot; aria-label=&quot;Cerrar&quot; onclick=&quot;try{sessionStorage.setItem(&#x27;fw_rot&#x27;,&#x27;1&#x27;)}catch(e){};this.parentNode.remove()&quot;&gt;✕&lt;/button&gt;`;
+      ov.appendChild(chip);
+    }
+  } catch (e) {}
+}, 800);
+
+/* ---------------- 15) tocar dos veces para saltar ---------------- */
+(function () {
+  const SEL = &quot;#engPreShow, #homeCine, #v7Flag, #v11Face, #podOverlay&quot;;
+  let armed = null, at = 0;
+  window.addEventListener(&quot;click&quot;, e =&gt; {
+    try {
+      if (!v12Touch() || v12Opt().noDbl) return;
+      const t = e.target.closest &amp;&amp; e.target.closest(SEL);
+      if (!t || e.target.closest(&quot;button, a, input, select&quot;)) return;
+      const now = performance.now();
+      if (armed === t &amp;&amp; now - at &lt; 700) { armed = null; return; } // segundo toque: pasa
+      armed = t; at = now;
+      e.stopImmediatePropagation(); e.preventDefault();
+      const lab = t.querySelector(&quot;.ps-skip, .hc-skip, .v7-flag-tap&quot;);
+      if (lab) { lab.dataset.o = lab.dataset.o || lab.textContent; lab.textContent = &quot;Tocá otra vez para saltar ⏭️&quot;; lab.classList.add(&quot;v12-armed&quot;); setTimeout(() =&gt; { if (lab.isConnected) { lab.textContent = lab.dataset.o; lab.classList.remove(&quot;v12-armed&quot;); } }, 900); }
+    } catch (err) {}
+  }, true);
+})();
+
+/* ---------------- tutorial ---------------- */
+function v12Tut() {
+  const pg = document.querySelector(&#x27;#v10Tut .v10-page[data-t=&quot;menu&quot;]&#x27;);
+  if (!pg || pg.querySelector(&quot;.v12-tut&quot;)) return;
+  pg.insertAdjacentHTML(&quot;beforeend&quot;, `&lt;h3 class=&quot;v12-tut&quot;&gt;📱 En el celular&lt;/h3&gt;&lt;ul&gt;
+    &lt;li&gt;&lt;b&gt;🕹️ Cómo doblar&lt;/b&gt;: en Accesibilidad elegís botones, deslizar el dedo o inclinar el celu.&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;📳 Vibración&lt;/b&gt;, &lt;b&gt;🔋 ahorro de batería&lt;/b&gt;, &lt;b&gt;🤚 modo una mano&lt;/b&gt; y &lt;b&gt;⛶ pantalla completa&lt;/b&gt;, también en Accesibilidad.&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;📲 Instalalo como app&lt;/b&gt;: queda con su ícono en la pantalla de inicio y se abre de un toque.&lt;/li&gt;
+    &lt;li&gt;Abajo tenés la &lt;b&gt;barra rápida&lt;/b&gt;: Sesión, Equipo, Calendario y Más.&lt;/li&gt;&lt;/ul&gt;`);
+}
+(function () {
+  if (document.readyState !== &quot;loading&quot;) setTimeout(v12Tut, 0); else document.addEventListener(&quot;DOMContentLoaded&quot;, v12Tut);
+  const rd = window.render;
+  if (typeof rd === &quot;function&quot;) { render = function () { const r = rd.apply(this, arguments); try { v12Tut(); } catch (e) {} return r; }; window.render = render; }
 })();
 
 &lt;/script&gt;
