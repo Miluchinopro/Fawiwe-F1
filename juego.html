@@ -1,9 +1,9 @@
-<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.1 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.1" srcdoc="&lt;!doctype html&gt;
+<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.2 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.2" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;es&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
-&lt;title&gt;FAWIWE F1 · Prototipo 1.1&lt;/title&gt;
+&lt;title&gt;FAWIWE F1 · Prototipo 1.2&lt;/title&gt;
 &lt;style&gt;
 @import url(&#x27;https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap&#x27;);
 *{box-sizing:border-box}body{margin:0;background:#090909;color:#eee;font-family:&quot;Inter&quot;,Arial,sans-serif}h1,h2,h3,.logo,.rank,.luxury-banner,button,.tutorial-box h3{font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif}header{background:linear-gradient(120deg,#090909,#300b08);padding:18px 5%;border-bottom:3px solid #d9b650;position:sticky;top:0;z-index:9}.logo{font-size:48px;font-weight:1000;letter-spacing:6px}
@@ -2093,10 +2093,39 @@ body.fw-onehand.v10-dec #fwRadioToast{top:8px!important;bottom:auto!important}
   #game .card table{font-size:12.5px}
 }
 html,body{overflow-x:clip}
+
+/* ===== V143 · multijugador ===== */
+.dl-row.v13-p2{background:linear-gradient(90deg,#0c2a3a,transparent)!important;border-left:3px solid #38bdf8!important}
+.v13-tag{display:inline-block;background:#0284c7;color:#fff;font-size:10px;font-weight:900;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}
+.v13-p2q{color:#7dd3fc!important}
+.v13-flag2{margin-top:6px;font-size:20px;font-weight:800;color:#7dd3fc}
+#multiSplit .split-panel h3 small{display:block;font-size:12px;font-weight:700;color:#9aa0aa;letter-spacing:.04em;margin-top:2px}
+body.dash #soloHeader.hidden{display:none!important}
+#multiSplit &gt; .grid &gt; div:nth-child(-n+2){display:none}
+#multiSplit .stat-row{gap:10px}
+#multiSplit .stat-row b{text-align:right}
+@media (max-width:700px){
+  #multiSplit .split-screen{display:flex!important;flex-direction:column;gap:30px}
+  #multiSplit .vs-badge{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}
+  #multiSplit .split-panel{width:auto!important}
+  #duelCine .dc-row{gap:6px!important;padding:0 8px!important;width:100%;box-sizing:border-box}
+  #duelCine .dc-p{min-width:0!important;flex:1 1 0!important;padding:10px 6px!important}
+  #duelCine .dc-p b{font-size:15px!important;word-break:break-word}
+  #duelCine .dc-vs{flex:0 0 auto!important}
+}
+.v13-q2{margin:10px 0;text-align:left}
+.v13-q2f{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.v13-q2f input,.v13-q2f select{width:100%}
+@media (max-width:520px){.v13-q2f{grid-template-columns:1fr}}
+.v13-qe{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.v13-qe&gt;div{background:#15151c;border:1px solid #2a2a33;border-radius:12px;padding:10px}
+.v13-qe&gt;div.win{border-color:#facc15;box-shadow:0 0 0 1px #facc15 inset}
+.v13-qe span{display:block;font-size:13px;color:#ccc}.v13-qe b{font-size:34px;font-weight:900}
+@media (max-width:700px){ #duelCine .dc-plate .bc-lines,#duelChamp .dc-plate .bc-lines{display:none} }
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
-&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.1 🏁&lt;/div&gt;
+&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.2 🏁&lt;/div&gt;
 &lt;div id=&quot;introScreen&quot; class=&quot;ci-wait&quot; onclick=&quot;skipIntroCinematic(event)&quot;&gt;
   &lt;div class=&quot;ci-gate&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ci-gate-btn&quot; onclick=&quot;event.stopPropagation();ciBegin()&quot;&gt;▶ Tocá para empezar&lt;/button&gt;&lt;span&gt;🔊 Con música y sonido&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;ci-layer ci-present&quot;&gt;&lt;div class=&quot;bc-plate&quot;&gt;&lt;svg class=&quot;bc-lines&quot; viewBox=&quot;0 0 400 300&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;6&quot; y=&quot;6&quot; width=&quot;388&quot; height=&quot;288&quot; rx=&quot;60&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.25s&quot;/&gt;&lt;rect x=&quot;18&quot; y=&quot;18&quot; width=&quot;364&quot; height=&quot;264&quot; rx=&quot;50&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.37s&quot;/&gt;&lt;rect x=&quot;30&quot; y=&quot;30&quot; width=&quot;340&quot; height=&quot;240&quot; rx=&quot;40&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.49s&quot;/&gt;&lt;rect x=&quot;42&quot; y=&quot;42&quot; width=&quot;316&quot; height=&quot;216&quot; rx=&quot;30&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.61s&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;k&quot;&gt;FAWIWE RACING TEAM&lt;/div&gt;&lt;b&gt;Presenta&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
@@ -25271,7 +25300,7 @@ function v11RadarLoop() {
 function v11CoolStart() {
   const myG = DL.grid.find(x =&gt; x.mine &amp;&amp; x.seat === 1);
   if (!myG || myG.status) return;
-  const pos = myG.pos, nm = (s.playedDriverName || &quot;&quot;).split(&quot; &quot;)[0];
+  const pos = myG.pos, nm = (s.playedDriverName || myG.name || &quot;&quot;).replace(&quot; (reserva)&quot;, &quot;&quot;).split(&quot; &quot;)[0];
   const mineFeed = DL.feed.filter(f =&gt; f.mine);
   const passes = mineFeed.filter(f =&gt; /Pasaste|¡ADENTRO!|LARGADÓN|ganás (un|dos) lugar/.test(f.txt)).length;
   const lines = [];
@@ -25758,6 +25787,684 @@ function v12Tut() {
   const rd = window.render;
   if (typeof rd === &quot;function&quot;) { render = function () { const r = rd.apply(this, arguments); try { v12Tut(); } catch (e) {} return r; }; window.render = render; }
 })();
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · V143 — MULTIJUGADOR
+   El Jugador 2 pasa a ser un auto real de la grilla (posiciones coherentes) y se suma lo del
+   modo solitario: clasificación en vivo, transmisión con los dos autos (estrategia, pases,
+   boxes y radio para cada uno), cara a cara antes de la carrera, bandera para los dos y
+   carrera rápida para 2. + arreglos de pantalla (nombres, plata, celular, datos repetidos).
+   ===================================================================================== */
+function v13On() { return typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; !!s.player2 &amp;&amp; !!s.team; }
+function v13Drv() { return s.playerMode === &quot;driver&quot;; }
+function v13P2Name() {
+  if (!v13On()) return null;
+  if (v13Drv() &amp;&amp; s.player2.playedDriverName) return s.player2.playedDriverName;
+  try { const L = currentTeamLineup(s.player2.club); return L &amp;&amp; L[0] ? L[0][0] : null; } catch (e) { return null; }
+}
+function v13P1Label() { return v13Drv() ? (s.playedDriverName || s.name) : s.name; }
+function v13P2Label() { return v13Drv() ? (s.player2.playedDriverName || s.player2.name) : s.player2.name; }
+function v13Short(n) { try { return lapShort(n); } catch (e) { return String(n || &quot;&quot;).split(&quot; &quot;).slice(-1)[0].toUpperCase(); } }
+function v13Esc(t) { return v9Esc(t); }
+try { FW_WHO.p2 = { tag: &quot;📻 BOX P2&quot;, color: &quot;#38bdf8&quot;, pitch: 0.95, rate: 1.1, v: 1 }; } catch (e) {}
+function v13Say(t, o) { if (typeof DL !== &quot;undefined&quot; &amp;&amp; DL &amp;&amp; DL.skip) return; try { fwRadioSay(t, &quot;p2&quot;, o); } catch (e) {} }
+
+/* ============================ el auto del Jugador 2 en la grilla ============================ */
+// Modo piloto: el piloto que eligió P2 corre en su equipo (y deja su asiento original)
+if (typeof currentTeamLineup === &quot;function&quot;) {
+  const o = currentTeamLineup;
+  currentTeamLineup = function (team) {
+    let L = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; v13Drv() &amp;&amp; s.player2.playedDriverName) {
+        const n2 = s.player2.playedDriverName, r2 = s.player2.playedDriverRating || 80;
+        const orig = originalDriverLineup(team, s.season);
+        if (team === s.player2.club) {
+          const mate = orig.find(d =&gt; d[0] !== n2 &amp;&amp; d[0] !== s.playedDriverName) || L.find(d =&gt; d &amp;&amp; d[0] !== n2 &amp;&amp; d[0] !== s.playedDriverName) || [generateRookieName(&quot;p2mate_&quot; + team + &quot;_&quot; + s.season), 72, 2, team];
+          L = [[n2, r2, 2, team], mate];
+        } else {
+          const i = L.findIndex(d =&gt; d &amp;&amp; d[0] === n2);
+          if (i &gt;= 0) {
+            L = L.slice();
+            const used = new Set(L.filter(Boolean).map(d =&gt; d[0]).concat([n2, s.playedDriverName]));
+            const pool = orig.concat(typeof lastKnownLineup === &quot;function&quot; ? [] : []);
+            L[i] = pool.find(d =&gt; !used.has(d[0])) || [generateRookieName(&quot;p2rem_&quot; + team + &quot;_&quot; + s.season), 74, 2, team];
+          }
+        }
+      }
+    } catch (e) {}
+    return L;
+  };
+}
+// rendimiento del auto de P2: su auto, sus minijuegos y lo que decida en la transmisión
+let V13_ADJ = null;
+if (typeof effectiveRating === &quot;function&quot;) {
+  const o = effectiveRating;
+  effectiveRating = function (name, base) { let r = o.apply(this, arguments); try { if (V13_ADJ &amp;&amp; name === V13_ADJ.n) r += V13_ADJ.adj; } catch (e) {} return r; };
+}
+function v13Adj(kind, timing) {
+  const n = v13P2Name(); if (!n) return null;
+  const t = getTeamsForYear(s.season).find(x =&gt; x[0] === s.player2.club);
+  const tr = t ? t[1] : 3, base = 20 + tr * 14;
+  let sc = (s.player2.car - base) * 1.0;
+  if (kind === &quot;race&quot;) {
+    sc += ((s.player2.raceMiniScore != null ? s.player2.raceMiniScore : 50) - 50) * 0.5;
+    try { const st = s._dl &amp;&amp; s._dl.key === dlKey() ? s._dl : null; if (st) sc += st.bonus2 || 0; } catch (e) {}
+  } else {
+    const tm = timing || s.player2.qualiTiming;
+    sc += tm === &quot;optimal&quot; ? 8 : tm === &quot;late&quot; ? 3 : tm === &quot;early&quot; ? -3 : 0;
+  }
+  return { n, adj: sc / (0.42 * (s.aiLevel || 1)) };
+}
+let V13_QT = null;
+if (typeof simulateGrid === &quot;function&quot;) {
+  const o = simulateGrid;
+  simulateGrid = function (kind) {
+    if (!v13On()) return o.apply(this, arguments);
+    const keep = V13_ADJ;
+    V13_ADJ = v13Adj(kind, V13_QT);
+    let r;
+    try { r = o.apply(this, arguments); } finally { V13_ADJ = keep; }
+    try {
+      if (!Array.isArray(r)) return r;
+      const n2 = v13P2Name();
+      const st = s._dl &amp;&amp; s._dl.key === dlKey() ? s._dl : null;
+      if (kind === &quot;race&quot; &amp;&amp; st &amp;&amp; !st.final &amp;&amp; (st.moves2 || []).length) {
+        const ord = r.slice();
+        (st.moves2 || []).forEach(m =&gt; {
+          const a = ord.find(x =&gt; x.name === n2), b = ord.find(x =&gt; x.name === m.other);
+          if (!a || !b || a.status || b.status) return;
+          const ia = ord.indexOf(a), ib = ord.indexOf(b);
+          if ((m.res === &quot;gain&quot; &amp;&amp; ib &lt; ia) || (m.res === &quot;lose&quot; &amp;&amp; ib &gt; ia)) { ord[ia] = b; ord[ib] = a; }
+        });
+        const ps = s.pointsSystem || [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+        ord.forEach((x, i) =&gt; { if (x.status === &quot;DNS&quot;) { x.pos = null; x.pts = 0; return; } x.pos = i + 1; x.pts = (!x.status &amp;&amp; i &lt; ps.length) ? ps[i] : 0; });
+        r = ord;
+      }
+      r.forEach(x =&gt; { if (x.name === n2) x.p2 = true; });
+      const p1 = r.find(x =&gt; x.mine &amp;&amp; x.seat === 1), p2 = r.find(x =&gt; x.name === n2);
+      const pos = x =&gt; x ? (x.pos || r.length) : r.length;
+      s[&quot;_v13&quot; + (kind === &quot;race&quot; ? &quot;Race&quot; : &quot;Quali&quot;)] = { key: dlKey(), p1: pos(p1), p2: pos(p2), s1: p1 &amp;&amp; p1.status, s2: p2 &amp;&amp; p2.status, n2 };
+    } catch (e) { console.warn(&quot;[FAWIWE] multijugador grilla:&quot;, e); }
+    return r;
+  };
+  window.simulateGrid = simulateGrid;
+}
+// las posiciones de los dos jugadores salen de la grilla (antes eran una cuenta aparte)
+if (typeof calcRacePos === &quot;function&quot;) {
+  const o = calcRacePos;
+  calcRacePos = function () {
+    try {
+      if (v13On()) {
+        if (!s._v13Race || s._v13Race.key !== dlKey()) simulateGrid(&quot;race&quot;);
+        const R = s._v13Race;
+        if (R &amp;&amp; R.key === dlKey()) return s.club === s.player2.club ? R.p2 : R.p1;
+      }
+    } catch (e) { console.warn(&quot;[FAWIWE] multijugador carrera:&quot;, e); }
+    return o.apply(this, arguments);
+  };
+}
+if (typeof calcQualiPos === &quot;function&quot;) {
+  const o = calcQualiPos;
+  calcQualiPos = function (car, stars, timing) {
+    try {
+      if (v13On()) {
+        const p2 = s.activePlayer === 2;
+        if (p2) { s.player2.qualiTiming = timing; V13_QT = timing; }
+        let R; try { simulateGrid(&quot;quali&quot;); R = s._v13Quali; } finally { V13_QT = null; }
+        if (R &amp;&amp; R.key === dlKey()) return p2 ? R.p2 : R.p1;
+      }
+    } catch (e) { console.warn(&quot;[FAWIWE] multijugador qualy:&quot;, e); }
+    return o.apply(this, arguments);
+  };
+}
+if (typeof window.finishRace === &quot;function&quot;) {
+  const o = window.finishRace;
+  window.finishRace = function () {
+    try { if (v13On() &amp;&amp; !s.raceDone) { s._v13Race = null; } } catch (e) {}
+    const before = v13On() ? s.player2.points : 0;
+    const r = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; v13Drv() &amp;&amp; s.raceDone &amp;&amp; s._v13Paid !== dlKey()) {
+        s._v13Paid = dlKey();
+        const got = s.player2.points - before;
+        s.player2.money = Math.round(((s.player2.money || 0) + 0.3 + Math.max(0, got) * 0.05) * 10) / 10; // premio y sueldo del piloto P2
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+// sin sprint en multijugador (los puntos de la sprint eran solo para P1)
+if (typeof dlSprintWeekend === &quot;function&quot;) { const o = dlSprintWeekend; dlSprintWeekend = function () { if (v13On()) return false; return o.apply(this, arguments); }; }
+// la transmisión en vivo también en multijugador (piloto e ingeniero)
+if (typeof dlOn === &quot;function&quot;) {
+  const o = dlOn;
+  dlOn = function () { if (v13On()) return !!(s &amp;&amp; s.team); return o.apply(this, arguments); };
+}
+
+/* ============================ ⏱️ clasificación en vivo para los dos ============================ */
+let V13_NOQ = false;
+if (typeof window.announceQuali === &quot;function&quot;) {
+  const o = window.announceQuali;
+  window.announceQuali = function () { const on = v13On() &amp;&amp; s.qlLive !== false &amp;&amp; !s._dlSkip; V13_NOQ = on; try { return o.apply(this, arguments); } finally { V13_NOQ = false; } };
+  try { announceQuali = window.announceQuali; } catch (e) {}
+}
+if (typeof showBigResult === &quot;function&quot;) {
+  const o = showBigResult;
+  showBigResult = function (kind) {
+    if (V13_NOQ &amp;&amp; /CLASIFICACI/i.test(String(kind))) { v9Toast(&quot;✅ Vuelta de clasificación lista. Cuando terminen los dos, ¡clasificación en vivo!&quot;); return; }
+    return o.apply(this, arguments);
+  };
+  window.showBigResult = showBigResult;
+}
+if (typeof window.finalizeQuali === &quot;function&quot; || typeof finalizeQuali === &quot;function&quot;) {
+  const o = finalizeQuali;
+  finalizeQuali = function () {
+    const wasP2 = v13On() &amp;&amp; s.activePlayer === 2;
+    const r = o.apply(this, arguments);
+    try {
+      if (wasP2 &amp;&amp; s.session === 3 &amp;&amp; s.qlLive !== false &amp;&amp; !s._dlSkip &amp;&amp; typeof qlStart === &quot;function&quot; &amp;&amp; !QL) {
+        const g = simulateGrid(&quot;quali&quot;).map(x =&gt; Object.assign({}, x));
+        const n2 = v13P2Name();
+        g.forEach(x =&gt; { if (x.mine &amp;&amp; x.seat !== 1) x.mine = false; if (x.name === n2) { x.mine = true; x.seat = 2; } });
+        qlStart(g, &quot;multi&quot;);
+        QL.eng = true; QL.v13 = true;
+        qlFeed(&quot;👥 &quot; + v13P1Label() + &quot; y &quot; + v13P2Label() + &quot; a la pista. ¡Que gane el mejor!&quot;);
+      }
+    } catch (e) { console.warn(&quot;[FAWIWE] qualy multijugador:&quot;, e); try { QL = null; document.getElementById(&quot;qlOverlay&quot;)?.classList.remove(&quot;show&quot;); } catch (e2) {} }
+    return r;
+  };
+  window.finalizeQuali = finalizeQuali;
+}
+if (typeof qlFinish === &quot;function&quot;) {
+  const o = qlFinish;
+  qlFinish = function () {
+    if (!(typeof QL !== &quot;undefined&quot; &amp;&amp; QL &amp;&amp; QL.v13)) return o.apply(this, arguments);
+    clearInterval(qlTimer); clearInterval(qlDecTimer);
+    const q = QL; QL = null;
+    document.getElementById(&quot;qlOverlay&quot;).classList.remove(&quot;show&quot;);
+    q.order.forEach((x, i) =&gt; { x.pos = i + 1; });
+    const n2 = v13P2Name();
+    const a = q.order.find(x =&gt; x.mine &amp;&amp; x.seat === 1), b = q.order.find(x =&gt; x.name === n2);
+    if (a) s.qualiPos = a.pos;
+    if (b) s.player2.qualiPos = b.pos;
+    s._qlKey = q.key;
+    s._dlQuali = { key: q.key, names: q.order.map(x =&gt; x.name) };
+    try { const e = engEnsure(); e.lastQualiOrder = { key: engKey(), names: q.order.map(x =&gt; x.name) }; } catch (e) {}
+    add(&quot;⏱️ Clasificación final: 🟡 &quot; + v13P1Label() + &quot; P&quot; + (a ? a.pos : &quot;?&quot;) + &quot; · 🔵 &quot; + v13P2Label() + &quot; P&quot; + (b ? b.pos : &quot;?&quot;) + &quot;.&quot;);
+    try { render(); } catch (e) {}
+    try {
+      const pa = a ? a.pos : 99, pb = b ? b.pos : 99;
+      showBigResult(&quot;CLASIFICACIÓN · &quot; + ((trackData[s.gp] || {}).name || &quot;&quot;), &quot;🟡 P&quot; + pa + &quot;  ·  🔵 P&quot; + pb, (pa &lt; pb ? v13P1Label() : v13P2Label()) + &quot; larga adelante en el duelo. &quot; + v13P1Label() + &quot; P&quot; + pa + &quot; · &quot; + v13P2Label() + &quot; P&quot; + pb + &quot;.&quot;, &quot;points&quot;, q.order.slice(0, 22).map((x, i) =&gt; ({ name: x.name, team: x.team, pos: i + 1, pts: 0, mine: x.mine })));
+    } catch (e) {}
+  };
+}
+
+/* ============================ 📺 transmisión: la capa del Jugador 2 ============================ */
+// sus paradas y su auto marcado en el vuelta a vuelta
+if (typeof engBuildLaps === &quot;function&quot;) {
+  const o = engBuildLaps;
+  engBuildLaps = function (entries, opt) {
+    try {
+      if (v13On() &amp;&amp; typeof DL !== &quot;undefined&quot; &amp;&amp; DL &amp;&amp; DL.mode === &quot;race&quot; &amp;&amp; Array.isArray(entries)) {
+        const n2 = v13P2Name();
+        if (n2 &amp;&amp; entries.some(x =&gt; x.name === n2)) {
+          const ent = entries.map(x =&gt; x.name === n2 ? Object.assign({}, x, { mine: true, seat: 3 }) : x);
+          const op = Object.assign({}, opt || {});
+          if (DL.pits2) op.myPits = Object.assign({}, op.myPits || {}, { 3: DL.pits2.slice() });
+          const d = o.call(this, ent, op);
+          d.rows.forEach(r =&gt; { if (r.name === n2) r.p2 = true; });
+          return d;
+        }
+      }
+    } catch (e) { console.warn(&quot;[FAWIWE] vuelta a vuelta P2:&quot;, e); }
+    return o.apply(this, arguments);
+  };
+}
+function v13Me2() { return DL &amp;&amp; DL.data &amp;&amp; DL.data.rows.find(r =&gt; r.p2); }
+// pases jugados por P2 también quedan en el vuelta a vuelta
+if (typeof dlApplyLocks === &quot;function&quot;) {
+  const o = dlApplyLocks;
+  dlApplyLocks = function () {
+    const r = o.apply(this, arguments);
+    try {
+      const st = s._dl, me2 = v13Me2();
+      if (v13On() &amp;&amp; st &amp;&amp; me2 &amp;&amp; (st.moves2 || []).length) {
+        let ch = false;
+        st.moves2.forEach(m =&gt; { ch = (m.res === &quot;lose&quot; ? dlLockPair(m.other, me2.name, m.lap + 1) : dlLockPair(me2.name, m.other, m.lap + 1)) || ch; });
+        if (ch) lapFinalize(DL.data);
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+// estrategia de P2 (después de la de P1, antes de la largada)
+function v13StratOpen() {
+  if (!DL || DL.mode !== &quot;race&quot; || DL.skip || !v13Me2()) return false;
+  DL.strat = v9StratPlans(); DL.strat.p2 = true;
+  DL.phase = &quot;strat&quot;;
+  clearInterval(dlTimer);
+  v13Say(v13Short(v13P2Label()) + &quot;, turno de tu estrategia. &quot; + DL.strat.why + &quot;.&quot;);
+  clearTimeout(DL._stratTO); DL._stratTO = setTimeout(() =&gt; { if (DL &amp;&amp; DL.phase === &quot;strat&quot; &amp;&amp; DL.strat &amp;&amp; DL.strat.p2) v9StratChoose(DL.strat.rec, true); }, 30000);
+  dlDraw();
+  return true;
+}
+if (typeof v9StratChoose === &quot;function&quot;) {
+  const o = v9StratChoose;
+  v9StratChoose = function (i, auto) {
+    if (!(DL &amp;&amp; DL.phase === &quot;strat&quot; &amp;&amp; DL.strat &amp;&amp; DL.strat.p2)) return o.apply(this, arguments);
+    clearTimeout(DL._stratTO);
+    const R = DL.strat, p = R.P[i], st = dlState();
+    const g = i === R.rec ? 1.2 : p.min &lt; 15 ? -1.5 : -0.3;
+    st.bonus2 = (st.bonus2 || 0) + g;
+    DL.pits2 = p.pits.slice(); DL._p2Strat = true;
+    DL.strat = null; DL.phase = &quot;run&quot;;
+    dlRebuild();
+    dlFeed(0, &quot;🔵 &quot; + v13P2Label() + &quot; · estrategia: &quot; + p.name + (auto ? &quot; (la eligió su box)&quot; : &quot;&quot;) + &quot;.&quot;, true, g &gt; 0 ? &quot;ok&quot; : g &lt; -1 ? &quot;bad&quot; : &quot;&quot;);
+    v7StartOpen();
+  };
+}
+if (typeof v9StratHtml === &quot;function&quot;) {
+  const o = v9StratHtml;
+  v9StratHtml = function () { const h = o.apply(this, arguments); try { if (DL.strat &amp;&amp; DL.strat.p2) return h.replace(&#x27;&lt;div class=&quot;q&quot;&gt;🧠 ESTRATEGIA&#x27;, &#x27;&lt;div class=&quot;q v13-p2q&quot;&gt;🔵 &#x27; + v13Esc(v13P2Label()) + &#x27; · 🧠 ESTRATEGIA&#x27;); if (v13On()) return h.replace(&#x27;&lt;div class=&quot;q&quot;&gt;🧠 ESTRATEGIA&#x27;, &#x27;&lt;div class=&quot;q&quot;&gt;🟡 &#x27; + v13Esc(v13P1Label()) + &#x27; · 🧠 ESTRATEGIA&#x27;); } catch (e) {} return h; };
+}
+if (typeof v7StartOpen === &quot;function&quot;) {
+  const o = v7StartOpen;
+  v7StartOpen = function () {
+    try {
+      if (v13On() &amp;&amp; DL &amp;&amp; DL.mode === &quot;race&quot; &amp;&amp; !DL.skip &amp;&amp; DL._stratAsked &amp;&amp; !DL._p2Strat) {
+        DL._p2Strat = true;
+        if (v13StratOpen()) return;
+      }
+    } catch (e) {}
+    return o.apply(this, arguments);
+  };
+}
+// pases y defensas de P2
+function v13QteCheck(l) {
+  const me2 = v13Me2(); if (!me2 || DL.mode !== &quot;race&quot; || DL.skip || DL.phase !== &quot;run&quot; || DL.pendingQte || DL.pendingQte2) return;
+  if ((DL._q2n || 0) &gt;= 3 || l &lt; 3 || l &gt; DL.N - 3 || me2.t.length &lt;= l || me2.status === &quot;DNS&quot;) return;
+  if (DL._q2last &amp;&amp; l - DL._q2last &lt; 7) return;
+  if (me2.pits.includes(l) || me2.pits.includes(l + 1)) return;
+  const d = DL.data, p = me2.pos[l];
+  const ahead = d.rows.find(r =&gt; r.pos[l] === p - 1 &amp;&amp; r.t.length &gt; l), behind = d.rows.find(r =&gt; r.pos[l] === p + 1 &amp;&amp; r.t.length &gt; l);
+  const gA = ahead ? me2.cum[l - 1] - ahead.cum[l - 1] : 99, gB = behind ? behind.cum[l - 1] - me2.cum[l - 1] : 99;
+  const okR = r =&gt; r &amp;&amp; !r.pits.includes(l) &amp;&amp; !(r.mine &amp;&amp; r.seat === 1); // contra P1 es el duelo del paquete 3
+  const cand = gA &lt; 1.0 &amp;&amp; okR(ahead) ? { atk: true, other: ahead, gap: gA } : gB &lt; 1.0 &amp;&amp; okR(behind) ? { atk: false, other: behind, gap: gB } : null;
+  if (cand &amp;&amp; dlH(&quot;q2&quot; + l + dlKey()) % 3 !== 0) { DL._q2last = l; DL._q2n = (DL._q2n || 0) + 1; DL.pendingQte2 = { atk: cand.atk, other: cand.other.name, lap: l, gap: cand.gap }; }
+}
+function v13QteOpen() {
+  const P = DL.pendingQte2; DL.pendingQte2 = null; if (!P) return false;
+  const side = dlH(&quot;q2side&quot; + P.lap + dlKey()) % 2 ? &quot;in&quot; : &quot;out&quot;;
+  DL.qte = Object.assign(P, { p2: true, step: &quot;side&quot;, side, t0: performance.now(), x: 0, v: 1, speed: s.miniDiff === &quot;easy&quot; ? 0.55 : s.miniDiff === &quot;hard&quot; ? 1.05 : 0.8 });
+  DL.phase = &quot;qte&quot;;
+  const nm = dlShort(P.other), who = v13P2Label();
+  dlFeed(P.lap, &quot;🔵 &quot; + who + (P.atk ? &quot; tiene a tiro a &quot; + P.other + &quot; (&quot; + P.gap.toFixed(1) + &quot;s).&quot; : &quot;: &quot; + P.other + &quot; lo ataca a &quot; + P.gap.toFixed(1) + &quot;s.&quot;), true);
+  v13Say(P.atk ? v13Short(who) + &quot;, lo tenés a &quot; + nm + &quot;. Está cerrando &quot; + (side === &quot;in&quot; ? &quot;el interior&quot; : &quot;el exterior&quot;) + &quot;.&quot; : v13Short(who) + &quot;, te ataca &quot; + nm + &quot; por &quot; + (side === &quot;in&quot; ? &quot;adentro&quot; : &quot;afuera&quot;) + &quot;.&quot;, { priority: true });
+  clearTimeout(DL._qteTO); DL._qteTO = setTimeout(() =&gt; { if (DL &amp;&amp; DL.phase === &quot;qte&quot; &amp;&amp; DL.qte &amp;&amp; DL.qte.p2) v7QteFinish(false, true); }, 14000);
+  try { v12Vib([20, 30, 20]); } catch (e) {}
+  dlDraw();
+  return true;
+}
+if (typeof v7QteFinish === &quot;function&quot;) {
+  const o = v7QteFinish;
+  v7QteFinish = function (ok, auto) {
+    const Q = DL &amp;&amp; DL.qte;
+    if (!Q || !Q.p2) return o.apply(this, arguments);
+    try { cancelAnimationFrame(v7Raf); } catch (e) {}
+    clearTimeout(DL._qteTO);
+    const st = dlState();
+    if (auto &amp;&amp; Q.step === &quot;side&quot;) ok = dlH(&quot;q2a&quot; + Q.lap) % 3 === 0;
+    const res = Q.atk ? (ok ? &quot;gain&quot; : &quot;keep&quot;) : (ok ? &quot;keep&quot; : &quot;lose&quot;);
+    st.moves2 = st.moves2 || [];
+    if (res !== &quot;keep&quot;) st.moves2.push({ other: Q.other, res, lap: Q.lap });
+    const who = v13P2Label();
+    dlFeed(Q.lap, Q.atk ? (ok ? &quot;🔵 ⚔️ ¡&quot; + who + &quot; pasa a &quot; + Q.other + &quot;!&quot; : &quot;🔵 ⚔️ &quot; + Q.other + &quot; le cerró la puerta a &quot; + who + &quot;.&quot;) : (ok ? &quot;🔵 🛡️ ¡&quot; + who + &quot; aguantó a &quot; + Q.other + &quot;!&quot; : &quot;🔵 🛡️ &quot; + Q.other + &quot; pasó a &quot; + who + &quot;.&quot;), true, ok ? &quot;ok&quot; : &quot;bad&quot;);
+    v13Say(Q.atk ? (ok ? &quot;¡Adentro! ¡Qué maniobra!&quot; : &quot;No alcanzó, seguí atrás.&quot;) : (ok ? &quot;¡Bien defendido!&quot; : &quot;Te pasó, pegate atrás.&quot;));
+    DL.qte = null; DL.phase = &quot;run&quot;;
+    dlRebuild(); dlDraw();
+    try { if (!auto &amp;&amp; res === &quot;gain&quot;) v9ReplayStart(Q.lap, v13Short(who) + &quot; pasa a &quot; + dlShort(Q.other)); } catch (e) {}
+  };
+}
+if (typeof v7QteHtml === &quot;function&quot;) {
+  const o = v7QteHtml;
+  v7QteHtml = function () {
+    let h = o.apply(this, arguments);
+    try {
+      const Q = DL.qte;
+      if (Q &amp;&amp; Q.p2) h = h.replace(&#x27;&lt;div class=&quot;q&quot;&gt;&#x27;, &#x27;&lt;div class=&quot;q v13-p2q&quot;&gt;🔵 &#x27; + v13Esc(v13P2Label()) + &#x27; · &#x27;);
+      else if (v13On()) h = h.replace(&#x27;&lt;div class=&quot;q&quot;&gt;&#x27;, &#x27;&lt;div class=&quot;q&quot;&gt;🟡 &#x27; + v13Esc(v13P1Label()) + &#x27; · &#x27;);
+      if (!v13Drv()) h = h.replace(&quot;🎯 ¡ATACÁ A &quot;, &quot;🎯 ORDEN DE ATAQUE: ¡ATACÁ A &quot;).replace(&quot;🛡️ ¡DEFENDÉ DE &quot;, &quot;🛡️ ORDEN: ¡DEFENDÉ DE &quot;);
+    } catch (e) {}
+    return h;
+  };
+}
+// entrada a boxes de P2
+function v13PitOpen(l) {
+  const old = s.season &lt; 1994;
+  DL.pe = { lap: l, t0: performance.now() + 1500, x: 0, old, p2: true, zone: old ? [58, 72] : [60, 74], speed: s.miniDiff === &quot;easy&quot; ? 0.032 : s.miniDiff === &quot;hard&quot; ? 0.05 : 0.04 };
+  DL.phase = &quot;pitentry&quot;;
+  dlFeed(l, &quot;🔵 &quot; + v13P2Label() + &quot; entra a boxes en la vuelta &quot; + l + &quot;.&quot;, true);
+  v13Say(v13Short(v13P2Label()) + &quot;, box, box. &quot; + (old ? &quot;Frená justo en tu box.&quot; : &quot;Limitador en la línea.&quot;));
+  cancelAnimationFrame(v9Raf);
+  const step = () =&gt; {
+    const P = DL &amp;&amp; DL.pe; if (!P || DL.phase !== &quot;pitentry&quot;) return;
+    const now = performance.now(), cd = document.getElementById(&quot;v10PeCd&quot;);
+    if (now &lt; P.t0) { if (cd) cd.textContent = String(Math.ceil((P.t0 - now) / 500)); } else { if (cd &amp;&amp; cd.textContent) cd.textContent = &quot;&quot;; P.x = Math.min(100, (now - P.t0) * P.speed); }
+    const m = document.getElementById(&quot;v9PeCar&quot;); if (m) m.style.left = P.x + &quot;%&quot;;
+    if (P.x &gt;= 100) { v9PitEntryHit(true); return; }
+    v9Raf = requestAnimationFrame(step);
+  };
+  v9Raf = requestAnimationFrame(step);
+  dlDraw();
+  return true;
+}
+if (typeof v9PitEntryHit === &quot;function&quot;) {
+  const o = v9PitEntryHit;
+  v9PitEntryHit = function (timeout) {
+    const P = DL &amp;&amp; DL.pe;
+    if (!P || !P.p2 || DL.phase !== &quot;pitentry&quot;) return o.apply(this, arguments);
+    if (!timeout &amp;&amp; performance.now() &lt; P.t0) return;
+    cancelAnimationFrame(v9Raf);
+    const st = dlState(), who = v13P2Label(), me2 = v13Me2();
+    let txt, cls;
+    if (!timeout &amp;&amp; P.x &lt; P.zone[0]) { st.bonus2 = (st.bonus2 || 0) - Math.min(1.5, 0.3 + (P.zone[0] - P.x) / 40); txt = &quot;🔵 🐢 &quot; + who + &quot; frenó muy temprano para entrar a boxes.&quot;; cls = &quot;bad&quot;; }
+    else if (!timeout &amp;&amp; P.x &lt;= P.zone[1]) { st.bonus2 = (st.bonus2 || 0) + 0.6; txt = &quot;🔵 ✅ Entrada a boxes perfecta de &quot; + who + &quot;.&quot;; cls = &quot;ok&quot;; }
+    else if (P.old) { st.bonus2 = (st.bonus2 || 0) - 1.2; txt = &quot;🔵 😬 &quot; + who + &quot; se pasó de su box.&quot;; cls = &quot;bad&quot;; }
+    else { if (me2) st.pens.push({ name: me2.name, reason: &quot;Exceso de velocidad en boxes&quot; }); txt = &quot;🔵 🚨 Exceso de velocidad en boxes para &quot; + who + &quot;: +5 segundos.&quot;; cls = &quot;bad&quot;; }
+    dlFeed(P.lap, txt, true, cls);
+    v13Say(cls === &quot;ok&quot; ? &quot;Perfecta la entrada.&quot; : &quot;Uy, eso nos costó.&quot;);
+    DL.pe = null; DL.phase = &quot;run&quot;;
+    DL._p2pit = DL._p2pit || {}; DL._p2pit[P.lap] = true;
+    dlRebuild(); dlSchedule(); dlDraw();
+  };
+}
+if (typeof v9PitEntryHtml === &quot;function&quot;) {
+  const o = v9PitEntryHtml;
+  v9PitEntryHtml = function () {
+    let h = o.apply(this, arguments);
+    try {
+      if (DL.pe &amp;&amp; DL.pe.p2) h = h.replace(&#x27;&lt;div class=&quot;q&quot;&gt;&#x27;, &#x27;&lt;div class=&quot;q v13-p2q&quot;&gt;🔵 &#x27; + v13Esc(v13P2Label()) + &#x27; · &#x27;);
+      else if (v13On()) h = h.replace(&#x27;&lt;div class=&quot;q&quot;&gt;&#x27;, &#x27;&lt;div class=&quot;q&quot;&gt;🟡 &#x27; + v13Esc(v13P1Label()) + &#x27; · &#x27;);
+      if (!v13Drv()) h = h.replace(&quot;Activá el limitador en la zona blanca.&quot;, &quot;📻 Avisale a tu piloto cuándo activar el limitador: en la zona blanca.&quot;);
+    } catch (e) {}
+    return h;
+  };
+}
+if (typeof dlRaceExtras === &quot;function&quot;) {
+  const o = dlRaceExtras;
+  dlRaceExtras = function (l) {
+    const r = o.apply(this, arguments);
+    if (r) return r;
+    try {
+      if (!v13On() || !DL || DL.mode !== &quot;race&quot; || DL.skip || DL.phase !== &quot;run&quot;) return r;
+      const me2 = v13Me2();
+      if (me2 &amp;&amp; me2.pits.includes(l) &amp;&amp; me2.t.length &gt;= l &amp;&amp; l &lt; DL.N &amp;&amp; !(DL._p2pit || {})[l]) { DL._p2pit = DL._p2pit || {}; DL._p2pit[l] = true; return v13PitOpen(l); }
+      if (DL.pendingQte2) return v13QteOpen();
+    } catch (e) { console.warn(&quot;[FAWIWE] P2 en carrera:&quot;, e); }
+    return r;
+  };
+}
+if (typeof dlLap === &quot;function&quot;) {
+  const o = dlLap;
+  dlLap = function (l) {
+    const r = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; DL &amp;&amp; DL.mode === &quot;race&quot;) {
+        v13QteCheck(l);
+        const me2 = v13Me2();
+        if (me2 &amp;&amp; !DL.skip &amp;&amp; l === DL.N - 5 &amp;&amp; !DL._p2fin5) { DL._p2fin5 = true; dlFeed(l, &quot;🔵 Últimas 5 vueltas: &quot; + v13P2Label() + &quot; va P&quot; + me2.pos[l] + &quot;.&quot;, true); }
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+if (typeof dlSkip === &quot;function&quot;) {
+  const o = dlSkip;
+  dlSkip = function () {
+    try {
+      if (DL &amp;&amp; DL.phase === &quot;strat&quot; &amp;&amp; DL.strat &amp;&amp; DL.strat.p2) { const p = DL.strat.P[DL.strat.rec]; DL.pits2 = p.pits.slice(); DL.strat = null; DL.phase = &quot;run&quot;; DL._p2Strat = true; }
+      if (DL &amp;&amp; DL.phase === &quot;qte&quot; &amp;&amp; DL.qte &amp;&amp; DL.qte.p2) v7QteFinish(false, true);
+      if (DL &amp;&amp; DL.phase === &quot;pitentry&quot; &amp;&amp; DL.pe &amp;&amp; DL.pe.p2) { cancelAnimationFrame(v9Raf); DL.pe = null; DL.phase = &quot;run&quot;; }
+      if (DL) DL.pendingQte2 = null;
+    } catch (e) {}
+    return o.apply(this, arguments);
+  };
+}
+// tablero: el auto de P2 en celeste
+if (typeof dlDraw === &quot;function&quot;) {
+  const o = dlDraw;
+  dlDraw = function () {
+    const r = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; DL &amp;&amp; DL.data) {
+        const n2 = v13P2Name();
+        document.querySelectorAll(&quot;#dlBoard .dl-row&quot;).forEach(row =&gt; { const nm = row.querySelector(&quot;.n&quot;); if (nm &amp;&amp; n2 &amp;&amp; nm.textContent.indexOf(n2.replace(&quot; (reserva)&quot;, &quot;&quot;)) === 0) { row.classList.add(&quot;v13-p2&quot;); if (!nm.querySelector(&quot;.v13-tag&quot;)) nm.insertAdjacentHTML(&quot;beforeend&quot;, &#x27; &lt;span class=&quot;v13-tag&quot;&gt;P2&lt;/span&gt;&#x27;); } });
+        const h = document.querySelector(&quot;#dlOverlay .eng-live-head h2, #dlOverlay h2&quot;);
+        if (h &amp;&amp; !h.dataset.v13) { h.dataset.v13 = 1; h.innerHTML = &quot;👥 &quot; + v13Esc(v13P1Label()) + &quot; vs &quot; + v13Esc(v13P2Label()); }
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+
+/* ============================ 😤 cara a cara: el rival es el otro jugador ============================ */
+function v13Face() {
+  if (!v13On() || !DL || DL.skip) return;
+  let ov = document.getElementById(&quot;v11Face&quot;);
+  if (!ov) { ov = document.createElement(&quot;div&quot;); ov.id = &quot;v11Face&quot;; ov.addEventListener(&quot;click&quot;, () =&gt; ov.classList.remove(&quot;show&quot;)); document.body.appendChild(ov); }
+  const h = s.p2HeadToHead || { p1Wins: 0, p2Wins: 0 };
+  const c1 = (typeof teamColors !== &quot;undefined&quot; &amp;&amp; teamColors[s.team]) || &quot;#facc15&quot;, c2 = (typeof teamColors !== &quot;undefined&quot; &amp;&amp; teamColors[s.player2.club]) || &quot;#38bdf8&quot;;
+  const hs = (c) =&gt; typeof v4HelmetSvg === &quot;function&quot; ? v4HelmetSvg({ c1: c, c2: &quot;#111111&quot;, pat: &quot;franja&quot;, num: &quot;&quot;, team: true }, 130) : &quot;&quot;;
+  const lead = h.p1Wins === h.p2Wins ? &quot;Empatados. Hoy se define.&quot; : (h.p1Wins &gt; h.p2Wins ? v13P1Label() : v13P2Label()) + &quot; va adelante en el duelo.&quot;;
+  ov.innerHTML = `&lt;div class=&quot;v11-face&quot;&gt;&lt;div class=&quot;v11-k&quot;&gt;⚔️ CARA A CARA · GP DE ${v13Esc(((trackData[s.gp] || {}).name || &quot;&quot;).toUpperCase())}&lt;/div&gt;
+    &lt;div class=&quot;v11-vs&quot;&gt;&lt;div class=&quot;v11-side me&quot; style=&quot;--c:${c1}&quot;&gt;${hs(c1)}&lt;b&gt;🟡 ${v13Esc(v13P1Label())}&lt;/b&gt;&lt;span&gt;${v13Esc(s.team)}&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;v11-mid&quot;&gt;&lt;i&gt;VS&lt;/i&gt;&lt;div class=&quot;v11-h2h&quot;&gt;&lt;b&gt;${h.p1Wins}&lt;/b&gt;&lt;span&gt;–&lt;/span&gt;&lt;b&gt;${h.p2Wins}&lt;/b&gt;&lt;/div&gt;&lt;small&gt;duelos ganados&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;v11-side riv&quot; style=&quot;--c:${c2}&quot;&gt;${hs(c2)}&lt;b&gt;🔵 ${v13Esc(v13P2Label())}&lt;/b&gt;&lt;span&gt;${v13Esc(s.player2.club)}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;p class=&quot;v11-quote&quot;&gt;${v13Esc(lead)}&lt;/p&gt;&lt;div class=&quot;v7-flag-tap&quot;&gt;Tocá para seguir&lt;/div&gt;&lt;/div&gt;`;
+  ov.classList.remove(&quot;show&quot;); void ov.offsetWidth; ov.classList.add(&quot;show&quot;);
+  clearTimeout(ov._t); ov._t = setTimeout(() =&gt; ov.classList.remove(&quot;show&quot;), 5000);
+}
+if (typeof dlStart === &quot;function&quot;) {
+  const o = dlStart;
+  dlStart = function () {
+    const r = o.apply(this, arguments);
+    try { if (v13On() &amp;&amp; DL &amp;&amp; DL.mode === &quot;race&quot; &amp;&amp; !DL.skip) setTimeout(v13Face, 250); } catch (e) {}
+    return r;
+  };
+}
+// bandera a cuadros y enfriamiento: los dos
+if (typeof dlEnd === &quot;function&quot;) {
+  const o = dlEnd;
+  dlEnd = function () {
+    const skip = DL &amp;&amp; DL.skip, mode = DL &amp;&amp; DL.mode;
+    const r = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; DL &amp;&amp; mode === &quot;race&quot;) {
+        const n2 = v13P2Name(), g2 = DL.grid.find(x =&gt; x.name === n2), g1 = DL.grid.find(x =&gt; x.mine &amp;&amp; x.seat === 1);
+        const lab = g =&gt; g ? (g.status ? (g.status === &quot;DNF&quot; ? &quot;abandonó&quot; : g.status) : &quot;P&quot; + g.pos) : &quot;—&quot;;
+        if (g2) dlFeed(DL.N, &quot;🔵 &quot; + v13P2Label() + &quot; terminó &quot; + lab(g2) + (g2.pts ? &quot; · +&quot; + g2.pts + &quot; puntos&quot; : &quot;&quot;) + &quot;.&quot;, true, g2.pos &lt;= 3 &amp;&amp; !g2.status ? &quot;ok&quot; : &quot;&quot;);
+        if (!skip) {
+          const fl = document.querySelector(&quot;#v7Flag .v7-flag-wrap&quot;);
+          if (fl) {
+            const nm = fl.querySelector(&quot;.v7-flag-name&quot;); if (nm) nm.textContent = &quot;🟡 &quot; + v13P1Label() + &quot; · &quot; + lab(g1);
+            if (!fl.querySelector(&quot;.v13-flag2&quot;)) nm.insertAdjacentHTML(&quot;afterend&quot;, `&lt;div class=&quot;v13-flag2&quot;&gt;🔵 ${v13Esc(v13P2Label())} · ${v13Esc(lab(g2))}&lt;/div&gt;`);
+          }
+          if (DL._cool &amp;&amp; g2) DL._cool.lines.splice(Math.max(1, DL._cool.lines.length - 1), 0, [&quot;eng&quot;, v13P2Label() + &quot; terminó &quot; + lab(g2) + &quot;. &quot; + (g1 &amp;&amp; g2 &amp;&amp; !g1.status &amp;&amp; (g2.status || g1.pos &lt; g2.pos) ? &quot;Le ganaste el duelo.&quot; : &quot;Hoy el duelo fue para él.&quot;)]);
+        }
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+
+/* ============================ arreglos de pantalla ============================ */
+if (typeof duelNames === &quot;function&quot;) {
+  duelNames = function () { return { a: v13On() ? v13P1Label() : (s.name || &quot;P1&quot;), b: v13On() ? v13P2Label() : ((s.player2 &amp;&amp; s.player2.name) || &quot;P2&quot;) }; };
+}
+// tarjetas: el mismo formato para los dos y la plata correcta
+if (typeof window.render === &quot;function&quot;) {
+  const rd = window.render;
+  render = function () {
+    const r = rd.apply(this, arguments);
+    try {
+      if (v13On()) {
+        const p1 = document.querySelector(&quot;#multiSplit .split-panel.p1 h3&quot;), p2 = document.querySelector(&quot;#multiSplit .split-panel.p2 h3&quot;);
+        const sub1 = v13Drv() ? &quot;Jugador 1&quot; : s.team, sub2 = v13Drv() ? (s.player2.name &amp;&amp; s.player2.name !== v13P2Label() ? s.player2.name : &quot;Jugador 2&quot;) : s.player2.club;
+        if (p1) p1.innerHTML = `🟡 ${v13Esc(v13P1Label())}&lt;small&gt;${v13Esc(sub1)}&lt;/small&gt;`;
+        if (p2) p2.innerHTML = `🔵 ${v13Esc(v13P2Label())}&lt;small&gt;${v13Esc(sub2)}&lt;/small&gt;`;
+        const tb = document.querySelector(&quot;#multiSplit .turn-banner b&quot;); if (tb) tb.textContent = s.activePlayer === 1 ? v13P1Label() : v13P2Label();
+      }
+    } catch (e) {}
+    return r;
+  };
+  window.render = render;
+}
+if (typeof window.start === &quot;function&quot;) {
+  const o = window.start;
+  window.start = function () {
+    try {
+      {
+        // P2 no puede ser el mismo piloto que P1
+        const multi = typeof playMode !== &quot;undefined&quot; &amp;&amp; playMode === &quot;multi&quot;;
+        const sel2 = document.getElementById(&quot;playedDriverSel2&quot;), sel1 = document.getElementById(&quot;playedDriverSel&quot;);
+        const isDrv = document.getElementById(&quot;driverTypeSel2&quot;) &amp;&amp; !document.getElementById(&quot;p2driverPickBox&quot;)?.classList.contains(&quot;hidden&quot;);
+        if (multi &amp;&amp; isDrv &amp;&amp; sel1 &amp;&amp; sel2 &amp;&amp; sel2.value &amp;&amp; sel1.value === sel2.value) { v9Toast(&quot;👥 Los dos jugadores eligieron el mismo piloto. El Jugador 2 tiene que elegir otro.&quot;); sel2.focus(); return; }
+      }
+    } catch (e) {}
+    const r = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; v13Drv()) {
+        s.player2.money = 0; // como piloto, P2 arranca sin plata, igual que P1
+        try { render(); } catch (e) {}
+        const n2 = s.player2.playedDriverName;
+        const mates = (typeof myTeamLineup === &quot;function&quot; ? myTeamLineup() : []).map(d =&gt; d.name);
+        if (n2 &amp;&amp; mates.includes(n2)) add(&quot;⚠️ &quot; + n2 + &quot; era compañero del Jugador 1: en su lugar corre otro piloto.&quot;);
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+if (typeof myTeamLineup === &quot;function&quot;) {
+  const o = myTeamLineup;
+  myTeamLineup = function () {
+    const L = o.apply(this, arguments);
+    try {
+      if (v13On() &amp;&amp; v13Drv() &amp;&amp; s.player2.playedDriverName) {
+        const n2 = s.player2.playedDriverName;
+        L.forEach((d, i) =&gt; { if (i &gt; 0 &amp;&amp; d.name === n2) { d.name = generateRookieName(&quot;p1mate_&quot; + s.club + &quot;_&quot; + s.season); d.rating = 72; } });
+      }
+    } catch (e) {}
+    return L;
+  };
+}
+
+/* ============================ 🏁 carrera rápida para 2 ============================ */
+if (typeof v6QuickOpen === &quot;function&quot;) {
+  const o = v6QuickOpen;
+  v6QuickOpen = function () {
+    const r = o.apply(this, arguments);
+    try {
+      const Q = window._v6Q; const card = document.querySelector(&quot;#v6Quick .v6-quick-card, #v6Quick &gt; div&quot;);
+      if (Q &amp;&amp; card &amp;&amp; !card.querySelector(&quot;.v13-q2&quot;)) {
+        const t1 = (getDriversForYear(Q.year).find(d =&gt; d[0] === Q.drv) || [])[3];
+        const drivers = v6QuickDrivers(Q.year).filter(d =&gt; d !== Q.drv &amp;&amp; (!t1 || (getDriversForYear(Q.year).find(x =&gt; x[0] === d) || [])[3] !== t1));
+        if (!drivers.includes(Q.drv2)) Q.drv2 = drivers[0];
+        const btns = card.querySelector(&quot;.v6-res-btns&quot;) || card.lastElementChild;
+        const html = `&lt;div class=&quot;v13-q2&quot;&gt;&lt;label class=&quot;ng-check&quot;&gt;&lt;input type=&quot;checkbox&quot; ${Q.two ? &quot;checked&quot; : &quot;&quot;} onchange=&quot;window._v6Q.two=this.checked; v6QuickOpen()&quot;&gt; &lt;span&gt;👥 2 jugadores en la misma compu o celu&lt;/span&gt;&lt;/label&gt;
+          ${Q.two ? `&lt;div class=&quot;v13-q2f&quot;&gt;&lt;label&gt;🔵 Jugador 2&lt;input type=&quot;text&quot; maxlength=&quot;20&quot; value=&quot;${v13Esc(Q.name2 || &quot;&quot;)}&quot; placeholder=&quot;Nombre&quot; oninput=&quot;window._v6Q.name2=this.value&quot;&gt;&lt;/label&gt;
+          &lt;label&gt;🧑‍✈️ Su piloto&lt;select onchange=&quot;window._v6Q.drv2=this.value&quot;&gt;${drivers.map(d =&gt; `&lt;option ${d === Q.drv2 ? &quot;selected&quot; : &quot;&quot;}&gt;${v13Esc(d)}&lt;/option&gt;`).join(&quot;&quot;)}&lt;/select&gt;&lt;/label&gt;&lt;/div&gt;` : &quot;&quot;}&lt;/div&gt;`;
+        if (btns) btns.insertAdjacentHTML(&quot;beforebegin&quot;, html); else card.insertAdjacentHTML(&quot;beforeend&quot;, html);
+      }
+    } catch (e) { console.warn(&quot;[FAWIWE] carrera rápida 2:&quot;, e); }
+    return r;
+  };
+}
+if (typeof v6QuickStart === &quot;function&quot;) {
+  const o = v6QuickStart;
+  v6QuickStart = function () {
+    const Q = window._v6Q;
+    if (!Q || !Q.two) return o.apply(this, arguments);
+    // armamos el multijugador antes de arrancar
+    try {
+      const keepSet = window.setPlayMode;
+      setPlayMode = function () { return keepSet.call(this, &quot;multi&quot;); };
+      try {
+        const drvs = v6QuickDrivers(Q.year);
+        const t1 = (getDriversForYear(Q.year).find(d =&gt; d[0] === Q.drv) || [])[3], tm = d =&gt; (getDriversForYear(Q.year).find(x =&gt; x[0] === d) || [])[3];
+        if (!drvs.includes(Q.drv2) || Q.drv2 === Q.drv || (t1 &amp;&amp; tm(Q.drv2) === t1)) Q.drv2 = drvs.find(d =&gt; d !== Q.drv &amp;&amp; (!t1 || tm(d) !== t1));
+        const n2 = document.getElementById(&quot;name2&quot;); if (n2) n2.value = (Q.name2 || &quot;&quot;).trim() || &quot;Jugador 2&quot;;
+        const t2 = document.getElementById(&quot;driverTypeSel2&quot;); if (t2) t2.value = &quot;actual&quot;;
+        const origStart = window.start;
+        window.start = function () {
+          try {
+            refreshDriverPickList2();
+            const p2 = document.getElementById(&quot;playedDriverSel2&quot;); if (p2) p2.value = Q.drv2;
+            const info = getDriversForYear(Q.year).find(d =&gt; d[0] === Q.drv2);
+            const c2 = document.getElementById(&quot;club2&quot;), c1 = document.getElementById(&quot;club&quot;);
+            if (c2 &amp;&amp; info &amp;&amp; [...c2.options].some(o2 =&gt; o2.value === info[3]) &amp;&amp; (!c1 || c1.value !== info[3])) c2.value = info[3];
+            else if (c2 &amp;&amp; c1) { const alt = [...c2.options].find(o2 =&gt; o2.value !== c1.value); if (alt) c2.value = alt.value; }
+          } catch (e) {}
+          return origStart.apply(this, arguments);
+        };
+        try { o.apply(this, arguments); } finally { window.start = origStart; }
+      } finally { setPlayMode = keepSet; window.setPlayMode = keepSet; }
+      if (s.player2) { s.player2.money = 0; add(&quot;👥 Carrera rápida a dos: 🟡 &quot; + v13P1Label() + &quot; vs 🔵 &quot; + v13P2Label() + &quot;.&quot;); render(); }
+    } catch (e) { console.warn(&quot;[FAWIWE] carrera rápida a dos:&quot;, e); }
+  };
+}
+function v13QuickEnd() {
+  let ov = document.getElementById(&quot;v9QuickEnd&quot;);
+  if (!ov) { ov = document.createElement(&quot;div&quot;); ov.id = &quot;v9QuickEnd&quot;; document.body.appendChild(ov); }
+  const p1 = s.lastRace &amp;&amp; s.lastRace.pos, p2 = s.player2.lastPos;
+  const w = p1 &amp;&amp; p2 ? (p1 &lt; p2 ? 1 : 2) : 0;
+  ov.innerHTML = `&lt;div class=&quot;v9-qe-card&quot;&gt;&lt;div class=&quot;hof-k&quot;&gt;🏁 CARRERA RÁPIDA A DOS&lt;/div&gt;&lt;h2&gt;${v13Esc((trackData[s.gp] || {}).name || &quot;&quot;)} ${s.season}&lt;/h2&gt;
+    &lt;div class=&quot;v13-qe&quot;&gt;&lt;div class=&quot;${w === 1 ? &quot;win&quot; : &quot;&quot;}&quot;&gt;&lt;span&gt;🟡 ${v13Esc(v13P1Label())}&lt;/span&gt;&lt;b&gt;${p1 ? &quot;P&quot; + p1 : &quot;—&quot;}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;${w === 2 ? &quot;win&quot; : &quot;&quot;}&quot;&gt;&lt;span&gt;🔵 ${v13Esc(v13P2Label())}&lt;/span&gt;&lt;b&gt;${p2 ? &quot;P&quot; + p2 : &quot;—&quot;}&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;p class=&quot;small&quot;&gt;${w ? &quot;🏆 Ganó el duelo &quot; + v13Esc(w === 1 ? v13P1Label() : v13P2Label()) + &quot;.&quot; : &quot;&quot;}&lt;/p&gt;
+    &lt;div class=&quot;v6-res-btns&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;lv-btn red&quot; onclick=&quot;document.getElementById(&#x27;v9QuickEnd&#x27;).classList.remove(&#x27;show&#x27;);v6QuickOpen()&quot;&gt;🔁 Revancha&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;lv-btn&quot; onclick=&quot;document.getElementById(&#x27;v9QuickEnd&#x27;).classList.remove(&#x27;show&#x27;);v7BackToMenu()&quot;&gt;🏠 Menú&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;`;
+  ov.classList.add(&quot;show&quot;);
+}
+if (typeof nextGP === &quot;function&quot;) {
+  const o = nextGP;
+  nextGP = function () { if (v13On() &amp;&amp; s.quickRace &amp;&amp; s.raceDone) { v13QuickEnd(); return; } return o.apply(this, arguments); };
+}
+
+/* ============================ tutorial ============================ */
+function v13Tut() {
+  const pg = document.querySelector(&#x27;#v10Tut .v10-page[data-t=&quot;menu&quot;]&#x27;);
+  if (!pg || pg.querySelector(&quot;.v13-tut&quot;)) return;
+  pg.insertAdjacentHTML(&quot;beforeend&quot;, `&lt;h3 class=&quot;v13-tut&quot;&gt;👥 Multijugador&lt;/h3&gt;&lt;ul&gt;
+    &lt;li&gt;Los dos autos están en la misma grilla: &lt;b&gt;clasificación en vivo&lt;/b&gt; y &lt;b&gt;transmisión de la carrera&lt;/b&gt; con los dos marcados (🟡 P1, 🔵 P2).&lt;/li&gt;
+    &lt;li&gt;En la carrera cada uno juega lo suyo: &lt;b&gt;estrategia&lt;/b&gt;, &lt;b&gt;pases y defensas&lt;/b&gt; y &lt;b&gt;entrada a boxes&lt;/b&gt;. Antes de largar, el &lt;b&gt;cara a cara&lt;/b&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;Carrera rápida a dos&lt;/b&gt;: en Carrera rápida tildá &quot;2 jugadores&quot;.&lt;/li&gt;&lt;/ul&gt;`);
+}
+(function () {
+  if (document.readyState !== &quot;loading&quot;) setTimeout(v13Tut, 0); else document.addEventListener(&quot;DOMContentLoaded&quot;, v13Tut);
+  const rd = window.render;
+  if (typeof rd === &quot;function&quot;) { render = function () { const r = rd.apply(this, arguments); try { v13Tut(); } catch (e) {} return r; }; window.render = render; }
+})();
+
+/* ============================ el cartel de turno espera a que termine lo que está en vivo ============================ */
+function v13LiveBusy() {
+  try {
+    if (typeof QL !== &quot;undefined&quot; &amp;&amp; QL) return true;
+    if (typeof DL !== &quot;undefined&quot; &amp;&amp; DL &amp;&amp; document.getElementById(&quot;dlOverlay&quot;)?.classList.contains(&quot;show&quot;)) return true;
+    if (document.querySelector(&quot;#duelCine, #v7Flag.show, #resultOverlay.show, #v11Face.show, #podOverlay.show&quot;)) return true;
+  } catch (e) {}
+  return false;
+}
+if (typeof duelTurnPlate === &quot;function&quot;) {
+  const o = duelTurnPlate;
+  let pend = null, timer = null;
+  duelTurnPlate = function (p) {
+    if (!v13LiveBusy()) return o.apply(this, arguments);
+    pend = p;
+    clearInterval(timer);
+    timer = setInterval(() =&gt; { if (v13LiveBusy()) return; clearInterval(timer); const q = pend; pend = null; if (q &amp;&amp; s.player2 &amp;&amp; s.activePlayer === q) o.call(this, q); }, 500);
+  };
+}
 
 &lt;/script&gt;
 &lt;/body&gt;
