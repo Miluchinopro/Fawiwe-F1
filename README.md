@@ -1,4 +1,4 @@
-# 🏎️ FAWIWE F1 · Prototipo 1.3
+# 🏎️ FAWIWE F1 · Prototipo 1.4
 
 Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**, de 1950 a 2026.
 
@@ -13,7 +13,8 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 - **Modo Ingeniero y Modo Piloto**, con minijuegos en cada sesión.
 - **Carrera en vivo** vuelta por vuelta: estrategia, largada, pases y defensas jugables, entrada a boxes, Safety Car, VSC, lluvia con radar y radio con voz.
 - **Rival de la temporada**, cara a cara y vuelta de enfriamiento.
-- **Todas las épocas**: reglas, paradas y clasificación según el año.
+- **Todas las épocas, como fueron**: los pilotos de cada año (de Fangio a hoy), los calendarios de cada temporada, el sistema de puntos de cada época, la vuelta rápida cuando daba punto, reglas, paradas y clasificación.
+- **Cinemáticas**: una intro con 76 años de autos y el tacómetro al rojo, y al empezar tu carrera viajás en el tiempo hasta tu año con tu credencial del paddock.
 - Carrera rápida, desafíos, "Toda una vida", temporada rápida y multijugador local.
 
 ## 👥 Multijugador

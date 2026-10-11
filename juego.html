@@ -1,9 +1,9 @@
-<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.3 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.3" srcdoc="&lt;!doctype html&gt;
+<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.4 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.4" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;es&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
-&lt;title&gt;FAWIWE F1 · Prototipo 1.3&lt;/title&gt;
+&lt;title&gt;FAWIWE F1 · Prototipo 1.4&lt;/title&gt;
 &lt;style&gt;
 @import url(&#x27;https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap&#x27;);
 *{box-sizing:border-box}body{margin:0;background:#090909;color:#eee;font-family:&quot;Inter&quot;,Arial,sans-serif}h1,h2,h3,.logo,.rank,.luxury-banner,button,.tutorial-box h3{font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif}header{background:linear-gradient(120deg,#090909,#300b08);padding:18px 5%;border-bottom:3px solid #d9b650;position:sticky;top:0;z-index:9}.logo{font-size:48px;font-weight:1000;letter-spacing:6px}
@@ -2152,10 +2152,188 @@ body.dash #soloHeader.hidden{display:none!important}
 .v14-cups span.a{border-color:#facc15}.v14-cups span.b{border-color:#38bdf8}
 .v14-cupk{margin-top:10px;font-weight:900;letter-spacing:.14em;color:#facc15;font-size:13px}
 #duelChamp .v14-chart{max-width:360px;margin:8px auto}
+
+/* ===== V145 · Prototipo 1.4 ===== */
+/* 7) carteles de resultado: si no entran en la pantalla, se recorren (no se cortan arriba) */
+#resultOverlay{align-items:flex-start!important;overflow-y:auto!important}
+#resultOverlay .result-card{margin:auto!important}
+/* 31) en la clasificación no hay puntos */
+#resultOverlay.v15-quali #resultGridTable th:nth-child(4),#resultOverlay.v15-quali #resultGridTable td:nth-child(4){display:none}
+/* 15 y 17) el aviso de girar el celu ya no aprieta el panel de la carrera */
+#v12Rot{position:fixed!important;left:10px!important;right:10px!important;bottom:10px!important;top:auto!important;z-index:99995!important;margin:0!important;width:auto!important;box-shadow:0 10px 30px #000c}
+#dlOverlay &gt; .eng-live-card,#qlOverlay &gt; .eng-live-card{flex:0 0 auto;width:min(1000px,100%)}
+/* 16) en el celu parado, la radio no tapa el título de la transmisión */
+@media (max-width:700px) and (orientation:portrait){
+  body:has(#fwRadioToast.show):not(.v10-dec) #dlOverlay.show,body:has(#fwRadioToast.show):not(.v10-dec) #qlOverlay.show{padding-top:84px!important;transition:padding-top .2s}
+  #dlOverlay,#qlOverlay{transition:padding-top .2s}
+}
+/* 14) en el celu, el botón ☰ flotante sobra: está &quot;Más&quot; en el menú de abajo */
+@media (max-width:700px){
+  body:has(#v12Nav) #dashToggle{display:none!important}
+  body:has(#v12Nav) #dashTop{padding-left:10px!important}
+}
+/* 18) conferencia de prensa en el celu */
+@media (max-width:700px){
+  #pressOverlay{padding:8px!important;align-items:flex-start!important}
+  .press-card{padding:18px 14px!important;max-height:none!important;margin:auto 0}
+  .press-kicker{font-size:11px!important;letter-spacing:2px!important;padding-right:44px}
+  .press-title{font-size:24px!important;margin:8px 0!important}
+  .press-body{font-size:15px!important}
+  .press-quote{font-size:14px!important;margin:12px auto!important;padding:10px!important}
+  .press-question{margin:12px 0!important;padding:12px!important}
+  .press-question h3{font-size:15px!important}
+  .press-options{grid-template-columns:1fr!important;gap:6px!important}
+  .press-option{font-size:14px!important;padding:10px!important}
+  .press-btn{font-size:16px!important;padding:11px 20px!important}
+  .press-close{width:36px!important;height:36px!important;font-size:18px!important;top:8px!important;right:8px!important}
+}
+/* 19) accesibilidad: cada casilla al lado de su texto */
+.v4-a11y label.ng-check{justify-content:flex-start!important;flex-wrap:nowrap!important;text-align:left}
+.v4-a11y label.ng-check span{flex:1}
+/* 20) historial con la misma letra que el resto */
+#log p{font-size:14px;line-height:1.45;margin:6px 0}
+@media (max-width:700px){#log p{font-size:13px}}
+/* 25) subida de rango: las líneas quedan detrás del texto, y &quot;Continuar&quot; es más grande */
+#rankCine .rc-plate .bc-lines{opacity:.35;width:30%!important}
+#rankCine .rc-old,#rankCine .rc-new,#rankCine .rc-ladder,#rankCine .rc-un{z-index:1}
+#rankCine .rc-go{font-size:17px!important;padding:14px 46px!important;min-height:48px}
+/* 30) el cartel &quot;Gracias por jugar&quot; no tapa el último texto */
+#setup{padding-bottom:42px}
+body.dash #game{padding-bottom:30px}
+/* 35) selector de dificultad sin cortar */
+#miniDiff,#inGameMiniDiff{text-overflow:ellipsis}
+/* 36) decisiones: qué cambia cada opción */
+.v15-fx{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:12px;font-weight:700}
+.v15-fx i{font-style:normal;padding:2px 7px;border-radius:999px;background:#0006}
+.v15-fx i.up{color:#86efac}.v15-fx i.dn{color:#fca5a5}
+
+/* ===== V146 · cinemáticas nuevas ===== */
+#introScreen.v16-under{visibility:hidden!important}
+.v16-f1{display:inline-flex;align-items:center;justify-content:center;background:#e10600;color:#fff;font-weight:900;font-style:italic;border-radius:5px;padding:1px 7px;margin-right:8px;font-size:.85em;letter-spacing:0;transform:skewX(-8deg)}
+/* ---------- 1) intro ---------- */
+#v16Intro{position:fixed;inset:0;z-index:1000000;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,#1a0a0c 0%,#0b0b10 60%,#050507 100%);color:#fff;font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif;user-select:none;-webkit-user-select:none;transition:opacity .45s ease}
+#v16Intro.bye{opacity:0;pointer-events:none}
+#v16Intro .v16-gate,#v16Intro .v16-stage,#v16Intro .v16-final,#v16Intro .v16-skip{display:none}
+#v16Intro.gate .v16-gate{display:flex}
+#v16Intro.play .v16-stage,#v16Intro.play .v16-skip{display:block}
+#v16Intro.final .v16-final{display:flex}
+.v16-gate{position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:22px;animation:v16Fade .6s ease both}
+.v16-gate-logo{font-weight:900;font-size:clamp(34px,8vw,64px);letter-spacing:.06em;display:flex;align-items:center}
+.v16-gate-logo b{background:linear-gradient(90deg,#e10600 0 33%,#fff 33% 66%,#e10600 66%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.v16-gate-btn{font:900 18px &quot;Titillium Web&quot;,Arial,sans-serif!important;letter-spacing:.06em;padding:16px 34px!important;border-radius:999px!important;border:0!important;background:#e10600!important;color:#fff!important;box-shadow:0 0 0 0 #e1060088;animation:v16Pulse 1.6s ease-in-out infinite;cursor:pointer}
+.v16-gate-k{color:#a1a1aa;font-size:13px;letter-spacing:.12em}
+.v16-skip{position:absolute;right:14px;bottom:14px;z-index:5;background:#0009!important;border:1px solid #fff3!important;color:#fff!important;border-radius:999px!important;padding:8px 14px!important;font:700 13px &quot;Titillium Web&quot;,Arial!important;cursor:pointer}
+.v16-stage{position:absolute;inset:0}
+.v16-stage &gt; div{position:absolute;inset:0}
+/* escena 1: boxes de noche */
+.v16-s1{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;animation:v16Out .35s ease 1.5s forwards}
+.v16-garages{display:flex;gap:clamp(6px,1.4vw,14px)}
+.v16-garages i{position:relative;width:clamp(42px,9vw,96px);height:clamp(54px,11vw,110px);background:#16161d;border:2px solid #23232c;border-radius:6px 6px 0 0;overflow:hidden}
+.v16-garages i::before{content:&quot;&quot;;position:absolute;inset:8px 6px 0;background:repeating-linear-gradient(0deg,#1f1f28 0 6px,#18181f 6px 12px);border-radius:3px 3px 0 0}
+.v16-garages em{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#ffe9b0 0%,#f59e0b66 35%,transparent 70%);opacity:0;animation:v16LightOn .25s ease calc(.25s + var(--i) * .17s) forwards}
+.v16-present{font-weight:700;letter-spacing:.42em;font-size:clamp(12px,2.2vw,18px);color:#a1a1aa;text-transform:uppercase;opacity:0;animation:v16Fade .5s ease .55s forwards}
+.v16-present span{color:#fff;font-weight:900}
+/* escena 2: 76 años de autos */
+.v16-s2{opacity:0;animation:v16Fade .3s ease 1.55s forwards,v16Out .3s ease 4.45s forwards}
+.v16-speed{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,#ffffff10 60px 62px),linear-gradient(180deg,transparent 0 62%,#13131a 62%);animation:v16Speed .35s linear infinite}
+.v16-big{position:absolute;left:0;right:0;top:12%;text-align:center;font-weight:900;font-size:clamp(26px,7vw,72px);letter-spacing:.02em;color:#ffffff14;-webkit-text-stroke:1px #ffffff33;transform:scale(1.4);opacity:0;animation:v16Big 2.8s ease 1.65s forwards}
+.v16-car{position:absolute;left:0;width:clamp(240px,46vw,520px);top:calc(34% + var(--i) * 7%);transform:translateX(-110%);animation:v16Drive .95s cubic-bezier(.5,0,.4,1) calc(1.75s + var(--i) * .64s) forwards;filter:drop-shadow(0 12px 18px #000)}
+.v16-car svg{width:100%;height:auto;display:block}
+.v16-car::after{content:&quot;&quot;;position:absolute;right:100%;top:40%;width:60%;height:30%;background:linear-gradient(90deg,transparent,#ffffff22);filter:blur(4px)}
+.v16-year{position:absolute;left:30%;top:-46px;font-weight:900;font-size:clamp(22px,5vw,44px);color:#e10600;text-shadow:0 0 18px #e1060088}
+/* escena 3: tacómetro al rojo */
+.v16-s3{display:flex;align-items:center;justify-content:center;opacity:0;animation:v16Fade .25s ease 4.45s forwards}
+.v16-tacho{position:relative;width:min(440px,84vw);text-align:center;animation:v16Shake .08s linear 5.4s 8}
+.v16-tacho svg{width:100%;height:auto;overflow:visible}
+.v16-arc{stroke-dasharray:1;stroke-dashoffset:1;animation:v16Arc 1.3s cubic-bezier(.6,0,.3,1) 4.6s forwards}
+.v16-needle{transform-origin:100px 110px;transform:rotate(-90deg);animation:v16Needle 1.3s cubic-bezier(.6,0,.3,1) 4.6s forwards}
+.v16-rpm{margin-top:-6px;font-size:14px;letter-spacing:.2em;color:#a1a1aa}
+.v16-rpm b{display:block;font-size:clamp(30px,7vw,52px);color:#fff;letter-spacing:.02em;animation:v16Pulse2 .3s ease 5.5s 3}
+.v16-leds{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.v16-leds i{width:clamp(14px,3vw,22px);height:clamp(14px,3vw,22px);border-radius:50%;background:#26262e}
+.v16-leds i.g{--c:#22c55e}.v16-leds i.y{--c:#facc15}.v16-leds i.r{--c:#e10600}
+.v16-leds i{animation:v16Led .1s ease calc(4.7s + var(--i) * .12s) forwards}
+.v16-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;animation:v16Flash .45s ease 6.05s forwards}
+/* final: el logo */
+.v16-final{position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,36px);padding:20px;text-align:center}
+.v16-logo{display:flex;flex-direction:column;align-items:center}
+.v16-k{display:flex;align-items:center;font-weight:700;letter-spacing:.3em;font-size:clamp(10px,1.9vw,15px);color:#d4d4d8;opacity:0;animation:v16Fade .5s ease .1s forwards}
+.v16-logo h1{margin:10px 0 0;font-weight:900;font-size:clamp(54px,15vw,150px);line-height:.95;letter-spacing:.02em;display:flex}
+.v16-logo h1 span{display:inline-block;color:#fff;opacity:0;transform:translateY(-60px) scale(1.3);animation:v16Letter .35s cubic-bezier(.2,1.5,.4,1) calc(.12s + var(--i) * .09s) forwards}
+.v16-logo h1 span.r{color:#e10600}
+.v16-check{width:min(520px,80vw);height:14px;margin-top:10px;background:repeating-linear-gradient(90deg,#fff 0 14px,#111 14px 28px);clip-path:inset(0 100% 0 0);animation:v16Wipe .5s ease .75s forwards}
+.v16-roles{margin-top:12px;color:#a1a1aa;font-weight:700;letter-spacing:.16em;font-size:clamp(11px,2vw,14px);opacity:0;animation:v16Fade .5s ease 1s forwards}
+.v16-btns{display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:v16Up .5s ease 1.1s forwards}
+.v16-play{font:900 clamp(20px,4vw,26px) &quot;Titillium Web&quot;,Arial,sans-serif!important;letter-spacing:.08em;padding:16px 56px!important;border-radius:999px!important;border:0!important;background:#e10600!important;color:#fff!important;cursor:pointer;animation:v16Pulse 1.6s ease-in-out 1.6s infinite}
+.v16-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.v16-small{font:700 14px &quot;Titillium Web&quot;,Arial,sans-serif!important;padding:10px 18px!important;border-radius:999px!important;background:#1d1d26!important;border:1px solid #3a3a46!important;color:#fff!important;cursor:pointer}
+.v16-by{position:absolute;bottom:14px;left:0;right:0;color:#71717a;font-size:12px;opacity:0;animation:v16Fade .5s ease 1.4s forwards}
+@keyframes v16Fade{from{opacity:0}to{opacity:1}}
+@keyframes v16Out{to{opacity:0;visibility:hidden}}
+@keyframes v16Up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes v16LightOn{0%{opacity:0}40%{opacity:1}55%{opacity:.4}100%{opacity:1}}
+@keyframes v16Speed{to{background-position:-62px 0,0 0}}
+@keyframes v16Big{0%{opacity:0;transform:scale(1.4)}20%{opacity:1;transform:scale(1)}85%{opacity:1}100%{opacity:0;transform:scale(.96)}}
+@keyframes v16Drive{0%{transform:translateX(-110%)}100%{transform:translateX(calc(100vw + 10%))}}
+@keyframes v16Arc{to{stroke-dashoffset:0}}
+@keyframes v16Needle{to{transform:rotate(86deg)}}
+@keyframes v16Led{to{background:var(--c);box-shadow:0 0 12px var(--c)}}
+@keyframes v16Shake{0%{transform:translate(0,0)}25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,2px)}100%{transform:translate(0,0)}}
+@keyframes v16Pulse{0%,100%{box-shadow:0 0 0 0 #e1060077}50%{box-shadow:0 0 0 14px #e1060000}}
+@keyframes v16Pulse2{50%{color:#e10600;transform:scale(1.06)}}
+@keyframes v16Flash{0%{opacity:0}30%{opacity:.85}100%{opacity:0}}
+@keyframes v16Letter{to{opacity:1;transform:none}}
+@keyframes v16Wipe{to{clip-path:inset(0 0 0 0)}}
+/* ---------- 2) al tocar Jugar: viaje en el tiempo + credencial ---------- */
+#v16Go{position:fixed;inset:0;z-index:1000001;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#16161f 0%,#07070b 70%);color:#fff;font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .35s ease;--tc:#e10600}
+#v16Go.t1{opacity:1}
+#v16Go.bye{opacity:0;pointer-events:none;transition:opacity .45s ease}
+#v16Go::before{content:&quot;&quot;;position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg,#ffffff06 0 4deg,transparent 4deg 12deg);animation:v16Spin 14s linear infinite}
+.g-time{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;transition:transform .5s cubic-bezier(.6,0,.3,1),opacity .4s ease}
+.g-k{letter-spacing:.4em;font-weight:700;color:#a1a1aa;font-size:clamp(12px,2.2vw,16px)}
+.g-year{font-weight:900;font-size:clamp(80px,22vw,190px);line-height:1;color:#fff;text-shadow:0 0 40px var(--tc);font-variant-numeric:tabular-nums}
+.g-era{margin-top:6px;color:#e5e7eb;font-weight:700;font-size:clamp(13px,2.6vw,20px)}
+#v16Go.t2 .g-time{transform:translateY(calc(-50% - 38vh)) scale(.5);opacity:0}
+.g-lanyard{position:absolute;left:50%;top:-10px;width:28px;height:0;transform:translateX(-50%);background:linear-gradient(90deg,var(--tc) 0 40%,#fff 40% 60%,var(--tc) 60%);transition:height .6s cubic-bezier(.3,1.3,.4,1) .05s}
+#v16Go.t2 .g-lanyard{height:calc(50vh - 170px)}
+.g-pass{position:relative;width:min(380px,86vw);background:linear-gradient(170deg,#f8fafc,#e2e8f0);color:#111;border-radius:18px;box-shadow:0 30px 80px #000c;overflow:hidden;transform:translateY(-130vh) rotate(-10deg);transform-origin:50% -40px}
+#v16Go.t2 .g-pass{animation:v16Drop 1.1s cubic-bezier(.3,1.25,.45,1) forwards}
+.g-head{display:flex;align-items:center;gap:6px;padding:12px 16px;background:#111;color:#fff;font-weight:900;letter-spacing:.18em;font-size:13px}
+.g-head em{margin-left:auto;font-style:normal;color:#e10600;letter-spacing:.06em;font-size:16px}
+.g-team{padding:10px 16px;background:var(--tc);color:#fff;font-weight:900;font-size:clamp(20px,5vw,28px);text-transform:uppercase;text-shadow:0 2px 6px #0008;letter-spacing:.02em}
+.g-body{display:flex;gap:12px;align-items:center;padding:14px 16px 6px}
+.g-photo{flex:0 0 92px;height:92px;border-radius:12px;background:#111;display:flex;align-items:center;justify-content:center}
+.g-photo svg{width:78px;height:auto}
+.g-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.g-info small{font-size:11px;font-weight:700;letter-spacing:.12em;color:#52525b;text-transform:uppercase}
+.g-info b{font-size:clamp(18px,4.6vw,24px);line-height:1.1;font-weight:900;overflow-wrap:anywhere}
+.g-info b i{font-style:normal;color:#e10600;font-size:.7em}
+.g-car{padding:0 16px}
+.g-car svg{width:100%;height:auto;display:block}
+.g-bar{display:flex;gap:2px;height:30px;margin:6px 16px 16px;align-items:stretch}
+.g-bar i{background:#111;display:block}
+.g-stamp{position:absolute;right:14px;top:46%;padding:6px 14px;border:4px solid #16a34a;color:#16a34a;border-radius:10px;font-weight:900;font-size:clamp(20px,5vw,28px);letter-spacing:.06em;background:#ffffffd0;transform:rotate(-14deg) scale(3);opacity:0}
+#v16Go.t3 .g-stamp{animation:v16Stamp .3s cubic-bezier(.3,1.6,.5,1) forwards}
+
+#v16Go.t4 .g-pass{transform:none;animation:v16Away .8s cubic-bezier(.6,0,.4,1) forwards}
+#v16Go.t4 .g-lanyard{height:0;transition:height .3s ease}
+.g-welcome{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scale(.6);text-align:center;font-weight:900;font-size:clamp(28px,7vw,62px);letter-spacing:.02em;opacity:0;text-shadow:0 0 30px var(--tc)}
+#v16Go.t4 .g-welcome{animation:v16Welcome .7s cubic-bezier(.2,1.4,.4,1) .25s forwards}
+.g-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#v16Go.t4 .g-flash{animation:v16Flash .4s ease .1s}
+.g-skip{position:absolute;right:14px;bottom:14px;font-size:12px;color:#a1a1aa;letter-spacing:.08em}
+@keyframes v16Spin{to{transform:rotate(360deg)}}
+@keyframes v16Drop{0%{transform:translateY(-130vh) rotate(-10deg)}70%{transform:translateY(0) rotate(3deg)}85%{transform:rotate(-1.5deg)}100%{transform:none}}
+@keyframes v16Stamp{to{transform:rotate(-14deg) scale(1);opacity:1}}
+@keyframes v16Thud{50%{transform:translateY(6px)}}
+@keyframes v16Away{to{transform:scale(1.8) translateY(-10vh);opacity:0}}
+@keyframes v16Welcome{to{opacity:1;transform:translateY(-50%) scale(1)}}
+@media (max-height:520px){.v16-garages i{height:60px}.v16-logo h1{font-size:clamp(40px,12vh,90px)}.g-pass{width:min(330px,60vw)}.g-car{display:none}.g-body{padding-top:8px}#v16Go.t2 .g-lanyard{height:calc(50vh - 120px)}}
+body.fw-reduce #v16Intro *,body.fw-reduce #v16Go *{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
-&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.3 🏁&lt;/div&gt;
+&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.4 🏁&lt;/div&gt;
 &lt;div id=&quot;introScreen&quot; class=&quot;ci-wait&quot; onclick=&quot;skipIntroCinematic(event)&quot;&gt;
   &lt;div class=&quot;ci-gate&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ci-gate-btn&quot; onclick=&quot;event.stopPropagation();ciBegin()&quot;&gt;▶ Tocá para empezar&lt;/button&gt;&lt;span&gt;🔊 Con música y sonido&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;ci-layer ci-present&quot;&gt;&lt;div class=&quot;bc-plate&quot;&gt;&lt;svg class=&quot;bc-lines&quot; viewBox=&quot;0 0 400 300&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;6&quot; y=&quot;6&quot; width=&quot;388&quot; height=&quot;288&quot; rx=&quot;60&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.25s&quot;/&gt;&lt;rect x=&quot;18&quot; y=&quot;18&quot; width=&quot;364&quot; height=&quot;264&quot; rx=&quot;50&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.37s&quot;/&gt;&lt;rect x=&quot;30&quot; y=&quot;30&quot; width=&quot;340&quot; height=&quot;240&quot; rx=&quot;40&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.49s&quot;/&gt;&lt;rect x=&quot;42&quot; y=&quot;42&quot; width=&quot;316&quot; height=&quot;216&quot; rx=&quot;30&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.61s&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;k&quot;&gt;FAWIWE RACING TEAM&lt;/div&gt;&lt;b&gt;Presenta&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
@@ -2279,7 +2457,7 @@ body.dash #soloHeader.hidden{display:none!important}
   &lt;span class=&quot;brand-fa&quot;&gt;FA&lt;/span&gt;&lt;span class=&quot;brand-wi&quot;&gt;WI&lt;/span&gt;&lt;span class=&quot;brand-we&quot;&gt;WE&lt;/span&gt;
   &lt;span class=&quot;f1-mark&quot; aria-label=&quot;F1&quot;&gt;F1&lt;/span&gt;
 &lt;/div&gt;
-  &lt;div class=&quot;small&quot;&gt;F1 Team President • Gestión • Carreras • Mercado • Desarrollo&lt;/div&gt;
+  &lt;div class=&quot;small&quot;&gt;Presidente de escudería de F1 • Gestión • Carreras • Mercado • Desarrollo&lt;/div&gt;
 &lt;/header&gt;
 &lt;div class=&quot;wrap&quot;&gt;
 
@@ -2335,13 +2513,13 @@ body.dash #soloHeader.hidden{display:none!important}
     &lt;h3&gt;🔧 Minijuegos si elegís Modo Ingeniero&lt;/h3&gt;
     &lt;ul&gt;
       &lt;li&gt;&lt;b&gt;Prácticas&lt;/b&gt;: 1 quiz de F1 (2000-2026) por práctica, más difícil según tu rango, y después un trabajo distinto para cada puesto. Como &lt;b&gt;Ingeniero de Equipo&lt;/b&gt; el trabajo va rotando: un día es pit stop completo, otro es levantar el auto con los gatos, otro reparar piezas rotas, otro elegir compuestos según el Gran Premio, y otro diagnosticar una falla.&lt;/li&gt;
-      &lt;li&gt;Todos los minijuegos tienen botón &lt;b&gt;▶ START&lt;/b&gt; antes de que corra el tiempo.&lt;/li&gt;
+      &lt;li&gt;Todos los minijuegos tienen botón &lt;b&gt;▶ ARRANCAR&lt;/b&gt; antes de que corra el tiempo.&lt;/li&gt;
       &lt;li&gt;&lt;b&gt;Clasificación&lt;/b&gt; y &lt;b&gt;Carrera&lt;/b&gt;: el resultado depende del minijuego y de decisiones de estrategia; el rango desbloquea más tipos de trabajo y control.&lt;/li&gt;
     &lt;/ul&gt;
     &lt;h3&gt;🏁 El inicio&lt;/h3&gt;
     &lt;ul&gt;
-      &lt;li&gt;Al abrir el juego mirás la cinemática: &lt;b&gt;la evolución de la F1&lt;/b&gt; (7 autos de 1950 a 2026), el auto de frente y el semáforo. Tocá la pantalla para saltarla.&lt;/li&gt;
-      &lt;li&gt;Después aparece el &lt;b&gt;volante&lt;/b&gt;: el botón rojo &lt;b&gt;START ENGINE&lt;/b&gt; arranca el motor y entra al menú. A los costados: &lt;b&gt;🔊 Sonido&lt;/b&gt; y &lt;b&gt;📖 Cómo se juega&lt;/b&gt; (abre este tutorial).&lt;/li&gt;
+      &lt;li&gt;Al abrir el juego tocás &lt;b&gt;▶ Tocá para empezar&lt;/b&gt; y mirás la cinemática: &lt;b&gt;los boxes de noche&lt;/b&gt;, &lt;b&gt;76 años de autos&lt;/b&gt; pasando a toda velocidad y el &lt;b&gt;tacómetro al rojo&lt;/b&gt;. Tocá la pantalla o &lt;b&gt;Saltar&lt;/b&gt; para ir directo al logo.&lt;/li&gt;
+      &lt;li&gt;En el logo, &lt;b&gt;▶ JUGAR&lt;/b&gt; entra al menú. Abajo están &lt;b&gt;🔊 Sonido&lt;/b&gt; y &lt;b&gt;📖 Cómo se juega&lt;/b&gt; (abre este tutorial). Cuando elegís todo y tocás para empezar tu carrera, viajás en el tiempo hasta tu año y recibís tu &lt;b&gt;credencial del paddock&lt;/b&gt;.&lt;/li&gt;
     &lt;/ul&gt;
     &lt;h3&gt;🎛️ Centro del Ingeniero (Modo Ingeniero · Solitario)&lt;/h3&gt;
     &lt;p class=&quot;small&quot;&gt;Todo se va abriendo a medida que subís de rango, como en un equipo de verdad:&lt;/p&gt;
@@ -2712,9 +2890,9 @@ body.dash #soloHeader.hidden{display:none!important}
       &lt;div&gt;
         &lt;label&gt;&lt;span data-i18n=&quot;lbl_difficulty&quot;&gt;Dificultad de minijuegos&lt;/span&gt;&lt;/label&gt;
         &lt;select id=&quot;miniDiff&quot;&gt;
-          &lt;option value=&quot;easy&quot;&gt;🟢 Fácil — ritmo tranquilo: más ayudas (el auto frena y acelera solo)&lt;/option&gt;
-          &lt;option value=&quot;normal&quot; selected&gt;🟡 Normal — ritmo de fin de semana: algunas ayudas (vos frenás)&lt;/option&gt;
-          &lt;option value=&quot;hard&quot;&gt;🔴 Difícil — ritmo de pole: sin ayudas, todo a mano&lt;/option&gt;
+          &lt;option value=&quot;easy&quot;&gt;🟢 Fácil (más ayudas)&lt;/option&gt;
+          &lt;option value=&quot;normal&quot; selected&gt;🟡 Normal (algunas ayudas)&lt;/option&gt;
+          &lt;option value=&quot;hard&quot;&gt;🔴 Difícil (sin ayudas)&lt;/option&gt;
         &lt;/select&gt;
       &lt;/div&gt;
       &lt;div&gt;
@@ -2781,9 +2959,9 @@ body.dash #soloHeader.hidden{display:none!important}
       &lt;div&gt;
         &lt;label&gt;&lt;span data-i18n=&quot;lbl_difficulty&quot;&gt;Dificultad de minijuegos&lt;/span&gt;&lt;/label&gt;
         &lt;select id=&quot;inGameMiniDiff&quot; onchange=&quot;changeMiniDiff(this.value)&quot;&gt;
-          &lt;option value=&quot;easy&quot;&gt;🟢 Fácil — ritmo tranquilo: más ayudas (el auto frena y acelera solo)&lt;/option&gt;
-          &lt;option value=&quot;normal&quot;&gt;🟡 Normal — ritmo de fin de semana: algunas ayudas (vos frenás)&lt;/option&gt;
-          &lt;option value=&quot;hard&quot;&gt;🔴 Difícil — ritmo de pole: sin ayudas, todo a mano&lt;/option&gt;
+          &lt;option value=&quot;easy&quot;&gt;🟢 Fácil (más ayudas)&lt;/option&gt;
+          &lt;option value=&quot;normal&quot;&gt;🟡 Normal (algunas ayudas)&lt;/option&gt;
+          &lt;option value=&quot;hard&quot;&gt;🔴 Difícil (sin ayudas)&lt;/option&gt;
         &lt;/select&gt;
       &lt;/div&gt;
       &lt;div&gt;
@@ -2810,11 +2988,9 @@ body.dash #soloHeader.hidden{display:none!important}
           &lt;option value=&quot;radical&quot;&gt;Apoyar cambio radical (pierde más ahora, gana después)&lt;/option&gt;
         &lt;/select&gt;
       &lt;/div&gt;
-      &lt;div&gt;
-        &lt;label&gt;🌐 Idioma / Language&lt;/label&gt;
+      &lt;div class=&quot;hidden&quot;&gt;
         &lt;select id=&quot;langSel&quot; onchange=&quot;setLanguage(this.value)&quot;&gt;
           &lt;option value=&quot;es&quot; selected&gt;Español&lt;/option&gt;
-          &lt;option value=&quot;en&quot;&gt;English (menú y HUD — el contenido narrativo sigue en español)&lt;/option&gt;
         &lt;/select&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -3034,8 +3210,8 @@ const legendDrivers = [
   [&quot;Alan Jones&quot;, 85, 0], [&quot;Nelson Piquet&quot;, 90, 0], [&quot;Alain Prost&quot;, 96, 0],
   [&quot;Ayrton Senna&quot;, 98, 0], [&quot;Nigel Mansell&quot;, 89, 0], [&quot;Keke Rosberg&quot;, 86, 0],
   [&quot;Riccardo Patrese&quot;, 84, 0], [&quot;Michael Schumacher&quot;, 97, 0], [&quot;Damon Hill&quot;, 87, 0],
-  [&quot;Jacques Villeneuve&quot;, 86, 0], [&quot;Mika Hakkinen&quot;, 92, 0], [&quot;David Coulthard&quot;, 85, 0],
-  [&quot;Gerhard Berger&quot;, 85, 0], [&quot;Jean Alesi&quot;, 84, 0], [&quot;Kimi Raikkonen&quot;, 90, 0],
+  [&quot;Jacques Villeneuve&quot;, 86, 0], [&quot;Mika Häkkinen&quot;, 92, 0], [&quot;David Coulthard&quot;, 85, 0],
+  [&quot;Gerhard Berger&quot;, 85, 0], [&quot;Jean Alesi&quot;, 84, 0], [&quot;Kimi Räikkönen&quot;, 90, 0],
   [&quot;Rubens Barrichello&quot;, 85, 0], [&quot;Juan Pablo Montoya&quot;, 87, 0], [&quot;Ralf Schumacher&quot;, 83, 0],
   [&quot;Felipe Massa&quot;, 85, 0], [&quot;Sebastian Vettel&quot;, 93, 0], [&quot;Jenson Button&quot;, 87, 0],
   [&quot;Nico Rosberg&quot;, 88, 0]
@@ -3051,8 +3227,8 @@ const legendDriverCountry = {
   &quot;Alan Jones&quot;: &quot;Australia&quot;, &quot;Nelson Piquet&quot;: &quot;Brasil&quot;, &quot;Alain Prost&quot;: &quot;Francia&quot;,
   &quot;Ayrton Senna&quot;: &quot;Brasil&quot;, &quot;Nigel Mansell&quot;: &quot;Reino Unido&quot;, &quot;Keke Rosberg&quot;: &quot;Finlandia&quot;,
   &quot;Riccardo Patrese&quot;: &quot;Italia&quot;, &quot;Michael Schumacher&quot;: &quot;Alemania&quot;, &quot;Damon Hill&quot;: &quot;Reino Unido&quot;,
-  &quot;Jacques Villeneuve&quot;: &quot;Canadá&quot;, &quot;Mika Hakkinen&quot;: &quot;Finlandia&quot;, &quot;David Coulthard&quot;: &quot;Reino Unido&quot;,
-  &quot;Gerhard Berger&quot;: &quot;Austria&quot;, &quot;Jean Alesi&quot;: &quot;Francia&quot;, &quot;Kimi Raikkonen&quot;: &quot;Finlandia&quot;,
+  &quot;Jacques Villeneuve&quot;: &quot;Canadá&quot;, &quot;Mika Häkkinen&quot;: &quot;Finlandia&quot;, &quot;David Coulthard&quot;: &quot;Reino Unido&quot;,
+  &quot;Gerhard Berger&quot;: &quot;Austria&quot;, &quot;Jean Alesi&quot;: &quot;Francia&quot;, &quot;Kimi Räikkönen&quot;: &quot;Finlandia&quot;,
   &quot;Rubens Barrichello&quot;: &quot;Brasil&quot;, &quot;Juan Pablo Montoya&quot;: &quot;Colombia&quot;, &quot;Ralf Schumacher&quot;: &quot;Alemania&quot;,
   &quot;Felipe Massa&quot;: &quot;Brasil&quot;, &quot;Sebastian Vettel&quot;: &quot;Alemania&quot;, &quot;Jenson Button&quot;: &quot;Reino Unido&quot;,
   &quot;Nico Rosberg&quot;: &quot;Alemania&quot;
@@ -3699,7 +3875,7 @@ const driversByYear = {
   1994: [[&quot;Michael Schumacher&quot;,96,26,&quot;Benetton&quot;],[&quot;Jos Verstappen&quot;,78,8,&quot;Benetton&quot;],
     [&quot;Damon Hill&quot;,89,19,&quot;Williams&quot;],[&quot;David Coulthard&quot;,82,12,&quot;Williams&quot;],
     [&quot;Gerhard Berger&quot;,85,15,&quot;Scuderia Ferrari&quot;],[&quot;Jean Alesi&quot;,85,15,&quot;Scuderia Ferrari&quot;],
-    [&quot;Mika Hakkinen&quot;,86,16,&quot;McLaren&quot;],[&quot;Martin Brundle&quot;,80,10,&quot;McLaren&quot;],
+    [&quot;Mika Häkkinen&quot;,86,16,&quot;McLaren&quot;],[&quot;Martin Brundle&quot;,80,10,&quot;McLaren&quot;],
     [&quot;Olivier Panis&quot;,79,9,&quot;Ligier&quot;],[&quot;Eric Bernard&quot;,76,6,&quot;Ligier&quot;],
     [&quot;Rubens Barrichello&quot;,83,13,&quot;Jordan Grand Prix&quot;],[&quot;Eddie Irvine&quot;,80,10,&quot;Jordan Grand Prix&quot;]],
   // ===== Pilotos más históricos de cada escudería de leyenda sin cobertura previa =====
@@ -5594,7 +5770,7 @@ function finishJuniorCareer(finalRating) {
 
 function start(juniorFinalRating) {
   s.gameOver = false;
-  s.pointsSystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+  s.pointsSystem = typeof v15PointsFor === &quot;function&quot; ? v15PointsFor(s.season, s.gp || 0) : [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
   s.hasPartner = false;
   s.partnerName = null;
   s.rivalries = {};
@@ -6317,7 +6493,7 @@ function renderJobArea() {
         document.getElementById(&quot;jobArea&quot;).innerHTML = stepHead + `
           &lt;div class=&quot;mini-explain&quot;&gt;
             &lt;b&gt;🔧 Ingeniero — Pit stop completo${turnLabel}&lt;/b&gt;&lt;br&gt;
-            Elegí compuesto, dale a START y seguí el orden de hoy: &lt;b&gt;${orderText}&lt;/b&gt;. ${cfg.clicks} clics en ${cfg.time}s.
+            Elegí compuesto, dale a ARRANCAR y seguí el orden de hoy: &lt;b&gt;${orderText}&lt;/b&gt;. ${cfg.clicks} clics en ${cfg.time}s.
           &lt;/div&gt;
           &lt;div class=&quot;tyre-choice&quot;&gt;
             &lt;button class=&quot;tyre-btn soft ${s.chosenTyre===&#x27;Soft&#x27;?&#x27;selected&#x27;:&#x27;&#x27;}&quot; onclick=&quot;selectTyre(&#x27;Soft&#x27;)&quot;&gt;🔴 Soft&lt;/button&gt;
@@ -6331,7 +6507,7 @@ function renderJobArea() {
             &lt;div class=&quot;wheel-zone rl&quot; id=&quot;wheelRL&quot; onclick=&quot;clickSide(&#x27;rl&#x27;)&quot;&gt;TI&lt;/div&gt;
             &lt;div class=&quot;wheel-zone rr&quot; id=&quot;wheelRR&quot; onclick=&quot;clickSide(&#x27;rr&#x27;)&quot;&gt;TD&lt;/div&gt;
           &lt;/div&gt;
-          &lt;p class=&quot;side-hint&quot; id=&quot;sideHint&quot;&gt;Elegí neumático y pulsá START&lt;/p&gt;
+          &lt;p class=&quot;side-hint&quot; id=&quot;sideHint&quot;&gt;Elegí neumático y tocá ARRANCAR&lt;/p&gt;
           &lt;p class=&quot;progressline&quot;&gt;Clics: &lt;b id=&quot;clickProg&quot;&gt;0&lt;/b&gt; / ${cfg.clicks}&lt;/p&gt;
           &lt;div id=&quot;miniTimer&quot; class=&quot;timer-bar&quot; style=&quot;display:none&quot;&gt;⏱️ ${cfg.time}s&lt;/div&gt;
           &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;startEngineerMini()&quot;&gt;${t(&quot;mg_btn_start&quot;)}&lt;/button&gt;
@@ -7281,16 +7457,18 @@ function finishRace() {
     }
     updateRivalries(grid, main);
     let gotFastestLap = false;
-    if (!mainStatus &amp;&amp; pos &lt;= 10) {
+    if (!mainStatus &amp;&amp; (pos &lt;= 10 || (typeof v15FLAnyPos === &quot;function&quot; &amp;&amp; v15FLAnyPos()))) {
       const h = Math.abs(deterministicHash(&quot;fastestlap_&quot; + s.gp + &quot;_&quot; + s.season)) % 100;
       // Más chance cuanto mejor termines (el líder suele tener el auto más rápido).
       const chance = Math.max(5, 30 - pos * 2);
       if (h &lt; chance) {
         gotFastestLap = true;
-        pts += 1;
-        const mainBase = main.name.replace(&quot; (reserva)&quot;, &quot;&quot;);
-        s.driverPoints[mainBase] = (s.driverPoints[mainBase] || 0) + 1;
-        add(&quot;⚡ ¡Vuelta rápida de la carrera! +1 punto extra.&quot;);
+        if (typeof v15FLPoint !== &quot;function&quot; || v15FLPoint()) {
+          pts += 1;
+          const mainBase = main.name.replace(&quot; (reserva)&quot;, &quot;&quot;);
+          s.driverPoints[mainBase] = (s.driverPoints[mainBase] || 0) + 1;
+          add(&quot;⚡ ¡Vuelta rápida de la carrera! +1 punto extra.&quot;);
+        } else add(&quot;⚡ ¡Vuelta rápida de la carrera! (en &quot; + s.season + &quot; no daba punto extra)&quot;);
       }
     }
     // Fin de semana perfecto (Grand Slam): pole + victoria + vuelta rápida en el mismo GP.
@@ -7419,7 +7597,7 @@ function finishRace() {
     ? ` · Compañero: ${teammateResult.name} ${teammateResult.status}`
     : ` · Compañero: ${teammateResult.name} P${teammateResult.pos} (+${teammateResult.pts} pts)`) : &quot;&quot;;
   // Aclaración: solo suma puntos el top 10. Lo que suma el equipo es la suma de sus dos autos.
-  const teamLine = (teammateResult &amp;&amp; !s.player2) ? ` · Constructores: el equipo suma +${pts + (teammateResult.pts || 0)} (${pts} ${s.playerMode === &quot;driver&quot; ? &quot;tuyos&quot; : &quot;del auto principal&quot;} + ${teammateResult.pts || 0} del compañero) · solo puntúa el top 10` : &quot;&quot;;
+  const teamLine = (teammateResult &amp;&amp; !s.player2) ? ` · Constructores: el equipo suma +${pts + (teammateResult.pts || 0)} (${pts} ${s.playerMode === &quot;driver&quot; ? &quot;tuyos&quot; : &quot;del auto principal&quot;} + ${teammateResult.pts || 0} del compañero) · solo puntúa el top ${ps.length}` : &quot;&quot;;
   showBigResult(&quot;CARRERA · GP de &quot; + (trackData[s.gp] ? trackData[s.gp].name : &quot;&quot;), msgObj.title, msgObj.sub + teammateLine + teamLine, msgObj.cls, fullGrid);
 
   s.raceDone = true;
@@ -7599,12 +7777,8 @@ function nextGP() {
   if (s.gp === 5) midSeasonRatingUpdate();
   // Doble puntos en la última carrera de la temporada — drama de final de año, como pasó en
   // la F1 real alguna vez (Abu Dhabi 2021 usó esta regla en su momento).
-  if (s.gp === 9) {
-    s.pointsSystem = [50, 36, 30, 24, 20, 16, 12, 8, 4, 2];
-    add(&quot;🏁🏁 ¡ÚLTIMA CARRERA DE LA TEMPORADA CON DOBLE DE PUNTOS! Todo se puede definir hoy.&quot;);
-  } else {
-    s.pointsSystem = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
-  }
+  s.pointsSystem = typeof v15PointsFor === &quot;function&quot; ? v15PointsFor(s.season, s.gp) : [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+  if (s.gp === 9 &amp;&amp; s.season === 2014) add(&quot;🏁🏁 ¡ÚLTIMA CARRERA CON DOBLE DE PUNTOS, como en Abu Dhabi 2014! Todo se puede definir hoy.&quot;);
   // Salario: entra automáticamente cada Gran Premio, en los dos modos de juego.
   const salary = salaryForGP();
   s.money += salary;
@@ -7653,7 +7827,7 @@ function nextGP() {
     s.seasonsCompleted = (s.seasonsCompleted || 0) + 1;
     if (!s.records) s.records = { bestCar: 0, bestMoney: 0, titleStreak: 0, currentStreak: 0, bestRacePoints: 0, bestSeasonPoints: 0 };
     if (s.points &gt; (s.records.bestSeasonPoints || 0)) s.records.bestSeasonPoints = s.points;
-    if (s.points &gt;= 200) {
+    if (typeof v15IsChampion === &quot;function&quot; ? v15IsChampion(1) : s.points &gt;= 200) {
       s.titles++;
       s.records.currentStreak = (s.records.currentStreak || 0) + 1;
       if (s.records.currentStreak &gt; (s.records.titleStreak || 0)) s.records.titleStreak = s.records.currentStreak;
@@ -7661,7 +7835,7 @@ function nextGP() {
     } else {
       s.records.currentStreak = 0;
     }
-    if (s.player2 &amp;&amp; s.player2.points &gt;= 200) {
+    if (s.player2 &amp;&amp; (typeof v15IsChampion === &quot;function&quot; ? v15IsChampion(2) : s.player2.points &gt;= 200)) {
       s.player2.titles = (s.player2.titles || 0) + 1;
       add(&quot;🥇 ¡&quot; + s.player2.name + &quot; es campeón de la temporada &quot; + s.season + &quot;!&quot;);
     }
@@ -7671,7 +7845,7 @@ function nextGP() {
     evaluateSeasonObjective();
     generateOffers();
     renderOriginalDrivers(true);
-    showBigResult(&quot;FIN DE TEMPORADA &quot; + s.season, &quot;📋 PILOTOS ORIGINALES&quot;, (s.originalDriverResults || []).map(r =&gt; r.name + &quot; · P&quot; + (r.position || &quot;—&quot;)).join(&quot;  •  &quot;), &quot;points&quot;);
+    { const _se = typeof v15SeasonEnd === &quot;function&quot; ? v15SeasonEnd() : [&quot;📋 PILOTOS ORIGINALES&quot;, (s.originalDriverResults || []).map(r =&gt; r.name + &quot; · P&quot; + (r.position || &quot;—&quot;)).join(&quot;  •  &quot;)]; showBigResult(&quot;FIN DE TEMPORADA &quot; + s.season, _se[0], _se[1], &quot;points&quot;); }
 
     const previousSeason = s.season;
     const previousSeasonPoints = s.points;
@@ -7815,7 +7989,7 @@ function runAfterPartyRound() {
   zone.innerHTML = `
     &lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;🎊 Fiesta after race — ${round.title} (${s._afterPartyRound + 1}/${afterPartyRounds.length})&lt;/b&gt;&lt;br&gt;${round.hint}&lt;/div&gt;
     &lt;div class=&quot;after-party-status&quot; id=&quot;afterPartyStatus&quot;&gt;Preparado...&lt;/div&gt;
-    &lt;button class=&quot;start-btn&quot; id=&quot;afterPartyStartBtn&quot; onclick=&quot;startAfterPartyRound()&quot;&gt;▶ START&lt;/button&gt;
+    &lt;button class=&quot;start-btn&quot; id=&quot;afterPartyStartBtn&quot; onclick=&quot;startAfterPartyRound()&quot;&gt;▶ ARRANCAR&lt;/button&gt;
   `;
 }
 
@@ -10880,12 +11054,12 @@ const i18nDict = {
   pill_signed: { es: &quot;FIRMADO&quot;, en: &quot;SIGNED&quot; },
   pill_hired: { es: &quot;CONTRATADO&quot;, en: &quot;HIRED&quot; },
   pill_max: { es: &quot;MÁXIMO&quot;, en: &quot;MAX&quot; },
-  mg_hint_brake: { es: &quot;Pulsá START para acelerar hacia la curva&quot;, en: &quot;Press START to accelerate towards the corner&quot; },
-  mg_hint_party: { es: &quot;Pulsá START para arrancar la noche&quot;, en: &quot;Press START to start the night&quot; },
-  mg_hint_doctor: { es: &quot;Pulsá START para comenzar la revisión&quot;, en: &quot;Press START to begin the check-up&quot; },
-  mg_hint_generic: { es: &quot;Pulsá START para empezar&quot;, en: &quot;Press START to begin&quot; },
-  mg_hint_lap: { es: &quot;Pulsá START para largar el intento&quot;, en: &quot;Press START to begin the attempt&quot; },
-  mg_hint_reaction: { es: &quot;Pulsá START para prender las luces&quot;, en: &quot;Press START to light up the lights&quot; },
+  mg_hint_brake: { es: &quot;Tocá ARRANCAR para acelerar hacia la curva&quot;, en: &quot;Press START to accelerate towards the corner&quot; },
+  mg_hint_party: { es: &quot;Tocá ARRANCAR para arrancar la noche&quot;, en: &quot;Press START to start the night&quot; },
+  mg_hint_doctor: { es: &quot;Tocá ARRANCAR para comenzar la revisión&quot;, en: &quot;Press START to begin the check-up&quot; },
+  mg_hint_generic: { es: &quot;Tocá ARRANCAR para empezar&quot;, en: &quot;Press START to begin&quot; },
+  mg_hint_lap: { es: &quot;Tocá ARRANCAR para largar el intento&quot;, en: &quot;Press START to begin the attempt&quot; },
+  mg_hint_reaction: { es: &quot;Tocá ARRANCAR para prender las luces&quot;, en: &quot;Press START to light up the lights&quot; },
   mg_go_now: { es: &quot;¡YA! Tocá SALIR ahora.&quot;, en: &quot;GO! Tap LAUNCH now.&quot; },
   mg_btn_launch: { es: &quot;🟢 SALIR&quot;, en: &quot;🟢 LAUNCH&quot; },
   mg_btn_brake: { es: &quot;🅱️ FRENAR&quot;, en: &quot;🅱️ BRAKE&quot; },
@@ -10893,9 +11067,9 @@ const i18nDict = {
   mg_btn_enjoy: { es: &quot;🎊 DISFRUTAR&quot;, en: &quot;🎊 ENJOY&quot; },
   mg_btn_mark: { es: &quot;🏁 MARCAR&quot;, en: &quot;🏁 MARK&quot; },
   mg_btn_stabilize: { es: &quot;🏥 ESTABILIZAR&quot;, en: &quot;🏥 STABILIZE&quot; },
-  mg_btn_start: { es: &quot;▶ START&quot;, en: &quot;▶ START&quot; },
-  mg_btn_start_quiz: { es: &quot;▶ START QUIZ&quot;, en: &quot;▶ START QUIZ&quot; },
-  mg_btn_start_mini: { es: &quot;▶ START MINIJUEGO&quot;, en: &quot;▶ START MINIGAME&quot; }
+  mg_btn_start: { es: &quot;▶ ARRANCAR&quot;, en: &quot;▶ START&quot; },
+  mg_btn_start_quiz: { es: &quot;▶ EMPEZAR EL QUIZ&quot;, en: &quot;▶ START QUIZ&quot; },
+  mg_btn_start_mini: { es: &quot;▶ ARRANCAR MINIJUEGO&quot;, en: &quot;▶ START MINIGAME&quot; }
 };
 function setLanguage(lang) {
   s.language = lang;
@@ -13957,7 +14131,7 @@ function bfxIntro(idx) {
   bfxEl(&quot;bfxBody&quot;).innerHTML = `&lt;div class=&quot;bfx-gamehead&quot;&gt;&lt;div&gt;${dots}&lt;/div&gt;&lt;b&gt;Minijuego ${idx + 1} de 2&lt;/b&gt;&lt;/div&gt;
     &lt;h2 class=&quot;bfx-gametitle&quot;&gt;${engEsc(cfg.label)}&lt;/h2&gt;
     &lt;p class=&quot;small&quot;&gt;${bfxHowTo(type)}&lt;/p&gt;
-    &lt;div class=&quot;bfx-ctrl&quot;&gt;&lt;button class=&quot;start-btn&quot; onclick=&quot;bfxPlay(${idx})&quot;&gt;▶ START&lt;/button&gt; &lt;button class=&quot;dark&quot; onclick=&quot;bfxSkipAll()&quot;&gt;Saltar minijuegos (sin bonus)&lt;/button&gt;&lt;/div&gt;`;
+    &lt;div class=&quot;bfx-ctrl&quot;&gt;&lt;button class=&quot;start-btn&quot; onclick=&quot;bfxPlay(${idx})&quot;&gt;▶ ARRANCAR&lt;/button&gt; &lt;button class=&quot;dark&quot; onclick=&quot;bfxSkipAll()&quot;&gt;Saltar minijuegos (sin bonus)&lt;/button&gt;&lt;/div&gt;`;
 }
 function bfxHowTo(type) {
   return {
@@ -14988,9 +15162,9 @@ function renderEraTask(stepHead, turnLabel) {
     &lt;div class=&quot;era-mini&quot;&gt;
       &lt;div class=&quot;mini-explain&quot;&gt;&lt;div class=&quot;era-head&quot;&gt;&lt;div class=&quot;era-svg&quot;&gt;${fwCarSvg(era.y, eraColor())}&lt;/div&gt;&lt;div&gt;&lt;b&gt;🏎️ Manejo de época · ${s.season} · ${g.title}${turnLabel || &quot;&quot;}&lt;/b&gt;&lt;br&gt;&lt;span class=&quot;small&quot;&gt;${engEsc(era.cap)}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
       &lt;p style=&quot;margin:8px 0 0&quot;&gt;${g.how}&lt;/p&gt;&lt;/div&gt;
-      &lt;div class=&quot;era-stage&quot; id=&quot;eraStage&quot;&gt;&lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:30px 0&quot;&gt;Así se manejaba en ${era.y}. Tocá START cuando estés listo.&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;era-stage&quot; id=&quot;eraStage&quot;&gt;&lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:30px 0&quot;&gt;Así se manejaba en ${era.y}. Tocá ARRANCAR cuando estés listo.&lt;/p&gt;&lt;/div&gt;
       &lt;div class=&quot;era-msg&quot; id=&quot;eraMsg&quot;&gt;&lt;/div&gt;
-      &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;eraStart()&quot;&gt;▶ START&lt;/button&gt;
+      &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;eraStart()&quot;&gt;▶ ARRANCAR&lt;/button&gt;
     &lt;/div&gt;`;
 }
 function eraStart() {
@@ -15378,9 +15552,9 @@ function renderTrackTask(stepHead, turnLabel, onDone) {
     &lt;div class=&quot;era-mini&quot;&gt;
       &lt;div class=&quot;mini-explain&quot;&gt;&lt;div class=&quot;era-head&quot;&gt;&lt;div class=&quot;era-svg&quot;&gt;${fwCarSvg(fwEra(s.season).y, eraColor())}&lt;/div&gt;&lt;div&gt;&lt;b&gt;${d.icon} Desafío del circuito · ${engEsc(trkName())} ${s.season}${turnLabel || &quot;&quot;}&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;font-weight:900&quot;&gt;${engEsc(d.title)}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
       &lt;p style=&quot;margin:8px 0 0&quot;&gt;${d.how}&lt;/p&gt;${trkPatternHtml()}&lt;/div&gt;
-      &lt;div class=&quot;era-stage&quot; id=&quot;eraStage&quot;&gt;&lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:30px 0&quot;&gt;Desafío ${d.idx + 1} de 5 de este circuito. Tocá START cuando estés listo.&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;era-stage&quot; id=&quot;eraStage&quot;&gt;&lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:30px 0&quot;&gt;Desafío ${d.idx + 1} de 5 de este circuito. Tocá ARRANCAR cuando estés listo.&lt;/p&gt;&lt;/div&gt;
       &lt;div class=&quot;era-msg&quot; id=&quot;eraMsg&quot;&gt;&lt;/div&gt;
-      &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;trkStart()&quot;&gt;▶ START&lt;/button&gt;
+      &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;trkStart()&quot;&gt;▶ ARRANCAR&lt;/button&gt;
     &lt;/div&gt;`;
 }
 function trkStart() {
@@ -16871,21 +17045,21 @@ function pxContext() {
    También: un mal setup ahora castiga de verdad el resultado.
    ===================================================================================== */
 const ENG_PAY = [
-  // [desde, hasta] en € por año, por rango del juego
+  // [desde, hasta] en dólares por año, por rango del juego
   { lo: 27000, hi: 130000 }, { lo: 175000, hi: 300000 }, { lo: 460000, hi: 4000000 }, { lo: 1000000, hi: 8000000 },
   { lo: 3000000, hi: 12000000 }, { lo: 6000000, hi: 15000000 }, { lo: 10000000, hi: 17000000 }
 ];
 const ENG_PAY_SCALE = [
-  [&quot;Ingeniero Graduado / Junior&quot;, &quot;27.000 € – 65.000 €&quot;],
-  [&quot;Ingeniero Senior (de carrera, datos o diseño)&quot;, &quot;70.000 € – 130.000 €&quot;],
-  [&quot;Ingeniero Jefe / Jefe de Departamento&quot;, &quot;175.000 € – 300.000 €&quot;],
-  [&quot;Director Técnico&quot;, &quot;460.000 € – 12.000.000 €&quot;],
-  [&quot;Jefe de Equipo / Director General&quot;, &quot;1.000.000 € – 17.000.000 €&quot;]
+  [&quot;Ingeniero Graduado / Junior&quot;, &quot;$27.000 – $65.000&quot;],
+  [&quot;Ingeniero Senior (de carrera, datos o diseño)&quot;, &quot;$70.000 – $130.000&quot;],
+  [&quot;Ingeniero Jefe / Jefe de Departamento&quot;, &quot;$175.000 – $300.000&quot;],
+  [&quot;Director Técnico&quot;, &quot;$460.000 – $12M&quot;],
+  [&quot;Jefe de Equipo / Director General&quot;, &quot;$1M – $17M&quot;]
 ];
 function walEur(n) {
   n = Math.round(n || 0);
-  if (Math.abs(n) &gt;= 1000000) return &quot;€&quot; + (Math.round(n / 100000) / 10).toLocaleString(&quot;es-AR&quot;) + &quot;M&quot;;
-  return &quot;€&quot; + n.toLocaleString(&quot;es-AR&quot;);
+  if (Math.abs(n) &gt;= 1000000) return &quot;$&quot; + (Math.round(n / 100000) / 10).toLocaleString(&quot;es-AR&quot;) + &quot;M&quot;;
+  return &quot;$&quot; + n.toLocaleString(&quot;es-AR&quot;);
 }
 function walOn() { return typeof engOn === &quot;function&quot; &amp;&amp; engOn(); }
 function walTierProgress() {
@@ -17754,9 +17928,9 @@ function emFrame(stepHead, icon, title, how, startFn, done, key) {
   jobArea.innerHTML = (stepHead || &quot;&quot;) + `
     &lt;div class=&quot;era-mini&quot;&gt;
       &lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;${icon} ${title}&lt;/b&gt;&lt;p style=&quot;margin:8px 0 0&quot;&gt;${how}&lt;/p&gt;&lt;/div&gt;
-      &lt;div class=&quot;era-stage&quot; id=&quot;eraStage&quot;&gt;&lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:30px 0&quot;&gt;Tocá START cuando estés listo.&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;era-stage&quot; id=&quot;eraStage&quot;&gt;&lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:30px 0&quot;&gt;Tocá ARRANCAR cuando estés listo.&lt;/p&gt;&lt;/div&gt;
       &lt;div class=&quot;era-msg&quot; id=&quot;eraMsg&quot;&gt;&lt;/div&gt;
-      &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;emStart(&#x27;${startFn}&#x27;)&quot;&gt;▶ START&lt;/button&gt;
+      &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;emStart(&#x27;${startFn}&#x27;)&quot;&gt;▶ ARRANCAR&lt;/button&gt;
     &lt;/div&gt;`;
 }
 function emStart(fn) {
@@ -26894,6 +27068,1033 @@ function v14Tut() {
   if (document.readyState !== &quot;loading&quot;) setTimeout(v14Tut, 50); else document.addEventListener(&quot;DOMContentLoaded&quot;, v14Tut);
   const rd = window.render;
   if (typeof rd === &quot;function&quot;) { render = function () { const r = rd.apply(this, arguments); try { v14Tut(); } catch (e) {} return r; }; window.render = render; }
+})();
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · V145 · Grillas reales año por año (1950–1999)
+   Formato: año | Equipo:auto(1-5):Piloto 1,Piloto 2 | ...
+   Se usan los dos pilotos que más corrieron para cada equipo esa temporada.
+   ===================================================================================== */
+const V15_HIST_RAW = `
+1950|Alfa Romeo:5.0:Giuseppe Farina,Juan Manuel Fangio|Scuderia Ferrari:3.8:Alberto Ascari,Luigi Villoresi|Talbot-Lago:3.0:Louis Rosier,Philippe Étancelin|Maserati:2.6:Louis Chiron,Prince Bira|Gordini:1.8:Robert Manzon,Maurice Trintignant
+1951|Alfa Romeo:4.9:Juan Manuel Fangio,Giuseppe Farina|Scuderia Ferrari:4.8:Alberto Ascari,José Froilán González|Talbot-Lago:2.8:Louis Rosier,Philippe Étancelin|Gordini:1.8:Robert Manzon,Maurice Trintignant|BRM:1.7:Reg Parnell,Peter Walker|Maserati:1.5:Onofre Marimón,Prince Bira
+1952|Scuderia Ferrari:5.0:Alberto Ascari,Giuseppe Farina|Gordini:3.0:Jean Behra,Robert Manzon|Maserati:2.8:José Froilán González,Felice Bonetto|HWM:2.0:Peter Collins,Lance Macklin|Cooper Car Company:2.0:Mike Hawthorn,Alan Brown|Connaught:1.6:Dennis Poore,Eric Thompson
+1953|Scuderia Ferrari:5.0:Alberto Ascari,Giuseppe Farina|Maserati:4.6:Juan Manuel Fangio,José Froilán González|Gordini:2.6:Jean Behra,Maurice Trintignant|HWM:2.0:Peter Collins,Lance Macklin|Cooper Car Company:1.8:Ken Wharton,Alan Brown|Connaught:1.7:Roy Salvadori,Prince Bira
+1954|Mercedes-Benz:5.0:Juan Manuel Fangio,Karl Kling|Scuderia Ferrari:4.4:José Froilán González,Mike Hawthorn|Maserati:3.8:Stirling Moss,Onofre Marimón|Lancia:3.0:Alberto Ascari,Luigi Villoresi|Gordini:2.2:Jean Behra,André Pilette
+1955|Mercedes-Benz:5.0:Juan Manuel Fangio,Stirling Moss|Scuderia Ferrari:3.8:Maurice Trintignant,Giuseppe Farina|Maserati:3.6:Jean Behra,Roberto Mieres|Lancia:3.4:Alberto Ascari,Eugenio Castellotti|Vanwall:1.8:Mike Hawthorn,Ken Wharton|Gordini:1.6:Robert Manzon,Hernando da Silva Ramos|Connaught:1.5:Tony Brooks,Jack Fairman
+1956|Scuderia Ferrari:5.0:Juan Manuel Fangio,Peter Collins|Maserati:4.2:Stirling Moss,Jean Behra|Vanwall:3.0:Harry Schell,Maurice Trintignant|BRM:2.2:Mike Hawthorn,Tony Brooks|Connaught:1.6:Ron Flockhart,Archie Scott Brown|Gordini:1.5:Robert Manzon,Hernando da Silva Ramos
+1957|Maserati:5.0:Juan Manuel Fangio,Jean Behra|Vanwall:4.4:Stirling Moss,Tony Brooks|Scuderia Ferrari:4.0:Mike Hawthorn,Peter Collins|BRM:2.4:Ron Flockhart,Les Leston|Cooper Car Company:2.0:Jack Brabham,Roy Salvadori
+1958|Vanwall:4.8:Stirling Moss,Tony Brooks|Scuderia Ferrari:4.5:Mike Hawthorn,Peter Collins|Cooper Car Company:3.8:Jack Brabham,Roy Salvadori|BRM:3.0:Jean Behra,Harry Schell|Maserati:2.6:Juan Manuel Fangio,Masten Gregory|Team Lotus:2.0:Graham Hill,Cliff Allison
+1959|Cooper Car Company:5.0:Jack Brabham,Bruce McLaren|Scuderia Ferrari:4.0:Tony Brooks,Phil Hill|BRM:3.4:Jo Bonnier,Harry Schell|Team Lotus:2.4:Graham Hill,Innes Ireland|Aston Martin:1.6:Roy Salvadori,Carroll Shelby
+1960|Cooper Car Company:5.0:Jack Brabham,Bruce McLaren|Team Lotus:4.2:Innes Ireland,John Surtees|Scuderia Ferrari:3.4:Phil Hill,Wolfgang von Trips|BRM:2.8:Graham Hill,Jo Bonnier|Aston Martin:1.4:Roy Salvadori,Maurice Trintignant
+1961|Scuderia Ferrari:5.0:Phil Hill,Wolfgang von Trips|Team Lotus:3.8:Jim Clark,Innes Ireland|Porsche:3.2:Dan Gurney,Jo Bonnier|Cooper Car Company:3.0:Jack Brabham,Bruce McLaren|BRM:2.4:Graham Hill,Tony Brooks
+1962|BRM:5.0:Graham Hill,Richie Ginther|Team Lotus:4.8:Jim Clark,Trevor Taylor|Cooper Car Company:3.6:Bruce McLaren,Tony Maggs|Porsche:3.2:Dan Gurney,Jo Bonnier|Scuderia Ferrari:3.0:Phil Hill,Giancarlo Baghetti|Lola:2.6:John Surtees,Roy Salvadori
+1963|Team Lotus:5.0:Jim Clark,Trevor Taylor|BRM:4.2:Graham Hill,Richie Ginther|Brabham:3.6:Jack Brabham,Dan Gurney|Scuderia Ferrari:3.4:John Surtees,Lorenzo Bandini|Cooper Car Company:3.0:Bruce McLaren,Tony Maggs
+1964|Scuderia Ferrari:4.8:John Surtees,Lorenzo Bandini|BRM:4.6:Graham Hill,Richie Ginther|Team Lotus:4.6:Jim Clark,Peter Arundell|Brabham:3.8:Jack Brabham,Dan Gurney|Cooper Car Company:3.0:Bruce McLaren,Phil Hill
+1965|Team Lotus:4.8:Jim Clark,Mike Spence|BRM:4.0:Graham Hill,Jackie Stewart|Scuderia Ferrari:3.6:John Surtees,Lorenzo Bandini|Brabham:3.4:Jack Brabham,Dan Gurney|Cooper Car Company:3.0:Bruce McLaren,Jochen Rindt|Honda F1:2.0:Richie Ginther,Ronnie Bucknum
+1966|Brabham:5.0:Jack Brabham,Denny Hulme|Scuderia Ferrari:4.0:Lorenzo Bandini,Mike Parkes|Cooper Car Company:3.8:John Surtees,Jochen Rindt|BRM:3.4:Graham Hill,Jackie Stewart|Team Lotus:3.0:Jim Clark,Peter Arundell|Eagle Racing:2.0:Dan Gurney,Bob Bondurant|Honda F1:2.0:Richie Ginther,Ronnie Bucknum|McLaren:1.8:Bruce McLaren,Chris Amon
+1967|Brabham:5.0:Denny Hulme,Jack Brabham|Team Lotus:4.6:Jim Clark,Graham Hill|Scuderia Ferrari:3.6:Chris Amon,Lorenzo Bandini|Cooper Car Company:3.4:Jochen Rindt,Pedro Rodríguez|BRM:3.0:Jackie Stewart,Mike Spence|Eagle Racing:2.6:Dan Gurney,Bruce McLaren
+1968|Team Lotus:4.8:Graham Hill,Jackie Oliver|Matra:4.6:Jackie Stewart,Jean-Pierre Beltoise|McLaren:4.4:Bruce McLaren,Denny Hulme|Scuderia Ferrari:3.8:Chris Amon,Jacky Ickx|Brabham:3.0:Jack Brabham,Jochen Rindt|BRM:3.0:Pedro Rodríguez,Richard Attwood|Honda F1:2.6:John Surtees,Jo Schlesser|Cooper Car Company:2.0:Lucien Bianchi,Vic Elford
+1969|Matra:5.0:Jackie Stewart,Jean-Pierre Beltoise|Brabham:4.2:Jacky Ickx,Jack Brabham|Team Lotus:3.8:Jochen Rindt,Graham Hill|McLaren:3.6:Bruce McLaren,Denny Hulme|Scuderia Ferrari:2.6:Chris Amon,Pedro Rodríguez|BRM:2.4:John Surtees,Jackie Oliver
+1970|Team Lotus:4.8:Jochen Rindt,Emerson Fittipaldi|Scuderia Ferrari:4.6:Jacky Ickx,Clay Regazzoni|Tyrrell:3.6:Jackie Stewart,François Cevert|March:3.4:Chris Amon,Jo Siffert|BRM:3.4:Pedro Rodríguez,Jackie Oliver|Brabham:3.4:Jack Brabham,Rolf Stommelen|McLaren:3.2:Denny Hulme,Peter Gethin|Matra:2.8:Jean-Pierre Beltoise,Henri Pescarolo|Surtees:2.0:John Surtees,Derek Bell
+1971|Tyrrell:5.0:Jackie Stewart,François Cevert|BRM:4.0:Jo Siffert,Peter Gethin|Scuderia Ferrari:3.8:Jacky Ickx,Clay Regazzoni|March:3.4:Ronnie Peterson,Nanni Galli|McLaren:3.0:Denny Hulme,Peter Revson|Team Lotus:2.8:Emerson Fittipaldi,Reine Wisell|Matra:2.4:Chris Amon,Jean-Pierre Beltoise|Surtees:2.2:John Surtees,Rolf Stommelen|Brabham:2.2:Graham Hill,Tim Schenken
+1972|Team Lotus:5.0:Emerson Fittipaldi,Dave Walker|Tyrrell:4.6:Jackie Stewart,François Cevert|McLaren:4.2:Denny Hulme,Peter Revson|Scuderia Ferrari:4.0:Jacky Ickx,Clay Regazzoni|BRM:2.8:Jean-Pierre Beltoise,Peter Gethin|Surtees:2.6:Mike Hailwood,Tim Schenken|Brabham:2.4:Graham Hill,Carlos Reutemann|March:2.2:Ronnie Peterson,Niki Lauda
+1973|Tyrrell:5.0:Jackie Stewart,François Cevert|Team Lotus:4.8:Emerson Fittipaldi,Ronnie Peterson|McLaren:4.2:Denny Hulme,Peter Revson|Brabham:3.2:Carlos Reutemann,Wilson Fittipaldi|Scuderia Ferrari:2.8:Jacky Ickx,Arturo Merzario|BRM:2.6:Clay Regazzoni,Niki Lauda|Shadow Racing Cars:2.2:Jackie Oliver,George Follmer|Surtees:2.0:Mike Hailwood,Carlos Pace
+1974|McLaren:4.8:Emerson Fittipaldi,Denny Hulme|Scuderia Ferrari:4.8:Clay Regazzoni,Niki Lauda|Tyrrell:4.0:Jody Scheckter,Patrick Depailler|Team Lotus:3.6:Ronnie Peterson,Jacky Ickx|Brabham:3.6:Carlos Reutemann,Carlos Pace|Shadow Racing Cars:2.4:Jean-Pierre Jarier,Tom Pryce|March:2.4:Hans-Joachim Stuck,Vittorio Brambilla|BRM:2.2:Jean-Pierre Beltoise,Henri Pescarolo|Surtees:1.8:Jochen Mass,Derek Bell
+1975|Scuderia Ferrari:5.0:Niki Lauda,Clay Regazzoni|Brabham:4.2:Carlos Reutemann,Carlos Pace|McLaren:4.0:Emerson Fittipaldi,Jochen Mass|Hesketh:3.4:James Hunt,Brett Lunger|Tyrrell:3.4:Jody Scheckter,Patrick Depailler|Shadow Racing Cars:2.8:Jean-Pierre Jarier,Tom Pryce|Team Lotus:2.6:Ronnie Peterson,Jacky Ickx|March:2.6:Vittorio Brambilla,Lella Lombardi
+1976|Scuderia Ferrari:4.8:Niki Lauda,Clay Regazzoni|McLaren:4.7:James Hunt,Jochen Mass|Tyrrell:3.6:Jody Scheckter,Patrick Depailler|Team Lotus:3.4:Mario Andretti,Gunnar Nilsson|Brabham:3.0:Carlos Reutemann,Carlos Pace|March:2.8:Ronnie Peterson,Vittorio Brambilla|Shadow Racing Cars:2.4:Tom Pryce,Jean-Pierre Jarier
+1977|Scuderia Ferrari:4.8:Niki Lauda,Carlos Reutemann|Team Lotus:4.6:Mario Andretti,Gunnar Nilsson|McLaren:4.0:James Hunt,Jochen Mass|Brabham:3.4:John Watson,Hans-Joachim Stuck|Tyrrell:3.2:Ronnie Peterson,Patrick Depailler|Shadow Racing Cars:2.4:Alan Jones,Riccardo Patrese
+1978|Team Lotus:5.0:Mario Andretti,Ronnie Peterson|Scuderia Ferrari:4.2:Carlos Reutemann,Gilles Villeneuve|Brabham:4.0:Niki Lauda,John Watson|Tyrrell:3.2:Patrick Depailler,Didier Pironi|Wolf Racing:3.2:Jody Scheckter,Keke Rosberg|McLaren:2.8:James Hunt,Patrick Tambay|Arrows:2.4:Riccardo Patrese,Rolf Stommelen|Shadow Racing Cars:2.0:Hans-Joachim Stuck,Clay Regazzoni
+1979|Scuderia Ferrari:5.0:Jody Scheckter,Gilles Villeneuve|Williams:4.6:Alan Jones,Clay Regazzoni|Ligier:4.0:Jacques Laffite,Patrick Depailler|Team Lotus:3.4:Mario Andretti,Carlos Reutemann|Renault F1:3.4:Jean-Pierre Jabouille,René Arnoux|Brabham:2.8:Niki Lauda,Nelson Piquet|Tyrrell:2.8:Didier Pironi,Jean-Pierre Jarier|McLaren:2.4:John Watson,Patrick Tambay|Wolf Racing:2.0:James Hunt,Keke Rosberg|Arrows:2.0:Riccardo Patrese,Jochen Mass
+1980|Williams:5.0:Alan Jones,Carlos Reutemann|Ligier:4.4:Jacques Laffite,Didier Pironi|Brabham:4.2:Nelson Piquet,Héctor Rebaque|Renault F1:4.0:René Arnoux,Jean-Pierre Jabouille|Team Lotus:2.6:Elio de Angelis,Mario Andretti|Tyrrell:2.4:Jean-Pierre Jarier,Derek Daly|McLaren:2.4:John Watson,Alain Prost|Arrows:2.4:Riccardo Patrese,Jochen Mass|Alfa Romeo:2.2:Bruno Giacomelli,Patrick Depailler|Scuderia Ferrari:2.0:Jody Scheckter,Gilles Villeneuve
+1981|Williams:5.0:Alan Jones,Carlos Reutemann|Brabham:4.8:Nelson Piquet,Héctor Rebaque|Renault F1:4.2:Alain Prost,René Arnoux|Scuderia Ferrari:3.4:Gilles Villeneuve,Didier Pironi|Ligier:3.2:Jacques Laffite,Jean-Pierre Jabouille|McLaren:3.2:John Watson,Andrea de Cesaris|Team Lotus:2.6:Elio de Angelis,Nigel Mansell|Arrows:2.4:Riccardo Patrese,Siegfried Stohr|Alfa Romeo:2.4:Mario Andretti,Bruno Giacomelli|Tyrrell:2.0:Eddie Cheever,Michele Alboreto
+1982|Scuderia Ferrari:4.8:Gilles Villeneuve,Didier Pironi|McLaren:4.4:Niki Lauda,John Watson|Williams:4.4:Keke Rosberg,Derek Daly|Renault F1:4.4:Alain Prost,René Arnoux|Brabham:3.6:Nelson Piquet,Riccardo Patrese|Team Lotus:3.0:Elio de Angelis,Nigel Mansell|Tyrrell:2.8:Michele Alboreto,Brian Henton|Ligier:2.4:Jacques Laffite,Eddie Cheever|Alfa Romeo:2.4:Andrea de Cesaris,Bruno Giacomelli|Toleman:1.6:Derek Warwick,Teo Fabi
+1983|Scuderia Ferrari:4.8:Patrick Tambay,René Arnoux|Brabham:4.6:Nelson Piquet,Riccardo Patrese|Renault F1:4.6:Alain Prost,Eddie Cheever|Williams:3.6:Keke Rosberg,Jacques Laffite|McLaren:3.6:Niki Lauda,John Watson|Alfa Romeo:2.8:Andrea de Cesaris,Mauro Baldi|Team Lotus:2.8:Elio de Angelis,Nigel Mansell|Tyrrell:2.4:Michele Alboreto,Danny Sullivan|Toleman:2.2:Derek Warwick,Bruno Giacomelli|Arrows:2.0:Marc Surer,Chico Serra
+1984|McLaren:5.0:Niki Lauda,Alain Prost|Scuderia Ferrari:3.8:Michele Alboreto,René Arnoux|Team Lotus:3.6:Elio de Angelis,Nigel Mansell|Brabham:3.6:Nelson Piquet,Teo Fabi|Renault F1:3.4:Patrick Tambay,Derek Warwick|Williams:3.2:Keke Rosberg,Jacques Laffite|Toleman:2.6:Ayrton Senna,Johnny Cecotto|Alfa Romeo:2.2:Riccardo Patrese,Eddie Cheever|Ligier:2.0:Andrea de Cesaris,François Hesnault|Arrows:1.8:Marc Surer,Thierry Boutsen
+1985|McLaren:5.0:Alain Prost,Niki Lauda|Williams:4.6:Keke Rosberg,Nigel Mansell|Scuderia Ferrari:4.4:Michele Alboreto,Stefan Johansson|Team Lotus:4.2:Ayrton Senna,Elio de Angelis|Brabham:3.0:Nelson Piquet,Marc Surer|Ligier:2.8:Jacques Laffite,Andrea de Cesaris|Renault F1:2.6:Patrick Tambay,Derek Warwick|Arrows:2.4:Thierry Boutsen,Gerhard Berger|Tyrrell:1.8:Martin Brundle,Stefan Bellof|Toleman:1.8:Teo Fabi,Piercarlo Ghinzani
+1986|Williams:5.0:Nigel Mansell,Nelson Piquet|McLaren:4.6:Alain Prost,Keke Rosberg|Team Lotus:4.2:Ayrton Senna,Johnny Dumfries|Scuderia Ferrari:3.6:Michele Alboreto,Stefan Johansson|Benetton:3.2:Gerhard Berger,Teo Fabi|Ligier:3.0:Jacques Laffite,René Arnoux|Tyrrell:2.4:Martin Brundle,Philippe Streiff|Lola:2.0:Alan Jones,Patrick Tambay|Brabham:2.0:Riccardo Patrese,Derek Warwick|Arrows:1.8:Thierry Boutsen,Christian Danner|Minardi:1.4:Andrea de Cesaris,Alessandro Nannini
+1987|Williams:5.0:Nelson Piquet,Nigel Mansell|McLaren:4.4:Alain Prost,Stefan Johansson|Team Lotus:4.0:Ayrton Senna,Satoru Nakajima|Scuderia Ferrari:4.0:Gerhard Berger,Michele Alboreto|Benetton:3.4:Thierry Boutsen,Teo Fabi|Arrows:2.4:Derek Warwick,Eddie Cheever|Brabham:2.4:Riccardo Patrese,Andrea de Cesaris|Tyrrell:2.2:Jonathan Palmer,Philippe Streiff|Ligier:1.6:René Arnoux,Piercarlo Ghinzani|Minardi:1.4:Alessandro Nannini,Adrián Campos
+1988|McLaren:5.0:Ayrton Senna,Alain Prost|Scuderia Ferrari:3.6:Gerhard Berger,Michele Alboreto|Benetton:3.2:Thierry Boutsen,Alessandro Nannini|Williams:3.0:Nigel Mansell,Riccardo Patrese|Team Lotus:2.8:Nelson Piquet,Satoru Nakajima|March:2.6:Ivan Capelli,Maurício Gugelmin|Arrows:2.4:Derek Warwick,Eddie Cheever|Tyrrell:1.6:Jonathan Palmer,Julian Bailey|Ligier:1.4:René Arnoux,Stefan Johansson|Minardi:1.4:Luis Pérez-Sala,Pierluigi Martini
+1989|McLaren:5.0:Ayrton Senna,Alain Prost|Williams:4.2:Thierry Boutsen,Riccardo Patrese|Scuderia Ferrari:4.2:Nigel Mansell,Gerhard Berger|Benetton:3.4:Alessandro Nannini,Johnny Herbert|Tyrrell:2.8:Jean Alesi,Jonathan Palmer|Team Lotus:2.6:Nelson Piquet,Satoru Nakajima|Arrows:2.4:Derek Warwick,Eddie Cheever|Brabham:2.4:Martin Brundle,Stefano Modena|March:2.0:Ivan Capelli,Maurício Gugelmin|Minardi:2.0:Pierluigi Martini,Luis Pérez-Sala
+1990|McLaren:5.0:Ayrton Senna,Gerhard Berger|Scuderia Ferrari:4.8:Alain Prost,Nigel Mansell|Benetton:4.0:Nelson Piquet,Alessandro Nannini|Williams:4.0:Thierry Boutsen,Riccardo Patrese|Tyrrell:2.8:Jean Alesi,Satoru Nakajima|March:2.2:Ivan Capelli,Maurício Gugelmin|Team Lotus:2.0:Derek Warwick,Martin Donnelly|Arrows:1.8:Michele Alboreto,Alex Caffi|Brabham:1.6:Stefano Modena,David Brabham|Minardi:1.6:Pierluigi Martini,Paolo Barilla|Ligier:1.6:Philippe Alliot,Nicola Larini
+1991|McLaren:5.0:Ayrton Senna,Gerhard Berger|Williams:4.8:Nigel Mansell,Riccardo Patrese|Scuderia Ferrari:3.8:Alain Prost,Jean Alesi|Benetton:3.4:Nelson Piquet,Roberto Moreno|Jordan Grand Prix:2.8:Andrea de Cesaris,Bertrand Gachot|Tyrrell:2.4:Satoru Nakajima,Stefano Modena|Minardi:1.8:Pierluigi Martini,Gianni Morbidelli|Ligier:1.6:Thierry Boutsen,Érik Comas|Brabham:1.6:Martin Brundle,Mark Blundell|Team Lotus:1.6:Mika Häkkinen,Johnny Herbert|Footwork:1.4:Michele Alboreto,Alex Caffi
+1992|Williams:5.0:Nigel Mansell,Riccardo Patrese|McLaren:4.2:Ayrton Senna,Gerhard Berger|Benetton:3.8:Michael Schumacher,Martin Brundle|Scuderia Ferrari:2.8:Jean Alesi,Ivan Capelli|Team Lotus:2.8:Mika Häkkinen,Johnny Herbert|Ligier:2.4:Thierry Boutsen,Érik Comas|Tyrrell:2.0:Olivier Grouillard,Andrea de Cesaris|Footwork:2.0:Michele Alboreto,Aguri Suzuki|Jordan Grand Prix:1.6:Stefano Modena,Maurício Gugelmin|Minardi:1.6:Gianni Morbidelli,Christian Fittipaldi|March:1.4:Karl Wendlinger,Paul Belmondo
+1993|Williams:5.0:Alain Prost,Damon Hill|McLaren:4.2:Ayrton Senna,Michael Andretti|Benetton:4.2:Michael Schumacher,Riccardo Patrese|Scuderia Ferrari:3.2:Jean Alesi,Gerhard Berger|Ligier:2.8:Martin Brundle,Mark Blundell|Team Lotus:2.4:Johnny Herbert,Alessandro Zanardi|Sauber Clásico:2.4:JJ Lehto,Karl Wendlinger|Footwork:2.2:Derek Warwick,Aguri Suzuki|Jordan Grand Prix:2.0:Rubens Barrichello,Thierry Boutsen|Minardi:1.6:Christian Fittipaldi,Fabrizio Barbazza|Tyrrell:1.4:Ukyo Katayama,Andrea de Cesaris
+1994|Benetton:4.6:Michael Schumacher,Jos Verstappen|Williams:4.5:Damon Hill,David Coulthard|Scuderia Ferrari:3.6:Gerhard Berger,Jean Alesi|McLaren:3.2:Mika Häkkinen,Martin Brundle|Jordan Grand Prix:2.8:Rubens Barrichello,Eddie Irvine|Ligier:2.8:Olivier Panis,Éric Bernard|Tyrrell:2.6:Ukyo Katayama,Mark Blundell|Sauber Clásico:2.2:Heinz-Harald Frentzen,Andrea de Cesaris|Footwork:2.0:Christian Fittipaldi,Gianni Morbidelli|Minardi:1.6:Pierluigi Martini,Michele Alboreto|Team Lotus:1.4:Johnny Herbert,Pedro Lamy
+1995|Benetton:5.0:Michael Schumacher,Johnny Herbert|Williams:4.8:Damon Hill,David Coulthard|Scuderia Ferrari:4.0:Jean Alesi,Gerhard Berger|McLaren:3.0:Mika Häkkinen,Mark Blundell|Ligier:2.8:Olivier Panis,Martin Brundle|Jordan Grand Prix:2.6:Rubens Barrichello,Eddie Irvine|Sauber Clásico:2.4:Heinz-Harald Frentzen,Jean-Christophe Boullion|Tyrrell:1.8:Mika Salo,Ukyo Katayama|Footwork:1.8:Gianni Morbidelli,Taki Inoue|Minardi:1.6:Luca Badoer,Pedro Lamy
+1996|Williams:5.0:Damon Hill,Jacques Villeneuve|Scuderia Ferrari:4.2:Michael Schumacher,Eddie Irvine|Benetton:4.0:Jean Alesi,Gerhard Berger|McLaren:3.6:Mika Häkkinen,David Coulthard|Jordan Grand Prix:2.8:Rubens Barrichello,Martin Brundle|Ligier:2.6:Olivier Panis,Pedro Diniz|Sauber Clásico:2.6:Heinz-Harald Frentzen,Johnny Herbert|Tyrrell:2.0:Mika Salo,Ukyo Katayama|Footwork:1.8:Jos Verstappen,Ricardo Rosset|Minardi:1.6:Pedro Lamy,Giancarlo Fisichella
+1997|Williams:5.0:Jacques Villeneuve,Heinz-Harald Frentzen|Scuderia Ferrari:4.6:Michael Schumacher,Eddie Irvine|McLaren:4.0:Mika Häkkinen,David Coulthard|Benetton:3.8:Jean Alesi,Gerhard Berger|Jordan Grand Prix:3.0:Giancarlo Fisichella,Ralf Schumacher|Prost Grand Prix:2.8:Olivier Panis,Shinji Nakano|Sauber Clásico:2.4:Johnny Herbert,Nicola Larini|Arrows:2.2:Damon Hill,Pedro Diniz|Stewart Grand Prix:2.2:Rubens Barrichello,Jan Magnussen|Tyrrell:1.8:Mika Salo,Jos Verstappen|Minardi:1.4:Ukyo Katayama,Jarno Trulli
+1998|McLaren:5.0:Mika Häkkinen,David Coulthard|Scuderia Ferrari:4.6:Michael Schumacher,Eddie Irvine|Williams:3.6:Jacques Villeneuve,Heinz-Harald Frentzen|Jordan Grand Prix:3.4:Damon Hill,Ralf Schumacher|Benetton:3.4:Giancarlo Fisichella,Alexander Wurz|Sauber Clásico:2.6:Jean Alesi,Johnny Herbert|Arrows:2.2:Mika Salo,Pedro Diniz|Stewart Grand Prix:2.2:Rubens Barrichello,Jos Verstappen|Prost Grand Prix:1.8:Olivier Panis,Jarno Trulli|Tyrrell:1.6:Ricardo Rosset,Toranosuke Takagi|Minardi:1.4:Shinji Nakano,Esteban Tuero
+1999|McLaren:4.8:Mika Häkkinen,David Coulthard|Scuderia Ferrari:4.8:Michael Schumacher,Eddie Irvine|Jordan Grand Prix:4.0:Heinz-Harald Frentzen,Damon Hill|Stewart Grand Prix:3.4:Johnny Herbert,Rubens Barrichello|Williams:3.0:Ralf Schumacher,Alessandro Zanardi|Benetton:3.0:Giancarlo Fisichella,Alexander Wurz|Prost Grand Prix:2.4:Olivier Panis,Jarno Trulli|Sauber Clásico:2.2:Jean Alesi,Pedro Diniz|Arrows:1.8:Pedro de la Rosa,Toranosuke Takagi|BAR Honda:1.8:Jacques Villeneuve,Ricardo Zonta|Minardi:1.4:Marc Gené,Luca Badoer
+`;
+// rating de cada piloto (si no figura, se usa el que ya tenía el juego o 74)
+const V15_RATING = {
+  &quot;Juan Manuel Fangio&quot;: 97, &quot;Alberto Ascari&quot;: 94, &quot;Giuseppe Farina&quot;: 90, &quot;Stirling Moss&quot;: 95, &quot;José Froilán González&quot;: 87, &quot;Luigi Villoresi&quot;: 84,
+  &quot;Mike Hawthorn&quot;: 88, &quot;Peter Collins&quot;: 86, &quot;Tony Brooks&quot;: 87, &quot;Jean Behra&quot;: 84, &quot;Maurice Trintignant&quot;: 82, &quot;Jack Brabham&quot;: 90, &quot;Bruce McLaren&quot;: 86,
+  &quot;Phil Hill&quot;: 86, &quot;Graham Hill&quot;: 88, &quot;Jim Clark&quot;: 97, &quot;John Surtees&quot;: 88, &quot;Dan Gurney&quot;: 88, &quot;Wolfgang von Trips&quot;: 85, &quot;Richie Ginther&quot;: 82,
+  &quot;Innes Ireland&quot;: 80, &quot;Jo Bonnier&quot;: 78, &quot;Jackie Stewart&quot;: 94, &quot;Denny Hulme&quot;: 86, &quot;Jochen Rindt&quot;: 91, &quot;Lorenzo Bandini&quot;: 82, &quot;Chris Amon&quot;: 85,
+  &quot;Jacky Ickx&quot;: 88, &quot;Pedro Rodríguez&quot;: 84, &quot;Jo Siffert&quot;: 83, &quot;Emerson Fittipaldi&quot;: 91, &quot;Clay Regazzoni&quot;: 85, &quot;François Cevert&quot;: 86,
+  &quot;Ronnie Peterson&quot;: 89, &quot;Niki Lauda&quot;: 95, &quot;James Hunt&quot;: 90, &quot;Jody Scheckter&quot;: 88, &quot;Carlos Reutemann&quot;: 87, &quot;Mario Andretti&quot;: 90,
+  &quot;Patrick Depailler&quot;: 82, &quot;Carlos Pace&quot;: 82, &quot;Gilles Villeneuve&quot;: 90, &quot;Alan Jones&quot;: 87, &quot;Jacques Laffite&quot;: 84, &quot;Didier Pironi&quot;: 85,
+  &quot;René Arnoux&quot;: 84, &quot;Nelson Piquet&quot;: 91, &quot;Alain Prost&quot;: 96, &quot;Keke Rosberg&quot;: 87, &quot;John Watson&quot;: 82, &quot;Riccardo Patrese&quot;: 85,
+  &quot;Nigel Mansell&quot;: 91, &quot;Elio de Angelis&quot;: 83, &quot;Michele Alboreto&quot;: 84, &quot;Patrick Tambay&quot;: 82, &quot;Ayrton Senna&quot;: 98, &quot;Gerhard Berger&quot;: 86,
+  &quot;Thierry Boutsen&quot;: 82, &quot;Stefan Johansson&quot;: 79, &quot;Derek Warwick&quot;: 81, &quot;Teo Fabi&quot;: 79, &quot;Alessandro Nannini&quot;: 82, &quot;Jean Alesi&quot;: 85,
+  &quot;Michael Schumacher&quot;: 97, &quot;Damon Hill&quot;: 88, &quot;Mika Häkkinen&quot;: 92, &quot;David Coulthard&quot;: 86, &quot;Johnny Herbert&quot;: 81, &quot;Martin Brundle&quot;: 82,
+  &quot;Rubens Barrichello&quot;: 85, &quot;Eddie Irvine&quot;: 82, &quot;Heinz-Harald Frentzen&quot;: 83, &quot;Jacques Villeneuve&quot;: 87, &quot;Olivier Panis&quot;: 80,
+  &quot;Giancarlo Fisichella&quot;: 81, &quot;Ralf Schumacher&quot;: 83, &quot;Alexander Wurz&quot;: 78, &quot;Jarno Trulli&quot;: 80, &quot;Mika Salo&quot;: 76, &quot;Karl Wendlinger&quot;: 78,
+  &quot;Satoru Nakajima&quot;: 74, &quot;Eddie Cheever&quot;: 77, &quot;Andrea de Cesaris&quot;: 76, &quot;Ivan Capelli&quot;: 78, &quot;Stefano Modena&quot;: 77, &quot;Pierluigi Martini&quot;: 75,
+  &quot;Mark Blundell&quot;: 76, &quot;Ukyo Katayama&quot;: 74, &quot;Jos Verstappen&quot;: 76, &quot;Pedro Diniz&quot;: 70, &quot;Jean-Pierre Beltoise&quot;: 80, &quot;Jean-Pierre Jarier&quot;: 79,
+  &quot;Tom Pryce&quot;: 79, &quot;Jochen Mass&quot;: 79, &quot;Vittorio Brambilla&quot;: 76, &quot;Hans-Joachim Stuck&quot;: 78, &quot;Peter Revson&quot;: 81, &quot;Mike Hailwood&quot;: 79,
+  &quot;Jackie Oliver&quot;: 75, &quot;Henri Pescarolo&quot;: 75, &quot;Jean-Pierre Jabouille&quot;: 79, &quot;Mauro Baldi&quot;: 72, &quot;Johnny Cecotto&quot;: 73
+};
+const V15_HIST = {};
+(function () {
+  V15_HIST_RAW.trim().split(&quot;\n&quot;).forEach(line =&gt; {
+    const parts = line.trim().split(&quot;|&quot;); const y = +parts[0];
+    const T = [], D = [];
+    parts.slice(1).forEach(p =&gt; {
+      const [team, car, drivers] = p.split(&quot;:&quot;);
+      T.push([team, +car]);
+      drivers.split(&quot;,&quot;).forEach(n =&gt; D.push([n.trim(), 0, 0, team]));
+    });
+    V15_HIST[y] = { T, D };
+  });
+})();
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · V145 · Prototipo 1.4 — 43 arreglos
+   ===================================================================================== */
+
+/* ---------- 1-2) Multijugador: campeonatos que suman como la carrera ---------- */
+if (typeof window.finishRace === &quot;function&quot;) {
+  const o = window.finishRace;
+  window.finishRace = function () {
+    const multi = !!(s &amp;&amp; s.player2);
+    const doneBefore = !!s.raceDone;
+    const p1Before = s.points || 0, p2Before = multi ? (s.player2.points || 0) : 0;
+    const tsBefore = multi ? Object.assign({}, s.teamStandings || {}) : null;
+    const r = o.apply(this, arguments);
+    try {
+      if (multi &amp;&amp; !doneBefore &amp;&amp; s.raceDone) {
+        const key = s.season + &quot;_&quot; + s.gp;
+        if (s._v15Pts !== key) {
+          s._v15Pts = key;
+          const g = simulateGrid(&quot;race&quot;) || [];
+          if (!s.driverPoints) initDriverStandings();
+          if (!s.driverWins) s.driverWins = {};
+          g.forEach(e =&gt; {
+            const b = String(e.name).replace(&quot; (reserva)&quot;, &quot;&quot;);
+            s.driverPoints[b] = (s.driverPoints[b] || 0) + (e.pts || 0);
+            if (e.pos === 1 &amp;&amp; !e.status) s.driverWins[b] = (s.driverWins[b] || 0) + 1;
+          });
+          const tot = t =&gt; g.filter(e =&gt; e.team === t).reduce((a, e) =&gt; a + (e.pts || 0), 0);
+          s.points = p1Before + tot(s.team);
+          if (s.player2.club !== s.team) s.player2.points = p2Before + tot(s.player2.club);
+          const ts = s.teamStandings || (s.teamStandings = {});
+          const mine = new Set([s.team, s.player2.club]);
+          Object.keys(Object.assign({}, tsBefore, ts)).forEach(t =&gt; { if (!mine.has(t)) ts[t] = (tsBefore[t] || 0); });
+          g.forEach(e =&gt; { if (!mine.has(e.team)) ts[e.team] = (ts[e.team] || 0) + (e.pts || 0); });
+          ts[s.team] = s.points; ts[s.player2.club] = s.player2.points;
+          try { render(); } catch (e) {}
+        }
+      }
+    } catch (e) { console.warn(&quot;[FAWIWE] v145 puntos multijugador:&quot;, e); }
+    return r;
+  };
+}
+
+/* ---------- 3) Un piloto nunca puede estar en dos equipos a la vez ---------- */
+function v15UsedElsewhere(name, exceptTeam) {
+  const ro = s &amp;&amp; s.rosterOverrides; if (!ro) return false;
+  return Object.keys(ro).some(t =&gt; t !== exceptTeam &amp;&amp; (ro[t] || []).some(d =&gt; d &amp;&amp; d[0] === name));
+}
+function v15FreeDriver(seed) {
+  try {
+    const used = new Set();
+    getEraTeamNames().forEach(t =&gt; { if (t === s.club) return; try { currentTeamLineup(t).forEach(d =&gt; used.add(d[0])); } catch (e) {} });
+    (s.drivers || []).forEach(n =&gt; used.add(n));
+    if (s.playedDriverName) used.add(s.playedDriverName);
+    const pool = getDriversForYear(s.season).concat(getDriversForYear(s.season - 1)).filter(d =&gt; !used.has(d[0]));
+    if (pool.length) { const d = pool[Math.abs(deterministicHash(seed)) % pool.length]; return { name: d[0], rating: d[1] }; }
+  } catch (e) {}
+  return { name: generateRookieName(seed), rating: 72 };
+}
+if (typeof myTeamLineup === &quot;function&quot;) {
+  const o = myTeamLineup;
+  myTeamLineup = function () {
+    const r = o.apply(this, arguments);
+    if (!Array.isArray(r) || !s || s._v15Lineup) return r;
+    s._v15Lineup = true;
+    try {
+      r.forEach(seat =&gt; {
+        if (!seat || !seat.name) return;
+        if (s.playerMode === &quot;driver&quot; &amp;&amp; seat.name === s.playedDriverName) return;
+        if ((s.drivers || []).includes(seat.name)) return;
+        if (v15UsedElsewhere(seat.name, s.club)) {
+          s._v15Swap = s._v15Swap || {};
+          const k = s.season + &quot;_&quot; + s.club + &quot;_&quot; + seat.name;
+          if (!s._v15Swap[k]) s._v15Swap[k] = v15FreeDriver(&quot;mate_&quot; + k);
+          const f = s._v15Swap[k];
+          seat.name = f.name; seat.rating = effectiveRating(f.name, f.rating);
+        }
+      });
+    } catch (e) {} finally { s._v15Lineup = false; }
+    return r;
+  };
+  window.myTeamLineup = myTeamLineup;
+}
+if (typeof currentTeamLineup === &quot;function&quot;) {
+  const o = currentTeamLineup;
+  currentTeamLineup = function (team) {
+    const r = o.apply(this, arguments);
+    try {
+      if (!Array.isArray(r) || !s || team === s.club) return r;
+      const mine = new Set((s.drivers || []).concat(s.playerMode === &quot;driver&quot; &amp;&amp; s.playedDriverName ? [s.playedDriverName] : []));
+      if (!mine.size) return r;
+      return r.map((d, i) =&gt; (d &amp;&amp; mine.has(d[0])) ? [generateRookieName(&quot;v15_&quot; + team + &quot;_&quot; + s.season + &quot;_&quot; + i), 72, 2, team] : d);
+    } catch (e) { return r; }
+  };
+  window.currentTeamLineup = currentTeamLineup;
+}
+
+/* ---------- 4) Volver al menú cierra todo lo que estaba abierto ---------- */
+if (typeof returnToMenu === &quot;function&quot;) {
+  const o = returnToMenu;
+  returnToMenu = function () {
+    const oneOff = !!(s &amp;&amp; (s.challenge || s.quickRace));
+    let r;
+    if (oneOff) { const c = window.confirm; window.confirm = () =&gt; true; try { r = o.apply(this, arguments); } finally { window.confirm = c; } }
+    else r = o.apply(this, arguments);
+    try {
+      if (document.getElementById(&quot;game&quot;).classList.contains(&quot;hidden&quot;)) {
+        [&quot;resultOverlay&quot;, &quot;podOverlay&quot;, &quot;v7Flag&quot;, &quot;pressOverlay&quot;, &quot;aiEventOverlay&quot;, &quot;dlOverlay&quot;, &quot;qlOverlay&quot;, &quot;engLiveOverlay&quot;, &quot;v11Face&quot;, &quot;engPreShow&quot;, &quot;v9QuickEnd&quot;, &quot;v7Champ&quot;, &quot;seasonChangesOverlay&quot;, &quot;v6Share&quot;, &quot;v14Pass&quot;, &quot;duelTurn&quot;].forEach(id =&gt; {
+          const e = document.getElementById(id); if (!e) return;
+          e.classList.remove(&quot;show&quot;); if (id === &quot;pressOverlay&quot;) e.style.display = &quot;none&quot;;
+        });
+        try { if (DL) { clearInterval(dlTimer); clearInterval(dlDecTimer); DL = null; } } catch (e) {}
+        try { if (QL) { clearInterval(qlTimer); clearInterval(qlDecTimer); QL = null; } } catch (e) {}
+        try { s.pendingPress = null; s.aiEventActive = false; } catch (e) {}
+        document.body.classList.remove(&quot;v10-dec&quot;);
+        window.scrollTo(0, 0);
+      }
+    } catch (e) {}
+    return r;
+  };
+  window.returnToMenu = returnToMenu;
+}
+
+/* ---------- 5) Tarjeta de temporada: tus puntos y las carreras justas ---------- */
+function v9SeasonTrack() {
+  try {
+    const m = String(s._v4ResKey || &quot;&quot;).match(/^(\d+)_(\d+)$/); if (!m) return;
+    const season = +m[1], gp = +m[2];
+    const grid = s._v4Grid || [];
+    const lineup = myTeamLineup() || [];
+    const mine = grid.filter(e =&gt; lineup.some(d =&gt; d.name === e.name));
+    const me = s.playerMode === &quot;driver&quot; ? (mine.find(e =&gt; e.name === s.playedDriverName) || mine[0]) : (mine.filter(e =&gt; !e.status).sort((a, b) =&gt; a.pos - b.pos)[0] || mine[0]);
+    if (!me) return;
+    const S = s._v9Season &amp;&amp; s._v9Season.season === season ? s._v9Season : (s._v9Season = { season, wins: 0, pods: 0, races: 0, best: null, seen: {} });
+    if (S.seen[gp]) return; S.seen[gp] = 1;
+    S.races++;
+    if (!me.status &amp;&amp; me.pos === 1) S.wins++;
+    if (!me.status &amp;&amp; me.pos &lt;= 3) S.pods++;
+    if (!me.status &amp;&amp; (!S.best || me.pos &lt; S.best.pos)) S.best = { pos: me.pos, trk: (trackData[gp] || {}).name || &quot;&quot; };
+  } catch (e) {}
+}
+if (typeof v9SeasonData === &quot;function&quot;) {
+  const o = v9SeasonData;
+  v9SeasonData = function () {
+    const D = o.apply(this, arguments);
+    try {
+      if (D.drv) { const b = (s.playedDriverName || &quot;&quot;).replace(&quot; (reserva)&quot;, &quot;&quot;); D.pts = (s.driverPoints &amp;&amp; s.driverPoints[b]) || 0; }
+      const total = (typeof trackData !== &quot;undefined&quot; &amp;&amp; trackData.length) || 10;
+      if (D.races &gt; total) D.races = total;
+    } catch (e) {}
+    return D;
+  };
+}
+
+/* ---------- 6) &quot;Potencia de la IA&quot; ya no aparece vacía ---------- */
+(function () {
+  const sel = document.getElementById(&quot;inGameAiLevel&quot;);
+  if (sel) [...sel.options].forEach(op =&gt; { op.value = String(parseFloat(op.value)); });
+  if (typeof render === &quot;function&quot;) {
+    const o = render;
+    render = function () {
+      const r = o.apply(this, arguments);
+      try { const a = document.getElementById(&quot;inGameAiLevel&quot;); if (a &amp;&amp; s) a.value = String(parseFloat(s.aiLevel || 1)); } catch (e) {}
+      return r;
+    };
+    window.render = render;
+  }
+})();
+
+/* ---------- 7) Cartel de clasificación: dice dónde largás ---------- */
+if (typeof showBigResult === &quot;function&quot;) {
+  const o = showBigResult;
+  showBigResult = function (kind, title, sub, cls, grid) {
+    try {
+      if (/^CLASIFICACI/.test(String(kind)) &amp;&amp; s.lastQuali) {
+        const pos = s.lastQuali.pos;
+        let single = false;
+        try { single = qlSessions((Array.isArray(grid) &amp;&amp; grid.length) || 20).length === 1; } catch (e) {}
+        sub = String(sub || &quot;&quot;); title = String(title || &quot;&quot;);
+        const eng = /Tu piloto/.test(sub);
+        if (/CLASIFICADO A Q3/.test(title)) {
+          title = &quot;P&quot; + pos + &quot; EN LA GRILLA&quot;;
+          sub = sub.replace(/(Tu piloto está|Estás) en la pelea de la última tanda\./,
+            single ? (eng ? &quot;Larga P&quot; : &quot;Largás P&quot;) + pos + &quot; el domingo.&quot; : (eng ? &quot;Llegó a la Q3: larga P&quot; : &quot;Llegaste a la Q3: largás P&quot;) + pos + &quot; el domingo.&quot;);
+        } else if (single &amp;&amp; /ELIMINADO EN Q[12]/.test(title)) {
+          title = &quot;P&quot; + pos + &quot; EN LA GRILLA&quot;;
+          sub = sub.replace(/No pasaste a Q2\. Hay que encontrar ritmo el sábado que viene\.|Cerca de la Q3, pero el corte te dejó afuera\./, (eng ? &quot;Larga P&quot; : &quot;Largás P&quot;) + pos + &quot; el domingo.&quot;);
+        } else if (/ELIMINADO EN Q1/.test(title)) {
+          sub = sub.replace(&quot;No pasaste a Q2.&quot;, &quot;No pasaste a Q2: &quot; + (eng ? &quot;larga P&quot; : &quot;largás P&quot;) + pos + &quot;.&quot;);
+        } else if (/ELIMINADO EN Q2/.test(title)) {
+          sub = sub.replace(&quot;el corte te dejó afuera.&quot;, &quot;el corte te dejó afuera: &quot; + (eng ? &quot;larga P&quot; : &quot;largás P&quot;) + pos + &quot;.&quot;);
+        }
+        if (single) sub = sub.replace(&quot;La Q3 fue perfecta.&quot;, &quot;Nadie fue más rápido el sábado.&quot;);
+      }
+    } catch (e) {}
+    const r = o.call(this, kind, title, sub, cls, grid);
+    try { const ov = document.getElementById(&quot;resultOverlay&quot;); if (ov) ov.classList.toggle(&quot;v15-quali&quot;, /^CLASIFICACI/.test(String(kind))); } catch (e) {}
+    return r;
+  };
+  window.showBigResult = showBigResult;
+}
+
+/* =====================================================================================
+   8-13) ÉPOCAS REALES: grillas, calendarios, puntos, vuelta rápida y sprints
+   ===================================================================================== */
+// 8) grillas 1950-1999 con los pilotos reales de cada año
+(function () {
+  if (typeof V15_HIST === &quot;undefined&quot; || typeof teamsByYear === &quot;undefined&quot;) return;
+  const known = {};
+  try { Object.keys(driversByYear).forEach(k =&gt; driversByYear[k].forEach(d =&gt; { if (!known[d[0]] || +k &gt;= known[d[0]].y) known[d[0]] = { r: d[1], y: +k }; })); } catch (e) {}
+  Object.keys(V15_HIST).forEach(y =&gt; {
+    const H = V15_HIST[y];
+    H.D.forEach(d =&gt; {
+      const r = V15_RATING[d[0]] || (known[d[0]] &amp;&amp; known[d[0]].r) || 74;
+      d[1] = r; d[2] = Math.max(1, Math.round((r - 62) * 0.8));
+    });
+    teamsByYear[y] = H.T.map(t =&gt; t.slice());
+    driversByYear[y] = H.D.map(d =&gt; d.slice());
+  });
+  // 9) 2009: Fisichella en un solo equipo · 2026: Racing Bulls con Lawson y Lindblad
+  try {
+    const d9 = driversByYear[2009];
+    if (d9) { const fer = d9.filter(d =&gt; d[3] === &quot;Scuderia Ferrari&quot;); const fi = fer.find(d =&gt; /Fisichella/.test(d[0])); if (fi &amp;&amp; d9.filter(d =&gt; /Fisichella/.test(d[0])).length &gt; 1) { fi[0] = &quot;Felipe Massa&quot;; fi[1] = 86; fi[2] = 18; } }
+    const d26 = driversByYear[2026];
+    if (d26) { const t = d26.find(d =&gt; d[0] === &quot;Yuki Tsunoda&quot; &amp;&amp; /Racing Bulls/.test(d[3])); if (t) { t[0] = &quot;Arvid Lindblad&quot;; t[1] = 77; t[2] = 3; } }
+  } catch (e) {}
+  try { Object.assign(teamColors, { &quot;Talbot-Lago&quot;: &quot;#2b5fad&quot;, &quot;Gordini&quot;: &quot;#1f5fbf&quot;, &quot;Mercedes-Benz&quot;: &quot;#c9ced6&quot;, &quot;Lancia&quot;: &quot;#b5121b&quot;, &quot;HWM&quot;: &quot;#2e7d32&quot;, &quot;Porsche&quot;: &quot;#d0d0d0&quot; }); } catch (e) {}
+  const clampY = year =&gt; Math.max(1950, Math.min(2026, year | 0));
+  function withMine(T, y) {
+    try {
+      if (typeof s === &quot;undefined&quot; || !s || !s.team || s.season !== y) return T;
+      const need = [s.team].concat(s.player2 &amp;&amp; s.player2.club ? [s.player2.club] : []);
+      need.forEach(team =&gt; {
+        if (T.some(t =&gt; t[0] === team)) return;
+        const yy = Object.keys(teamsByYear).map(Number).filter(k =&gt; teamsByYear[k].some(t =&gt; t[0] === team)).sort((a, b) =&gt; Math.abs(a - y) - Math.abs(b - y))[0];
+        const tm = yy != null ? teamsByYear[yy].find(t =&gt; t[0] === team) : (legendTeams.find(t =&gt; t[0] === team) || [team, 2.5]);
+        T = T.concat([tm]);
+      });
+    } catch (e) {}
+    return T;
+  }
+  if (typeof getTeamsForYear === &quot;function&quot;) {
+    const o = getTeamsForYear;
+    getTeamsForYear = function (year) {
+      const y = clampY(year);
+      if (V15_HIST[y]) return withMine(V15_HIST[y].T.map(t =&gt; t.slice()), y);
+      return o.apply(this, arguments);
+    };
+    window.getTeamsForYear = getTeamsForYear;
+  }
+  if (typeof getDriversForYear === &quot;function&quot;) {
+    const o = getDriversForYear;
+    getDriversForYear = function (year) {
+      const y = clampY(year);
+      if (!V15_HIST[y]) return o.apply(this, arguments);
+      let D = driversByYear[y].slice();
+      try {
+        if (typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; s.team &amp;&amp; s.season === y &amp;&amp; typeof lastKnownLineup === &quot;function&quot;) {
+          [s.team].concat(s.player2 &amp;&amp; s.player2.club ? [s.player2.club] : []).forEach(team =&gt; {
+            if (D.some(d =&gt; d[3] === team)) return;
+            const add = lastKnownLineup(team, y).filter(d =&gt; !D.some(x =&gt; x[0] === d[0])).map(d =&gt; [d[0], d[1], d[2], team]);
+            D = D.concat(add);
+          });
+        }
+      } catch (e) {}
+      return D;
+    };
+    window.getDriversForYear = getDriversForYear;
+  }
+})();
+
+// 10) calendarios con las carreras que existían cada año
+(function () {
+  if (typeof CAL_POOL === &quot;undefined&quot;) return;
+  const R = (a, b) =&gt; { const r = []; for (let i = a; i &lt;= b; i++) r.push(i); return r; };
+  const set = (n, p) =&gt; { const c = CAL_POOL.find(x =&gt; x.n === n); if (c) Object.assign(c, p); };
+  set(&quot;Mónaco&quot;, { skip: [1951, 1952, 1953, 1954, 2020] });
+  set(&quot;Bélgica&quot;, { from: 1950, skip: [1957, 1959, 1969, 1971, 2003, 2006] });
+  set(&quot;Alemania&quot;, { from: 1951, to: 2019, skip: [1955, 1960, 2007, 2015, 2017] });
+  set(&quot;Francia&quot;, { from: 1950, to: 2008, skip: [1955], more: [2018, 2019, 2021, 2022] });
+  set(&quot;España&quot;, { from: 1986, more: [1951, 1954].concat(R(1968, 1981)), skip: [] });
+  set(&quot;Países Bajos&quot;, { from: 1952, to: 1985, skip: [1954, 1956, 1957, 1972], more: R(2021, 2026) });
+  set(&quot;Canadá&quot;, { from: 1967, skip: [1975, 1987, 2020] });
+  set(&quot;Brasil&quot;, { from: 1973, skip: [2020] });
+  set(&quot;Japón&quot;, { from: 1987, more: [1976, 1977], skip: [2020, 2021] });
+  set(&quot;Australia&quot;, { skip: [2020, 2021] });
+  set(&quot;Austria&quot;, { from: 2014, more: [1964].concat(R(1970, 1987), R(1997, 2003)) });
+  set(&quot;México&quot;, { from: 2015, more: R(1963, 1970).concat(R(1986, 1992)), skip: [2020] });
+  set(&quot;Estados Unidos&quot;, { from: 2012, more: R(1959, 1980).concat([1989, 1990, 1991], R(2000, 2007)), skip: [2020] });
+  set(&quot;Argentina&quot;, { more: R(1953, 1958).concat([1960], R(1972, 1975), R(1977, 1981)) });
+  set(&quot;Portugal&quot;, { more: [1958, 1959, 1960].concat(R(1984, 1996)) });
+  set(&quot;Las Vegas&quot;, { more: [1981, 1982] });
+  set(&quot;Singapur&quot;, { skip: [2020, 2021] });
+  set(&quot;China&quot;, { skip: [2020, 2021, 2022, 2023] });
+  set(&quot;Azerbaiyán&quot;, { skip: [2020] });
+  set(&quot;Bahréin&quot;, { skip: [2011] });
+  set(&quot;Emilia-Romaña&quot;, { skip: [2023] });
+  const add = c =&gt; { if (!CAL_POOL.find(x =&gt; x.n === c.n)) CAL_POOL.push(c); };
+  add({ n: &quot;Sudáfrica&quot;, laps: 72, rec: &quot;1:08.149&quot;, from: 1962, to: 1993, skip: [1964, 1966].concat(R(1986, 1991)), icon: &quot;🦁&quot;, type: &quot;power&quot;, ov: &quot;medio&quot;, wear: 1.1, wv: 0.8, note: &quot;Kyalami: altura, calor y la recta larguísima que termina en Crowthorne.&quot;, c: [&quot;Crowthorne&quot;, &quot;Barbecue&quot;, &quot;Jukskei&quot;, &quot;Clubhouse&quot;], m: [[&quot;trkSlip&quot;, &quot;Rebufo en la recta principal&quot;], [&quot;trkTemp&quot;, &quot;Calor del Highveld&quot;], [&quot;trkWall&quot;, &quot;Frenada de Crowthorne&quot;], [&quot;trkSide&quot;, &quot;Ataque en Clubhouse&quot;]], era: &quot;en Kyalami&quot;, country: &quot;Sudáfrica&quot; });
+  add({ n: &quot;Suiza&quot;, laps: 42, rec: &quot;2:39.700&quot;, from: 1950, to: 1954, icon: &quot;🏔️&quot;, type: &quot;power&quot;, ov: &quot;difícil&quot;, wear: 1.0, wv: 1.3, note: &quot;Bremgarten: árboles, adoquines y curvas rapidísimas en el bosque de Berna.&quot;, c: [&quot;Forsthaus&quot;, &quot;Eymatt&quot;, &quot;Bethlehem&quot;, &quot;Glasbrunnen&quot;], m: [[&quot;trkBand&quot;, &quot;Curvas rápidas en el bosque&quot;], [&quot;trkWet&quot;, &quot;Lluvia en Berna&quot;], [&quot;trkWall&quot;, &quot;Frenada de Forsthaus&quot;], [&quot;trkSide&quot;, &quot;Ataque en Eymatt&quot;]], era: &quot;en Bremgarten&quot;, country: &quot;Suiza&quot; });
+  add({ n: &quot;Suecia&quot;, laps: 70, rec: &quot;1:24.836&quot;, from: 1973, to: 1978, icon: &quot;🛫&quot;, type: &quot;mech&quot;, ov: &quot;medio&quot;, wear: 1.0, wv: 1.0, note: &quot;Anderstorp: una pista sobre un aeródromo, con una recta que también era pista de aterrizaje.&quot;, c: [&quot;Startkurvan&quot;, &quot;Södra&quot;, &quot;Norra&quot;, &quot;Läktarkurvan&quot;], m: [[&quot;trkSlip&quot;, &quot;Rebufo en la pista de aterrizaje&quot;], [&quot;trkSimon&quot;, &quot;Curvas largas de memoria&quot;], [&quot;trkWall&quot;, &quot;Frenada de Norra&quot;], [&quot;trkSide&quot;, &quot;Ataque en la Startkurvan&quot;]], era: &quot;en Anderstorp&quot;, country: &quot;Suecia&quot; });
+  // registra los datos de los circuitos nuevos en los otros módulos
+  CAL_POOL.filter(c =&gt; [&quot;Sudáfrica&quot;, &quot;Suiza&quot;, &quot;Suecia&quot;].includes(c.n)).forEach(c =&gt; {
+    try { if (typeof circuitTraits !== &quot;undefined&quot; &amp;&amp; !circuitTraits[c.n]) circuitTraits[c.n] = { overtake: c.ov, tireWear: c.wear, weatherVar: c.wv, note: c.note }; } catch (e) {}
+    try { if (typeof ENG_TRACK_TYPE !== &quot;undefined&quot; &amp;&amp; !ENG_TRACK_TYPE[c.n]) ENG_TRACK_TYPE[c.n] = c.type; } catch (e) {}
+    try { if (typeof EM_CORNERS !== &quot;undefined&quot; &amp;&amp; !EM_CORNERS[c.n]) EM_CORNERS[c.n] = c.c; } catch (e) {}
+    try { if (typeof FAME_TRACK_COUNTRY !== &quot;undefined&quot; &amp;&amp; !FAME_TRACK_COUNTRY[c.n]) FAME_TRACK_COUNTRY[c.n] = c.country; } catch (e) {}
+    try { if (typeof FW_TRACK_MINI !== &quot;undefined&quot; &amp;&amp; !FW_TRACK_MINI[c.n]) FW_TRACK_MINI[c.n] = { icon: c.icon, v: c.m.concat([[&quot;era&quot;, c.era]]) }; } catch (e) {}
+  });
+  // orden de las fechas según la época
+  const ORD = {
+    old: [&quot;Argentina&quot;, &quot;Sudáfrica&quot;, &quot;Brasil&quot;, &quot;España&quot;, &quot;Mónaco&quot;, &quot;Suiza&quot;, &quot;Bélgica&quot;, &quot;Suecia&quot;, &quot;Países Bajos&quot;, &quot;Francia&quot;, &quot;Gran Bretaña&quot;, &quot;Alemania&quot;, &quot;Austria&quot;, &quot;Italia&quot;, &quot;Portugal&quot;, &quot;Canadá&quot;, &quot;Estados Unidos&quot;, &quot;México&quot;, &quot;Las Vegas&quot;, &quot;Japón&quot;, &quot;Australia&quot;],
+    e85: [&quot;Sudáfrica&quot;, &quot;Brasil&quot;, &quot;Argentina&quot;, &quot;Estados Unidos&quot;, &quot;San Marino&quot;, &quot;España&quot;, &quot;Mónaco&quot;, &quot;Canadá&quot;, &quot;México&quot;, &quot;Francia&quot;, &quot;Gran Bretaña&quot;, &quot;Alemania&quot;, &quot;Austria&quot;, &quot;Países Bajos&quot;, &quot;Hungría&quot;, &quot;Bélgica&quot;, &quot;Italia&quot;, &quot;Portugal&quot;, &quot;Japón&quot;, &quot;Australia&quot;],
+    e96: [&quot;Australia&quot;, &quot;Brasil&quot;, &quot;Argentina&quot;, &quot;San Marino&quot;, &quot;España&quot;, &quot;Mónaco&quot;, &quot;Canadá&quot;, &quot;Francia&quot;, &quot;Gran Bretaña&quot;, &quot;Alemania&quot;, &quot;Austria&quot;, &quot;Hungría&quot;, &quot;Bélgica&quot;, &quot;Italia&quot;, &quot;Estados Unidos&quot;, &quot;Malasia&quot;, &quot;Japón&quot;, &quot;Portugal&quot;],
+    e04: [&quot;Australia&quot;, &quot;Bahréin&quot;, &quot;Malasia&quot;, &quot;Arabia Saudita&quot;, &quot;China&quot;, &quot;Japón&quot;, &quot;Miami&quot;, &quot;Turquía&quot;, &quot;San Marino&quot;, &quot;Emilia-Romaña&quot;, &quot;España&quot;, &quot;Mónaco&quot;, &quot;Canadá&quot;, &quot;Austria&quot;, &quot;Francia&quot;, &quot;Gran Bretaña&quot;, &quot;Alemania&quot;, &quot;Hungría&quot;, &quot;Bélgica&quot;, &quot;Países Bajos&quot;, &quot;Italia&quot;, &quot;Portugal&quot;, &quot;Azerbaiyán&quot;, &quot;Singapur&quot;, &quot;Estados Unidos&quot;, &quot;México&quot;, &quot;Brasil&quot;, &quot;Las Vegas&quot;, &quot;Qatar&quot;, &quot;Argentina&quot;, &quot;Abu Dhabi&quot;],
+    e26: [&quot;Australia&quot;, &quot;China&quot;, &quot;Japón&quot;, &quot;Bahréin&quot;, &quot;Arabia Saudita&quot;, &quot;Miami&quot;, &quot;Canadá&quot;, &quot;Mónaco&quot;, &quot;España&quot;, &quot;Austria&quot;, &quot;Gran Bretaña&quot;, &quot;Bélgica&quot;, &quot;Hungría&quot;, &quot;Países Bajos&quot;, &quot;Italia&quot;, &quot;Azerbaiyán&quot;, &quot;Singapur&quot;, &quot;Estados Unidos&quot;, &quot;México&quot;, &quot;Brasil&quot;, &quot;Las Vegas&quot;, &quot;Qatar&quot;, &quot;Abu Dhabi&quot;]
+  };
+  function v15Order(y) { return y &lt; 1985 ? ORD.old : y &lt; 1996 ? ORD.e85 : y &lt; 2004 ? ORD.e96 : y &lt; 2026 ? ORD.e04 : ORD.e26; }
+  window.v15Order = v15Order;
+  if (typeof calForSeason === &quot;function&quot;) {
+    const o = calForSeason;
+    calForSeason = function (y) {
+      y = parseInt(y, 10) || 2026;
+      const mine = typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; s.team &amp;&amp; s.season === y;
+      try {
+        if (mine &amp;&amp; s._v15Cal &amp;&amp; s._v15Cal.season === y &amp;&amp; s._v15Cal.seed === s.calSeed) {
+          const L = s._v15Cal.names.map(n =&gt; CAL_POOL.find(c =&gt; c.n === n)).filter(Boolean);
+          if (L.length === s._v15Cal.names.length) return L;
+        }
+      } catch (e) {}
+      let list;
+      // una partida vieja cargada a mitad de temporada conserva el calendario que ya tenía
+      if (mine &amp;&amp; !s._v15Cal &amp;&amp; (s.gp || 0) &gt; 0) list = o.apply(this, arguments);
+      else {
+        list = o.apply(this, arguments);
+        const ord = v15Order(y);
+        const k = c =&gt; { const i = ord.indexOf(c.n); return c.finale ? 999 : i &gt;= 0 ? i : 500 + CAL_POOL.indexOf(c); };
+        // la fecha que abría la temporada ese año siempre está
+        const opener = (y &gt;= 1996 &amp;&amp; y &lt;= 2026 &amp;&amp; ![2006, 2010, 2020, 2021, 2022, 2023, 2024, 2025].includes(y)) ? &quot;Australia&quot; : ([2006, 2010, 2022, 2023, 2024, 2025].includes(y) ? &quot;Bahréin&quot; : null);
+        const oc = opener &amp;&amp; CAL_POOL.find(c =&gt; c.n === opener);
+        if (oc &amp;&amp; calRunsIn(oc, y) &amp;&amp; !list.includes(oc)) {
+          const rm = list.slice().reverse().find(c =&gt; !c.fixed &amp;&amp; !c.finale);
+          if (rm) list = list.filter(c =&gt; c !== rm).concat([oc]);
+        }
+        list = list.slice().sort((a, b) =&gt; k(a) - k(b));
+      }
+      if (mine) s._v15Cal = { season: y, seed: s.calSeed, names: list.map(c =&gt; c.n) };
+      return list;
+    };
+    window.calForSeason = calForSeason;
+  }
+})();
+
+// 11-12) puntos y vuelta rápida según el año
+function v15PointsFor(y, gp) {
+  y = y | 0;
+  let p;
+  if (y &lt; 1960) p = [8, 6, 4, 3, 2];
+  else if (y === 1960) p = [8, 6, 4, 3, 2, 1];
+  else if (y &lt;= 1990) p = [9, 6, 4, 3, 2, 1];
+  else if (y &lt;= 2002) p = [10, 6, 4, 3, 2, 1];
+  else if (y &lt;= 2009) p = [10, 8, 6, 5, 4, 3, 2, 1];
+  else p = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+  if (y === 2014 &amp;&amp; gp === 9) p = p.map(x =&gt; x * 2);
+  return p;
+}
+function v15FLAnyPos() { return s &amp;&amp; s.season &lt; 1960; }
+function v15FLPoint() { return s &amp;&amp; (s.season &lt; 1960 || (s.season &gt;= 2019 &amp;&amp; s.season &lt;= 2024)); }
+function v15CustomPoints() { try { return !!(s.rosterTemplate &amp;&amp; s.rosterTemplate.points &amp;&amp; s.rosterTemplate.points.length &amp;&amp; typeof engOn === &quot;function&quot; &amp;&amp; engOn()); } catch (e) { return false; } }
+function v15ApplyPoints() {
+  try { if (s &amp;&amp; s.season &amp;&amp; !v15CustomPoints() &amp;&amp; !s._juniorMode) s.pointsSystem = v15PointsFor(s.season, s.gp || 0); } catch (e) {}
+}
+[&quot;finishRace&quot;, &quot;simulateGrid&quot;].forEach(fn =&gt; {
+  const o = window[fn]; if (typeof o !== &quot;function&quot;) return;
+  window[fn] = function () { v15ApplyPoints(); return o.apply(this, arguments); };
+});
+try { simulateGrid = window.simulateGrid; } catch (e) {}
+
+// 13) sprints en los circuitos reales de cada año
+const V15_SPRINTS = {
+  2021: [&quot;Gran Bretaña&quot;, &quot;Italia&quot;, &quot;Brasil&quot;],
+  2022: [&quot;Emilia-Romaña&quot;, &quot;Austria&quot;, &quot;Brasil&quot;],
+  2023: [&quot;Azerbaiyán&quot;, &quot;Austria&quot;, &quot;Bélgica&quot;, &quot;Qatar&quot;, &quot;Estados Unidos&quot;, &quot;Brasil&quot;],
+  2024: [&quot;China&quot;, &quot;Miami&quot;, &quot;Austria&quot;, &quot;Estados Unidos&quot;, &quot;Brasil&quot;, &quot;Qatar&quot;],
+  2025: [&quot;China&quot;, &quot;Miami&quot;, &quot;Bélgica&quot;, &quot;Estados Unidos&quot;, &quot;Brasil&quot;, &quot;Qatar&quot;],
+  2026: [&quot;China&quot;, &quot;Miami&quot;, &quot;Canadá&quot;, &quot;Gran Bretaña&quot;, &quot;Países Bajos&quot;, &quot;Singapur&quot;]
+};
+if (typeof engSprintGPs === &quot;function&quot;) {
+  const o = engSprintGPs;
+  engSprintGPs = function (season) {
+    try {
+      const list = V15_SPRINTS[season];
+      if (list &amp;&amp; typeof trackData !== &quot;undefined&quot; &amp;&amp; trackData.length) {
+        let idx = trackData.map((t, i) =&gt; list.includes(t.name) ? i : -1).filter(i =&gt; i &gt; 0);
+        if (idx.length &lt; 3) o.call(this, season).forEach(i =&gt; { if (idx.length &lt; 3 &amp;&amp; !idx.includes(i)) idx.push(i); });
+        return idx.slice(0, 6).sort((a, b) =&gt; a - b);
+      }
+    } catch (e) {}
+    return o.apply(this, arguments);
+  };
+  window.engSprintGPs = engSprintGPs;
+}
+
+[&quot;start&quot;, &quot;nextGP&quot;].forEach(fn =&gt; {
+  const o = window[fn]; if (typeof o !== &quot;function&quot;) return;
+  window[fn] = function () { const r = o.apply(this, arguments); v15ApplyPoints(); return r; };
+});
+
+/* =====================================================================================
+   44) Campeón de verdad: el título se gana terminando primero (antes alcanzaba con 200 pts)
+   ===================================================================================== */
+function v15IsChampion(p) {
+  try {
+    const drv = s.playerMode === &quot;driver&quot;;
+    if (drv) {
+      const name = p === 2 ? (typeof v13P2Name === &quot;function&quot; ? v13P2Name() : null) : s.playedDriverName;
+      if (!name) return false;
+      const dp = s.driverPoints || {}, dw = s.driverWins || {};
+      const base = String(name).replace(&quot; (reserva)&quot;, &quot;&quot;);
+      const rows = Object.keys(dp).sort((a, b) =&gt; (dp[b] - dp[a]) || ((dw[b] || 0) - (dw[a] || 0)));
+      return rows[0] === base &amp;&amp; (dp[base] || 0) &gt; 0;
+    }
+    const team = p === 2 ? s.player2 &amp;&amp; s.player2.club : s.team;
+    if (!team) return false;
+    const st = Object.assign({}, s.teamStandings || {});
+    st[s.team] = s.points || 0; if (s.player2) st[s.player2.club] = s.player2.points || 0;
+    let names = Object.keys(st); try { const era = getEraTeamNames(); names = names.filter(n =&gt; era.includes(n) || n === s.team || (s.player2 &amp;&amp; n === s.player2.club)); } catch (e) {}
+    const best = names.sort((a, b) =&gt; st[b] - st[a])[0];
+    return best === team &amp;&amp; (st[team] || 0) &gt; 0;
+  } catch (e) { return false; }
+}
+// 24) cartel de fin de temporada con tu resumen
+function v15SeasonEnd() {
+  let title = &quot;🏁 TEMPORADA &quot; + s.season + &quot; TERMINADA&quot;, sub = &quot;&quot;;
+  try {
+    const drv = s.playerMode === &quot;driver&quot; &amp;&amp; s.playedDriverName;
+    if (drv) {
+      const dp = s.driverPoints || {}, dw = s.driverWins || {};
+      const rows = Object.keys(dp).sort((a, b) =&gt; (dp[b] - dp[a]) || ((dw[b] || 0) - (dw[a] || 0)));
+      const i = rows.indexOf(s.playedDriverName);
+      if (i === 0) title = &quot;👑 ¡CAMPEÓN DEL MUNDO &quot; + s.season + &quot;!&quot;;
+      sub = &quot;Terminaste P&quot; + (i + 1) + &quot; en el campeonato de pilotos con &quot; + (dp[s.playedDriverName] || 0) + &quot; puntos.&quot;;
+    } else {
+      const st = Object.assign({}, s.teamStandings || {}); st[s.team] = s.points || 0;
+      let names = Object.keys(st); try { const era = getEraTeamNames(); names = names.filter(n =&gt; era.includes(n) || n === s.team); } catch (e) {}
+      names.sort((a, b) =&gt; st[b] - st[a]);
+      const i = names.indexOf(s.team);
+      if (i === 0) title = &quot;👑 ¡CAMPEONES DE CONSTRUCTORES &quot; + s.season + &quot;!&quot;;
+      sub = s.team + &quot; terminó P&quot; + (i + 1) + &quot; en Constructores con &quot; + (s.points || 0) + &quot; puntos.&quot;;
+    }
+    if (s.player2) sub += &quot; · &quot; + (s.player2.name || &quot;Jugador 2&quot;) + &quot;: &quot; + (s.player2.points || 0) + &quot; puntos.&quot;;
+    const orig = (s.originalDriverResults || []).map(r =&gt; r.name + &quot; P&quot; + (r.position || &quot;—&quot;)).join(&quot; · &quot;);
+    if (orig) sub += &quot; · Pilotos originales: &quot; + orig;
+  } catch (e) {}
+  return [title, sub];
+}
+
+/* =====================================================================================
+   14-43) Celular, textos y detalles
+   ===================================================================================== */
+function v15SeasonStarted() {
+  try { return !!(s.raceDone || (s.gp || 0) &gt; 0 || (s.points || 0) &gt; 0 || Object.values(s.driverPoints || {}).some(v =&gt; v &gt; 0)); } catch (e) { return true; }
+}
+// 23) antes de la primera carrera no hay posiciones
+if (typeof dashTeamPos === &quot;function&quot;) {
+  const o = dashTeamPos;
+  dashTeamPos = function () {
+    if (!v15SeasonStarted()) return &quot;—&quot;;
+    try {
+      if (s.playerMode === &quot;driver&quot; &amp;&amp; s.playedDriverName &amp;&amp; !s.player2) {
+        const dp = s.driverPoints || {}, dw = s.driverWins || {};
+        const rows = Object.keys(dp).sort((a, b) =&gt; (dp[b] - dp[a]) || ((dw[b] || 0) - (dw[a] || 0)));
+        const i = rows.indexOf(s.playedDriverName); if (i &gt;= 0) return &quot;P&quot; + (i + 1);
+      }
+    } catch (e) {}
+    return o.apply(this, arguments);
+  };
+  window.dashTeamPos = dashTeamPos;
+}
+if (typeof renderOriginalDrivers === &quot;function&quot;) {
+  const o = renderOriginalDrivers;
+  renderOriginalDrivers = function () {
+    const r = o.apply(this, arguments);
+    try { if (!v15SeasonStarted()) document.querySelectorAll(&quot;#originalDriversCard .pos&quot;).forEach(e =&gt; { e.textContent = &quot;—&quot;; }); } catch (e) {}
+    return r;
+  };
+  window.renderOriginalDrivers = renderOriginalDrivers;
+}
+// 21) telemetría con los pilotos que corren · 22) &quot;(P1)&quot; solo en multijugador · 33) récords sin plata en modo piloto
+if (typeof render === &quot;function&quot;) {
+  const o = render;
+  render = function () {
+    const r = o.apply(this, arguments);
+    try {
+      const tb = document.getElementById(&quot;telemetryBody&quot;);
+      if (tb &amp;&amp; /Sin pilotos contratados/.test(tb.innerHTML)) {
+        const L = (myTeamLineup() || []).map(d =&gt; d.name + &quot; (rating &quot; + Math.round(d.rating || 0) + &quot;)&quot;).join(&quot; • &quot;);
+        if (L) tb.innerHTML = tb.innerHTML.replace(&quot;Sin pilotos contratados (se usa rendimiento base)&quot;, L);
+      }
+      if (!s.player2) { const st = document.getElementById(&quot;standings&quot;); if (st &amp;&amp; st.innerHTML.includes(&quot; (P1)&lt;/td&gt;&quot;)) st.innerHTML = st.innerHTML.replace(&quot; (P1)&lt;/td&gt;&quot;, &quot; ⭐&lt;/td&gt;&quot;); }
+      if (s.playerMode === &quot;driver&quot;) document.querySelectorAll(&quot;#game td&quot;).forEach(td =&gt; { if (/Mayor presupuesto alcanzado/.test(td.textContent)) td.parentElement.style.display = &quot;none&quot;; });
+    } catch (e) {}
+    return r;
+  };
+  window.render = render;
+}
+// 29) plata: &quot;$0&quot; en vez de &quot;$0K&quot;
+if (typeof formatMoney === &quot;function&quot;) {
+  const o = formatMoney;
+  formatMoney = function (m) { if (!m || Math.abs(m) &lt; 0.0005) return &quot;$0&quot;; return o.apply(this, arguments); };
+  window.formatMoney = formatMoney;
+}
+// 28) el juego queda en castellano
+try { if (localStorage.getItem(&quot;fawiwe_lang&quot;) === &quot;en&quot;) { localStorage.setItem(&quot;fawiwe_lang&quot;, &quot;es&quot;); if (typeof setLanguage === &quot;function&quot;) setLanguage(&quot;es&quot;); } } catch (e) {}
+// 26) carrera rápida y desafíos: sin eventos del paddock ni mensajes del jefe
+function v15OneOff() { return !!(window._v15OneOff || (s &amp;&amp; (s.challenge || s.quickRace))); }
+if (typeof triggerAIEventIfNeeded === &quot;function&quot;) {
+  const o = triggerAIEventIfNeeded;
+  triggerAIEventIfNeeded = function () { if (v15OneOff()) return; return o.apply(this, arguments); };
+  window.triggerAIEventIfNeeded = triggerAIEventIfNeeded;
+}
+if (typeof v4BossReact === &quot;function&quot;) {
+  const o = v4BossReact;
+  v4BossReact = function () { if (v15OneOff()) return null; return o.apply(this, arguments); };
+  window.v4BossReact = v4BossReact;
+}
+// 25) subida de rango: en el rango máximo no hay &quot;próximo rango&quot;
+if (typeof window.showRankUp === &quot;function&quot;) {
+  const o = window.showRankUp;
+  window.showRankUp = function (name) {
+    const r = o.apply(this, arguments);
+    try {
+      const drv = s.playerMode === &quot;driver&quot;;
+      const list = drv ? driverRankNames : rankTiers.map(x =&gt; x[0]);
+      if (list.indexOf(name) &gt;= list.length - 1) {
+        const un = document.querySelector(&quot;#rankCine .rc-un&quot;);
+        if (un &amp;&amp; /próximo rango/.test(un.textContent)) un.innerHTML = &quot;&lt;div&gt;👑 Llegaste a lo más alto. No hay rango más alto que este.&lt;/div&gt;&quot;;
+      }
+    } catch (e) {}
+    return r;
+  };
+}
+// 32) cambiar el modo no te borra el año elegido
+if (typeof setMode === &quot;function&quot;) {
+  const o = setMode;
+  setMode = function () {
+    const d = document.getElementById(&quot;decade&quot;), y = document.getElementById(&quot;startYear&quot;);
+    const dv = d &amp;&amp; d.value, yv = y &amp;&amp; y.value;
+    const r = o.apply(this, arguments);
+    try {
+      if (d &amp;&amp; dv &amp;&amp; [...d.options].some(op =&gt; op.value === dv) &amp;&amp; d.value !== dv) { d.value = dv; try { updateYearOptions(); } catch (e) {} }
+      if (y &amp;&amp; yv &amp;&amp; [...y.options].some(op =&gt; op.value === yv) &amp;&amp; y.value !== yv) { y.value = yv; try { refreshTeamLists(); } catch (e) {} }
+    } catch (e) {}
+    return r;
+  };
+  window.setMode = setMode;
+}
+// 36) decisiones: cada opción muestra qué cambia
+if (typeof newEvent === &quot;function&quot;) {
+  const o = newEvent;
+  newEvent = function () {
+    const r = o.apply(this, arguments);
+    try {
+      const btns = document.querySelectorAll(&quot;#eventsBody .choice-card&quot;);
+      btns.forEach((b, i) =&gt; {
+        const c = currentChoices &amp;&amp; currentChoices[i]; if (!c || b.querySelector(&quot;.v15-fx&quot;)) return;
+        const f = (v, ic) =&gt; v ? `&lt;i class=&quot;${v &gt; 0 ? &quot;up&quot; : &quot;dn&quot;}&quot;&gt;${ic} ${v &gt; 0 ? &quot;+&quot; : &quot;&quot;}${v}&lt;/i&gt;` : &quot;&quot;;
+        const money = c[3] ? `&lt;i class=&quot;${c[3] &gt; 0 ? &quot;up&quot; : &quot;dn&quot;}&quot;&gt;💰 ${c[3] &gt; 0 ? &quot;+&quot; : &quot;−&quot;}$${Math.abs(c[3])}M&lt;/i&gt;` : &quot;&quot;;
+        b.insertAdjacentHTML(&quot;beforeend&quot;, `&lt;span class=&quot;v15-fx&quot;&gt;${f(c[1], &quot;❤️&quot;)}${f(c[2], &quot;🤝&quot;)}${money}${f(c[4], &quot;🏎️&quot;)}&lt;/span&gt;`);
+      });
+    } catch (e) {}
+    return r;
+  };
+  window.newEvent = newEvent;
+}
+// 37) en modo ingeniero, lo que dice tu piloto en la presentación tiene sentido
+if (typeof fwRadioSay === &quot;function&quot;) {
+  const o = fwRadioSay;
+  fwRadioSay = function (txt, who) {
+    try { if (/^Presentamos el auto/.test(String(txt)) &amp;&amp; who === &quot;drv&quot;) txt = &quot;Ya vi el auto &quot; + s.season + &quot;. ¡Vamos a sacarle todo, ingeniero!&quot;; } catch (e) {}
+    return o.call(this, txt, who, arguments[2]);
+  };
+  window.fwRadioSay = fwRadioSay;
+}
+// 38) &quot;Toda una vida&quot;: arrancás en el box
+if (typeof v4Lifetime === &quot;function&quot;) {
+  const o = v4Lifetime;
+  v4Lifetime = function () {
+    const r = o.apply(this, arguments);
+    try { const n = document.getElementById(&quot;v4MenuNote&quot;); if (n) n.textContent = n.textContent.replace(&quot;como jefe de equipo&quot;, &quot;como ingeniero de un equipo (y vas subiendo hasta jefe)&quot;); } catch (e) {}
+    return r;
+  };
+  window.v4Lifetime = v4Lifetime;
+}
+// 40) menú: &quot;Tu jefe&quot; sirve para los dos modos
+try {
+  if (typeof DASH_NAV !== &quot;undefined&quot;) DASH_NAV.forEach(g =&gt; g[1].forEach(it =&gt; { if (it[0] === &quot;JEF&quot;) it[1] = &quot;Tu jefe&quot;; }));
+  document.querySelectorAll(&#x27;.ds-item[data-sel=&quot;#v4BossCard&quot;] span&#x27;).forEach(sp =&gt; { sp.textContent = &quot;Tu jefe&quot;; });
+} catch (e) {}
+// 41) el piloto de reserva tiene nombre propio
+if (typeof engReserveInfo === &quot;function&quot;) {
+  const o = engReserveInfo;
+  engReserveInfo = function () {
+    const r = o.apply(this, arguments);
+    try { if (r &amp;&amp; r.name === &quot;Piloto de reserva&quot;) r.name = generateRookieName(&quot;reserva_&quot; + (s.team || &quot;&quot;) + &quot;_&quot; + s.season); } catch (e) {}
+    return r;
+  };
+  window.engReserveInfo = engReserveInfo;
+}
+if (typeof myTeamLineup === &quot;function&quot;) {
+  const o = myTeamLineup;
+  myTeamLineup = function () {
+    const r = o.apply(this, arguments);
+    try { (r || []).forEach(seat =&gt; { if (seat &amp;&amp; /^Piloto de reserva( \d)?$/.test(seat.name)) seat.name = generateRookieName(&quot;reserva_&quot; + (s.team || &quot;&quot;) + &quot;_&quot; + s.season + &quot;_&quot; + (seat.seat || 0)); }); } catch (e) {}
+    return r;
+  };
+  window.myTeamLineup = myTeamLineup;
+}
+// 34) partidas largas: menos vueltas guardadas (las últimas 8 carreras alcanzan)
+if (typeof window.nextGP === &quot;function&quot;) {
+  const o = window.nextGP;
+  window.nextGP = function () {
+    const r = o.apply(this, arguments);
+    try { const e = s.eng; if (e &amp;&amp; Array.isArray(e.lapHist) &amp;&amp; e.lapHist.length &gt; 8) e.lapHist = e.lapHist.slice(-8); } catch (e) {}
+    return r;
+  };
+}
+
+/* 8b) cada temporada nueva (hasta 2026) usa los pilotos reales de ese año:
+   los cambios de equipo, retiros y debuts son los que pasaron de verdad */
+function v15RealSeason() { try { return s &amp;&amp; s.season &lt;= 2026 &amp;&amp; !s.rosterTemplate &amp;&amp; !s.quickRace &amp;&amp; !s.challenge; } catch (e) { return false; } }
+if (typeof processGridRetirements === &quot;function&quot;) {
+  const o = processGridRetirements;
+  processGridRetirements = function () {
+    if (!v15RealSeason()) return o.apply(this, arguments);
+    try {
+      if (!s.driverCareerLength) s.driverCareerLength = {};
+      const before = {};
+      try { getTeamsForYear(s.season - 1).forEach(t =&gt; { (originalDriverLineup(t[0], s.season - 1) || []).forEach(d =&gt; { before[d[0]] = t[0]; }); }); } catch (e) {}
+      Object.keys(s.rosterOverrides || {}).forEach(t =&gt; (s.rosterOverrides[t] || []).forEach(d =&gt; { if (d) before[d[0]] = t; }));
+      // se borran los cambios simulados: manda la grilla real del año
+      const keep = {};
+      if (s.playerMode === &quot;driver&quot; &amp;&amp; s.rosterOverrides &amp;&amp; s.rosterOverrides[s.club]) keep[s.club] = s.rosterOverrides[s.club];
+      s.rosterOverrides = keep;
+      const after = {};
+      getTeamsForYear(s.season).forEach(t =&gt; { if (t[0] === s.club) return; currentTeamLineup(t[0]).forEach(d =&gt; { if (d) after[d[0]] = t[0]; }); });
+      try { (myTeamLineup() || []).forEach(d =&gt; { if (d &amp;&amp; d.name) after[d.name] = s.club; }); } catch (e) {}
+      Object.keys(after).forEach(n =&gt; { s.driverCareerLength[n] = (s.driverCareerLength[n] || 0) + 1; });
+      const moves = Object.keys(after).filter(n =&gt; before[n] &amp;&amp; before[n] !== after[n]).map(n =&gt; n + &quot;: &quot; + before[n] + &quot; → &quot; + after[n]);
+      const gone = Object.keys(before).filter(n =&gt; !after[n] &amp;&amp; n !== s.playedDriverName &amp;&amp; !(s.drivers || []).includes(n));
+      const fresh = Object.keys(after).filter(n =&gt; !before[n]);
+      if (moves.length) add(&quot;🔁 Cambios de equipo para &quot; + s.season + &quot;: &quot; + moves.slice(0, 10).join(&quot;, &quot;) + (moves.length &gt; 10 ? &quot; y &quot; + (moves.length - 10) + &quot; más&quot; : &quot;&quot;) + &quot;.&quot;);
+      if (gone.length) add(&quot;👋 Dejan la F1: &quot; + gone.slice(0, 8).join(&quot;, &quot;) + (gone.length &gt; 8 ? &quot; y &quot; + (gone.length - 8) + &quot; más&quot; : &quot;&quot;) + &quot;.&quot;);
+      if (fresh.length) add(&quot;🆕 Llegan a la F1: &quot; + fresh.slice(0, 8).join(&quot;, &quot;) + (fresh.length &gt; 8 ? &quot; y &quot; + (fresh.length - 8) + &quot; más&quot; : &quot;&quot;) + &quot;.&quot;);
+    } catch (e) { console.warn(&quot;[FAWIWE] temporada real:&quot;, e); return o.apply(this, arguments); }
+  };
+  window.processGridRetirements = processGridRetirements;
+}
+if (typeof processGridTransfers === &quot;function&quot;) {
+  const o = processGridTransfers;
+  processGridTransfers = function () { if (v15RealSeason()) return; return o.apply(this, arguments); };
+  window.processGridTransfers = processGridTransfers;
+}
+
+/* 8c) el auto de cada equipo según el año elegido (antes tomaba el primer año en que aparecía) */
+if (typeof findRating === &quot;function&quot;) {
+  const o = findRating;
+  findRating = function (name) {
+    try {
+      let y = (s &amp;&amp; s.season) || 2026;
+      const setup = document.getElementById(&quot;setup&quot;), sy = document.getElementById(&quot;startYear&quot;);
+      if (setup &amp;&amp; !setup.classList.contains(&quot;hidden&quot;) &amp;&amp; sy &amp;&amp; +sy.value) y = +sy.value;
+      const t = getTeamsForYear(y).find(x =&gt; x[0] === name);
+      if (t) return t[1];
+      const ys = Object.keys(teamsByYear).map(Number).filter(k =&gt; teamsByYear[k].some(x =&gt; x[0] === name)).sort((a, b) =&gt; Math.abs(a - y) - Math.abs(b - y));
+      if (ys.length) return teamsByYear[ys[0]].find(x =&gt; x[0] === name)[1];
+    } catch (e) {}
+    return o.apply(this, arguments);
+  };
+  window.findRating = findRating;
+}
+// 26b) la carrera rápida y los desafíos arrancan sin eventos del paddock
+[&quot;v6QuickStart&quot;, &quot;v4ChalStart&quot;].forEach(fn =&gt; {
+  const o = window[fn]; if (typeof o !== &quot;function&quot;) return;
+  window[fn] = function () {
+    window._v15OneOff = true;
+    let r;
+    try { r = o.apply(this, arguments); } finally { window._v15OneOff = false; }
+    try {
+      if (s.aiEventActive) { s.aiEventActive = false; s.aiCurrentEvent = null; document.getElementById(&quot;aiEventOverlay&quot;)?.classList.remove(&quot;show&quot;); }
+      s.aiEventSchedule = [];
+    } catch (e) {}
+    return r;
+  };
+});
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · V146 · Dos cinemáticas nuevas
+   1) Al entrar al juego: boxes de noche → 76 años de F1 → tacómetro al rojo → logo.
+   2) Al tocar &quot;Jugar&quot;: viaje en el tiempo hasta tu año + credencial del paddock acreditada.
+   ===================================================================================== */
+const V16 = { introT: [], goT: [], introOn: false, goOn: false };
+function v16Reduce() { try { return (window.matchMedia &amp;&amp; matchMedia(&quot;(prefers-reduced-motion: reduce)&quot;).matches) || document.body.classList.contains(&quot;fw-reduce&quot;); } catch (e) { return false; } }
+function v16Snd(fn, a) { try { if (typeof FWAudio !== &quot;undefined&quot; &amp;&amp; (typeof s === &quot;undefined&quot; || !s || s.soundOn !== false) &amp;&amp; FWAudio[fn]) FWAudio[fn](a); } catch (e) {} }
+function v16Esc(t) { return String(t == null ? &quot;&quot; : t).replace(/[&amp;&lt;&gt;&quot;]/g, c =&gt; ({ &quot;&amp;&quot;: &quot;&amp;amp;&quot;, &quot;&lt;&quot;: &quot;&amp;lt;&quot;, &quot;&gt;&quot;: &quot;&amp;gt;&quot;, &#x27;&quot;&#x27;: &quot;&amp;quot;&quot; }[c])); }
+
+/* ============================ 1) INTRO ============================ */
+function v16IntroBuild() {
+  if (document.getElementById(&quot;v16Intro&quot;)) return;
+  const cars = [[1955, &quot;#c0392b&quot;, &quot;1950&quot;], [1978, &quot;#1f2937&quot;, &quot;1978&quot;], [1998, &quot;#c0c0c0&quot;, &quot;1998&quot;], [2026, &quot;#e10600&quot;, &quot;2026&quot;]];
+  const carSvg = (era, c) =&gt; { try { return fwCarSvg(era, c); } catch (e) { return &quot;&quot;; } };
+  const ov = document.createElement(&quot;div&quot;);
+  ov.id = &quot;v16Intro&quot;; ov.className = &quot;gate&quot;;
+  ov.innerHTML = `
+    &lt;div class=&quot;v16-gate&quot;&gt;
+      &lt;div class=&quot;v16-gate-logo&quot;&gt;&lt;span class=&quot;v16-f1&quot;&gt;F1&lt;/span&gt;&lt;b&gt;FAWIWE&lt;/b&gt;&lt;/div&gt;
+      &lt;button type=&quot;button&quot; class=&quot;v16-gate-btn&quot; onclick=&quot;event.stopPropagation();v16IntroPlay(true)&quot;&gt;▶ Tocá para empezar&lt;/button&gt;
+      &lt;span class=&quot;v16-gate-k&quot;&gt;🔊 Con música y sonido&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;v16-stage&quot;&gt;
+      &lt;div class=&quot;v16-s1&quot;&gt;
+        &lt;div class=&quot;v16-garages&quot;&gt;${[0, 1, 2, 3, 4, 5].map(i =&gt; `&lt;i style=&quot;--i:${i}&quot;&gt;&lt;em&gt;&lt;/em&gt;&lt;/i&gt;`).join(&quot;&quot;)}&lt;/div&gt;
+        &lt;div class=&quot;v16-present&quot;&gt;&lt;span&gt;FAWIWE&lt;/span&gt; presenta&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;v16-s2&quot;&gt;
+        &lt;div class=&quot;v16-speed&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;v16-big&quot;&gt;76 AÑOS DE FÓRMULA 1&lt;/div&gt;
+        ${cars.map((c, i) =&gt; `&lt;div class=&quot;v16-car&quot; style=&quot;--i:${i}&quot;&gt;&lt;div class=&quot;v16-year&quot;&gt;${c[2]}&lt;/div&gt;${carSvg(c[0], c[1])}&lt;/div&gt;`).join(&quot;&quot;)}
+      &lt;/div&gt;
+      &lt;div class=&quot;v16-s3&quot;&gt;
+        &lt;div class=&quot;v16-tacho&quot;&gt;
+          &lt;svg viewBox=&quot;0 0 200 120&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;path d=&quot;M20 110 A80 80 0 0 1 180 110&quot; fill=&quot;none&quot; stroke=&quot;#2a2a33&quot; stroke-width=&quot;14&quot; stroke-linecap=&quot;round&quot;/&gt;
+            &lt;path class=&quot;v16-arc&quot; d=&quot;M20 110 A80 80 0 0 1 180 110&quot; fill=&quot;none&quot; stroke=&quot;url(#v16g)&quot; stroke-width=&quot;14&quot; stroke-linecap=&quot;round&quot; pathLength=&quot;1&quot;/&gt;
+            &lt;defs&gt;&lt;linearGradient id=&quot;v16g&quot; x1=&quot;0&quot; x2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#22c55e&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#facc15&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#e10600&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;
+            &lt;line class=&quot;v16-needle&quot; x1=&quot;100&quot; y1=&quot;110&quot; x2=&quot;100&quot; y2=&quot;40&quot; stroke=&quot;#fff&quot; stroke-width=&quot;4&quot; stroke-linecap=&quot;round&quot;/&gt;
+            &lt;circle cx=&quot;100&quot; cy=&quot;110&quot; r=&quot;8&quot; fill=&quot;#e10600&quot;/&gt;
+          &lt;/svg&gt;
+          &lt;div class=&quot;v16-rpm&quot;&gt;&lt;b&gt;15.000&lt;/b&gt; RPM&lt;/div&gt;
+          &lt;div class=&quot;v16-leds&quot;&gt;${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i =&gt; `&lt;i class=&quot;${i &lt; 4 ? &quot;g&quot; : i &lt; 7 ? &quot;y&quot; : &quot;r&quot;}&quot; style=&quot;--i:${i}&quot;&gt;&lt;/i&gt;`).join(&quot;&quot;)}&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;v16-flash&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;v16-final&quot;&gt;
+      &lt;div class=&quot;v16-logo&quot;&gt;
+        &lt;div class=&quot;v16-k&quot;&gt;&lt;span class=&quot;v16-f1&quot;&gt;F1&lt;/span&gt;EL JUEGO DE FÓRMULA 1 · 1950–2026&lt;/div&gt;
+        &lt;h1&gt;${&quot;FAWIWE&quot;.split(&quot;&quot;).map((ch, i) =&gt; `&lt;span style=&quot;--i:${i}&quot; class=&quot;${i &lt; 2 || i &gt; 3 ? &quot;r&quot; : &quot;&quot;}&quot;&gt;${ch}&lt;/span&gt;`).join(&quot;&quot;)}&lt;/h1&gt;
+        &lt;div class=&quot;v16-check&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;v16-roles&quot;&gt;Ingeniero · Jefe de equipo · Piloto&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;v16-btns&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;v16-play&quot; onclick=&quot;event.stopPropagation();v16IntroGo()&quot;&gt;▶ JUGAR&lt;/button&gt;
+        &lt;div class=&quot;v16-row&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;v16-small&quot; id=&quot;v16Snd&quot; onclick=&quot;event.stopPropagation();v16IntroSound()&quot;&gt;🔊 Sonido&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;v16-small&quot; onclick=&quot;event.stopPropagation();v16IntroTut()&quot;&gt;📖 Cómo se juega&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;v16-by&quot;&gt;Creado por Miluchino · Hecho con la ayuda de Claude 🤖&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button type=&quot;button&quot; class=&quot;v16-skip&quot; onclick=&quot;event.stopPropagation();v16IntroFinal()&quot;&gt;Saltar ⏭&lt;/button&gt;`;
+  ov.addEventListener(&quot;click&quot;, ev =&gt; { if (ov.classList.contains(&quot;play&quot;) &amp;&amp; !ev.target.closest(&quot;button&quot;)) v16IntroFinal(); });
+  document.body.appendChild(ov);
+  V16.introOn = true;
+  v16SndSync();
+}
+function v16SndSync() { const b = document.getElementById(&quot;v16Snd&quot;); if (b) b.textContent = (typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; s.soundOn === false) ? &quot;🔇 Sin sonido&quot; : &quot;🔊 Sonido&quot;; }
+function v16IntroPlay(withSound) {
+  const ov = document.getElementById(&quot;v16Intro&quot;); if (!ov || !ov.classList.contains(&quot;gate&quot;)) return;
+  if (withSound) { try { FWAudio.unlock(); } catch (e) {} }
+  if (v16Reduce()) return v16IntroFinal();
+  ov.classList.remove(&quot;gate&quot;); ov.classList.add(&quot;play&quot;);
+  const at = (ms, fn) =&gt; V16.introT.push(setTimeout(fn, ms));
+  try { if (s.soundOn !== false) { FWAudio.introTimes({ build: 0.3, h0: 4.6, h1: 6.3 }); if (FWAudio.isPlaying()) FWAudio.musicMode(&quot;intro&quot;); else FWAudio.musicStart(&quot;intro&quot;); } } catch (e) {}
+  [0, 1, 2, 3, 4, 5].forEach(i =&gt; at(250 + i * 170, () =&gt; v16Snd(&quot;click&quot;)));
+  [0, 1, 2, 3].forEach(i =&gt; at(1750 + i * 640, () =&gt; v16Snd(&quot;whoosh&quot;)));
+  at(4550, () =&gt; v16Snd(&quot;rev&quot;));
+  at(5350, () =&gt; v16Snd(&quot;rev&quot;));
+  at(6150, () =&gt; v16Snd(&quot;beep&quot;, true));
+  at(6300, () =&gt; v16IntroFinal(true));
+}
+function v16IntroFinal(natural) {
+  const ov = document.getElementById(&quot;v16Intro&quot;); if (!ov || ov.classList.contains(&quot;final&quot;)) return;
+  V16.introT.forEach(clearTimeout); V16.introT = [];
+  if (ov.classList.contains(&quot;gate&quot;)) { try { FWAudio.unlock(); } catch (e) {} }
+  ov.classList.remove(&quot;gate&quot;, &quot;play&quot;); ov.classList.add(&quot;final&quot;);
+  try { if (s.soundOn !== false) { FWAudio.musicMode(&quot;full&quot;); if (!FWAudio.isPlaying()) FWAudio.musicStart(&quot;full&quot;); } } catch (e) {}
+  [0, 1, 2, 3, 4, 5].forEach(i =&gt; V16.introT.push(setTimeout(() =&gt; v16Snd(&quot;click&quot;), 120 + i * 90)));
+  V16.introT.push(setTimeout(() =&gt; v16Snd(&quot;fanfare&quot;), natural ? 700 : 650));
+}
+function v16IntroClose() {
+  const ov = document.getElementById(&quot;v16Intro&quot;); if (!ov) return;
+  V16.introT.forEach(clearTimeout); V16.introT = [];
+  V16.introOn = false;
+  ov.classList.add(&quot;bye&quot;);
+  setTimeout(() =&gt; ov.remove(), 450);
+}
+function v16IntroGo() {
+  v16Snd(&quot;unlock&quot;); v16Snd(&quot;rev&quot;);
+  try { if (s.soundOn !== false &amp;&amp; !FWAudio.isPlaying()) FWAudio.musicStart(&quot;full&quot;); } catch (e) {}
+  v16IntroClose();
+  try { dismissIntro(); } catch (e) {}
+}
+function v16IntroSound() { try { swSound(); } catch (e) {} v16SndSync(); }
+function v16IntroTut() { v16IntroClose(); try { swTutorial(); } catch (e) {} }
+// la intro vieja queda escondida debajo: la nueva la reemplaza
+(function () {
+  const boot = () =&gt; {
+    try {
+      const old = document.getElementById(&quot;introScreen&quot;);
+      if (!old || old.style.display === &quot;none&quot; || old.classList.contains(&quot;intro-hidden&quot;)) return;
+      try { skipIntroCinematic(); } catch (e) {}
+      old.classList.add(&quot;v16-under&quot;);
+      v16IntroBuild();
+      // si la página ya recibió un toque (por ejemplo &quot;Jugar ahora&quot; en la web), arranca sola
+      let active = false;
+      try { const ua = (window.parent &amp;&amp; window.parent !== window &amp;&amp; window.parent.navigator.userActivation) || navigator.userActivation; active = !!(ua &amp;&amp; ua.hasBeenActive); } catch (e) {}
+      if (active) setTimeout(() =&gt; { try { FWAudio.unlock(); } catch (e) {} v16IntroPlay(false); }, 150);
+    } catch (e) { console.warn(&quot;[FAWIWE] intro nueva:&quot;, e); }
+  };
+  if (document.readyState === &quot;loading&quot;) document.addEventListener(&quot;DOMContentLoaded&quot;, boot); else setTimeout(boot, 0);
+  if (typeof dismissIntro === &quot;function&quot;) {
+    const o = dismissIntro;
+    dismissIntro = function () { const ov = document.getElementById(&quot;v16Intro&quot;); if (ov) { V16.introT.forEach(clearTimeout); V16.introOn = false; ov.remove(); } return o.apply(this, arguments); };
+    window.dismissIntro = dismissIntro;
+  }
+  document.addEventListener(&quot;keydown&quot;, ev =&gt; {
+    const ov = document.getElementById(&quot;v16Intro&quot;); if (!ov || !V16.introOn) return;
+    if (ev.key === &quot;Enter&quot; || ev.key === &quot; &quot;) { ev.preventDefault(); if (ov.classList.contains(&quot;gate&quot;)) v16IntroPlay(true); else if (ov.classList.contains(&quot;play&quot;)) v16IntroFinal(); else v16IntroGo(); }
+    else if (ev.key === &quot;Escape&quot;) { ev.preventDefault(); v16IntroFinal(); }
+  });
+})();
+
+/* ============================ 2) AL TOCAR &quot;JUGAR&quot; ============================ */
+function v16RealBegin() {
+  // lo mismo que hacía beginCareer: el modo piloto pasa por las categorías juveniles
+  const mode = document.getElementById(&quot;playerModeSel&quot;)?.value || &quot;engineer&quot;;
+  if (mode === &quot;driver&quot;) {
+    juniorBonus = 0;
+    s._juniorStageStartBonus = 0;
+    s._juniorStageKey = null;
+    juniorStep = 0;
+    juniorCareerYear = parseInt(document.getElementById(&quot;startYear&quot;)?.value || &quot;2026&quot;);
+    juniorStagesCache = juniorStagesForYear(juniorCareerYear);
+    document.getElementById(&quot;teamSetup&quot;)?.parentElement?.classList.add(&quot;hidden&quot;);
+    document.getElementById(&quot;juniorCareer&quot;).classList.remove(&quot;hidden&quot;);
+    renderJuniorStep();
+    return;
+  }
+  start();
+}
+function v16GoData() {
+  const $ = id =&gt; document.getElementById(id);
+  const club = $(&quot;club&quot;)?.value || &quot;&quot;;
+  const ctOn = $(&quot;engCtOn&quot;)?.checked &amp;&amp; ($(&quot;engCtName&quot;)?.value || &quot;&quot;).trim();
+  const team = ctOn || club || &quot;Tu equipo&quot;;
+  const color = (ctOn &amp;&amp; $(&quot;engCtColor&quot;)?.value) || (typeof teamColors !== &quot;undefined&quot; &amp;&amp; teamColors[team]) || &quot;#e10600&quot;;
+  const year = parseInt($(&quot;startYear&quot;)?.value || &quot;2026&quot;, 10) || 2026;
+  const drv = $(&quot;playerModeSel&quot;)?.value === &quot;driver&quot;;
+  const multi = typeof playMode !== &quot;undefined&quot; &amp;&amp; playMode === &quot;multi&quot;;
+  let name = ($(&quot;name&quot;)?.value || &quot;&quot;).trim();
+  if (drv) { const t = $(&quot;driverTypeSel&quot;)?.value; name = t === &quot;custom&quot; ? (($(&quot;customDriverName&quot;)?.value || &quot;&quot;).trim() || &quot;Piloto FAWIWE&quot;) : ($(&quot;playedDriverSel&quot;)?.value || name); }
+  if (!name) name = drv ? &quot;Piloto FAWIWE&quot; : &quot;Presidente FAWIWE&quot;;
+  let name2 = multi ? (($(&quot;name2&quot;)?.value || &quot;&quot;).trim() || &quot;Jugador 2&quot;) : &quot;&quot;;
+  if (multi &amp;&amp; drv) name2 = $(&quot;playedDriverSel2&quot;)?.value || name2;
+  let era = &quot;&quot;; try { era = fwEra(year).cap; } catch (e) {}
+  let carEra = year; try { carEra = fwEra(year).y; } catch (e) {}
+  return { team, color, year, drv, multi, name, name2, era, carEra };
+}
+function v16Go() {
+  const D = v16GoData();
+  if (v16Reduce()) return v16RealBegin();
+  document.getElementById(&quot;v16Go&quot;)?.remove();
+  const ov = document.createElement(&quot;div&quot;);
+  ov.id = &quot;v16Go&quot;;
+  ov.style.setProperty(&quot;--tc&quot;, D.color);
+  const role = D.multi ? &quot;2 JUGADORES&quot; : D.drv ? &quot;PILOTO&quot; : &quot;INGENIERO DE EQUIPO&quot;;
+  const who = D.multi ? `${v16Esc(D.name)} &lt;i&gt;vs&lt;/i&gt; ${v16Esc(D.name2)}` : v16Esc(D.name);
+  const helmet = `&lt;svg viewBox=&quot;0 0 120 100&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M14 64 Q14 18 62 16 Q106 16 108 58 L108 70 Q108 80 98 80 L30 80 Q14 80 14 64 Z&quot; fill=&quot;${D.color}&quot;/&gt;&lt;path d=&quot;M50 40 L104 40 Q108 52 106 60 L56 60 Q48 52 50 40 Z&quot; fill=&quot;#111&quot;/&gt;&lt;path d=&quot;M14 66 L108 66&quot; stroke=&quot;#fff&quot; stroke-width=&quot;5&quot;/&gt;&lt;circle cx=&quot;34&quot; cy=&quot;50&quot; r=&quot;5&quot; fill=&quot;#fff8&quot;/&gt;&lt;/svg&gt;`;
+  const headset = `&lt;svg viewBox=&quot;0 0 120 100&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M24 60 Q24 18 60 18 Q96 18 96 60&quot; fill=&quot;none&quot; stroke=&quot;${D.color}&quot; stroke-width=&quot;9&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;rect x=&quot;12&quot; y=&quot;52&quot; width=&quot;24&quot; height=&quot;34&quot; rx=&quot;9&quot; fill=&quot;#e5e7eb&quot;/&gt;&lt;rect x=&quot;84&quot; y=&quot;52&quot; width=&quot;24&quot; height=&quot;34&quot; rx=&quot;9&quot; fill=&quot;#e5e7eb&quot;/&gt;&lt;path d=&quot;M28 84 Q40 96 58 92&quot; fill=&quot;none&quot; stroke=&quot;#e5e7eb&quot; stroke-width=&quot;5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;92&quot; r=&quot;5&quot; fill=&quot;${D.color}&quot;/&gt;&lt;/svg&gt;`;
+  let car = &quot;&quot;; try { car = fwCarSvg(D.carEra, D.color); } catch (e) {}
+  ov.innerHTML = `
+    &lt;div class=&quot;g-time&quot;&gt;&lt;div class=&quot;g-k&quot;&gt;VIAJANDO A&lt;/div&gt;&lt;div class=&quot;g-year&quot; id=&quot;v16Year&quot;&gt;2026&lt;/div&gt;&lt;div class=&quot;g-era&quot;&gt;${v16Esc(D.era)}&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;g-lanyard&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;g-pass&quot;&gt;
+      &lt;div class=&quot;g-head&quot;&gt;&lt;span class=&quot;v16-f1&quot;&gt;F1&lt;/span&gt;&lt;b&gt;PADDOCK PASS&lt;/b&gt;&lt;em&gt;${D.year}&lt;/em&gt;&lt;/div&gt;
+      &lt;div class=&quot;g-team&quot;&gt;${v16Esc(D.team)}&lt;/div&gt;
+      &lt;div class=&quot;g-body&quot;&gt;
+        &lt;div class=&quot;g-photo&quot;&gt;${D.drv ? helmet : headset}&lt;/div&gt;
+        &lt;div class=&quot;g-info&quot;&gt;&lt;small&gt;${role}&lt;/small&gt;&lt;b&gt;${who}&lt;/b&gt;&lt;small&gt;Temporada ${D.year} · Acceso a todo el paddock&lt;/small&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;g-car&quot;&gt;${car}&lt;/div&gt;
+      &lt;div class=&quot;g-bar&quot;&gt;${Array.from({ length: 34 }, (_, i) =&gt; `&lt;i style=&quot;width:${1 + ((i * 7) % 4)}px&quot;&gt;&lt;/i&gt;`).join(&quot;&quot;)}&lt;/div&gt;
+      &lt;div class=&quot;g-stamp&quot;&gt;ACREDITADO ✓&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;g-welcome&quot;&gt;¡BIENVENIDO AL PADDOCK!&lt;/div&gt;
+    &lt;div class=&quot;g-flash&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;g-skip&quot;&gt;Tocá para saltar ⏭&lt;/div&gt;`;
+  document.body.appendChild(ov);
+  V16.goOn = true;
+  let done = false;
+  const finish = () =&gt; {
+    if (done) return; done = true;
+    V16.goT.forEach(clearTimeout); V16.goT = [];
+    try { v16RealBegin(); } catch (e) { console.warn(&quot;[FAWIWE] empezar:&quot;, e); }
+    ov.classList.add(&quot;bye&quot;);
+    setTimeout(() =&gt; { ov.remove(); V16.goOn = false; }, 500);
+  };
+  ov.addEventListener(&quot;click&quot;, finish);
+  const at = (ms, fn) =&gt; V16.goT.push(setTimeout(fn, ms));
+  try { if (s.soundOn !== false) FWAudio.musicStart(&quot;full&quot;); } catch (e) {}
+  requestAnimationFrame(() =&gt; ov.classList.add(&quot;t1&quot;));
+  v16Snd(&quot;whoosh&quot;);
+  // el año corre hacia atrás (o se queda en 2026)
+  const yEl = () =&gt; document.getElementById(&quot;v16Year&quot;);
+  const from = 2026, to = D.year, steps = Math.min(18, Math.max(1, Math.abs(from - to)));
+  for (let k = 1; k &lt;= steps; k++) at(80 + k * 55, () =&gt; { const y = Math.round(from + (to - from) * (k / steps)); const e = yEl(); if (e) e.textContent = y; if (k % 3 === 0) v16Snd(&quot;click&quot;); });
+  at(1350, () =&gt; { ov.classList.add(&quot;t2&quot;); v16Snd(&quot;whoosh&quot;); });
+  at(2500, () =&gt; { ov.classList.add(&quot;t3&quot;); v16Snd(&quot;beep&quot;, true); });
+  at(3300, () =&gt; { ov.classList.add(&quot;t4&quot;); v16Snd(&quot;rev&quot;); });
+  at(4200, finish);
+}
+(function () {
+  const o = window.beginCareer;
+  if (typeof o !== &quot;function&quot;) return;
+  window.beginCareer = function () {
+    if (V16.goOn) return;
+    try { v16Go(); } catch (e) { console.warn(&quot;[FAWIWE] cinemática de largada:&quot;, e); return o.apply(this, arguments); }
+  };
 })();
 
 &lt;/script&gt;
