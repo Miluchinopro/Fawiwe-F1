@@ -13415,7 +13415,7 @@ function engTabRace() {
       &lt;div class=&quot;stat&quot;&gt;&lt;b&gt;🏁 Formato del fin de semana&lt;/b&gt;&lt;p style=&quot;margin:6px 0&quot;&gt;${sprint ? &#x27;&lt;span class=&quot;eng-badge sprint&quot;&gt;⚡ SPRINT&lt;/span&gt; Carrera corta el sábado (8-7-6-5-4-3-2-1) + carrera del domingo.&#x27; : &quot;Formato clásico: prácticas, clasificación y carrera.&quot;}&lt;/p&gt;
         &lt;label class=&quot;small&quot;&gt;Fines de semana sprint&lt;/label&gt;
         &lt;select onchange=&quot;engSetSprintMode(this.value)&quot;&gt;&lt;option value=&quot;auto&quot; ${e.sprintMode === &quot;auto&quot; ? &quot;selected&quot; : &quot;&quot;}&gt;Automático (desde 2021, 3 por año)&lt;/option&gt;&lt;option value=&quot;always&quot; ${e.sprintMode === &quot;always&quot; ? &quot;selected&quot; : &quot;&quot;}&gt;Siempre (3 por año, cualquier época)&lt;/option&gt;&lt;option value=&quot;never&quot; ${e.sprintMode === &quot;never&quot; ? &quot;selected&quot; : &quot;&quot;}&gt;Nunca&lt;/option&gt;&lt;/select&gt;
-        &lt;p class=&quot;small&quot;&gt;Sprints ${s.season}: ${engSprintGPs(s.season).map(i =&gt; engTrackName(i)).join(&quot;, &quot;)}.&lt;/p&gt;&lt;/div&gt;
+        &lt;p class=&quot;small&quot;&gt;${e.sprintMode === &quot;never&quot; ? &quot;Sin sprints.&quot; : (e.sprintMode === &quot;auto&quot; &amp;&amp; s.season &lt; 2021) ? &quot;En &quot; + s.season + &quot; no hay sprints: llegaron a la F1 en 2021.&quot; : &quot;Sprints &quot; + s.season + &quot;: &quot; + engSprintGPs(s.season).map(i =&gt; engTrackName(i)).join(&quot;, &quot;) + &quot;.&quot;}&lt;/p&gt;&lt;/div&gt;
       &lt;div class=&quot;stat&quot;&gt;&lt;b&gt;🧰 Setup para ${engEsc(engTrackName())}&lt;/b&gt; &lt;span class=&quot;small&quot;&gt;${ENG_TYPE_LABEL[type]}&lt;/span&gt;
         ${engBar(engSetupQuality(), 100)}&lt;p class=&quot;small&quot;&gt;El auto está al ${engSetupQuality()}% · conocimiento ${know}/100 → ${engSetupBonus(&quot;race&quot;) &gt;= 0 ? &quot;+&quot; : &quot;&quot;}${engSetupBonus(&quot;race&quot;).toFixed(1)} de ritmo.&lt;/p&gt;&lt;button class=&quot;dark&quot; onclick=&quot;engSetTab(&#x27;setup&#x27;)&quot;&gt;🧰 Ir a ajustar el setup&lt;/button&gt;&lt;/div&gt;
       &lt;div class=&quot;stat&quot;&gt;&lt;b&gt;⚖️ Comisarios&lt;/b&gt;&lt;p class=&quot;small&quot;&gt;Sanciones de &lt;strong&gt;5s o 10s&lt;/strong&gt; por agresividad, peleas muy cerradas y condiciones (lluvia, Safety Car). &quot;Presionar&quot; y la salida de boxes agresiva aumentan el riesgo.&lt;/p&gt;
@@ -28374,11 +28374,13 @@ function v16Go() {
         [/se apagan las (5 )?luces/g, &quot;baja la bandera&quot;], [/con el semáforo/g, &quot;con la bandera&quot;], [/\bSemáforo\b/g, &quot;Bandera&quot;], [/🚦/g, &quot;🚩&quot;]
       );
     }
+    if (y &lt; 2014) R.push([/cuidado con los límites de pista/g, &quot;cuidado con no salirte de la pista&quot;]);
+    if (y &lt; 1993) R.push([/llamadas de boxes, Safety Car y clima/g, &quot;llamadas de boxes, banderas amarillas y clima&quot;], [/\(lluvia, Safety Car/g, &quot;(lluvia, banderas amarillas&quot;]);
     if (window.v17OneQ()) R.push([/Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10\./g, &quot;Una sola tanda: la mejor vuelta decide la grilla.&quot;]);
     R.push([/Historia 2000-2026/g, &quot;Historia de la F1 hasta &quot; + y]);
     return R;
   }
-  const TRIG = /DRS|ERS solo|[Rr]adio|RADIO|📻|🎧|🎙️ VOS|Q1 elimina|Historia 2000|[Ll]uces|LUCES|[Ss]emáforo|🚦/;
+  const TRIG = /DRS|ERS solo|[Rr]adio|RADIO|📻|🎧|🎙️ VOS|Q1 elimina|Historia 2000|Safety Car|límites de pista|[Ll]uces|LUCES|[Ss]emáforo|🚦/;
   const SKIP = &quot;script,style,textarea,input,#v17NoMap,.v6-quiz,.quiz-q&quot;;
   function fixText(root, R) {
     if (!root || !document.body.contains(root)) return;
@@ -28506,6 +28508,183 @@ function v16Go() {
       }, 80);
     } catch (e) {}
   }, 250);
+})();
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · PROTOTIPO 1.5 — ajustes de la revisión por temporadas
+   1) Modo piloto: un piloto real arranca con su nivel real (apenas 2 puntos menos).
+   2) Abandonos según la época: en los 50/60/70/80 se rompían muchos más autos.
+   3) Épocas bien marcadas: turbo 1983-88, atmosféricos 1989-97, híbridos 2014, etc.
+      (y el minijuego de época acompaña: sin recarga entre 1989 y 1993, ERS desde 2014).
+   4) Novatos con nombres de su época.
+   5) &quot;Cuidar las gomas&quot;: ya no se gana tocando cualquier cosa.
+   ===================================================================================== */
+(function () {
+  const yr = () =&gt; { try { return parseInt(s.season, 10) || 2026; } catch (e) { return 2026; } };
+
+  /* ---------- 1) nivel real del piloto elegido ---------- */
+  function v18Rate() {
+    try {
+      if (!s || s.playerMode !== &quot;driver&quot; || s.playedDriverType !== &quot;actual&quot; || s._v18Rate) return;
+      if (s.playedDriverRating !== 68 || !s.playedDriverName) return;
+      const d = (getDriversForYear(s.season) || []).find(x =&gt; x[0] === s.playedDriverName);
+      if (!d) return;
+      const r = Math.max(68, Math.min(97, Math.round(d[1] - 2)));
+      s.playedDriverRating = r; s.playedDriverBaseRating = r; s._v18Rate = true;
+    } catch (e) {}
+  }
+  if (typeof start === &quot;function&quot;) {
+    const o = start;
+    start = function () { const r = o.apply(this, arguments); try { if (s &amp;&amp; !s._v18Salt) s._v18Salt = Math.random().toString(36).slice(2, 8); } catch (e) {} v18Rate(); try { if (typeof render === &quot;function&quot;) render(); } catch (e) {} return r; };
+    window.start = start;
+  }
+
+  /* ---------- 2) abandonos según la época ---------- */
+  function v18EraDnf(y) {
+    if (y &lt; 1960) return 0.26; if (y &lt; 1970) return 0.21; if (y &lt; 1980) return 0.16; if (y &lt; 1990) return 0.18;
+    if (y &lt; 1997) return 0.12; if (y &lt; 2005) return 0.07; if (y &lt; 2014) return 0.02; return 0;
+  }
+  window.v18EraDnf = v18EraDnf;
+  if (typeof rollRaceStatus === &quot;function&quot;) {
+    const o = rollRaceStatus;
+    rollRaceStatus = function (name, teamRating, seedKey, isMine) {
+      // cada partida tiene su propia suerte: el mismo piloto no abandona siempre en las mismas carreras
+      try { if (s &amp;&amp; s._v18Salt) seedKey = seedKey + &quot;_&quot; + s._v18Salt; } catch (e) {}
+      const r = o.call(this, name, teamRating, seedKey, isMine);
+      try {
+        if (r) return r;
+        let x = v18EraDnf(yr());
+        if (!x) return r;
+        if (isMine) x *= 0.75 * Math.max(0.5, 1 - (facilityLevel(&quot;lab&quot;) || 0) * 0.08);
+        x *= Math.max(0.6, 1.25 - (teamRating || 3) * 0.1); // los autos buenos se rompen un poco menos
+        const h = Math.abs(deterministicHash(&quot;era_&quot; + seedKey)) % 1000;
+        if (h &lt; x * 1000) return &quot;DNF&quot;;
+      } catch (e) {}
+      return r;
+    };
+    window.rollRaceStatus = rollRaceStatus;
+  }
+
+  /* ---------- 3) épocas bien marcadas ---------- */
+  const ERAS = [
+    [1950, &quot;Motor adelante y ruedas finitas&quot;, &quot;Los autos se rompían todo el tiempo: terminar la carrera ya era medio triunfo.&quot;],
+    [1959, &quot;Motor atrás: autos chiquitos y livianos&quot;, &quot;Con el motor atrás los autos son más ágiles, pero siguen rompiéndose seguido: la confiabilidad manda.&quot;],
+    [1968, &quot;Llegan los primeros alerones&quot;, &quot;Sin ayudas electrónicas y con los primeros alerones: la mecánica y el chasis marcan la diferencia.&quot;],
+    [1977, &quot;Efecto suelo: el auto se pega al piso&quot;, &quot;Efecto suelo: el que domina el aire por debajo del auto, gana.&quot;],
+    [1983, &quot;Era turbo: más de 1000 caballos&quot;, &quot;Turbos de más de 1000 caballos: el motor pesa en TODOS los circuitos.&quot;],
+    [1989, &quot;Motores atmosféricos V10 y V12&quot;, &quot;Se prohíben los turbo: motores atmosféricos que gritan y una pelea fuerte de neumáticos.&quot;],
+    [1994, &quot;Vuelve la recarga de nafta&quot;, &quot;Guerra de neumáticos y reabastecimiento: la goma y la estrategia de paradas deciden las carreras.&quot;],
+    [1998, &quot;Neumáticos con ranuras&quot;, &quot;Guerra de neumáticos y reabastecimiento: la goma decide las carreras.&quot;],
+    [2009, &quot;KERS y gomas lisas otra vez&quot;, &quot;Difusores y KERS: la aerodinámica vuelve a ser la reina.&quot;],
+    [2014, &quot;Era híbrida: motores V6 turbo&quot;, &quot;Motores híbridos V6 turbo, pero la aerodinámica sigue siendo la reina.&quot;],
+    [2017, &quot;Autos más anchos y rápidos&quot;, &quot;Autos más anchos y con más carga: la aerodinámica es la reina (halo desde 2018).&quot;],
+    [2022, &quot;Vuelve el efecto suelo&quot;, &quot;Vuelve el efecto suelo: el piso del auto es la clave de la aerodinámica.&quot;],
+    [2026, &quot;Aerodinámica activa y mitad eléctrico&quot;, &quot;Mitad eléctrico y aerodinámica activa: la unidad de potencia es clave.&quot;]
+  ];
+  function v18Era(y) { let e = ERAS[0]; ERAS.forEach(x =&gt; { if (y &gt;= x[0]) e = x; }); return e; }
+  window.v18Era = v18Era;
+  if (typeof fwEraIdx === &quot;function&quot;) {
+    fwEraIdx = function (year) {
+      const y = parseInt(year, 10) || 2026;
+      return y &lt; 1968 ? 0 : y &lt; 1977 ? 1 : y &lt; 1983 ? 2 : y &lt; 1989 ? 3 : y &lt; 2009 ? 4 : y &lt; 2026 ? 5 : 6;
+    };
+    window.fwEraIdx = fwEraIdx;
+  }
+  if (typeof fwEra === &quot;function&quot;) {
+    fwEra = function (year) { const b = FW_ERAS[fwEraIdx(year)]; return Object.assign({}, b, { cap: v18Era(parseInt(year, 10) || 2026)[1] }); };
+    window.fwEra = fwEra;
+  }
+  if (typeof fwEraCardHtml === &quot;function&quot;) {
+    const o = fwEraCardHtml;
+    fwEraCardHtml = function (year) {
+      let h = o.apply(this, arguments);
+      try {
+        const k = fwEraIdx(year), b = FW_ERAS[k], info = FW_ERA_ENG[k], e = v18Era(parseInt(year, 10) || 2026);
+        h = h.replace(engEsc(b.cap), engEsc(e[1])).replace(engEsc(info.txt), engEsc(e[2]));
+      } catch (e) {}
+      return h;
+    };
+    window.fwEraCardHtml = fwEraCardHtml;
+  }
+  // minijuego de época: entre 1989 y 1993 no se recargaba nafta (contravolante sin ayudas),
+  // y desde 2014 el empujón eléctrico es el ERS
+  try {
+    if (typeof FW_ERA_MINI !== &quot;undefined&quot;) {
+      const fuel = FW_ERA_MINI[4], slide = FW_ERA_MINI[1], kers = FW_ERA_MINI[5];
+      const noRefuel = () =&gt; { const y = yr(); return y &gt;= 1989 &amp;&amp; y &lt; 1994; };
+      FW_ERA_MINI[4] = {
+        get id() { return noRefuel() ? slide.id : fuel.id; },
+        get title() { return noRefuel() ? slide.title : fuel.title; },
+        get how() { return noRefuel() ? slide.how.replace(&quot;Ruedas finitas y cero ayudas: el auto patina solo.&quot;, &quot;Motores atmosféricos muy potentes y poca electrónica: el auto patina solo.&quot;) : fuel.how; }
+      };
+      FW_ERA_MINI[5] = {
+        get id() { return kers.id; },
+        get title() { return yr() &gt;= 2014 ? &quot;ERS&quot; : kers.title; },
+        get how() { return yr() &gt;= 2014 ? kers.how.replace(/KERS/g, &quot;ERS&quot;) : kers.how; }
+      };
+    }
+  } catch (e) {}
+
+  if (typeof eraKers === &quot;function&quot;) {
+    const o = eraKers;
+    eraKers = function () {
+      const r = o.apply(this, arguments);
+      try { if (yr() &gt;= 2014) document.querySelectorAll(&quot;#eraStage button&quot;).forEach(b =&gt; { b.innerHTML = b.innerHTML.replace(/\bKERS\b/g, &quot;ERS&quot;); }); } catch (e) {}
+      return r;
+    };
+    window.eraKers = eraKers;
+  }
+
+  /* ---------- 4) novatos con nombres de su época ---------- */
+  const OLD_F = [&quot;Piero&quot;, &quot;Jean&quot;, &quot;Hans&quot;, &quot;Bob&quot;, &quot;Mario&quot;, &quot;Henri&quot;, &quot;Tony&quot;, &quot;Wolfgang&quot;, &quot;Ricardo&quot;, &quot;Peter&quot;, &quot;Gianni&quot;, &quot;Jacques&quot;, &quot;Kurt&quot;, &quot;Roberto&quot;, &quot;Brian&quot;, &quot;Carlos&quot;, &quot;Helmut&quot;, &quot;Franco&quot;, &quot;Lucien&quot;, &quot;Derek&quot;, &quot;Sergio&quot;, &quot;Ernst&quot;, &quot;Raúl&quot;, &quot;Colin&quot;];
+  const OLD_L = [&quot;Bellandi&quot;, &quot;Lambert&quot;, &quot;Hofmann&quot;, &quot;Whitfield&quot;, &quot;Duchamp&quot;, &quot;Moreau&quot;, &quot;Ferrante&quot;, &quot;Kessel&quot;, &quot;Ortega&quot;, &quot;Castelli&quot;, &quot;Brandt&quot;, &quot;Lacroix&quot;, &quot;Pemberton&quot;, &quot;Vossberg&quot;, &quot;Marchetti&quot;, &quot;Delacour&quot;, &quot;Rinaldi&quot;, &quot;Aldridge&quot;, &quot;Stenberg&quot;, &quot;Valdés&quot;, &quot;Montero&quot;, &quot;Fairbanks&quot;, &quot;Granville&quot;, &quot;Ruffino&quot;];
+  if (typeof generateRookieName === &quot;function&quot;) {
+    const o = generateRookieName;
+    generateRookieName = function (seedStr) {
+      try {
+        if (yr() &lt; 1990) {
+          const h1 = Math.abs(deterministicHash(&quot;rookie1_&quot; + seedStr)), h2 = Math.abs(deterministicHash(&quot;rookie2_&quot; + seedStr));
+          return OLD_F[h1 % OLD_F.length] + &quot; &quot; + OLD_L[h2 % OLD_L.length];
+        }
+      } catch (e) {}
+      return o.apply(this, arguments);
+    };
+    window.generateRookieName = generateRookieName;
+  }
+
+  /* ---------- 5) cuidar las gomas: hay que mantenerlas en la ventana ---------- */
+  if (typeof trkTemp === &quot;function&quot;) {
+    trkTemp = function () {
+      const st = document.getElementById(&quot;eraStage&quot;);
+      st.innerHTML = `&lt;div class=&quot;era-stat&quot;&gt;&lt;span&gt;Distancia&lt;/span&gt;&lt;span&gt;⏱️ &lt;b id=&quot;eT&quot;&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;era-gauge&quot;&gt;&lt;div class=&quot;gf&quot; id=&quot;eD&quot; style=&quot;width:0;background:linear-gradient(90deg,#22c55e,#16a34a)&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;era-stat&quot; style=&quot;margin-top:10px&quot;&gt;&lt;span&gt;🌡️ Temperatura del neumático &lt;b id=&quot;eW&quot;&gt;&lt;/b&gt;&lt;/span&gt;&lt;span&gt;En rojo: &lt;b id=&quot;eR&quot;&gt;0.0&lt;/b&gt;s / 1.2s&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;era-gauge&quot;&gt;&lt;div class=&quot;gz&quot; style=&quot;left:45%;width:30%&quot;&gt;&lt;/div&gt;&lt;div class=&quot;gr&quot; style=&quot;width:25%&quot;&gt;&lt;/div&gt;&lt;div class=&quot;gn&quot; id=&quot;eN&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;p class=&quot;small&quot; style=&quot;text-align:center;margin:6px 0 0&quot;&gt;Gomas frías = no agarran (vas lento). En la zona verde vas a fondo. En rojo se ampollan.&lt;/p&gt;
+        ${trkBtns([[&quot;eGas&quot;, &quot;🦶 ACELERAR (mantener)&quot;, &quot;era-btn hot&quot;]])}`;
+      const E = ERA, sp = eraSpeed();
+      E.t = 0; E.limit = 11; E.d = 0; E.temp = 40; E.red = 0; E.hold = false;
+      eraHold(document.getElementById(&quot;eGas&quot;), () =&gt; (E.hold = true), () =&gt; (E.hold = false));
+      eraLoop(dt =&gt; {
+        E.t += dt;
+        E.temp = Math.max(20, Math.min(100, E.temp + (E.hold ? 30 * sp : -30) * dt));
+        const zone = E.temp &lt; 45 ? &quot;cold&quot; : E.temp &gt; 75 ? &quot;hot&quot; : &quot;ok&quot;;
+        E.d += dt * (E.hold ? 18 : 6) * (zone === &quot;cold&quot; ? 0.35 : zone === &quot;hot&quot; ? 0.6 : 1);
+        if (zone === &quot;hot&quot;) E.red += dt;
+        const n = document.getElementById(&quot;eN&quot;); if (n) n.style.left = E.temp + &quot;%&quot;;
+        const d = document.getElementById(&quot;eD&quot;); if (d) d.style.width = Math.min(100, E.d) + &quot;%&quot;;
+        const r = document.getElementById(&quot;eR&quot;); if (r) r.textContent = E.red.toFixed(1);
+        const w = document.getElementById(&quot;eW&quot;); if (w) w.textContent = zone === &quot;cold&quot; ? &quot;· ❄️ frías&quot; : zone === &quot;hot&quot; ? &quot;· 🔥 ¡muy calientes!&quot; : &quot;· ✅ en ventana&quot;;
+        trkTimer(E);
+        if (E.red &gt;= 1.2) return eraEnd(false, &quot;Neumático ampollado: sobrecalentaste las gomas.&quot;);
+        if (E.d &gt;= 100) return eraEnd(true, &quot;¡Llegaste con las gomas enteras y buen ritmo!&quot;);
+        if (E.t &gt;= E.limit) eraEnd(false, E.d &lt; 60 ? &quot;Gomas frías todo el tiempo: no agarraban y perdiste la tanda.&quot; : &quot;Muy lento: no las tuviste en la ventana el tiempo suficiente.&quot;);
+      });
+    };
+    window.trkTemp = trkTemp;
+  }
 })();
 
 &lt;/script&gt;

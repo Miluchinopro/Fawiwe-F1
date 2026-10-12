@@ -16,6 +16,8 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 - **Todas las épocas, como fueron**: los pilotos de cada año (de Fangio a hoy), los calendarios de cada temporada, el sistema de puntos de cada época, la vuelta rápida cuando daba punto, reglas, paradas y clasificación.
 - **Cinemáticas**: una intro con 76 años de autos y el tacómetro al rojo, y al empezar tu carrera viajás en el tiempo hasta tu año con tu credencial del paddock.
 - **Cada época con sus cosas**: el quiz no pregunta del futuro, antes de 1980 el box te habla con la pizarra (también en la carrera en vivo) y el piloto con señas, antes de 1971 se larga con la bandera del comisario, antes de 2011 se pasa con el rebufo y desde 2026 hay modo adelantamiento en vez de DRS.
+- **Modo piloto justo**: si elegís un piloto real arranca con su nivel de verdad, así que si jugás bien le ganás a tu compañero.
+- **Cada época con sus roturas**: en los años 50 abandonaba casi la mitad de la grilla; hoy casi nadie. Y cada partida tiene su propia suerte.
 - **Escuderías leyenda** sin pilotos repetidos y **editor de grilla** que funciona en todas las épocas.
 - Carrera rápida, desafíos, "Toda una vida", temporada rápida y multijugador local.
 
