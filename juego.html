@@ -1,9 +1,9 @@
-<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.4 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.4" srcdoc="&lt;!doctype html&gt;
+<!doctype html><html><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e10600'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='900' font-style='italic' text-anchor='middle' fill='white'%3EF1%3C/text%3E%3C/svg%3E"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#e10600"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAWIWE</title><style>body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}header{padding:28px 6%;background:linear-gradient(135deg,#080808,#170000);border-bottom:2px solid #e10600}h1{margin:0;font-size:42px}p{color:#bbb}main{padding:30px 4%}iframe{width:100%;height:850px;border:0;border-radius:14px;background:#000;box-shadow:0 0 40px #000} .tag{color:#e10600;font-weight:900;letter-spacing:2px}</style></head><body><header><div class="tag">LA CARRERA EMPIEZA ACÁ</div><h1><span style="color:#e10600">FA</span><span>WI</span><span style="color:#e10600">WE</span> F1</h1><p>FAWIWE F1 · Prototipo 1.5 — el juego completo en una sola página: ingeniero, jefe de equipo o piloto, de 1950 a 2026.</p></header><main><iframe title="FAWIWE F1 · Prototipo 1.5" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;es&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
-&lt;title&gt;FAWIWE F1 · Prototipo 1.4&lt;/title&gt;
+&lt;title&gt;FAWIWE F1 · Prototipo 1.5&lt;/title&gt;
 &lt;style&gt;
 @import url(&#x27;https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap&#x27;);
 *{box-sizing:border-box}body{margin:0;background:#090909;color:#eee;font-family:&quot;Inter&quot;,Arial,sans-serif}h1,h2,h3,.logo,.rank,.luxury-banner,button,.tutorial-box h3{font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif}header{background:linear-gradient(120deg,#090909,#300b08);padding:18px 5%;border-bottom:3px solid #d9b650;position:sticky;top:0;z-index:9}.logo{font-size:48px;font-weight:1000;letter-spacing:6px}
@@ -2330,6 +2330,59 @@ body.dash #game{padding-bottom:30px}
 @keyframes v16Welcome{to{opacity:1;transform:translateY(-50%) scale(1)}}
 @media (max-height:520px){.v16-garages i{height:60px}.v16-logo h1{font-size:clamp(40px,12vh,90px)}.g-pass{width:min(330px,60vw)}.g-car{display:none}.g-body{padding-top:8px}#v16Go.t2 .g-lanyard{height:calc(50vh - 120px)}}
 body.fw-reduce #v16Intro *,body.fw-reduce #v16Go *{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}
+
+/* ===== FAWIWE · Prototipo 1.5 ===== */
+/* minijuegos: mientras jugás no aparece la barra de abajo que tapaba los botones */
+body.v17-play #v12Nav,body.v17-play #dashToggle{display:none!important}
+body.v17-play{padding-bottom:0!important}
+/* la cinemática de la vuelta se achica si la pantalla es baja, así entran los controles */
+#eraStage #lcCine{height:clamp(170px,calc(100vh - 470px),320px)}
+#eraStage .mw{margin:8px auto 44px}
+#eraStage .mw-wrap .mw-keys{margin-top:2px}
+/* pantallas anchas: cinemática a la izquierda y controles a la derecha */
+@media (min-width:700px){
+  #eraStage:has(#lcCine){display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:14px;align-items:start}
+  #eraStage:has(#lcCine) &gt; *{grid-column:2;min-width:0}
+  #eraStage:has(#lcCine) &gt; #lcCine{grid-column:1;grid-row:1 / span 12;height:clamp(220px,calc(100vh - 150px),400px);align-self:start}
+  #eraStage:has(#lcCine) .mw-wrap .mw-keys{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:center;width:auto!important;max-width:100%}
+  #eraStage:has(#lcCine) .eo{margin:4px auto}
+}
+/* celular acostado (o ventana muy baja): todo más compacto */
+@media (max-height:520px){
+  #eraStage{padding:8px!important;margin:6px 0!important}
+  #eraStage:has(#lcCine) &gt; #lcCine{height:calc(100vh - 40px)!important;max-height:330px}
+  #eraStage .mw-wrap .mw-keys,#eraStage .mw-tag,#eraStage .eo-tag,#eraStage .eo .mw-keys,#eraStage .em-assist{display:none!important}
+  #eraStage .mw{margin:2px auto 40px!important}
+  #eraStage .mw .mw-leds{display:none}
+  #eraStage .eo-dev{transform:scale(.8);transform-origin:top center;margin-bottom:-26px!important}
+  #eraStage .eo-btns{margin-top:4px}
+  #eraStage .era-stat{margin-bottom:4px}
+  #eraStage .em-car{transform:scale(.86);transform-origin:top center;margin-bottom:-30px}
+  #eraStage .era-row button{padding-top:10px!important;padding-bottom:10px!important}
+}
+/* multijugador acostado: cartel de pasar el celu siempre adentro de la pantalla */
+#v14Pass{box-sizing:border-box;max-width:100vw;overflow:auto}
+.v14-pass{box-sizing:border-box;max-width:min(420px,calc(100vw - 20px))}
+@media (max-height:520px){
+  #v14Pass{padding:8px 12px;align-items:center}
+  .v14-pass{padding:12px 16px}
+  .v14-pass-ic{font-size:28px}
+  .v14-pass-who{font-size:22px}
+  .v14-pass p{margin:4px 0 8px}
+  .v14-pass .lv-btn{min-height:44px}
+  /* largada a dos: las dos mitades más bajitas y lado a lado */
+  .v14-half{min-height:70px!important;padding:6px!important}
+  /* cinemática del duelo: entra entera y las rayas no tapan el marcador */
+  #duelCine,#duelChamp{justify-content:flex-start;gap:6px;padding:8px 12px}
+  #duelCine .dc-k{font-size:11px}
+  #duelCine .dc-p{padding:6px 8px}
+  #duelCine .dc-pos{font-size:34px}
+  #duelCine .dc-p b{font-size:15px}
+  #duelCine .dc-plate,#duelChamp .dc-plate{padding:10px 16px 12px;animation-delay:.4s}
+  #duelCine .dc-how{font-size:24px}
+  #duelCine .dc-score{font-size:17px;margin-top:6px}
+  #duelCine .dc-plate .bc-lines,#duelChamp .dc-plate .bc-lines{display:none}
+}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
@@ -4091,7 +4144,7 @@ function renderPracticeQuiz() {
     &lt;/div&gt;
     &lt;div class=&quot;mini-explain quiz-banner&quot;&gt;
       &lt;b&gt;📚 Quiz de F1 · ${rankName}&lt;/b&gt;&lt;br&gt;
-      1 pregunta por práctica · Dificultad &lt;b&gt;${hardLabel}&lt;/b&gt; · Historia 2000-2026.&lt;br&gt;
+      1 pregunta por práctica · Dificultad &lt;b&gt;${hardLabel}&lt;/b&gt; · Historia de la F1 hasta ${s.season}.&lt;br&gt;
       &lt;span class=&quot;small&quot;&gt;${s.playerMode === &quot;driver&quot; ? driverRankFlavor() : rankFlavor()}&lt;/span&gt;
     &lt;/div&gt;
     &lt;div id=&quot;miniTimer&quot; class=&quot;timer-bar&quot; style=&quot;display:none&quot;&gt;⏱️ ${cfgT}s&lt;/div&gt;
@@ -5749,7 +5802,7 @@ function juniorRaceResult(score, detailText) {
   const box = document.getElementById(&quot;juniorCareerBody&quot;);
   const posLabel = pos === 1 ? &quot;🏆 P1 — ¡GANASTE LA CARRERA!&quot; : pos &lt;= 3 ? &quot;🥂 P&quot; + pos + &quot; — ¡PODIO!&quot; : &quot;P&quot; + pos;
   box.innerHTML = `
-    &lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;${posLabel}&lt;/b&gt;&lt;br&gt;${detailText} · +${pts} puntos de categoría (${raceScores.length} en pista).&lt;/div&gt;
+    &lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;${posLabel}&lt;/b&gt;&lt;br&gt;${detailText} · ${pts &gt;= 0 ? &quot;+&quot; : &quot;&quot;}${pts} puntos de categoría (${raceScores.length} en pista).&lt;/div&gt;
     ${renderJuniorStandingsTable(false)}
     &lt;button class=&quot;start-btn&quot; onclick=&quot;advanceJuniorRace()&quot;&gt;Continuar →&lt;/button&gt;
   `;
@@ -6654,7 +6707,7 @@ function renderJobArea() {
         &lt;div class=&quot;quali-car rival1&quot;&gt;🏁&lt;/div&gt;
         &lt;div class=&quot;quali-car rival2&quot;&gt;🏁&lt;/div&gt;
       &lt;/div&gt;
-      &lt;p class=&quot;small&quot; style=&quot;text-align:center&quot;&gt;Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10.&lt;/p&gt;
+      &lt;p class=&quot;small&quot; style=&quot;text-align:center&quot;&gt;${(typeof v17OneQ === &quot;function&quot; &amp;&amp; v17OneQ()) ? &quot;Una sola tanda: la mejor vuelta decide la grilla.&quot; : &quot;Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10.&quot;}&lt;/p&gt;
     `;
     let qLabel, qDesc, choices;
     const cond = qualiConditions();
@@ -10715,6 +10768,22 @@ const driverRadioPool = [
     { label: &quot;Insistir en algo que el dato ya descartó&quot;, correct: false }] }
 ];
 
+// Antes de 1980 no había radio: el box hablaba con el piloto con la pizarra en la recta.
+const driverBoardPool = [
+  { text: &quot;Pasás por la recta de {gp} y el box te muestra la pizarra: «P3 · +0.4 · L12». El de atrás se acerca.&quot;, options: [
+    { label: &quot;Leer la diferencia y ajustar el ritmo para defender&quot;, correct: true },
+    { label: &quot;Ignorar la pizarra por completo&quot;, correct: false },
+    { label: &quot;Entrar a boxes a preguntar qué pasa&quot;, correct: false }] },
+  { text: &quot;A 10 vueltas del final de {gp} la pizarra dice «EASY».&quot;, options: [
+    { label: &quot;Bajar un poco el ritmo y cuidar el auto hasta el final&quot;, correct: true },
+    { label: &quot;Seguir a fondo como si nada&quot;, correct: false },
+    { label: &quot;Frenar en la recta para hacer señas al box&quot;, correct: false }] },
+  { text: &quot;En {gp} el box te muestra «IN» en la pizarra.&quot;, options: [
+    { label: &quot;Entrar a boxes en la próxima vuelta&quot;, correct: true },
+    { label: &quot;Hacerte el distraído y seguir&quot;, correct: false },
+    { label: &quot;Parar en la recta para preguntar&quot;, correct: false }] }
+];
+
 function renderDriverPracticeTask(idx, rName, injuryBanner) {
   injuryBanner = injuryBanner || &quot;&quot;;
   const cfg = getMiniConfig();
@@ -10784,14 +10853,15 @@ function renderDriverPracticeTask(idx, rName, injuryBanner) {
       &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;startGenericMini()&quot;&gt;${t(&quot;mg_btn_start&quot;)}&lt;/button&gt;
     `;
   } else if (task === &quot;radio&quot;) {
-    const sc = pickScenario(&quot;drvradio&quot;, driverRadioPool);
+    const board = s.season &lt; 1980;
+    const sc = board ? pickScenario(&quot;drvboard&quot;, driverBoardPool) : pickScenario(&quot;drvradio&quot;, driverRadioPool);
     jobArea.innerHTML = stepHead + `
-      &lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;📡 Radio con el box${turnLabel}&lt;/b&gt;&lt;br&gt;${sc.text} · ${cfg.time}s.&lt;/div&gt;
+      &lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;${board ? &quot;🪧 Pizarra del box&quot; : &quot;📡 Radio con el box&quot;}${turnLabel}&lt;/b&gt;&lt;br&gt;${sc.text} · ${cfg.time}s.&lt;/div&gt;
       &lt;div id=&quot;miniTimer&quot; class=&quot;timer-bar&quot; style=&quot;display:none&quot;&gt;⏱️ ${cfg.time}s&lt;/div&gt;
       &lt;div id=&quot;miniChoices&quot; class=&quot;hidden&quot;&gt;&lt;div class=&quot;choice-grid&quot;&gt;${sc.options.map(o =&gt; `&lt;button class=&quot;choice-card&quot; onclick=&quot;finishMini(${o.correct})&quot;&gt;${o.label}&lt;/button&gt;`).join(&quot;&quot;)}&lt;/div&gt;&lt;/div&gt;
       &lt;button class=&quot;start-btn&quot; id=&quot;startMiniBtn&quot; onclick=&quot;startGenericMini()&quot;&gt;${t(&quot;mg_btn_start&quot;)}&lt;/button&gt;
     `;
-    playRadioSound();
+    if (!board) playRadioSound();
   } else {
     // Vuelta rápida: zona de precisión mucho más angosta — el mejor desafío de reflejos.
     const gpName = trackData[s.gp] ? trackData[s.gp].name : &quot;el circuito&quot;;
@@ -10917,7 +10987,7 @@ function renderDriverQuali(idx, rName) {
       &lt;div class=&quot;quali-car rival1&quot;&gt;🏁&lt;/div&gt;
       &lt;div class=&quot;quali-car rival2&quot;&gt;🏁&lt;/div&gt;
     &lt;/div&gt;
-    &lt;p class=&quot;small&quot; style=&quot;text-align:center&quot;&gt;Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10.&lt;/p&gt;
+    &lt;p class=&quot;small&quot; style=&quot;text-align:center&quot;&gt;${(typeof v17OneQ === &quot;function&quot; &amp;&amp; v17OneQ()) ? &quot;Una sola tanda: la mejor vuelta decide la grilla.&quot; : &quot;Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10.&quot;}&lt;/p&gt;
   `;
   const extra = idx &gt;= 4 ? `&lt;button class=&quot;choice-card&quot; onclick=&quot;chooseQuali(&#x27;late&#x27;, true)&quot;&gt;🟣 Vuelta al límite, todo o nada (arriesgado)&lt;/button&gt;` : &quot;&quot;;
   document.getElementById(&quot;jobArea&quot;).innerHTML = `
@@ -15395,7 +15465,7 @@ function eraFuel() {
     &lt;div class=&quot;era-dots&quot; id=&quot;eDots&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;era-row&quot;&gt;&lt;button class=&quot;era-btn hot&quot; id=&quot;eFill&quot;&gt;⛽ CARGAR (mantener)&lt;/button&gt;&lt;/div&gt;`;
   const E = ERA, sp = eraSpeed();
-  E.c = 0; E.wins = 0; E.f = 0; E.hold = false; E.wait = 0; E.idle = 0; E.idleMax = 9 / sp;
+  E.c = 0; E.wins = 0; E.f = 0; E.hold = false; E.wait = 0; E.idle = 0; E.idleMax = 5 / sp;
   const rate = 42 * sp, zw = 12 / sp;
   function stop() {
     E.f = 0; E.target = 35 + ((E.c * 23 + s.gp * 7) % 40);
@@ -15522,10 +15592,11 @@ function trkDefFor(idx) {
     return { icon: T.icon, fn: TRK_ERA_FN[g.id], title: &quot;Época &quot; + y + &quot;: &quot; + g.title + &quot; &quot; + title, how: g.how, idx, era: true };
   }
   if (fn === &quot;trkDrs&quot; &amp;&amp; y &lt; 2011) { fn = &quot;trkSlip&quot;; title = title.replace(&quot;DRS&quot;, &quot;Rebufo&quot;); note = &quot;En &quot; + y + &quot; todavía no existía el DRS: se pasaba con el rebufo.&quot;; }
+  if (fn === &quot;trkDrs&quot; &amp;&amp; y &gt;= 2026) { title = title.replace(&quot;DRS&quot;, &quot;Modo adelantamiento&quot;); note = &quot;Desde &quot; + 2026 + &quot; ya no hay DRS: a menos de 1s del rival se activa el modo adelantamiento (más energía eléctrica).&quot;; }
   if (fn === &quot;trkWet&quot; &amp;&amp; y &lt; 1990) note = &quot;En &quot; + y + &quot; la goma intermedia casi no se usaba: cambiar a tiempo era todo un arte.&quot;;
   if (fn === &quot;trkPit&quot;) note = trkPitNote(y);
   if (fn === &quot;trkLaunch&quot; &amp;&amp; y &lt; 1971) note = &quot;En &quot; + y + &quot; no había semáforo: se largaba cuando el comisario bajaba la bandera.&quot;;
-  return { icon: T.icon, fn, title, how: TRK_HOW[fn] + (note ? `&lt;br&gt;&lt;span class=&quot;small&quot;&gt;🕰️ ${note}&lt;/span&gt;` : &quot;&quot;), idx };
+  return { icon: T.icon, fn, title, how: (fn === &quot;trkDrs&quot; &amp;&amp; y &gt;= 2026 ? TRK_HOW[fn].replace(/DRS/g, &quot;modo adelantamiento&quot;).replace(&quot;abrí el&quot;, &quot;activá el&quot;) : TRK_HOW[fn]) + (note ? `&lt;br&gt;&lt;span class=&quot;small&quot;&gt;🕰️ ${note}&lt;/span&gt;` : &quot;&quot;), idx };
 }
 function trkDef() { return trkDefFor(trkPatternIdx()); }
 function trkPatternHtml() {
@@ -15868,8 +15939,8 @@ function trkDrs() {
     &lt;div class=&quot;trk-gap&quot;&gt;&lt;b id=&quot;eG&quot;&gt;1.40&lt;/b&gt;&lt;span&gt;s&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;trk-det&quot; id=&quot;eDet&quot;&gt;ZONA DE DETECCIÓN&lt;/div&gt;
     &lt;div class=&quot;era-dots&quot; id=&quot;eDots&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
-    ${trkBtns([[&quot;eB&quot;, &quot;🟢 ABRIR DRS&quot;, &quot;era-btn cool&quot;]])}`;
-  const E = ERA, sp = eraSpeed();
+    ${trkBtns([[&quot;eB&quot;, (parseInt(s.season, 10) || 2026) &gt;= 2026 ? &quot;🟢 ACTIVAR ADELANTAMIENTO&quot; : &quot;🟢 ABRIR DRS&quot;, &quot;era-btn cool&quot;]])}`;
+  const E = ERA, sp = eraSpeed(), MO = (parseInt(s.season, 10) || 2026) &gt;= 2026;
   E.c = 0; E.wins = 0; E.t = 0; E.phase = &quot;drive&quot;; E.next = 1.6 / sp;
   const farIdx = Math.floor(trkRand(7) * 3); // en una de las 3 zonas estás lejos
   const res = (ok, txt) =&gt; {
@@ -15883,8 +15954,8 @@ function trkDrs() {
   };
   document.getElementById(&quot;eB&quot;).onclick = () =&gt; {
     if (!eraAlive(E.id) || E.c &gt;= 3) return;
-    if (E.phase !== &quot;det&quot;) return res(false, &quot;Fuera de la zona: el DRS no se abre ahí.&quot;);
-    res(E.gap &lt; 1, E.gap &lt; 1 ? &quot;¡DRS abierto y adelantamiento!&quot; : &quot;Estabas a más de 1 segundo: no te correspondía.&quot;);
+    if (E.phase !== &quot;det&quot;) return res(false, (MO ? &quot;Fuera de la zona: el modo adelantamiento no se activa ahí.&quot; : &quot;Fuera de la zona: el DRS no se abre ahí.&quot;));
+    res(E.gap &lt; 1, E.gap &lt; 1 ? (MO ? &quot;¡Modo adelantamiento y pasada!&quot; : &quot;¡DRS abierto y adelantamiento!&quot;) : &quot;Estabas a más de 1 segundo: no te correspondía.&quot;);
   };
   eraLoop(dt =&gt; {
     E.t += dt;
@@ -15894,7 +15965,7 @@ function trkDrs() {
     document.getElementById(&quot;eG&quot;).textContent = E.gap.toFixed(2);
     document.getElementById(&quot;eG&quot;).style.color = E.gap &lt; 1 ? &quot;#22c55e&quot; : &quot;#f5f5f5&quot;;
     if (E.phase === &quot;drive&quot; &amp;&amp; E.t &gt;= E.next &amp;&amp; E.c &lt; 3) { E.phase = &quot;det&quot;; E.until = E.t + 1.1 / sp; document.getElementById(&quot;eDet&quot;).classList.add(&quot;on&quot;); }
-    else if (E.phase === &quot;det&quot; &amp;&amp; E.t &gt;= E.until) res(E.gap &gt;= 1, E.gap &gt;= 1 ? &quot;Bien: estabas lejos, no había DRS.&quot; : &quot;¡Se te pasó la zona sin abrir el DRS!&quot;);
+    else if (E.phase === &quot;det&quot; &amp;&amp; E.t &gt;= E.until) res(E.gap &gt;= 1, E.gap &gt;= 1 ? (MO ? &quot;Bien: estabas lejos, no te tocaba el modo adelantamiento.&quot; : &quot;Bien: estabas lejos, no había DRS.&quot;) : (MO ? &quot;¡Se te pasó la zona sin activar el modo adelantamiento!&quot; : &quot;¡Se te pasó la zona sin abrir el DRS!&quot;));
   });
 }
 
@@ -18278,7 +18349,7 @@ function emLap() {
   if (typeof q === &quot;function&quot;) window.renderQualiSkillTest = function () {
     if (s.playerMode !== &quot;driver&quot;) return q.apply(this, arguments);
     const tr = trackData[s.gp] || {};
-    emFrame(&quot;&quot;, &quot;⏱️&quot;, &quot;Vuelta de clasificación en &quot; + (tr.name || &quot;&quot;), &quot;La decisión ya está tomada: ahora &lt;b&gt;clavá la vuelta&lt;/b&gt;. Frená y acelerá tocando la cinemática, doblá con ◀ ▶ del volante y usá el ERS solo en las rectas. Cuanto más cerca de la pole, mejor largás.&quot;, &quot;emLap&quot;, ok =&gt; { const a = typeof window.__emLapAcc === &quot;number&quot; ? window.__emLapAcc : (ok ? 0.8 : 0.3); resolveQualiSkill(a); });
+    emFrame(&quot;&quot;, &quot;⏱️&quot;, &quot;Vuelta de clasificación en &quot; + (tr.name || &quot;&quot;), &quot;La decisión ya está tomada: ahora &lt;b&gt;clavá la vuelta&lt;/b&gt;. Frená y acelerá tocando la cinemática, doblá con ◀ ▶ del volante y &quot; + (s.season &gt;= 2009 ? &quot;usá el &quot; + (s.season &gt;= 2014 ? &quot;ERS&quot; : &quot;KERS&quot;) + &quot; solo en las rectas&quot; : &quot;aprovechá el rebufo en las rectas&quot;) + &quot;. Cuanto más cerca de la pole, mejor largás.&quot;, &quot;emLap&quot;, ok =&gt; { const a = typeof window.__emLapAcc === &quot;number&quot; ? window.__emLapAcc : (ok ? 0.8 : 0.3); resolveQualiSkill(a); });
   };
 })();
 
@@ -27163,6 +27234,11 @@ const V15_HIST = {};
   });
 })();
 
+// Ferrari 2010-2015: en los datos sus pilotos figuraban como &quot;Ferrari&quot; y el equipo como &quot;Scuderia Ferrari&quot;
+(function () {
+  try { for (let y = 2010; y &lt;= 2015; y++) (driversByYear[y] || []).forEach(d =&gt; { if (d[3] === &quot;Ferrari&quot;) d[3] = &quot;Scuderia Ferrari&quot;; }); } catch (e) {}
+})();
+
 &lt;/script&gt;
 &lt;script&gt;
 /* =====================================================================================
@@ -27392,6 +27468,8 @@ if (typeof showBigResult === &quot;function&quot;) {
   } catch (e) {}
   try { Object.assign(teamColors, { &quot;Talbot-Lago&quot;: &quot;#2b5fad&quot;, &quot;Gordini&quot;: &quot;#1f5fbf&quot;, &quot;Mercedes-Benz&quot;: &quot;#c9ced6&quot;, &quot;Lancia&quot;: &quot;#b5121b&quot;, &quot;HWM&quot;: &quot;#2e7d32&quot;, &quot;Porsche&quot;: &quot;#d0d0d0&quot; }); } catch (e) {}
   const clampY = year =&gt; Math.max(1950, Math.min(2026, year | 0));
+  // 8 bis) si armaste tu propia parrilla en el editor, manda la tuya
+  window.v15Tpl = function () { try { return typeof engActiveTemplate === &quot;function&quot; &amp;&amp; !!engActiveTemplate(); } catch (e) { return false; } };
   function withMine(T, y) {
     try {
       if (typeof s === &quot;undefined&quot; || !s || !s.team || s.season !== y) return T;
@@ -27399,7 +27477,8 @@ if (typeof showBigResult === &quot;function&quot;) {
       need.forEach(team =&gt; {
         if (T.some(t =&gt; t[0] === team)) return;
         const yy = Object.keys(teamsByYear).map(Number).filter(k =&gt; teamsByYear[k].some(t =&gt; t[0] === team)).sort((a, b) =&gt; Math.abs(a - y) - Math.abs(b - y))[0];
-        const tm = yy != null ? teamsByYear[yy].find(t =&gt; t[0] === team) : (legendTeams.find(t =&gt; t[0] === team) || [team, 2.5]);
+        let tm = yy != null ? teamsByYear[yy].find(t =&gt; t[0] === team) : (legendTeams.find(t =&gt; t[0] === team) || [team, 2.5]);
+        try { if (s.customTeam &amp;&amp; s.customTeam.name === team) tm = [team, s.customTeam.rating]; } catch (e) {}
         T = T.concat([tm]);
       });
     } catch (e) {}
@@ -27409,6 +27488,7 @@ if (typeof showBigResult === &quot;function&quot;) {
     const o = getTeamsForYear;
     getTeamsForYear = function (year) {
       const y = clampY(year);
+      if (v15Tpl()) return o.apply(this, arguments);
       if (V15_HIST[y]) return withMine(V15_HIST[y].T.map(t =&gt; t.slice()), y);
       return o.apply(this, arguments);
     };
@@ -27418,7 +27498,7 @@ if (typeof showBigResult === &quot;function&quot;) {
     const o = getDriversForYear;
     getDriversForYear = function (year) {
       const y = clampY(year);
-      if (!V15_HIST[y]) return o.apply(this, arguments);
+      if (!V15_HIST[y] || v15Tpl()) return o.apply(this, arguments);
       let D = driversByYear[y].slice();
       try {
         if (typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; s.team &amp;&amp; s.season === y &amp;&amp; typeof lastKnownLineup === &quot;function&quot;) {
@@ -27833,6 +27913,7 @@ if (typeof findRating === &quot;function&quot;) {
   const o = findRating;
   findRating = function (name) {
     try {
+      if ((s &amp;&amp; s.customTeam &amp;&amp; s.customTeam.name === name) || (typeof v15Tpl === &quot;function&quot; &amp;&amp; v15Tpl())) return o.apply(this, arguments);
       let y = (s &amp;&amp; s.season) || 2026;
       const setup = document.getElementById(&quot;setup&quot;), sy = document.getElementById(&quot;startYear&quot;);
       if (setup &amp;&amp; !setup.classList.contains(&quot;hidden&quot;) &amp;&amp; sy &amp;&amp; +sy.value) y = +sy.value;
@@ -28095,6 +28176,266 @@ function v16Go() {
     if (V16.goOn) return;
     try { v16Go(); } catch (e) { console.warn(&quot;[FAWIWE] cinemática de largada:&quot;, e); return o.apply(this, arguments); }
   };
+})();
+
+&lt;/script&gt;
+&lt;script&gt;
+/* =====================================================================================
+   FAWIWE · PROTOTIPO 1.5 — segunda revisión a fondo
+   1) Modo piloto: el compañero que ves es el mismo que corre la carrera.
+   2) Escuderías leyenda: si tus pilotos leyenda también corren en otro equipo ese año,
+      ese otro equipo pone a un piloto real libre (o un debutante) — nunca hay dos iguales.
+   3) Quiz por época: no te pregunta cosas del futuro ni de reglas que todavía no existían.
+   4) Textos por época (DRS, ERS, Q1/Q2/Q3, radio) que llegan desde otras pantallas.
+   5) Minijuegos siempre enteros en pantalla (PC chica, celular vertical y acostado).
+   6) Multijugador con el celular acostado: largada, frenadas y paneles a la vista.
+   ===================================================================================== */
+(function () {
+  const yr = () =&gt; { try { return parseInt(s.season, 10) || 2026; } catch (e) { return 2026; } };
+
+  /* ---------- 1) compañero alineado en modo piloto ---------- */
+  if (typeof myTeamLineup === &quot;function&quot;) {
+    const o = myTeamLineup;
+    myTeamLineup = function () {
+      const r = o.apply(this, arguments);
+      try {
+        if (s._v17Mate || !Array.isArray(r) || s.playerMode !== &quot;driver&quot; || !s.playedDriverName || s._simulatingBackground) return r;
+        if (!r[0] || r[0].name !== s.playedDriverName || !r[1] || (s.drivers || [])[1]) return r;
+        s._v17Mate = true;
+        let mate = null;
+        try { mate = currentTeamLineup(s.club).find(d =&gt; d &amp;&amp; d[0] !== s.playedDriverName); } finally { s._v17Mate = false; }
+        if (mate &amp;&amp; mate[0] !== r[1].name &amp;&amp; !(typeof v15UsedElsewhere === &quot;function&quot; &amp;&amp; v15UsedElsewhere(mate[0], s.club))) {
+          r[1].name = mate[0]; r[1].rating = effectiveRating(mate[0], mate[1]);
+        }
+      } catch (e) { s._v17Mate = false; }
+      return r;
+    };
+    window.myTeamLineup = myTeamLineup;
+  }
+
+  /* ---------- 2) sin pilotos duplicados con escuderías leyenda ---------- */
+  let myCache = null;
+  function v17MyNames() {
+    if (myCache) return myCache;
+    if (s._v17My) return [];
+    s._v17My = true;
+    try { myCache = myTeamLineup().map(d =&gt; d.name); } catch (e) { myCache = []; } finally { s._v17My = false; }
+    const c = myCache; Promise.resolve().then(() =&gt; { if (myCache === c) myCache = null; });
+    return myCache;
+  }
+  function v17Free(team, idx, lineup, mine) {
+    const y = yr();
+    s._v17Free = s._v17Free || {};
+    const bag = s._v17Free[y] = s._v17Free[y] || {};
+    const key = team + &quot;_&quot; + idx;
+    if (bag[key] &amp;&amp; !mine.has(bag[key][0])) return [bag[key][0], bag[key][1], 2, team];
+    const racing = new Set();
+    try { getDriversForYear(y).forEach(d =&gt; racing.add(d[0])); } catch (e) {}
+    mine.forEach(n =&gt; racing.add(n));
+    Object.keys(bag).forEach(k =&gt; { if (k !== key) racing.add(bag[k][0]); });
+    (lineup || []).forEach(d =&gt; d &amp;&amp; racing.add(d[0]));
+    let pick = null;
+    for (const dy of [-1, 1, -2, 2, -3, 3]) {
+      if (pick) break;
+      try {
+        for (const d of originalDriverLineup(team, y + dy)) { if (d &amp;&amp; !racing.has(d[0])) { pick = [d[0], d[1]]; break; } }
+      } catch (e) {}
+    }
+    if (!pick) pick = [generateRookieName(&quot;v17_&quot; + team + &quot;_&quot; + y + &quot;_&quot; + idx), 72];
+    bag[key] = pick;
+    return [pick[0], pick[1], 2, team];
+  }
+  if (typeof currentTeamLineup === &quot;function&quot;) {
+    const o = currentTeamLineup;
+    currentTeamLineup = function (team) {
+      const r = o.apply(this, arguments);
+      try {
+        if (!Array.isArray(r) || !s || team === s.club || s._v17My || s._v17Mate) return r;
+        const mine = new Set(v17MyNames());
+        if (!mine.size || !r.some(d =&gt; d &amp;&amp; mine.has(d[0]))) return r;
+        return r.map((d, i) =&gt; (d &amp;&amp; mine.has(d[0])) ? v17Free(team, i, r, mine) : d);
+      } catch (e) { return r; }
+    };
+    window.currentTeamLineup = currentTeamLineup;
+  }
+
+  /* ---------- 3) quiz de la época ---------- */
+  const KW = [
+    [/\bKERS\b/, 2009], [/\bERS\b|MGU|h[ií]brid/i, 2014], [/\bDRS\b/, 2011, 2025], [/\bhalo\b/i, 2018],
+    [/sprint/i, 2021], [/tope de presupuesto|cost cap|l[ií]mite de presupuesto/i, 2021],
+    [/\bVSC\b|virtual/i, 2015], [/Audi|Cadillac/, 2026], [/Constructores/, 1958],
+    [/color.{0,30}neum|neum.{0,30}color/i, 2019], [/\b(Soft|Medium|Hard)\b/, 2019],
+    [/Red Bull/, 2005], [/Toro Rosso/, 2006], [/Haas/, 2016], [/Alpine/, 2021], [/Racing Bulls/, 2024],
+    [/Max Verstappen/, 2015], [/\b(Leclerc|Norris|Russell)\b/, 2018], [/\bPiastri\b/, 2023], [/\bHamilton\b/, 2007], [/\bAlonso\b/, 2001], [/\bVettel\b/, 2007]
+  ];
+  function v17EraOk(qz) {
+    const y = yr();
+    const txt = [qz.q].concat(qz.a || []).join(&quot; · &quot;);
+    const years = txt.match(/\b(19[5-9]\d|20[0-4]\d)\b/g) || [];
+    if (years.some(v =&gt; +v &gt; y)) return false;
+    for (const [re, from, to] of KW) { if (re.test(txt) &amp;&amp; (y &lt; from || (to &amp;&amp; y &gt; to))) return false; }
+    return true;
+  }
+  window.v17EraOk = v17EraOk;
+  try {
+    // preguntas clásicas para que las primeras épocas también tengan quiz variado
+    const add = [
+      { d: 0, q: &quot;¿Qué bandera muestra el final de la carrera?&quot;, a: [&quot;La de cuadros&quot;, &quot;La roja&quot;, &quot;La azul&quot;, &quot;La blanca&quot;], c: 0 },
+      { d: 0, q: &quot;¿Qué bandera avisa que hay aceite o pista resbaladiza?&quot;, a: [&quot;Amarilla con franjas rojas&quot;, &quot;Verde&quot;, &quot;Negra&quot;, &quot;Azul&quot;], c: 0 },
+      { d: 0, q: &quot;¿Quién ganó el primer Mundial de F1 en 1950?&quot;, a: [&quot;Giuseppe Farina&quot;, &quot;Juan Manuel Fangio&quot;, &quot;Alberto Ascari&quot;, &quot;Luigi Fagioli&quot;], c: 0 },
+      { d: 1, q: &quot;¿En qué circuito se corrió la primera carrera del Mundial, en 1950?&quot;, a: [&quot;Silverstone&quot;, &quot;Monza&quot;, &quot;Mónaco&quot;, &quot;Spa&quot;], c: 0 },
+      { d: 1, q: &quot;En 1950, ¿cuántos puntos daba ganar una carrera?&quot;, a: [&quot;8&quot;, &quot;10&quot;, &quot;9&quot;, &quot;25&quot;], c: 0 },
+      { d: 1, q: &quot;Juan Manuel Fangio ganó su primer título en 1951. ¿Con qué marca?&quot;, a: [&quot;Alfa Romeo&quot;, &quot;Ferrari&quot;, &quot;Maserati&quot;, &quot;Mercedes&quot;], c: 0 },
+      { d: 2, q: &quot;Alberto Ascari fue campeón en 1952 y 1953. ¿Con qué equipo?&quot;, a: [&quot;Ferrari&quot;, &quot;Maserati&quot;, &quot;Alfa Romeo&quot;, &quot;Lancia&quot;], c: 0 },
+      { d: 2, q: &quot;Las 500 Millas de Indianápolis contaron para el Mundial desde 1950 hasta…&quot;, a: [&quot;1960&quot;, &quot;1955&quot;, &quot;1970&quot;, &quot;1952&quot;], c: 0 },
+      { d: 3, q: &quot;¿Quién fue el primer campeón británico, en 1958?&quot;, a: [&quot;Mike Hawthorn&quot;, &quot;Stirling Moss&quot;, &quot;Peter Collins&quot;, &quot;Tony Brooks&quot;], c: 0 },
+      { d: 3, q: &quot;¿Qué equipo hizo campeón al motor trasero en 1959?&quot;, a: [&quot;Cooper&quot;, &quot;Ferrari&quot;, &quot;Vanwall&quot;, &quot;BRM&quot;], c: 0 },
+      { d: 3, q: &quot;Juan Manuel Fangio ganó cinco títulos. ¿En qué año ganó el último?&quot;, a: [&quot;1957&quot;, &quot;1955&quot;, &quot;1958&quot;, &quot;1954&quot;], c: 0 },
+      { d: 4, q: &quot;Jack Brabham fue campeón en 1966 manejando…&quot;, a: [&quot;Un auto de su propio equipo&quot;, &quot;Un Ferrari&quot;, &quot;Un Lotus&quot;, &quot;Un Cooper&quot;], c: 0 },
+      { d: 4, q: &quot;Jim Clark ganó sus títulos de 1963 y 1965 con…&quot;, a: [&quot;Lotus&quot;, &quot;BRM&quot;, &quot;Brabham&quot;, &quot;Ferrari&quot;], c: 0 },
+      { d: 5, q: &quot;En 1950, además de los puntos por puesto, ¿qué más sumaba un punto?&quot;, a: [&quot;La vuelta más rápida&quot;, &quot;La pole&quot;, &quot;Liderar una vuelta&quot;, &quot;Terminar sin parar&quot;], c: 0 }
+    ];
+    if (typeof f1QuizBank !== &quot;undefined&quot; &amp;&amp; Array.isArray(f1QuizBank)) add.forEach(x =&gt; { if (!f1QuizBank.some(b =&gt; b.q === x.q)) f1QuizBank.push(x); });
+  } catch (e) {}
+  if (typeof pickF1Quiz === &quot;function&quot;) {
+    const o = pickF1Quiz;
+    pickF1Quiz = function () {
+      try {
+        const era = f1QuizBank.filter(v17EraOk);
+        if (era.length &lt; 4) return o.apply(this, arguments);
+        const tier = tierIndex();
+        const used = new Set(s.quizUsed || []);
+        let pool = era.filter(x =&gt; x.d &lt;= tier &amp;&amp; !used.has(x.q));
+        if (!pool.length) pool = era.filter(x =&gt; !used.has(x.q));
+        if (!pool.length) pool = era;
+        const prefer = pool.filter(x =&gt; x.d &gt;= Math.max(0, tier - 1));
+        const src = prefer.length ? prefer : pool;
+        const chosen = src[Math.floor(Math.random() * src.length)];
+        s.quizUsed = (s.quizUsed || []).concat([chosen.q]).slice(-24);
+        const opts = chosen.a.map((label, i) =&gt; ({ label, correct: i === chosen.c }));
+        return { text: chosen.q, options: shuffleArr(opts), diff: chosen.d };
+      } catch (e) { return o.apply(this, arguments); }
+    };
+    window.pickF1Quiz = pickF1Quiz;
+  }
+
+  /* ---------- 4) textos según la época ---------- */
+  window.v17OneQ = function () {
+    try { if (typeof qlSessions === &quot;function&quot;) { let n = 22; try { n = Math.max(2, getEraTeamNames().length * 2); } catch (e) {} return qlSessions(n).length === 1; } } catch (e) {}
+    return yr() &lt; 2006;
+  };
+  function rules() {
+    const y = yr(), R = [];
+    if (y &lt; 2011) { R.push([/\bABRIR DRS\b/g, &quot;BUSCAR EL REBUFO&quot;], [/\b(el|del) DRS\b/g, (m, a) =&gt; (a === &quot;del&quot; ? &quot;del&quot; : &quot;el&quot;) + &quot; rebufo&quot;], [/\bDRS\b/g, &quot;rebufo&quot;]); }
+    if (y &gt;= 2026) { R.push([/\bABRIR DRS\b/g, &quot;ACTIVAR ADELANTAMIENTO&quot;], [/\b(el|del) DRS\b/g, (m, a) =&gt; a + &quot; modo adelantamiento&quot;], [/\bDRS\b/g, &quot;modo adelantamiento&quot;]); }
+    if (y &lt; 2009) R.push([/usá el ERS solo en las rectas/g, &quot;aprovechá el rebufo en las rectas&quot;]);
+    if (y &lt; 1980) R.push([/Radio con el box/g, &quot;Pizarra del box&quot;], [/\bpor radio\b/g, &quot;con la pizarra&quot;]);
+    if (window.v17OneQ()) R.push([/Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10\./g, &quot;Una sola tanda: la mejor vuelta decide la grilla.&quot;]);
+    R.push([/Historia 2000-2026/g, &quot;Historia de la F1 hasta &quot; + y]);
+    return R;
+  }
+  const TRIG = /DRS|ERS solo|Radio con el box|por radio|Q1 elimina|Historia 2000/;
+  const SKIP = &quot;script,style,textarea,input,#v17NoMap,.v6-quiz,.quiz-q&quot;;
+  function fixText(root, R) {
+    if (!root || !document.body.contains(root)) return;
+    if (root.nodeType === 3) root = root.parentNode;
+    if (!root || root.nodeType !== 1 || root.closest(SKIP)) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = w.nextNode())) {
+      const t = n.nodeValue;
+      if (!t || !TRIG.test(t)) continue;
+      if (n.parentNode &amp;&amp; n.parentNode.closest &amp;&amp; n.parentNode.closest(SKIP)) continue;
+      let v = t;
+      for (const [re, rep] of R) v = v.replace(re, rep);
+      if (v !== t) { if (/^\s*[a-záéíóú]/.test(v) &amp;&amp; /^\s*DRS/.test(t)) v = v.replace(/^(\s*)(.)/, (m, a, b) =&gt; a + b.toUpperCase()); n.nodeValue = v; }
+    }
+  }
+  let pend = new Set(), raf = 0;
+  function flush() {
+    raf = 0;
+    try {
+      if (typeof s === &quot;undefined&quot; || !s) { pend.clear(); return; }
+      const R = rules();
+      const list = [...pend]; pend.clear();
+      list.forEach(r =&gt; fixText(r, R));
+    } catch (e) { pend.clear(); }
+  }
+  try {
+    const mo = new MutationObserver(recs =&gt; {
+      for (const m of recs) {
+        if (m.type === &quot;characterData&quot;) { if (TRIG.test(m.target.nodeValue || &quot;&quot;)) pend.add(m.target); }
+        else m.addedNodes.forEach(a =&gt; { if ((a.nodeType === 3 ? a.nodeValue : a.textContent || &quot;&quot;).match(TRIG)) pend.add(a); });
+      }
+      if (pend.size &amp;&amp; !raf) raf = requestAnimationFrame(flush);
+    });
+    const go = () =&gt; mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    if (document.body) go(); else document.addEventListener(&quot;DOMContentLoaded&quot;, go);
+  } catch (e) {}
+
+  /* ---------- 5) minijuegos enteros en pantalla ---------- */
+  function fitStage() {
+    const st = document.getElementById(&quot;eraStage&quot;);
+    if (!st) return;
+    document.body.classList.add(&quot;v17-play&quot;);
+    const r = st.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const pad = vh &lt; 520 ? 4 : 10;
+    let top;
+    if (r.height + pad * 2 &gt; vh) top = window.scrollY + r.top - pad;
+    else top = window.scrollY + r.top - Math.max(pad, (vh - r.height) / 2);
+    // si el mensaje del resultado entra abajo, mejor
+    window.scrollTo({ top: Math.max(0, top), behavior: &quot;instant&quot; });
+  }
+  window.v17FitStage = fitStage;
+  let playTimer = 0;
+  function watchPlay() {
+    clearInterval(playTimer);
+    playTimer = setInterval(() =&gt; {
+      let alive = false;
+      try { alive = !!(typeof ERA !== &quot;undefined&quot; &amp;&amp; ERA &amp;&amp; document.getElementById(&quot;eraStage&quot;)); } catch (e) {}
+      if (!alive) { document.body.classList.remove(&quot;v17-play&quot;); clearInterval(playTimer); }
+    }, 400);
+  }
+  function hookStart(name) {
+    const o = window[name];
+    if (typeof o !== &quot;function&quot;) return;
+    const w = function () {
+      const r = o.apply(this, arguments);
+      try {
+        document.body.classList.add(&quot;v17-play&quot;);
+        setTimeout(fitStage, 60); setTimeout(fitStage, 420);
+        watchPlay();
+      } catch (e) {}
+      return r;
+    };
+    window[name] = w;
+    try { if (name === &quot;emStart&quot;) emStart = w; else if (name === &quot;trkStart&quot;) trkStart = w; else if (name === &quot;eraStart&quot;) eraStart = w; } catch (e) {}
+  }
+  [&quot;emStart&quot;, &quot;trkStart&quot;, &quot;eraStart&quot;].forEach(hookStart);
+  window.addEventListener(&quot;orientationchange&quot;, () =&gt; setTimeout(() =&gt; { if (document.body.classList.contains(&quot;v17-play&quot;)) fitStage(); }, 350));
+
+  /* ---------- 6) multijugador con el celular acostado ---------- */
+  let lastPhase = null, lastStep = null;
+  setInterval(() =&gt; {
+    try {
+      if (typeof DL === &quot;undefined&quot; || !DL) { lastPhase = null; return; }
+      const ph = DL.phase, step = DL.pvp ? DL.pvp.step : null;
+      if (ph === lastPhase &amp;&amp; step === lastStep) return;
+      lastPhase = ph; lastStep = step;
+      if (window.innerHeight &gt; 560) return;
+      setTimeout(() =&gt; {
+        const ov = document.getElementById(&quot;dlOverlay&quot;);
+        if (!ov || !ov.classList.contains(&quot;show&quot;)) return;
+        const h1 = document.getElementById(&quot;v14Half1&quot;);
+        const dec = document.getElementById(&quot;dlDecision&quot;);
+        const tgt = (h1 &amp;&amp; h1.getClientRects().length) ? h1.parentElement || h1 : (dec &amp;&amp; dec.getClientRects().length &amp;&amp; dec.innerHTML.trim() ? dec : null);
+        if (!tgt) return;
+        const r = tgt.getBoundingClientRect();
+        if (r.bottom &gt; window.innerHeight - 2 || r.top &lt; 0) tgt.scrollIntoView({ block: r.height &gt; window.innerHeight ? &quot;start&quot; : &quot;end&quot;, behavior: &quot;instant&quot; });
+      }, 80);
+    } catch (e) {}
+  }, 250);
 })();
 
 &lt;/script&gt;
