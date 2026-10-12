@@ -19,6 +19,7 @@ cd sitio && python3 build_site.py   # arma la página con el juego adentro
 | `modulos/` | Las partes grandes del juego: modo ingeniero, carrera en vivo, minijuegos, cinemáticas, sonido… |
 | `parches/` | Las mejoras de cada versión (v110 a v148). Cada una **envuelve** funciones anteriores para cambiarlas, por eso **el orden importa**. |
 | `sitio/` | La página de presentación (index.html) y sus capturas. |
+| `logo/` | El logo de FAWIWE (pestaña del navegador e íconos de la app). |
 
 `manifest.json` dice qué archivos entran y en qué orden. Para agregar algo nuevo: crear el archivo en la carpeta que corresponda y sumarlo al final de la lista en `manifest.json`.
 
