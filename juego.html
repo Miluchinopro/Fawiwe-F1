@@ -28584,6 +28584,9 @@ function v16Go() {
     [2026, &quot;Aerodinámica activa y mitad eléctrico&quot;, &quot;Mitad eléctrico y aerodinámica activa: la unidad de potencia es clave.&quot;]
   ];
   function v18Era(y) { let e = ERAS[0]; ERAS.forEach(x =&gt; { if (y &gt;= x[0]) e = x; }); return e; }
+  const ART = { 1950: 1952, 1959: 1962, 1968: 1970, 1977: 1979, 1983: 1986, 1989: 1992, 1994: 1996, 1998: 2001, 2009: 2010, 2014: 2015, 2017: 2018, 2022: 2023, 2026: 2026 };
+  function v18Art(y) { return ART[v18Era(y)[0]] || y; }
+  window.v18Art = v18Art;
   window.v18Era = v18Era;
   if (typeof fwEraIdx === &quot;function&quot;) {
     fwEraIdx = function (year) {
@@ -28593,7 +28596,7 @@ function v16Go() {
     window.fwEraIdx = fwEraIdx;
   }
   if (typeof fwEra === &quot;function&quot;) {
-    fwEra = function (year) { const b = FW_ERAS[fwEraIdx(year)]; return Object.assign({}, b, { cap: v18Era(parseInt(year, 10) || 2026)[1] }); };
+    fwEra = function (year) { const y = parseInt(year, 10) || 2026, k = fwEraIdx(y), b = FW_ERAS[k]; return { y: v18Art(y), cap: v18Era(y)[1], c: b &amp;&amp; b.c, _base: b &amp;&amp; b.y }; };
     window.fwEra = fwEra;
   }
   if (typeof fwEraCardHtml === &quot;function&quot;) {
@@ -28603,10 +28606,28 @@ function v16Go() {
       try {
         const k = fwEraIdx(year), b = FW_ERAS[k], info = FW_ERA_ENG[k], e = v18Era(parseInt(year, 10) || 2026);
         h = h.replace(engEsc(b.cap), engEsc(e[1])).replace(engEsc(info.txt), engEsc(e[2]));
+        const color = arguments[1];
+        h = h.replace(/&lt;div class=&quot;era-svg&quot;&gt;[\s\S]*?&lt;\/div&gt;&lt;div class=&quot;era-txt&quot;&gt;/, &#x27;&lt;div class=&quot;era-svg&quot;&gt;&#x27; + fwCarSvg(v18Art(parseInt(year, 10) || 2026), color) + &#x27;&lt;/div&gt;&lt;div class=&quot;era-txt&quot;&gt;&#x27;);
       } catch (e) {}
       return h;
     };
     window.fwEraCardHtml = fwEraCardHtml;
+  }
+  try {
+    if (typeof FW_ERAS !== &quot;undefined&quot;) FW_ERAS.forEach((b, k) =&gt; {
+      const y0 = b.y;
+      Object.defineProperty(b, &quot;y&quot;, { configurable: true, get() { try { const y = yr(); if (fwEraIdx(y) === k &amp;&amp; document.getElementById(&quot;game&quot;) &amp;&amp; !document.getElementById(&quot;game&quot;).classList.contains(&quot;hidden&quot;)) return v18Art(y); } catch (e) {} return y0; } });
+    });
+  } catch (e) {}
+  // 1959-1967: motor atrás pero todavía sin alerones
+  if (typeof fwCarSvg === &quot;function&quot;) {
+    const o = fwCarSvg;
+    fwCarSvg = function (era) {
+      let h = o.apply(this, arguments);
+      try { const y = parseInt(era, 10); if (y &gt;= 1959 &amp;&amp; y &lt; 1968) h = h.replace(/&lt;line x1=&quot;44&quot; y1=&quot;40&quot; x2=&quot;40&quot; y2=&quot;8&quot;[^&gt;]*\/&gt;/, &quot;&quot;).replace(/&lt;line x1=&quot;64&quot; y1=&quot;40&quot; x2=&quot;60&quot; y2=&quot;8&quot;[^&gt;]*\/&gt;/, &quot;&quot;).replace(/&lt;rect x=&quot;22&quot; y=&quot;2&quot; width=&quot;56&quot; height=&quot;8&quot;[^&gt;]*\/&gt;/, &quot;&quot;); } catch (e) {}
+      return h;
+    };
+    window.fwCarSvg = fwCarSvg;
   }
   // minijuego de época: entre 1989 y 1993 no se recargaba nafta (contravolante sin ayudas),
   // y desde 2014 el empujón eléctrico es el ERS
