@@ -2394,6 +2394,15 @@ html:has(body.v17-play){scroll-padding-bottom:0}
   body:has(#v12Nav){padding-bottom:62px!important}
   html:has(#v12Nav){scroll-padding-bottom:64px}
 }
+/* antes de 1971: en vez de semáforo, el comisario levanta la bandera y la baja para largar */
+body.v17-flag .v7-lights i,body.v17-flag .lc-lights i{display:none!important}
+body.v17-flag .v7-lights,body.v17-flag .lc-lights{justify-content:center;align-items:center;height:auto!important;min-height:66px!important;overflow:hidden;padding-top:4px!important;padding-bottom:4px!important}
+body.v17-flag .v7-lights::after,body.v17-flag .lc-lights::after{content:&quot;🚩&quot;;display:block;font-size:40px;line-height:1;transform-origin:20% 100%;transform:translateY(12px) rotate(-55deg);transition:transform .3s ease}
+body.v17-flag .v7-lights:has(i.on)::after,body.v17-flag .lc-lights:has(i.on)::after{transform:translateY(9px) rotate(-38deg)}
+body.v17-flag .v7-lights:has(i:nth-child(2).on)::after,body.v17-flag .lc-lights:has(i:nth-child(2).on)::after{transform:translateY(6px) rotate(-24deg)}
+body.v17-flag .v7-lights:has(i:nth-child(3).on)::after,body.v17-flag .lc-lights:has(i:nth-child(3).on)::after{transform:translateY(3px) rotate(-12deg)}
+body.v17-flag .v7-lights:has(i:nth-child(4).on)::after,body.v17-flag .lc-lights:has(i:nth-child(4).on)::after{transform:translateY(1px) rotate(-4deg)}
+body.v17-flag .v7-lights:has(i:nth-child(5).on)::after,body.v17-flag .lc-lights:has(i:nth-child(5).on)::after{transform:none}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
@@ -28335,17 +28344,41 @@ function v16Go() {
     try { if (typeof qlSessions === &quot;function&quot;) { let n = 22; try { n = Math.max(2, getEraTeamNames().length * 2); } catch (e) {} return qlSessions(n).length === 1; } } catch (e) {}
     return yr() &lt; 2006;
   };
+  function v17InGame() { try { const g = document.getElementById(&quot;game&quot;); return !!(g &amp;&amp; !g.classList.contains(&quot;hidden&quot;)); } catch (e) { return false; } }
+  window.v17Rules = function (txt) { try { let v = String(txt); for (const [re, rep] of rules()) v = v.replace(re, rep); return v; } catch (e) { return txt; } };
   function rules() {
     const y = yr(), R = [];
     if (y &lt; 2011) { R.push([/\bABRIR DRS\b/g, &quot;BUSCAR EL REBUFO&quot;], [/\b(el|del) DRS\b/g, (m, a) =&gt; (a === &quot;del&quot; ? &quot;del&quot; : &quot;el&quot;) + &quot; rebufo&quot;], [/\bDRS\b/g, &quot;rebufo&quot;]); }
     if (y &gt;= 2026) { R.push([/\bABRIR DRS\b/g, &quot;ACTIVAR ADELANTAMIENTO&quot;], [/\b(el|del) DRS\b/g, (m, a) =&gt; a + &quot; modo adelantamiento&quot;], [/\bDRS\b/g, &quot;modo adelantamiento&quot;]); }
     if (y &lt; 2009) R.push([/usá el ERS solo en las rectas/g, &quot;aprovechá el rebufo en las rectas&quot;]);
-    if (y &lt; 1980) R.push([/Radio con el box/g, &quot;Pizarra del box&quot;], [/\bpor radio\b/g, &quot;con la pizarra&quot;]);
+    if (y &lt; 1980 &amp;&amp; v17InGame()) {
+      // antes de 1980 no había radio: el box habla con la pizarra y el piloto con señas
+      const drv = s.playerMode === &quot;driver&quot;;
+      R.push(
+        [/Radio con el box/g, &quot;Pizarra del box&quot;], [/Radio check\. Fuerte y claro\./g, &quot;Pizarra lista. Se lee clarito.&quot;],
+        [/(🎙️|🔇) Voz radio/g, &quot;$1 Voz del box&quot;], [/Quejarte por radio/g, &quot;Hacer señas al box&quot;],
+        [/\bpor (la )?radio\b/g, &quot;con la pizarra&quot;], [/📻 Tu radio/g, &quot;🪧 Tu pizarra&quot;], [/📻 RADIO\b/g, drv ? &quot;✋ SEÑAS&quot; : &quot;🪧 PIZARRA&quot;],
+        [/📻 ([A-ZÁÉÍÓÚÑ]+) · INGENIERO/g, &quot;🪧 PIZARRA · $1&quot;], [/📻 INGENIERO/g, &quot;🪧 PIZARRA DEL BOX&quot;],
+        [/🎧 PILOTO/g, &quot;✋ SEÑAS DEL PILOTO&quot;], [/🎧 Piloto:/g, &quot;✋ Piloto (señas):&quot;],
+        [/🎙️ VOS\b/g, drv ? &quot;✋ VOS (SEÑAS)&quot; : &quot;🪧 VOS (PIZARRA)&quot;], [/📻 Vos: «/g, drv ? &quot;✋ Vos (señas): «&quot; : &quot;🪧 Vos: «&quot;],
+        [/\bla radio\b/g, &quot;la pizarra&quot;], [/\bRADIO\b/g, &quot;PIZARRA&quot;], [/\bRadio\b/g, &quot;Pizarra&quot;], [/\bradio\b/g, &quot;pizarra&quot;],
+        [/📻/g, &quot;🪧&quot;], [/🎧/g, &quot;📋&quot;]
+      );
+    }
+    if (y &lt; 1971 &amp;&amp; v17InGame()) {
+      // antes de 1971 no había semáforo: largaba el comisario bajando la bandera
+      R.push(
+        [/¡LUCES AFUERA!/g, &quot;¡BANDERA ABAJO!&quot;], [/Semáforos apagados/g, &quot;Bajó la bandera&quot;], [/Luces apagadas/g, &quot;Bandera abajo&quot;],
+        [/¡Esperen las luces!/g, &quot;¡Atentos a la bandera!&quot;], [/Luces en un momento/g, &quot;Bandera en un momento&quot;],
+        [/(que |cuando )?se apaguen las (5 )?luces(?! del auto)/g, (m, a) =&gt; (a || &quot;&quot;) + &quot;baje la bandera&quot;],
+        [/se apagan las (5 )?luces/g, &quot;baja la bandera&quot;], [/con el semáforo/g, &quot;con la bandera&quot;], [/\bSemáforo\b/g, &quot;Bandera&quot;], [/🚦/g, &quot;🚩&quot;]
+      );
+    }
     if (window.v17OneQ()) R.push([/Q1 elimina atrás · Q2 corta el medio · Q3 decide el top 10\./g, &quot;Una sola tanda: la mejor vuelta decide la grilla.&quot;]);
     R.push([/Historia 2000-2026/g, &quot;Historia de la F1 hasta &quot; + y]);
     return R;
   }
-  const TRIG = /DRS|ERS solo|Radio con el box|por radio|Q1 elimina|Historia 2000/;
+  const TRIG = /DRS|ERS solo|[Rr]adio|RADIO|📻|🎧|🎙️ VOS|Q1 elimina|Historia 2000|[Ll]uces|LUCES|[Ss]emáforo|🚦/;
   const SKIP = &quot;script,style,textarea,input,#v17NoMap,.v6-quiz,.quiz-q&quot;;
   function fixText(root, R) {
     if (!root || !document.body.contains(root)) return;
@@ -28383,6 +28416,32 @@ function v16Go() {
     const go = () =&gt; mo.observe(document.body, { childList: true, subtree: true, characterData: true });
     if (document.body) go(); else document.addEventListener(&quot;DOMContentLoaded&quot;, go);
   } catch (e) {}
+
+
+  /* 4b) antes de 1980: sin ruido de radio, y la voz lee la pizarra (una sola vez) */
+  const pre80 = () =&gt; yr() &lt; 1980 &amp;&amp; v17InGame();
+  if (typeof fwSquelch === &quot;function&quot;) { const o = fwSquelch; fwSquelch = function () { if (pre80()) return; return o.apply(this, arguments); }; window.fwSquelch = fwSquelch; }
+  if (typeof playRadioSound === &quot;function&quot;) { const o = playRadioSound; playRadioSound = function () { if (pre80()) return; return o.apply(this, arguments); }; window.playRadioSound = playRadioSound; }
+  if (typeof fwRadioSay === &quot;function&quot;) {
+    const o = fwRadioSay; let lastK = &quot;&quot;, lastT = 0;
+    fwRadioSay = function (text, who, opt) {
+      try {
+        if (pre80() &amp;&amp; text) {
+          text = window.v17Rules(text);
+          const k = (typeof fwRadioClean === &quot;function&quot; ? fwRadioClean(text) : String(text)).toLowerCase();
+          if (k === lastK &amp;&amp; Date.now() - lastT &lt; 5000) return;
+          if (who === &quot;drv&quot; || who === &quot;you&quot; || who === &quot;p2&quot;) { opt = Object.assign({}, opt || {}); if (opt.toast !== false &amp;&amp; typeof fwRadioToast === &quot;function&quot;) fwRadioToast(text, who); return; }
+          lastK = k; lastT = Date.now();
+        }
+      } catch (e) {}
+      return o.call(this, text, who, opt);
+    };
+    window.fwRadioSay = fwRadioSay;
+  }
+
+
+  /* 4c) clase de época en el body (largada con bandera antes de 1971) */
+  setInterval(() =&gt; { try { document.body.classList.toggle(&quot;v17-flag&quot;, yr() &lt; 1971 &amp;&amp; v17InGame()); } catch (e) {} }, 500);
 
   /* ---------- 5) minijuegos enteros en pantalla ---------- */
   function fitStage() {
