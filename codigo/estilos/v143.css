@@ -1,0 +1,28 @@
+/* ===== V143 · multijugador ===== */
+.dl-row.v13-p2{background:linear-gradient(90deg,#0c2a3a,transparent)!important;border-left:3px solid #38bdf8!important}
+.v13-tag{display:inline-block;background:#0284c7;color:#fff;font-size:10px;font-weight:900;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}
+.v13-p2q{color:#7dd3fc!important}
+.v13-flag2{margin-top:6px;font-size:20px;font-weight:800;color:#7dd3fc}
+#multiSplit .split-panel h3 small{display:block;font-size:12px;font-weight:700;color:#9aa0aa;letter-spacing:.04em;margin-top:2px}
+body.dash #soloHeader.hidden{display:none!important}
+#multiSplit > .grid > div:nth-child(-n+2){display:none}
+#multiSplit .stat-row{gap:10px}
+#multiSplit .stat-row b{text-align:right}
+@media (max-width:700px){
+  #multiSplit .split-screen{display:flex!important;flex-direction:column;gap:30px}
+  #multiSplit .vs-badge{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}
+  #multiSplit .split-panel{width:auto!important}
+  #duelCine .dc-row{gap:6px!important;padding:0 8px!important;width:100%;box-sizing:border-box}
+  #duelCine .dc-p{min-width:0!important;flex:1 1 0!important;padding:10px 6px!important}
+  #duelCine .dc-p b{font-size:15px!important;word-break:break-word}
+  #duelCine .dc-vs{flex:0 0 auto!important}
+}
+.v13-q2{margin:10px 0;text-align:left}
+.v13-q2f{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.v13-q2f input,.v13-q2f select{width:100%}
+@media (max-width:520px){.v13-q2f{grid-template-columns:1fr}}
+.v13-qe{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.v13-qe>div{background:#15151c;border:1px solid #2a2a33;border-radius:12px;padding:10px}
+.v13-qe>div.win{border-color:#facc15;box-shadow:0 0 0 1px #facc15 inset}
+.v13-qe span{display:block;font-size:13px;color:#ccc}.v13-qe b{font-size:34px;font-weight:900}
+@media (max-width:700px){ #duelCine .dc-plate .bc-lines,#duelChamp .dc-plate .bc-lines{display:none} }

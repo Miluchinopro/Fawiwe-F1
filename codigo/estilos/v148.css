@@ -1,0 +1,7 @@
+/* ===== FAWIWE · Prototipo 1.5 · pizarra del box (antes de 1980) ===== */
+#fwRadioToast.v18-pb{background:#141414f5;border:3px solid #6b4a2b;border-left-width:3px;border-radius:6px;box-shadow:0 10px 30px #000c,inset 0 0 0 2px #2a1c10}
+#fwRadioToast.v18-pb .fr-tag{color:#e8dcc0}
+#fwRadioToast.v18-pb .fr-tag i{display:none}
+.v18-board{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:center;padding:6px 4px 2px;font:900 clamp(22px,5vw,34px)/1 "Courier New",ui-monospace,monospace;letter-spacing:.06em;color:#f5f1e6;text-shadow:0 0 1px #fff8}
+.v18-board b{color:#facc15}
+.v18-board-k{font-size:12px;color:#bdb5a3;text-align:center;margin-top:4px;line-height:1.3}

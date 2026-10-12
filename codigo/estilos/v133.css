@@ -1,0 +1,83 @@
+/* ===== V133: mapa, podio, salón de la fama, pretemporada, celular ===== */
+.fw-map{position:relative;background:radial-gradient(circle at 50% 40%,#13202b,#07090c 70%);border:1px solid #2c2c2c;border-radius:12px;margin-bottom:8px;height:178px;overflow:hidden}
+.fw-map svg{width:100%;height:100%;display:block}
+.fw-map .fm-out{fill:none;stroke:#2b3440;stroke-width:9;stroke-linejoin:round;stroke-linecap:round}
+.fw-map .fm-trk{fill:none;stroke:#5b6675;stroke-width:3.2;stroke-linejoin:round}
+.fw-map .fm-start{fill:none;stroke:#fff;stroke-width:9}
+.fw-map .fm-car{stroke:#000;stroke-width:.8}
+.fw-map .fm-mine{stroke:#fff;stroke-width:1.6;filter:drop-shadow(0 0 3px #fff)}
+.fw-map .fm-lbl{font:900 7px Arial;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:#000;stroke-width:2}
+.fw-map g.pit circle{opacity:.45}
+.fw-map .fm-name{position:absolute;left:10px;top:6px;font:800 11px "Titillium Web",Arial,sans-serif;letter-spacing:.12em;color:#9aa4b2;text-transform:uppercase}
+#engMap{height:150px}
+#dlOverlay.rain .dl-card{position:relative;overflow:hidden}
+#dlOverlay.rain .dl-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(105deg,transparent 0 9px,#9ad1ff22 9px 10px);animation:v3rain .45s linear infinite;border-radius:inherit}
+@keyframes v3rain{from{background-position:0 0}to{background-position:-30px 60px}}
+#dlOverlay.sprint .kicker::after{content:" · ⚡ SPRINT";color:#facc15}
+#dlFeed p.blue{color:#60a5fa}
+.dl-eng{margin-left:auto;font-size:12px;color:#9ca3af;padding:4px 8px}
+.v3-eng{margin-top:10px;padding-top:8px;border-top:1px solid #ffffff14}
+/* récords + salón de la fama */
+.v3-table{overflow-x:auto}.v3-table table{width:100%;border-collapse:collapse;font-size:13.5px}
+.v3-table th{text-align:left;font-size:11px;letter-spacing:.1em;color:#888;padding:6px}.v3-table td{padding:6px;border-top:1px solid #ffffff10}
+.v3-hof-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.v3-hof-top b{display:block;font-size:20px}
+.v3-hof-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0}
+.v3-hof-stats.big{grid-template-columns:repeat(4,1fr)}
+.v3-hof-stats div{background:#0c0c10;border:1px solid #ffffff14;border-radius:12px;padding:8px;text-align:center}
+.v3-hof-stats i{font-style:normal;display:block;font-size:18px}.v3-hof-stats b{display:block;font-size:22px}.v3-hof-stats span{font-size:11px;color:#999;letter-spacing:.06em}
+.v3-moments p{margin:4px 0;font-size:13px}.v3-moments em{font-style:normal;font-weight:900;color:#facc15;margin-right:6px}
+#hofOverlay{position:fixed;inset:0;z-index:100002;display:none;align-items:flex-start;justify-content:center;background:radial-gradient(circle at 50% 30%,#3b2a06ee,#000000f2 70%);padding:16px;overflow:auto}
+#hofOverlay.show{display:flex;animation:v3fade .5s ease}
+.hof-card{width:min(640px,100%);text-align:center;background:linear-gradient(170deg,#1b160b,#0a0907);border:2px solid #d4a72c;border-radius:22px;padding:22px;box-shadow:0 0 80px #d4a72c44}
+.hof-k{font:800 12px "Titillium Web",Arial,sans-serif;letter-spacing:.3em;color:#d4a72c}
+.hof-plate{font-size:58px;margin:6px 0;animation:v3glow 2s ease-in-out infinite alternate}
+.hof-card h2{margin:0;font-size:30px;color:#fff}.hof-sub{color:#cbb06a;margin:4px 0 8px}.hof-tr{font-size:13px;color:#ddd}
+@keyframes v3glow{from{filter:drop-shadow(0 0 4px #d4a72c)}to{filter:drop-shadow(0 0 22px #ffd76a)}}
+@keyframes v3fade{from{opacity:0}to{opacity:1}}
+/* podio */
+#podOverlay{position:fixed;inset:0;z-index:100003;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 85%,#1a1a24,#000 75%);cursor:pointer;overflow:hidden}
+#podOverlay.show{display:flex;animation:v3fade .4s ease}
+.pod-wrap{width:min(760px,96vw);text-align:center;position:relative;z-index:2}
+.pod-k{font:900 14px "Titillium Web",Arial,sans-serif;letter-spacing:.3em;color:#facc15;margin-bottom:70px}
+.pod-stage{display:flex;align-items:flex-end;justify-content:center;gap:10px}
+.pod-step{flex:1;max-width:230px;animation:podUp .8s cubic-bezier(.2,.9,.3,1.2) both}
+.pod-step.p2{animation-delay:.35s}.pod-step.p1{animation-delay:.7s}.pod-step.p3{animation-delay:0s}
+.pod-drv{position:relative;padding:8px 4px}.pod-drv b{display:block;font-size:17px;color:#fff}.pod-drv span{font-size:12px;color:#aaa}
+.pod-cap{display:block;width:34px;height:34px;border-radius:50%;margin:0 auto 6px;border:3px solid #fff;box-shadow:0 0 18px #fff6}
+.pod-step.mine .pod-drv b{color:#facc15}
+.pod-trophy{position:absolute;top:-34px;left:50%;transform:translateX(-50%);font-style:normal;font-size:34px;animation:podTro 1.2s 1.4s ease both}
+.pod-block{background:linear-gradient(180deg,#f3f3f3,#bdbdbd);border-top:6px solid var(--tc);border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center}
+.pod-block em{font-style:normal;font:900 46px "Titillium Web",Arial,sans-serif;color:#111;margin-top:6px}
+.pod-step.p1 .pod-block{height:150px}.pod-step.p2 .pod-block{height:110px}.pod-step.p3 .pod-block{height:80px}
+.pod-spray{position:absolute;left:50%;top:-6px;width:8px;height:8px;pointer-events:none}
+.pod-spray b{position:absolute;left:0;top:0;width:6px;height:6px;border-radius:50%;background:#fff6d6;box-shadow:0 0 6px #ffe9a8;opacity:0;animation:podBub 1.3s ease-out infinite}
+.pod-tap{margin-top:18px;font-size:12px;color:#888;letter-spacing:.2em;text-transform:uppercase;animation:podPulse 1.2s ease-in-out infinite alternate}
+@keyframes podPulse{from{opacity:.35}to{opacity:1}}
+.pod-conf i{position:absolute;top:-12px;width:8px;height:14px;border-radius:2px;animation:podConf 3.2s linear infinite;opacity:.9}
+@keyframes podUp{from{transform:translateY(120%);opacity:0}to{transform:none;opacity:1}}
+@keyframes podTro{from{transform:translate(-50%,30px) scale(.3);opacity:0}to{transform:translate(-50%,0) scale(1);opacity:1}}
+@keyframes podBub{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.1)}}
+@keyframes podConf{from{transform:translateY(-20px) rotate(0)}to{transform:translateY(110vh) rotate(720deg)}}
+/* autoguardado */
+#v3Saved{position:fixed;right:16px;bottom:16px;z-index:100001;background:#0b0b0fee;border:1px solid #2a2a33;border-radius:999px;padding:6px 14px;font-size:12.5px;color:#cbd5e1;opacity:0;pointer-events:none}
+#v3Saved.show{animation:v3saved 2.4s ease}
+@keyframes v3saved{0%{opacity:0;transform:translateY(8px)}15%,75%{opacity:1;transform:none}100%{opacity:0}}
+.v3-auto{border:1px dashed #38bdf866;border-radius:10px}
+/* celular: botones grandes para el dedo */
+@media (max-width:760px){
+  #dlOverlay,#engLiveOverlay{padding:6px}
+  .dl-card,.eng-live-card{padding:12px!important;border-radius:16px!important}
+  .dl-radio .lv-btn,#dlCtrl .lv-btn{min-height:46px;padding:10px 14px!important;font-size:14px!important;flex:1 1 40%}
+  .dl-eng{flex-basis:100%;text-align:center}
+  #dlDecision .choice-card{min-height:56px}
+  #dlOverlay kbd{display:none}
+  .fw-map{height:150px}
+  .v3-hof-stats{grid-template-columns:repeat(3,1fr)}
+  .pod-drv b{font-size:13px}.pod-block em{font-size:32px}
+  .pod-step.p1 .pod-block{height:110px}.pod-step.p2 .pod-block{height:80px}.pod-step.p3 .pod-block{height:60px}
+  .mw-btn,.era-btn,.lc-btn{min-height:46px}
+  #fwRadioToast{bottom:10px}
+}
+@media (hover:none){ .lv-btn,.choice-card,.era-btn{touch-action:manipulation} }
+
+#hofOverlay .hof-card{margin:auto}

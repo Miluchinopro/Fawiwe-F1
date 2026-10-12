@@ -1,0 +1,123 @@
+/* ===== V146 · cinemáticas nuevas ===== */
+#introScreen.v16-under{visibility:hidden!important}
+.v16-f1{display:inline-flex;align-items:center;justify-content:center;background:#e10600;color:#fff;font-weight:900;font-style:italic;border-radius:5px;padding:1px 7px;margin-right:8px;font-size:.85em;letter-spacing:0;transform:skewX(-8deg)}
+/* ---------- 1) intro ---------- */
+#v16Intro{position:fixed;inset:0;z-index:1000000;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,#1a0a0c 0%,#0b0b10 60%,#050507 100%);color:#fff;font-family:"Titillium Web","Inter",Arial,sans-serif;user-select:none;-webkit-user-select:none;transition:opacity .45s ease}
+#v16Intro.bye{opacity:0;pointer-events:none}
+#v16Intro .v16-gate,#v16Intro .v16-stage,#v16Intro .v16-final,#v16Intro .v16-skip{display:none}
+#v16Intro.gate .v16-gate{display:flex}
+#v16Intro.play .v16-stage,#v16Intro.play .v16-skip{display:block}
+#v16Intro.final .v16-final{display:flex}
+.v16-gate{position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:22px;animation:v16Fade .6s ease both}
+.v16-gate-logo{font-weight:900;font-size:clamp(34px,8vw,64px);letter-spacing:.06em;display:flex;align-items:center}
+.v16-gate-logo b{background:linear-gradient(90deg,#e10600 0 33%,#fff 33% 66%,#e10600 66%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.v16-gate-btn{font:900 18px "Titillium Web",Arial,sans-serif!important;letter-spacing:.06em;padding:16px 34px!important;border-radius:999px!important;border:0!important;background:#e10600!important;color:#fff!important;box-shadow:0 0 0 0 #e1060088;animation:v16Pulse 1.6s ease-in-out infinite;cursor:pointer}
+.v16-gate-k{color:#a1a1aa;font-size:13px;letter-spacing:.12em}
+.v16-skip{position:absolute;right:14px;bottom:14px;z-index:5;background:#0009!important;border:1px solid #fff3!important;color:#fff!important;border-radius:999px!important;padding:8px 14px!important;font:700 13px "Titillium Web",Arial!important;cursor:pointer}
+.v16-stage{position:absolute;inset:0}
+.v16-stage > div{position:absolute;inset:0}
+/* escena 1: boxes de noche */
+.v16-s1{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;animation:v16Out .35s ease 1.5s forwards}
+.v16-garages{display:flex;gap:clamp(6px,1.4vw,14px)}
+.v16-garages i{position:relative;width:clamp(42px,9vw,96px);height:clamp(54px,11vw,110px);background:#16161d;border:2px solid #23232c;border-radius:6px 6px 0 0;overflow:hidden}
+.v16-garages i::before{content:"";position:absolute;inset:8px 6px 0;background:repeating-linear-gradient(0deg,#1f1f28 0 6px,#18181f 6px 12px);border-radius:3px 3px 0 0}
+.v16-garages em{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#ffe9b0 0%,#f59e0b66 35%,transparent 70%);opacity:0;animation:v16LightOn .25s ease calc(.25s + var(--i) * .17s) forwards}
+.v16-present{font-weight:700;letter-spacing:.42em;font-size:clamp(12px,2.2vw,18px);color:#a1a1aa;text-transform:uppercase;opacity:0;animation:v16Fade .5s ease .55s forwards}
+.v16-present span{color:#fff;font-weight:900}
+/* escena 2: 76 años de autos */
+.v16-s2{opacity:0;animation:v16Fade .3s ease 1.55s forwards,v16Out .3s ease 4.45s forwards}
+.v16-speed{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,#ffffff10 60px 62px),linear-gradient(180deg,transparent 0 62%,#13131a 62%);animation:v16Speed .35s linear infinite}
+.v16-big{position:absolute;left:0;right:0;top:12%;text-align:center;font-weight:900;font-size:clamp(26px,7vw,72px);letter-spacing:.02em;color:#ffffff14;-webkit-text-stroke:1px #ffffff33;transform:scale(1.4);opacity:0;animation:v16Big 2.8s ease 1.65s forwards}
+.v16-car{position:absolute;left:0;width:clamp(240px,46vw,520px);top:calc(34% + var(--i) * 7%);transform:translateX(-110%);animation:v16Drive .95s cubic-bezier(.5,0,.4,1) calc(1.75s + var(--i) * .64s) forwards;filter:drop-shadow(0 12px 18px #000)}
+.v16-car svg{width:100%;height:auto;display:block}
+.v16-car::after{content:"";position:absolute;right:100%;top:40%;width:60%;height:30%;background:linear-gradient(90deg,transparent,#ffffff22);filter:blur(4px)}
+.v16-year{position:absolute;left:30%;top:-46px;font-weight:900;font-size:clamp(22px,5vw,44px);color:#e10600;text-shadow:0 0 18px #e1060088}
+/* escena 3: tacómetro al rojo */
+.v16-s3{display:flex;align-items:center;justify-content:center;opacity:0;animation:v16Fade .25s ease 4.45s forwards}
+.v16-tacho{position:relative;width:min(440px,84vw);text-align:center;animation:v16Shake .08s linear 5.4s 8}
+.v16-tacho svg{width:100%;height:auto;overflow:visible}
+.v16-arc{stroke-dasharray:1;stroke-dashoffset:1;animation:v16Arc 1.3s cubic-bezier(.6,0,.3,1) 4.6s forwards}
+.v16-needle{transform-origin:100px 110px;transform:rotate(-90deg);animation:v16Needle 1.3s cubic-bezier(.6,0,.3,1) 4.6s forwards}
+.v16-rpm{margin-top:-6px;font-size:14px;letter-spacing:.2em;color:#a1a1aa}
+.v16-rpm b{display:block;font-size:clamp(30px,7vw,52px);color:#fff;letter-spacing:.02em;animation:v16Pulse2 .3s ease 5.5s 3}
+.v16-leds{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.v16-leds i{width:clamp(14px,3vw,22px);height:clamp(14px,3vw,22px);border-radius:50%;background:#26262e}
+.v16-leds i.g{--c:#22c55e}.v16-leds i.y{--c:#facc15}.v16-leds i.r{--c:#e10600}
+.v16-leds i{animation:v16Led .1s ease calc(4.7s + var(--i) * .12s) forwards}
+.v16-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;animation:v16Flash .45s ease 6.05s forwards}
+/* final: el logo */
+.v16-final{position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,36px);padding:20px;text-align:center}
+.v16-logo{display:flex;flex-direction:column;align-items:center}
+.v16-k{display:flex;align-items:center;font-weight:700;letter-spacing:.3em;font-size:clamp(10px,1.9vw,15px);color:#d4d4d8;opacity:0;animation:v16Fade .5s ease .1s forwards}
+.v16-logo h1{margin:10px 0 0;font-weight:900;font-size:clamp(54px,15vw,150px);line-height:.95;letter-spacing:.02em;display:flex}
+.v16-logo h1 span{display:inline-block;color:#fff;opacity:0;transform:translateY(-60px) scale(1.3);animation:v16Letter .35s cubic-bezier(.2,1.5,.4,1) calc(.12s + var(--i) * .09s) forwards}
+.v16-logo h1 span.r{color:#e10600}
+.v16-check{width:min(520px,80vw);height:14px;margin-top:10px;background:repeating-linear-gradient(90deg,#fff 0 14px,#111 14px 28px);clip-path:inset(0 100% 0 0);animation:v16Wipe .5s ease .75s forwards}
+.v16-roles{margin-top:12px;color:#a1a1aa;font-weight:700;letter-spacing:.16em;font-size:clamp(11px,2vw,14px);opacity:0;animation:v16Fade .5s ease 1s forwards}
+.v16-btns{display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:v16Up .5s ease 1.1s forwards}
+.v16-play{font:900 clamp(20px,4vw,26px) "Titillium Web",Arial,sans-serif!important;letter-spacing:.08em;padding:16px 56px!important;border-radius:999px!important;border:0!important;background:#e10600!important;color:#fff!important;cursor:pointer;animation:v16Pulse 1.6s ease-in-out 1.6s infinite}
+.v16-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.v16-small{font:700 14px "Titillium Web",Arial,sans-serif!important;padding:10px 18px!important;border-radius:999px!important;background:#1d1d26!important;border:1px solid #3a3a46!important;color:#fff!important;cursor:pointer}
+.v16-by{position:absolute;bottom:14px;left:0;right:0;color:#71717a;font-size:12px;opacity:0;animation:v16Fade .5s ease 1.4s forwards}
+@keyframes v16Fade{from{opacity:0}to{opacity:1}}
+@keyframes v16Out{to{opacity:0;visibility:hidden}}
+@keyframes v16Up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes v16LightOn{0%{opacity:0}40%{opacity:1}55%{opacity:.4}100%{opacity:1}}
+@keyframes v16Speed{to{background-position:-62px 0,0 0}}
+@keyframes v16Big{0%{opacity:0;transform:scale(1.4)}20%{opacity:1;transform:scale(1)}85%{opacity:1}100%{opacity:0;transform:scale(.96)}}
+@keyframes v16Drive{0%{transform:translateX(-110%)}100%{transform:translateX(calc(100vw + 10%))}}
+@keyframes v16Arc{to{stroke-dashoffset:0}}
+@keyframes v16Needle{to{transform:rotate(86deg)}}
+@keyframes v16Led{to{background:var(--c);box-shadow:0 0 12px var(--c)}}
+@keyframes v16Shake{0%{transform:translate(0,0)}25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,2px)}100%{transform:translate(0,0)}}
+@keyframes v16Pulse{0%,100%{box-shadow:0 0 0 0 #e1060077}50%{box-shadow:0 0 0 14px #e1060000}}
+@keyframes v16Pulse2{50%{color:#e10600;transform:scale(1.06)}}
+@keyframes v16Flash{0%{opacity:0}30%{opacity:.85}100%{opacity:0}}
+@keyframes v16Letter{to{opacity:1;transform:none}}
+@keyframes v16Wipe{to{clip-path:inset(0 0 0 0)}}
+/* ---------- 2) al tocar Jugar: viaje en el tiempo + credencial ---------- */
+#v16Go{position:fixed;inset:0;z-index:1000001;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#16161f 0%,#07070b 70%);color:#fff;font-family:"Titillium Web","Inter",Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .35s ease;--tc:#e10600}
+#v16Go.t1{opacity:1}
+#v16Go.bye{opacity:0;pointer-events:none;transition:opacity .45s ease}
+#v16Go::before{content:"";position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg,#ffffff06 0 4deg,transparent 4deg 12deg);animation:v16Spin 14s linear infinite}
+.g-time{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;transition:transform .5s cubic-bezier(.6,0,.3,1),opacity .4s ease}
+.g-k{letter-spacing:.4em;font-weight:700;color:#a1a1aa;font-size:clamp(12px,2.2vw,16px)}
+.g-year{font-weight:900;font-size:clamp(80px,22vw,190px);line-height:1;color:#fff;text-shadow:0 0 40px var(--tc);font-variant-numeric:tabular-nums}
+.g-era{margin-top:6px;color:#e5e7eb;font-weight:700;font-size:clamp(13px,2.6vw,20px)}
+#v16Go.t2 .g-time{transform:translateY(calc(-50% - 38vh)) scale(.5);opacity:0}
+.g-lanyard{position:absolute;left:50%;top:-10px;width:28px;height:0;transform:translateX(-50%);background:linear-gradient(90deg,var(--tc) 0 40%,#fff 40% 60%,var(--tc) 60%);transition:height .6s cubic-bezier(.3,1.3,.4,1) .05s}
+#v16Go.t2 .g-lanyard{height:calc(50vh - 170px)}
+.g-pass{position:relative;width:min(380px,86vw);background:linear-gradient(170deg,#f8fafc,#e2e8f0);color:#111;border-radius:18px;box-shadow:0 30px 80px #000c;overflow:hidden;transform:translateY(-130vh) rotate(-10deg);transform-origin:50% -40px}
+#v16Go.t2 .g-pass{animation:v16Drop 1.1s cubic-bezier(.3,1.25,.45,1) forwards}
+.g-head{display:flex;align-items:center;gap:6px;padding:12px 16px;background:#111;color:#fff;font-weight:900;letter-spacing:.18em;font-size:13px}
+.g-head em{margin-left:auto;font-style:normal;color:#e10600;letter-spacing:.06em;font-size:16px}
+.g-team{padding:10px 16px;background:var(--tc);color:#fff;font-weight:900;font-size:clamp(20px,5vw,28px);text-transform:uppercase;text-shadow:0 2px 6px #0008;letter-spacing:.02em}
+.g-body{display:flex;gap:12px;align-items:center;padding:14px 16px 6px}
+.g-photo{flex:0 0 92px;height:92px;border-radius:12px;background:#111;display:flex;align-items:center;justify-content:center}
+.g-photo svg{width:78px;height:auto}
+.g-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.g-info small{font-size:11px;font-weight:700;letter-spacing:.12em;color:#52525b;text-transform:uppercase}
+.g-info b{font-size:clamp(18px,4.6vw,24px);line-height:1.1;font-weight:900;overflow-wrap:anywhere}
+.g-info b i{font-style:normal;color:#e10600;font-size:.7em}
+.g-car{padding:0 16px}
+.g-car svg{width:100%;height:auto;display:block}
+.g-bar{display:flex;gap:2px;height:30px;margin:6px 16px 16px;align-items:stretch}
+.g-bar i{background:#111;display:block}
+.g-stamp{position:absolute;right:14px;top:46%;padding:6px 14px;border:4px solid #16a34a;color:#16a34a;border-radius:10px;font-weight:900;font-size:clamp(20px,5vw,28px);letter-spacing:.06em;background:#ffffffd0;transform:rotate(-14deg) scale(3);opacity:0}
+#v16Go.t3 .g-stamp{animation:v16Stamp .3s cubic-bezier(.3,1.6,.5,1) forwards}
+
+#v16Go.t4 .g-pass{transform:none;animation:v16Away .8s cubic-bezier(.6,0,.4,1) forwards}
+#v16Go.t4 .g-lanyard{height:0;transition:height .3s ease}
+.g-welcome{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scale(.6);text-align:center;font-weight:900;font-size:clamp(28px,7vw,62px);letter-spacing:.02em;opacity:0;text-shadow:0 0 30px var(--tc)}
+#v16Go.t4 .g-welcome{animation:v16Welcome .7s cubic-bezier(.2,1.4,.4,1) .25s forwards}
+.g-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#v16Go.t4 .g-flash{animation:v16Flash .4s ease .1s}
+.g-skip{position:absolute;right:14px;bottom:14px;font-size:12px;color:#a1a1aa;letter-spacing:.08em}
+@keyframes v16Spin{to{transform:rotate(360deg)}}
+@keyframes v16Drop{0%{transform:translateY(-130vh) rotate(-10deg)}70%{transform:translateY(0) rotate(3deg)}85%{transform:rotate(-1.5deg)}100%{transform:none}}
+@keyframes v16Stamp{to{transform:rotate(-14deg) scale(1);opacity:1}}
+@keyframes v16Thud{50%{transform:translateY(6px)}}
+@keyframes v16Away{to{transform:scale(1.8) translateY(-10vh);opacity:0}}
+@keyframes v16Welcome{to{opacity:1;transform:translateY(-50%) scale(1)}}
+@media (max-height:520px){.v16-garages i{height:60px}.v16-logo h1{font-size:clamp(40px,12vh,90px)}.g-pass{width:min(330px,60vw)}.g-car{display:none}.g-body{padding-top:8px}#v16Go.t2 .g-lanyard{height:calc(50vh - 120px)}}
+body.fw-reduce #v16Intro *,body.fw-reduce #v16Go *{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}

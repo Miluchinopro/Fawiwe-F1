@@ -1,0 +1,116 @@
+/* ===== Menú cinematográfico ===== */
+body.start-active::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background:repeating-linear-gradient(100deg,transparent 0 120px,#ffffff10 120px 122px,transparent 122px 260px);animation:mcBgMove 1.4s linear infinite}
+@keyframes mcBgMove{to{background-position:-260px 0}}
+#setup{position:relative;z-index:1}
+.mc-hero{position:relative;overflow:hidden;padding:28px 34px 30px!important;border-radius:20px;background:#15151ee6!important;border:0!important;text-align:left!important;box-shadow:0 20px 50px #000a}
+.mc-hero .bc-lines{left:auto;right:-10px;top:-10px;bottom:-10px;width:45%}
+.mc-hero-speed{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 80px,#ffffff08 80px 82px);animation:mcBgMove .6s linear infinite}
+.mc-hero-kicker{position:relative;display:flex;align-items:center;gap:12px;letter-spacing:.3em;font-size:clamp(11px,1.6vw,14px);color:#949498;font-weight:600}
+.mc-hero-kicker .bc-badge{font-size:20px;letter-spacing:.02em}
+.mc-hero-logo{position:relative;display:block;font:900 clamp(40px,7.5vw,84px)/.95 "Titillium Web","Inter",Arial,sans-serif;letter-spacing:.01em;margin-top:10px;text-transform:uppercase}
+.mc-hero-logo span{display:inline-block}
+.mc-hero-logo .r{color:#e10600}.mc-hero-logo .w,.mc-hero-logo .g{color:#fff}
+.mc-hero-sub{position:relative;font:900 clamp(22px,4vw,44px)/1 "Titillium Web",Arial,sans-serif;text-transform:uppercase;color:#fff;margin-top:2px}
+.mc-hero-year{position:relative;font:900 clamp(26px,4.4vw,48px)/1 "Titillium Web",Arial,sans-serif;color:transparent;-webkit-text-stroke:1.5px #e10600;margin-top:6px}
+.mc-hero-curb{position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,#e10600 0 30px,#f5f5f5 30px 60px);animation:mcCurb .5s linear infinite}
+@keyframes mcCurb{to{background-position:60px 0}}
+/* entrada al tocar START */
+#setup.mc-enter .mc-hero-logo span{animation:mcSlam .45s cubic-bezier(.2,1.4,.4,1) both}
+#setup.mc-enter .mc-hero-logo span:nth-child(2){animation-delay:.05s}#setup.mc-enter .mc-hero-logo span:nth-child(3){animation-delay:.1s}#setup.mc-enter .mc-hero-logo span:nth-child(4){animation-delay:.15s}#setup.mc-enter .mc-hero-logo span:nth-child(5){animation-delay:.2s}#setup.mc-enter .mc-hero-logo span:nth-child(6){animation-delay:.25s}#setup.mc-enter .mc-hero-logo span:nth-child(7){animation-delay:.4s}
+@keyframes mcSlam{from{opacity:0;transform:scale(2.4);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+#setup.mc-enter .mc-steps,#setup.mc-enter .mc-h,#setup.mc-enter .mc-card,#setup.mc-enter > div[style]{animation:mcRise .55s cubic-bezier(.2,.9,.3,1) both}
+#setup.mc-enter .mc-steps{animation-delay:.5s}
+#setup.mc-enter > div[style]{animation-delay:.6s}
+#setup.mc-enter .mc-h{animation-delay:.7s}
+#setup.mc-enter .mc-card:nth-of-type(1){animation-delay:.8s}#setup.mc-enter .mc-card:nth-of-type(2){animation-delay:.92s}
+@keyframes mcRise{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+/* pasos */
+.mc-steps{display:flex;gap:6px;margin:14px 0 6px;flex-wrap:wrap}
+.mc-step{flex:1;min-width:120px;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;background:#111;border:1px solid #333;font:700 14px "Titillium Web","Inter",Arial,sans-serif;letter-spacing:.05em;color:#888;position:relative;overflow:hidden}
+.mc-step b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#262626;color:#aaa;font-size:13px;flex:none}
+.mc-step.done{color:#bbf7d0;border-color:#22c55e66}.mc-step.done b{background:#22c55e;color:#062}
+.mc-step.now{color:#fff;border-color:#e10600;box-shadow:0 0 16px #e1060033}.mc-step.now b{background:#e10600;color:#111}
+.mc-step.now::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,#e1060022,transparent);animation:mcShine 1.8s linear infinite}
+@keyframes mcShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.mc-h{display:flex;align-items:center;gap:12px;margin-top:28px}
+.mc-num{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#e3261a;color:#fff;font-style:italic;transform:skewX(-8deg);flex:none}
+/* tarjetas */
+.mc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.mc-card{position:relative;display:flex!important;flex-direction:column;align-items:stretch;text-align:left;padding:0!important;margin:0!important;border-radius:16px!important;overflow:hidden;cursor:pointer;
+  background:linear-gradient(160deg,#1f1f27,#15151e)!important;color:#fff!important;border:2px solid #2a2a33!important;box-shadow:0 12px 30px #000a!important;transition:transform .2s,border-color .2s,box-shadow .2s!important;font-weight:400!important}
+.mc-card:hover{transform:translateY(-5px)!important;border-color:#e10600!important;box-shadow:0 18px 40px #000,0 0 24px #e1060033!important;filter:none!important}
+.mc-card:focus-visible{outline:3px solid #e10600;outline-offset:3px}
+.mc-card.sel{border-color:#e10600!important;box-shadow:0 0 0 2px #e1060055,0 0 40px #e1060044!important}
+.mc-card.flash::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,#ffffffaa 50%,transparent 70%);animation:mcWipe .6s ease-out forwards;pointer-events:none}
+@keyframes mcWipe{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.mc-check{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:#22c55e;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.6,.5,1);box-shadow:0 0 16px #22c55e}
+.mc-card.sel .mc-check{transform:scale(1)}
+.mc-info{padding:14px 16px 16px}
+.mc-info h3{margin:0 0 6px;font-size:20px;letter-spacing:.04em}
+.mc-info p{margin:0 0 10px;color:#aaa;font-size:14px;line-height:1.45}
+.mc-cta{display:inline-block;font:700 14px "Titillium Web","Inter",Arial,sans-serif;letter-spacing:.08em;color:#e10600}
+.mc-scene{position:relative;height:120px;overflow:hidden;border-bottom:1px solid #ffffff14}
+.mc-car{position:absolute;font-size:44px;bottom:14px;left:40%}
+.mc-car i{display:inline-block;font-style:normal;transform:scaleX(-1)}
+.mc-road{position:absolute;left:0;right:0;bottom:0;height:46px;background:#1d1d22;border-top:3px solid #e3261a}
+.mc-road::after{content:"";position:absolute;left:0;top:50%;width:200%;height:4px;background:repeating-linear-gradient(90deg,#e10600 0 26px,transparent 26px 56px);animation:mcRoad .45s linear infinite}
+@keyframes mcRoad{to{transform:translateX(-56px)}}
+.mc-road.two{height:70px}
+.sc-solo{background:linear-gradient(#1a3a5c,#3b1208)}
+.sc-solo .c1{animation:mcBob .35s ease-in-out infinite alternate}
+@keyframes mcBob{to{transform:translateY(-2px)}}
+.sc-multi{background:linear-gradient(#2a1a3a,#3b1208)}
+.sc-multi .c1{bottom:38px;animation:mcDuelA 2.4s ease-in-out infinite}
+.sc-multi .c2{bottom:6px;filter:hue-rotate(200deg);animation:mcDuelB 2.4s ease-in-out infinite}
+@keyframes mcDuelA{0%,100%{left:22%}50%{left:56%}}
+@keyframes mcDuelB{0%,100%{left:56%}50%{left:22%}}
+.sc-actual{background:#07101c}
+.mc-neon{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#38bdf822 0 1px,transparent 1px 30px),repeating-linear-gradient(0deg,#38bdf822 0 1px,transparent 1px 30px);animation:mcRoad 1s linear infinite}
+.mc-led{position:absolute;top:10px;left:14px;font:700 28px "Titillium Web",monospace;color:#38bdf8;text-shadow:0 0 12px #38bdf8;letter-spacing:.1em;animation:mcFlick 2.2s steps(1) infinite}
+@keyframes mcFlick{0%,100%{opacity:1}42%{opacity:.3}44%{opacity:1}46%{opacity:.4}48%{opacity:1}}
+.sc-actual .c1{animation:mcZoom 2.2s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes mcZoom{0%{left:-20%}60%,100%{left:120%}}
+.sc-legend{background:linear-gradient(#5a4526,#2a1d0c);filter:sepia(.6)}
+.mc-film{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,#0000001a 3px 4px);animation:mcGrain .2s steps(2) infinite}
+@keyframes mcGrain{50%{transform:translateY(2px)}}
+.sc-legend::before{content:"";position:absolute;left:0;right:0;bottom:0;height:40px;background:#3a2c18;border-top:3px dashed #e10600}
+.mc-trophy{position:absolute;right:18px;top:12px;font-size:40px;animation:mcShimmer 1.6s ease-in-out infinite}
+@keyframes mcShimmer{50%{filter:drop-shadow(0 0 14px #e10600);transform:rotate(-6deg) scale(1.08)}}
+.mc-car.old{filter:sepia(1) saturate(1.4);animation:mcOld 3s linear infinite}
+@keyframes mcOld{0%{left:-20%}100%{left:110%}}
+.mc-roles{margin:12px 0 6px}
+.mc-roles .mc-scene{height:96px}
+.mc-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:52px;filter:drop-shadow(0 6px 10px #000a)}
+.sc-eng{background:linear-gradient(#0f2a1a,#081208)}
+.mc-wave{position:absolute;inset:16px 14px;display:flex;align-items:center;gap:6px;opacity:.7}
+.mc-wave i{flex:1;height:30%;background:#22c55e;border-radius:3px;animation:mcEq .8s ease-in-out infinite alternate}
+.mc-wave i:nth-child(2n){animation-delay:.2s}.mc-wave i:nth-child(3n){animation-delay:.4s}.mc-wave i:nth-child(5n){animation-delay:.1s}
+@keyframes mcEq{to{height:95%}}
+.sc-drv{background:linear-gradient(#3a0b08,#120505)}
+.mc-streaks i{position:absolute;height:2px;width:40%;left:100%;background:linear-gradient(90deg,transparent,#fff);animation:mcStreak .6s linear infinite}
+.mc-streaks i:nth-child(1){top:20%}.mc-streaks i:nth-child(2){top:40%;animation-delay:.15s}.mc-streaks i:nth-child(3){top:60%;animation-delay:.3s}.mc-streaks i:nth-child(4){top:80%;animation-delay:.45s}.mc-streaks i:nth-child(5){top:50%;animation-delay:.22s}
+@keyframes mcStreak{to{left:-40%}}
+.sc-drv .mc-big{animation:mcBob .25s ease-in-out infinite alternate}
+.mc-go-btn{display:block;width:100%;max-width:420px;margin:10px auto 0!important;padding:18px!important;font:700 22px "Titillium Web","Inter",Arial,sans-serif!important;letter-spacing:.12em;background:linear-gradient(135deg,#ff3b2e,#a50f08)!important;color:#fff!important;border-radius:14px!important;box-shadow:0 10px 30px #e3261a55;animation:introPulse 1.8s ease-in-out infinite}
+/* cinemática de largada (placa de transmisión) */
+#mcGo{position:fixed;inset:0;z-index:999998;display:none;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(ellipse at 70% 40%,#3a0605,#15151e 65%);font-family:"Titillium Web","Inter",Arial,sans-serif;color:#fff;padding:20px}
+#mcGo.show{display:flex}
+#mcGo .go-gantry{display:flex;gap:clamp(8px,2vw,18px);padding:clamp(10px,2vw,18px) clamp(14px,3vw,26px);background:#0c0c10;border:3px solid #2a2a33;border-radius:14px;box-shadow:0 20px 50px #000;margin-bottom:26px}
+#mcGo .go-gantry span{width:clamp(30px,7vw,56px);height:clamp(30px,7vw,56px);border-radius:50%;background:#1e1e26;box-shadow:inset 0 -6px 10px #0009}
+#mcGo .go-gantry span.on{background:#ff2414;box-shadow:0 0 30px #ff2414,0 0 70px #ff241488}
+#mcGo .go-plate{position:relative;width:min(640px,92vw);padding:26px 34px 30px;background:#15151ee6;border-radius:20px;text-align:left;box-shadow:0 30px 80px #000a;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s}
+#mcGo.out .go-plate,#mcGo.plate .go-plate{opacity:1;transform:none}
+#mcGo .go-plate .bc-lines{left:auto;right:-12px;top:-12px;bottom:-12px;width:50%}
+#mcGo .go-sub{position:relative;letter-spacing:.3em;color:#949498;font-size:clamp(11px,1.8vw,14px);font-weight:600;display:flex;align-items:center;gap:12px}
+#mcGo .go-team{position:relative;margin-top:8px;font-size:clamp(34px,6.5vw,72px);font-weight:900;line-height:.95;text-transform:uppercase}
+#mcGo .go-season{position:relative;font-weight:900;font-size:clamp(34px,6vw,64px);line-height:1;color:transparent;-webkit-text-stroke:1.5px #e10600;margin-top:6px}
+#mcGo .go-word{position:absolute;top:8%;font-size:clamp(40px,10vw,120px);font-weight:900;color:#fff;letter-spacing:.04em;text-transform:uppercase;opacity:0;pointer-events:none}
+#mcGo.out .go-word{animation:mcGoWord .9s ease-out forwards}
+@keyframes mcGoWord{0%{opacity:0;transform:scale(.6)}30%{opacity:1;transform:scale(1.04)}100%{opacity:0;transform:scale(1.4)}}
+#mcGo .go-streak{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,#ffffff14 60px 62px);opacity:0}
+#mcGo.out .go-streak{opacity:1;animation:mcBgMove .25s linear infinite}
+@media (prefers-reduced-motion:reduce){body.start-active::after,.mc-hero-speed,.mc-hero-curb{animation:none}#setup.mc-enter *{animation:none!important}}
+
+.mc-led.flip{animation:mcFlip .3s ease-in-out}
+@keyframes mcFlip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg);opacity:.2}100%{transform:rotateX(0)}}

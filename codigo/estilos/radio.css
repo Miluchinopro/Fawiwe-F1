@@ -1,0 +1,51 @@
+/* ===== radio con voz + transmisión modo piloto ===== */
+#fwRadioToast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);z-index:100005;min-width:min(420px,92vw);max-width:92vw;background:#0b0b0ff2;border:1px solid #2a2a33;border-left:5px solid var(--fr,#22c55e);border-radius:12px;padding:8px 14px;color:#fff;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 10px 30px #000a}
+#fwRadioToast.show{opacity:1;transform:translate(-50%,0)}
+#fwRadioToast .fr-tag{display:flex;align-items:center;gap:3px;font:800 11px "Titillium Web",Arial,sans-serif;letter-spacing:.14em;color:var(--fr,#22c55e)}
+#fwRadioToast .fr-tag i{display:inline-block;width:3px;height:10px;background:var(--fr,#22c55e);border-radius:2px;animation:frWave .6s ease-in-out infinite alternate}
+#fwRadioToast .fr-tag i:nth-child(2){animation-delay:.15s}#fwRadioToast .fr-tag i:nth-child(3){animation-delay:.3s}
+#fwRadioToast .fr-tag span{margin-left:6px}
+#fwRadioToast .fr-txt{font-size:14.5px;margin-top:2px}
+@keyframes frWave{from{transform:scaleY(.3)}to{transform:scaleY(1.2)}}
+#dlOverlay{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.92);z-index:99990;padding:16px;overflow:auto}
+#dlOverlay.show{display:flex}
+.dl-radio{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:10px 0 4px;padding:6px 8px;background:#0a0a0a;border:1px solid #2c2c2c;border-radius:12px}
+.dl-radio .dl-rlabel{font:800 12px "Titillium Web",Arial,sans-serif;letter-spacing:.16em;color:#22c55e;margin-right:6px}
+.dl-radio .lv-btn small{margin-left:4px;opacity:.7}
+.dl-radio .lv-btn[disabled]{opacity:.4;cursor:not-allowed}
+.lv-btn.fr-voicebtn.off{opacity:.6}
+#dlOverlay kbd,#dlOverlay .choice-card kbd{display:inline-block;background:#fff;color:#000;border-radius:4px;padding:0 5px;font:800 11px Arial;margin-left:4px}
+.dl-cols{display:grid;grid-template-columns:28px 6px 1fr auto 64px;gap:8px;padding:2px 12px;font:800 10.5px "Titillium Web",Arial,sans-serif;letter-spacing:.14em;color:#777}
+.dl-row .t{min-width:30px;text-align:center}
+.dl-pitnow{font-size:10px;font-weight:900;background:#facc15;color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;animation:frWave .5s ease-in-out infinite alternate}
+#dlFeed p.ok{color:#4ade80}#dlFeed p.bad{color:#f87171}#dlFeed p.pit{color:#facc15}#dlFeed p.sc{color:#fde047;font-weight:800}#dlFeed p.radio{color:#7dd3fc}#dlFeed p.fin{color:#fff;font-weight:900}
+#dlFeed p.mine:not(.ok):not(.bad):not(.pit):not(.radio){color:#fff;font-weight:700}
+.dl-sum{background:#0a0a0a;border:1px solid #2c2c2c;border-radius:12px;padding:8px 12px;margin:0 0 10px;text-align:left}
+.dl-sum p{margin:4px 0;font-size:13px;color:#ddd}.dl-sum p em{font-style:normal;font-weight:900;color:#e10600;margin-right:4px}
+.dl-sum p.ok{color:#4ade80}.dl-sum p.bad{color:#f87171}.dl-sum p.pit{color:#facc15}
+.eng-pitn{font-size:11px;color:#facc15;margin-left:4px;font-weight:800}
+/* V134: gomas, duelo, bandera roja */
+.dl-tyre{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#ddd;padding:4px 10px;background:#15151c;border:1px solid #2c2c35;border-radius:999px}
+.dl-tyre i{width:14px;height:14px;border-radius:50%;border:3px solid #fff;background:#111}
+.dl-tyre b.mid{color:#facc15}.dl-tyre b.bad{color:#ef4444}
+.dl-tyre em{display:inline-block;width:46px;height:5px;background:#2a2a33;border-radius:9px;overflow:hidden}.dl-tyre em u{display:block;height:100%}
+#dlFeed p.red{color:#ff4d4d;font-weight:900}
+.dl-duel-bar{position:relative;height:30px;background:#111;border:1px solid #333;border-radius:10px;margin:10px 0;overflow:hidden}
+.dl-duel-bar .z{position:absolute;top:0;bottom:0;background:#22c55e55;border-left:2px solid #22c55e;border-right:2px solid #22c55e}
+.dl-duel-bar b{position:absolute;top:2px;bottom:2px;width:6px;margin-left:-3px;background:#fff;border-radius:3px;box-shadow:0 0 10px #fff}
+.dl-duel-log{font-size:18px;min-height:24px}
+.dl-duel{border-color:#e10600!important}
+/* V134: clasificación en vivo */
+#qlOverlay{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.92);z-index:99990;padding:16px;overflow:auto}
+#qlOverlay.show{display:flex}
+.ql-sess{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ql-sess span{font:900 14px "Titillium Web",Arial,sans-serif;padding:6px 12px;border-radius:999px;background:#1d1d25;color:#777;letter-spacing:.1em}
+.ql-sess span.on{background:#e10600;color:#fff;box-shadow:0 0 18px #e1060066}.ql-sess span.done{color:#22c55e}
+.ql-clock{flex-basis:100%;text-align:right;font-size:12px;color:#aaa}
+.ql-row{grid-template-columns:28px 6px 1fr auto 70px}
+.ql-row .t{font-variant-numeric:tabular-nums;max-width:none;color:#ddd}
+.ql-row.danger{background:#2a0b0b}
+.ql-cut{font:800 10.5px "Titillium Web",Arial,sans-serif;letter-spacing:.2em;color:#ff4d4d;border-top:2px dashed #ff4d4d;padding:4px 8px;margin-top:4px}
+.ql-cut.out{color:#777;border-color:#444}
+#qlFeed p.ok{color:#4ade80}#qlFeed p.bad{color:#f87171}#qlFeed p.mine{color:#fff;font-weight:700}#qlFeed p.radio{color:#7dd3fc}#qlFeed p.fin{color:#facc15;font-weight:900}
+@media (max-width:760px){#qlOverlay{padding:6px}.ql-card{padding:12px!important}}

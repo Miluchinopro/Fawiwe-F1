@@ -1,0 +1,140 @@
+/* ===== Compras con cinemática + minijuegos ===== */
+#bfxOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.88);z-index:99995;padding:14px;overflow:auto}
+#bfxOverlay.show{display:flex;animation:rankFade .25s ease-out}
+.bfx-card{position:relative;width:min(720px,100%);background:#15151e;border:0;border-top:4px solid #e10600;border-radius:20px;padding:16px;box-shadow:0 30px 80px #000c;text-align:center;font-family:"Titillium Web","Inter",Arial,sans-serif}
+.bfx-kicker{letter-spacing:.3em;font-size:12px;color:#949498;font-weight:700;margin-bottom:8px;text-align:left}
+.bfx-ctrl{margin-top:12px}
+.bfx-stage{position:relative;height:250px;border-radius:16px;overflow:hidden;border:1px solid #3a3a3a}
+.bfx-sky{position:absolute;inset:0}
+.bfx-sky.day{background:linear-gradient(#5ab0ff,#bfe3ff 70%,#9ed17a 70%)}
+.bfx-sky.sunset{background:linear-gradient(#ff7e5f,#feb47b 55%,#2b6cb0 55%)}
+.bfx-sky.office{background:radial-gradient(circle at 50% 30%,#3a3326,#141210)}
+.bfx-sky.tunnel{background:linear-gradient(90deg,#0a1628,#12304f,#0a1628)}
+.bfx-sky.garage{background:radial-gradient(circle at 50% 40%,#2e2e36,#0c0c10)}
+.bfx-sky.room{background:radial-gradient(circle at 50% 70%,#4a3a22,#171109)}
+.bfx-sun{position:absolute;top:12px;right:22px;font-size:40px}
+.bfx-sun.low{top:auto;bottom:44%;right:44%}
+.bfx-city{position:absolute;bottom:34%;left:0;right:0;font-size:34px;letter-spacing:6px;opacity:.85;white-space:nowrap}
+.bfx-road{position:absolute;bottom:0;left:0;right:0;height:34%;background:#3a3a3a;border-top:4px solid #777}
+.bfx-road i{position:absolute;top:45%;left:0;width:200%;height:6px;background:repeating-linear-gradient(90deg,#fff 0 40px,transparent 40px 80px);animation:bfxRoad .5s linear infinite}
+@keyframes bfxRoad{to{transform:translateX(-80px)}}
+.bfx-hero{position:absolute;left:50%;bottom:18%;font-size:76px;transform:translateX(-50%);filter:drop-shadow(0 6px 10px #0008)}
+.bfx-hero.small{font-size:60px;bottom:auto;top:18%}
+.bfx-hero .flip{display:inline-block;transform:scaleX(-1)}
+.bfx-a-drive{animation:bfxDrive 2.6s cubic-bezier(.2,.8,.3,1) both}
+@keyframes bfxDrive{0%{left:-20%}70%{left:54%}85%{left:48%}100%{left:50%}}
+.bfx-dust{position:absolute;bottom:16%;left:30%;font-size:30px;opacity:0;animation:bfxDust 2.6s .3s both}
+@keyframes bfxDust{0%{opacity:0;left:0}50%{opacity:.8}100%{opacity:0;left:38%}}
+.bfx-sea{position:absolute;bottom:0;left:0;right:0;height:45%;overflow:hidden}
+.bfx-sea div{font-size:26px;white-space:nowrap;color:#bde0ff;opacity:.7;animation:bfxWave 2s ease-in-out infinite alternate}
+.bfx-sea .w2{animation-delay:.6s;margin-left:-20px}
+@keyframes bfxWave{to{transform:translateX(-30px)}}
+.bfx-a-sail{bottom:22%;animation:bfxSail 3.2s ease-out both}
+@keyframes bfxSail{0%{left:-15%;transform:translateX(-50%) rotate(-4deg)}50%{transform:translateX(-50%) rotate(4deg)}100%{left:50%;transform:translateX(-50%) rotate(0)}}
+.bfx-gull{position:absolute;top:18%;left:-10%;font-size:28px;animation:bfxGull 4s linear both}
+@keyframes bfxGull{to{left:110%;top:8%}}
+.bfx-crane{position:absolute;left:8%;bottom:28%;font-size:90px;animation:bfxSwing 1.8s ease-in-out infinite alternate;transform-origin:bottom center}
+@keyframes bfxSwing{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.bfx-ground{position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(#8b6b3d,#5a4322)}
+.bfx-blocks{position:absolute;bottom:28%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column-reverse;gap:3px}
+.bfx-blocks b{display:block;width:110px;height:26px;background:linear-gradient(#e10600,#9c7a22);border-radius:4px;opacity:0;animation:bfxBlock .5s ease-out both}
+@keyframes bfxBlock{from{opacity:0;transform:translateY(-120px)}to{opacity:1;transform:none}}
+.bfx-a-pop{bottom:auto;top:14%;animation:bfxPop .7s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes bfxPop{from{opacity:0;transform:translateX(-50%) scale(.2)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+.bfx-desk{position:absolute;bottom:0;left:0;right:0;height:32%;background:linear-gradient(#6b4524,#3d2512)}
+.bfx-paper{position:absolute;left:50%;bottom:20%;font-size:70px;transform:translateX(-50%);animation:bfxPaper .6s ease-out both}
+@keyframes bfxPaper{from{bottom:-40%}}
+.bfx-pen{position:absolute;left:44%;bottom:30%;font-size:40px;animation:bfxPen 1.1s .5s ease-in-out both}
+@keyframes bfxPen{0%{left:40%;opacity:0}20%{opacity:1}100%{left:58%;opacity:1}}
+.bfx-side{position:absolute;right:10%;top:22%;font-size:54px;animation:bfxPop .6s 1.8s both}
+.bfx-cams{position:absolute;left:6%;top:10%;font-size:30px;opacity:0;animation:bfxCams .4s 1.6s 4 alternate both}
+@keyframes bfxCams{to{opacity:1}}
+.bfx-flash{position:absolute;inset:0;background:#fff;opacity:0;animation:bfxFlash .25s 1.7s 3 alternate}
+@keyframes bfxFlash{to{opacity:.55}}
+.bfx-air{position:absolute;left:100%;width:40%;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#7dd3fc,transparent);animation:bfxAir 1.2s linear infinite}
+@keyframes bfxAir{to{left:-40%}}
+.bfx-a-shake{bottom:34%;animation:bfxShake .15s linear infinite}
+@keyframes bfxShake{0%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-2px)}}
+.bfx-gauge{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);width:60%;height:14px;background:#222;border-radius:8px;overflow:hidden;font-size:0}
+.bfx-gauge span,.bfx-charge span{display:block;height:100%;width:0;background:linear-gradient(90deg,#22c55e,#facc15,#ef4444);animation:bfxFill 3s ease-out forwards}
+@keyframes bfxFill{to{width:92%}}
+.bfx-gear{position:absolute;font-size:80px;animation:bfxSpin 2s linear infinite}
+.bfx-gear.g1{left:12%;top:18%}.bfx-gear.g2{right:12%;top:32%;font-size:60px;animation-direction:reverse}
+@keyframes bfxSpin{to{transform:rotate(360deg)}}
+.bfx-a-pulse{bottom:32%;animation:bfxPulse .6s ease-in-out infinite alternate}
+@keyframes bfxPulse{to{transform:translateX(-50%) scale(1.15);filter:drop-shadow(0 0 20px #facc15)}}
+.bfx-charge{position:absolute;left:20%;right:20%;bottom:12%;height:16px;background:#222;border-radius:8px;overflow:hidden}
+.bfx-box{position:absolute;left:50%;bottom:14%;font-size:90px;transform:translateX(-50%);animation:bfxBox 1.3s ease-in-out both}
+@keyframes bfxBox{0%,60%{transform:translateX(-50%) rotate(0)}10%,30%,50%{transform:translateX(-50%) rotate(-8deg)}20%,40%{transform:translateX(-50%) rotate(8deg)}90%{opacity:1}100%{opacity:0;transform:translateX(-50%) scale(1.4)}}
+.bfx-a-rise{bottom:24%;animation:bfxRise .9s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes bfxRise{from{opacity:0;transform:translateX(-50%) translateY(60px) scale(.4)}to{opacity:1;transform:translateX(-50%) scale(1.1)}}
+.bfx-oval{position:absolute;left:50%;top:52%;width:70%;height:56%;border:14px solid #444;border-radius:50%;transform:translate(-50%,-50%);box-shadow:inset 0 0 0 2px #fff4}
+.bfx-orbit{position:absolute;left:50%;top:52%;width:70%;height:56%;transform:translate(-50%,-50%);animation:bfxSpin 2.2s linear infinite}
+.bfx-orbit span{position:absolute;top:-24px;left:50%;font-size:32px}
+.bfx-monitor{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:62%;height:56%;background:#111;border:6px solid #333;border-radius:10px;overflow:hidden}
+.bfx-scr{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#1b5e20 0 30px,#2e7d32 30px 60px);animation:bfxRoad .4s linear infinite;display:flex;align-items:center;justify-content:center;font-size:44px}
+.bfx-conf{position:absolute;top:-30px;font-size:22px;animation:bfxConf 1.6s ease-in both}
+@keyframes bfxConf{from{top:-30px;transform:rotate(0)}to{top:110%;transform:rotate(540deg)}}
+.bfx-caption{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);padding:8px 16px 8px 14px;background:#15151ef0;border-left:5px solid #e10600;border-radius:0 10px 10px 0;font-family:"Titillium Web","Inter",Arial,sans-serif;font-weight:900;font-size:clamp(16px,2.6vw,22px);text-transform:uppercase;letter-spacing:.02em;color:#fff;text-align:left;animation:bfxLower .6s .4s cubic-bezier(.2,.9,.25,1) both}
+@keyframes bfxLower{from{transform:translateX(-110%)}to{transform:none}}
+/* minijuegos */
+.bfx-gamehead{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:14px;margin-bottom:6px;text-align:left}
+.bfx-gametitle{margin:10px 0 6px;font-weight:900;text-transform:uppercase;letter-spacing:.01em}
+.bfx-dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#333;margin-right:4px}
+.bfx-dot.now{background:#e10600}.bfx-dot.ok{background:#22c55e}.bfx-dot.bad{background:#ef4444}
+.bfx-tbar{height:8px;background:#262626;border-radius:6px;overflow:hidden;margin-bottom:10px}
+.bfx-tbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ef4444,#facc15,#22c55e);transition:width .1s linear}
+.bfx-arena{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.bfx-meter{position:relative;width:100%;height:46px;background:#1a1a1a;border:2px solid #444;border-radius:12px;overflow:hidden}
+.bfx-meter.tall{height:36px}
+.bfx-meter .zone{position:absolute;top:0;bottom:0;background:#22c55e66;border-left:2px solid #22c55e;border-right:2px solid #22c55e}
+.bfx-meter .mark{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:26px}
+.bfx-meter .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#ffffff,#e3261a);opacity:.85}
+.bfx-mash{font-size:44px;width:170px;height:150px;border-radius:24px!important;line-height:1.1;touch-action:none;user-select:none}
+.bfx-count{font-size:30px;font-weight:900;color:#fff}
+.bfx-simon{display:grid;grid-template-columns:repeat(2,110px);gap:12px}
+.bfx-pad{font-size:40px;height:90px;background:#1e1e1e!important;border:3px solid #444!important;transition:transform .1s}
+.bfx-pad.lit{background:#e10600!important;transform:scale(1.08);box-shadow:0 0 24px #e10600}
+.bfx-field{position:relative;width:100%;height:220px;background:radial-gradient(circle,#1b2a1b,#0b0f0b);border-radius:14px;border:1px solid #333}
+.bfx-target{position:absolute;font-size:34px;padding:6px!important;background:transparent!important;animation:bfxPop .25s both}
+.bfx-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;width:100%;max-width:420px}
+.bfx-grid.g6{grid-template-columns:repeat(6,1fr)}
+.bfx-grid button{font-size:30px;padding:8px 0;margin:0;background:#1e1e1e!important}
+.bfx-order{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;width:100%}
+.bfx-order button{padding:14px 8px;margin:0;background:#1e1e1e!important;color:#fff;border:2px solid #555}
+.bfx-order button.done{opacity:.35;border-color:#22c55e}
+.bfx-target-val{font-size:18px}
+#bfxRange{width:100%;accent-color:#e10600;padding:0}
+.bfx-code{font-family:"Titillium Web",monospace;font-size:44px;letter-spacing:6px;font-weight:900;color:#fff;background:#111;border:2px dashed #555;padding:10px 20px;border-radius:12px}
+#bfxCodeIn{max-width:260px;text-align:center;font-size:22px;text-transform:uppercase;letter-spacing:4px}
+.bfx-lights{display:flex;gap:10px}
+.bfx-lights span{width:34px;height:34px;border-radius:50%;background:#222;border:3px solid #444}
+.bfx-lights span.red{background:#e3261a;box-shadow:0 0 14px #e3261a}
+.bfx-lights span.green{background:#22c55e;box-shadow:0 0 18px #22c55e}
+.bfx-verdict{margin-top:12px;font-size:24px;font-weight:900;animation:bfxPop2 .3s both}
+.bfx-verdict.ok{color:#86efac}.bfx-verdict.bad{color:#fca5a5}
+@keyframes bfxPop2{from{transform:scale(.5);opacity:0}}
+.bfx-result h2{font-size:clamp(26px,5vw,42px);margin:6px 0;font-weight:900;text-transform:uppercase}
+.bfx-result.perfect h2{color:#fff;text-shadow:0 0 24px #e10600}
+.bfx-bigicon{font-size:84px;animation:bfxPop2 .5s both}
+.bfx-reward{font-size:17px;color:#e6e6ea}
+
+/* ===== Pantallas grandes del juego con estilo de transmisión ===== */
+.result-card,#rankUpCard,.ai-event-card,.press-card,.team-big-card,.season-changes-card{font-family:"Titillium Web","Inter",Arial,sans-serif!important}
+.result-card{background:#15151e!important;border:0!important;border-top:5px solid #e10600!important;border-radius:20px!important;box-shadow:0 30px 90px #000c!important}
+.result-card .kicker{color:#949498!important;letter-spacing:.3em!important;font-weight:700!important}
+.result-card .big{font-weight:900!important;text-transform:uppercase;letter-spacing:.01em}
+.result-card .sub{color:#e6e6ea!important}
+.result-card.win,.result-card.pole{border-top-color:#ffffff!important;box-shadow:0 0 0 1px #ffffff33,0 30px 90px #000c!important}
+.result-card.win .big,.result-card.pole .big{color:#fff!important;text-shadow:0 0 30px #e10600}
+.result-card.podium .big{color:#fff!important}
+.result-card.points{border-top-color:#22c55e!important}
+.result-card.nopoints,.result-card.q1{border-top-color:#e10600!important}
+#resultGridTable th{color:#949498!important;border-bottom-color:#e1060055!important;text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+#resultGridTable tr.mine-row td{color:#fff!important;background:#e1060022}
+#rankUpCard{background:#15151e!important;border:0!important;border-top:5px solid #e10600!important;border-radius:20px!important}
+#rankUpTitle{font-weight:900!important;text-transform:uppercase}
+#rankUpName{color:#e10600!important;font-weight:900!important;text-transform:uppercase}
+.ai-event-card{background:#15151e!important;border:0!important;border-top:5px solid #e10600!important;border-radius:20px!important}
+.ai-event-kicker{color:#949498!important;letter-spacing:.3em!important}
+.ai-event-title{font-weight:900!important;text-transform:uppercase}

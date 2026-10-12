@@ -465,6 +465,7 @@ body.start-active #setup .tutorial-box {
 .eng-setctl b{min-width:22px;font-size:18px;color:#ffffff}
 .eng-setfb{color:#ffffff}
 @media (max-width:760px){.eng-setrow{grid-template-columns:1fr}}
+
 /* ===== Compras con cinemática + minijuegos ===== */
 #bfxOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.88);z-index:99995;padding:14px;overflow:auto}
 #bfxOverlay.show{display:flex;animation:rankFade .25s ease-out}
@@ -605,6 +606,7 @@ body.start-active #setup .tutorial-box {
 .ai-event-card{background:#15151e!important;border:0!important;border-top:5px solid #e10600!important;border-radius:20px!important}
 .ai-event-kicker{color:#949498!important;letter-spacing:.3em!important}
 .ai-event-title{font-weight:900!important;text-transform:uppercase}
+
 /* ===== Menú cinematográfico ===== */
 body.start-active::after{content:&quot;&quot;;position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
   background:repeating-linear-gradient(100deg,transparent 0 120px,#ffffff10 120px 122px,transparent 122px 260px);animation:mcBgMove 1.4s linear infinite}
@@ -721,6 +723,7 @@ body.start-active::after{content:&quot;&quot;;position:fixed;inset:0;pointer-eve
 
 .mc-led.flip{animation:mcFlip .3s ease-in-out}
 @keyframes mcFlip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg);opacity:.2}100%{transform:rotateX(0)}}
+
 /* ===== Carrera en vivo: torre de tiempos estilo transmisión ===== */
 #engLiveOverlay{background:rgba(10,10,14,.94)!important}
 .eng-live-card{background:#15151e!important;border:0!important;border-top:5px solid #e10600!important;border-radius:20px!important;box-shadow:0 30px 90px #000!important;font-family:&quot;Titillium Web&quot;,&quot;Inter&quot;,Arial,sans-serif}
@@ -789,6 +792,7 @@ body.start-active::after{content:&quot;&quot;;position:fixed;inset:0;pointer-eve
 .green{color:#4ade80!important;font-weight:800}
 .lv-chip{display:inline-block;padding:0 6px;border-radius:4px;background:#e10600;color:#fff;font-size:10px;font-weight:800;letter-spacing:.06em;vertical-align:middle}
 .lv-chip.sc{background:#facc15;color:#111}
+
 
 /* ================= CINE: evolución de la F1, autos por época, transmisión ================= */
 .ci-evo{opacity:0;overflow:hidden;animation:ciFadeIn .3s ease var(--evo-in) forwards,ciSceneOut .3s ease var(--evo-out) forwards}
@@ -2403,6 +2407,14 @@ body.v17-flag .v7-lights:has(i:nth-child(2).on)::after,body.v17-flag .lc-lights:
 body.v17-flag .v7-lights:has(i:nth-child(3).on)::after,body.v17-flag .lc-lights:has(i:nth-child(3).on)::after{transform:translateY(3px) rotate(-12deg)}
 body.v17-flag .v7-lights:has(i:nth-child(4).on)::after,body.v17-flag .lc-lights:has(i:nth-child(4).on)::after{transform:translateY(1px) rotate(-4deg)}
 body.v17-flag .v7-lights:has(i:nth-child(5).on)::after,body.v17-flag .lc-lights:has(i:nth-child(5).on)::after{transform:none}
+
+/* ===== FAWIWE · Prototipo 1.5 · pizarra del box (antes de 1980) ===== */
+#fwRadioToast.v18-pb{background:#141414f5;border:3px solid #6b4a2b;border-left-width:3px;border-radius:6px;box-shadow:0 10px 30px #000c,inset 0 0 0 2px #2a1c10}
+#fwRadioToast.v18-pb .fr-tag{color:#e8dcc0}
+#fwRadioToast.v18-pb .fr-tag i{display:none}
+.v18-board{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:center;padding:6px 4px 2px;font:900 clamp(22px,5vw,34px)/1 &quot;Courier New&quot;,ui-monospace,monospace;letter-spacing:.06em;color:#f5f1e6;text-shadow:0 0 1px #fff8}
+.v18-board b{color:#facc15}
+.v18-board-k{font-size:12px;color:#bdb5a3;text-align:center;margin-top:4px;line-height:1.3}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
@@ -28726,6 +28738,61 @@ function v16Go() {
       });
     };
     window.trkTemp = trkTemp;
+  }
+
+  /* ---------- 6) antes de 1980: la pizarra del box habla en código corto ---------- */
+  function v18BoardCode(text) {
+    const m = String(text || &quot;&quot;).toLowerCase();
+    if (/sanci|penaliz/.test(m)) return &quot;PEN&quot;;
+    if (/\bbox\b|boxes|parada|entrá|entra a/.test(m)) return &quot;IN&quot;;
+    if (/lluvia|llueve|mojad/.test(m)) return &quot;RAIN&quot;;
+    if (/amarilla|accidente|despacio|levant/.test(m)) return &quot;SLOW&quot;;
+    if (/ganaste|victoria|podio|cuadros|terminaste/.test(m)) return &quot;OK!&quot;;
+    if (/largada|largás|bandera abajo|luces/.test(m)) return &quot;GO&quot;;
+    if (/empuj|ataca|apretá|a fondo|pasalo|push/.test(m)) return &quot;PUSH&quot;;
+    if (/cuidá|cuidado|cuidar|tranqui|gomas|ahorr|aflojá|calma|easy/.test(m)) return &quot;EASY&quot;;
+    if (/rápido|vamos|podés/.test(m)) return &quot;PUSH&quot;;
+    return &quot;OK&quot;;
+  }
+  function v18BoardLine(text) {
+    const parts = [];
+    try {
+      if (typeof DL !== &quot;undefined&quot; &amp;&amp; DL &amp;&amp; DL.me &amp;&amp; DL.data) {
+        const l = Math.max(0, Math.min(DL.lap || 0, (DL.me.pos || []).length - 1));
+        const p = DL.me.pos[l];
+        if (p) parts.push(&quot;P&quot; + p);
+        if (p &gt; 1 &amp;&amp; l &gt; 0) {
+          const ahead = DL.data.rows.find(r =&gt; r.pos[l] === p - 1);
+          if (ahead &amp;&amp; ahead.cum &amp;&amp; DL.me.cum &amp;&amp; ahead.cum[l - 1] != null &amp;&amp; DL.me.cum[l - 1] != null) parts.push(&quot;−&quot; + Math.max(0, DL.me.cum[l - 1] - ahead.cum[l - 1]).toFixed(1));
+        }
+        if (DL.N) parts.push(&quot;L&quot; + Math.max(0, DL.N - (DL.lap || 0)));
+      }
+    } catch (e) {}
+    parts.push(v18BoardCode(text));
+    return parts;
+  }
+  window.v18BoardLine = v18BoardLine;
+  if (typeof fwRadioToast === &quot;function&quot;) {
+    const o = fwRadioToast;
+    fwRadioToast = function (text, who) {
+      const r = o.apply(this, arguments);
+      try {
+        const el = document.getElementById(&quot;fwRadioToast&quot;); if (!el) return r;
+        const g = document.getElementById(&quot;game&quot;);
+        const old = yr() &lt; 1980 &amp;&amp; g &amp;&amp; !g.classList.contains(&quot;hidden&quot;) &amp;&amp; (!who || who === &quot;eng&quot; || who === &quot;p2&quot;);
+        el.classList.toggle(&quot;v18-pb&quot;, old);
+        if (old) {
+          const tag = el.querySelector(&quot;.fr-tag span&quot;);
+          if (tag &amp;&amp; typeof window.v17Rules === &quot;function&quot;) tag.textContent = window.v17Rules(tag.textContent);
+          const parts = v18BoardLine(text);
+          const txt = el.querySelector(&quot;.fr-txt&quot;);
+          if (txt) txt.innerHTML = `&lt;div class=&quot;v18-board&quot;&gt;${parts.map((x, i) =&gt; i === parts.length - 1 ? `&lt;b&gt;${x}&lt;/b&gt;` : `&lt;span&gt;${x}&lt;/span&gt;`).join(&quot;&quot;)}&lt;/div&gt;&lt;div class=&quot;v18-board-k&quot;&gt;&lt;/div&gt;`;
+          const k = el.querySelector(&quot;.v18-board-k&quot;); if (k) k.textContent = String(text).replace(/&lt;[^&gt;]+&gt;/g, &quot;&quot;);
+        }
+      } catch (e) {}
+      return r;
+    };
+    window.fwRadioToast = fwRadioToast;
   }
 })();
 

@@ -1,0 +1,15 @@
+/* ===== V140 ===== */
+#v6Share a.lv-btn,#v6Share a.lv-btn:hover{text-decoration:none}
+@media (max-width:760px){ body.v10-dec #fwRadioToast{top:auto;bottom:10px;transform:translate(-50%,20px)} body.v10-dec #fwRadioToast.show{transform:translate(-50%,0)} }
+.v10-cd{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-weight:900;font-size:30px;color:#facc15;text-shadow:0 2px 8px #000;pointer-events:none}
+#v10Space{position:fixed;inset:0;background:rgba(0,0,0,.86);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow:auto;z-index:1000004}
+#v10Space.show{display:flex}
+.v10-saves{display:flex;flex-direction:column;gap:8px;margin:12px 0;text-align:left}
+.v10-saves>div{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#15151c;border:1px solid #2a2a33;border-radius:10px;padding:8px 10px}
+.v10-saves i{font-style:normal;color:#999}
+.v10-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.v10-tabs button{background:#15151c!important;background-image:none!important;border:1px solid #333!important;color:#ddd!important;border-radius:999px;padding:6px 14px;font-weight:800;box-shadow:none;cursor:pointer}
+.v10-tabs button.on{border-color:#e10600!important;color:#fff!important;box-shadow:0 0 0 1px #e10600 inset}
+.v10-page.hidden{display:none}
+.v10-mute{background:#2a1a1a;border-left:3px solid #e10600;padding:6px 10px;border-radius:8px;margin:8px 0}
+#gameTutorialBox{background:#0b0b0b!important}

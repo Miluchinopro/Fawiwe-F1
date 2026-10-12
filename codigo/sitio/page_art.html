@@ -1,0 +1,534 @@
+<title>FAWIWE F1</title>
+<meta name="description" content="FAWIWE F1: el juego de Fórmula 1 donde sos ingeniero, jefe de equipo o piloto. Jugalo gratis en el navegador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* Estilo transmisión: placas carbón, rojo de pista, letra ancha y blanca. Una sola paleta oscura a propósito. */
+:root{color-scheme:dark;--bg:#15151e;--bg2:#0f0f15;--panel:#1f1f27;--line:#2c2c36;--red:#e10600;--white:#ffffff;--txt:#e6e6ea;--mute:#949498;--font:"Titillium Web",Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--font);overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font);font-weight:900;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:999px;border:0;font:900 17px var(--font);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-3px)}
+.btn:focus-visible,nav a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn.red{background:var(--red);color:#fff;box-shadow:0 10px 30px #e1060055}
+.btn.ghost{background:transparent;color:#fff;border:2px solid #ffffff66}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:#15151ef0;backdrop-filter:blur(8px);border-bottom:3px solid var(--red)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font:900 26px var(--font);letter-spacing:.06em;text-decoration:none;display:inline-flex;align-items:center;gap:10px;color:#fff}
+.brand .r{color:var(--red)}
+.badge{display:inline-block;padding:1px 10px;background:var(--red);color:#fff;font:900 italic 18px var(--font);transform:skewX(-12deg);border-radius:3px;letter-spacing:.02em}
+nav .links a{margin-left:20px;text-decoration:none;color:var(--mute);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.06em}
+nav .links a:hover{color:#fff}
+nav .links a.cta{color:#fff;background:var(--red);padding:8px 16px;border-radius:999px}
+/* líneas rojas de pista que se dibujan */
+.bc-lines{position:absolute;pointer-events:none;overflow:visible}
+.bc-lines rect{fill:none;stroke:var(--red);stroke-width:3;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.4s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.plate{position:relative;background:#15151ee8;border-radius:24px;box-shadow:0 30px 80px #000c}
+.plate .bc-lines{top:-14px;bottom:-14px;right:-14px;width:58%;height:calc(100% + 28px)}
+/* hero */
+.hero{position:relative;overflow:hidden;padding:110px 20px 70px;background:var(--bg)}
+.hero-bg{position:absolute;inset:-20px;background:url("{{IMG_cine}}") center/cover;filter:blur(8px) brightness(.45) saturate(1.2);transform:scale(1.05)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#15151ef2 10%,#15151e99 60%,#15151e55)}
+.hero-in{position:relative;z-index:2;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:34px;align-items:center}
+.hero .plate{padding:clamp(24px,4vw,44px) clamp(24px,4vw,52px)}
+.kick{display:flex;align-items:center;gap:12px;color:var(--mute);font-weight:700;letter-spacing:.28em;font-size:13px}
+.title{margin:14px 0 0;font-size:clamp(40px,5.6vw,80px);line-height:.93;font-weight:900;text-transform:uppercase;color:#fff}
+.title span{display:block}
+.title .r{color:var(--red)}
+.year{font:900 clamp(36px,5vw,72px)/1 var(--font);color:transparent;-webkit-text-stroke:2px var(--red);margin-top:6px;letter-spacing:.03em}
+.hero-copy .tag{font-size:clamp(22px,2.6vw,30px);font-weight:900;text-transform:uppercase;line-height:1.05;color:#fff;margin:0 0 12px}
+.hero-copy .tag em{font-style:normal;color:var(--red)}
+.hero-copy p{color:var(--txt);font-size:18px;line-height:1.55;margin:0 0 24px;max-width:46ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.curb{position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-linear-gradient(90deg,var(--red) 0 34px,#f5f5f5 34px 68px);z-index:2}
+/* cinta */
+.ticker-wrap{overflow:hidden;padding:14px 0;margin-top:-6px}
+.ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;transform:rotate(-1.2deg);margin:0 -20px}
+.ticker div{display:inline-block;padding:12px 0;font:900 19px var(--font);letter-spacing:.1em;animation:tick 30s linear infinite}
+.ticker b{color:#15151e;margin:0 18px}
+@keyframes tick{to{transform:translateX(-50%)}}
+section{padding:84px 0}
+.sec-k{display:flex;align-items:center;gap:10px;color:var(--mute);font-weight:700;letter-spacing:.3em;font-size:13px}
+.sec-k::before{content:"";width:34px;height:4px;background:var(--red);border-radius:2px}
+h2{font-size:clamp(34px,5vw,58px);margin:8px 0 14px;line-height:.98;color:#fff}
+.lead{color:var(--txt);font-size:18px;max-width:62ch;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.stat{background:var(--panel);border-top:4px solid var(--red);border-radius:14px;padding:20px}
+.stat b{display:block;font:900 clamp(28px,3.2vw,40px) var(--font);color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{color:var(--mute);font-size:14px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
+.mode{position:relative;border-radius:20px;padding:30px;overflow:hidden;background:var(--panel);border-top:5px solid var(--red);min-width:0}
+.mode .big{position:absolute;right:-6px;top:-18px;font-size:150px;opacity:.08;transform:rotate(-12deg)}
+.mode h3{font-size:32px;margin:0 0 4px;color:#fff}
+.mode .who{color:var(--red);font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:.06em;font-size:14px}
+.mode ul{list-style:none;padding:0;margin:0}
+.mode li{padding:9px 0;border-bottom:1px solid #ffffff10;color:var(--txt)}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.shot{background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:zoom-in;transition:transform .25s,border-color .25s;min-width:0}
+.shot:hover{transform:translateY(-4px);border-color:var(--red)}
+.shot .bar{display:flex;gap:6px;padding:9px 12px;background:var(--panel)}
+.shot .bar i{width:10px;height:10px;border-radius:50%;background:#44444e}.shot .bar i:first-child{background:var(--red)}
+.shot img{display:block;width:100%;height:auto}
+.shot p{margin:0;padding:12px 14px;color:var(--mute);font-size:14px;line-height:1.45}
+.shot p b{color:#fff}
+.shot.wide{grid-column:1/-1}
+.shot.wide img{max-height:560px;object-fit:cover;object-position:top}
+.ranks{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:38px}
+.ranks::before{content:"";position:absolute;top:26px;left:4%;right:4%;height:4px;background:linear-gradient(90deg,var(--red),#ffffff)}
+.rk{position:relative;text-align:center}
+.rk .n{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel);border:3px solid var(--red);font-size:24px;position:relative;z-index:1}
+.rk h4{margin:0 0 6px;font-size:16px;color:#fff}
+.rk p{margin:0;color:var(--mute);font-size:12.5px;line-height:1.4;text-transform:none}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:34px}
+.feat{background:var(--panel);border-radius:16px;padding:22px;border-left:4px solid transparent;transition:border-color .2s,transform .2s}
+.feat:hover{border-left-color:var(--red);transform:translateY(-3px)}
+.feat .ic{font-size:32px}
+.feat h3{margin:10px 0 6px;font-size:21px;color:#fff}
+.feat p{margin:0;color:var(--mute);line-height:1.5;font-size:15px}
+.play{position:relative;border-radius:26px;padding:56px 30px;text-align:center;background:#15151ee8;box-shadow:0 30px 80px #000c}
+.play .bc-lines{top:-14px;bottom:-14px;left:-14px;right:-14px;width:calc(100% + 28px);height:calc(100% + 28px)}
+.play h2{font-size:clamp(40px,7vw,80px)}
+.play .ctas{justify-content:center}
+.lights{display:flex;gap:14px;justify-content:center;margin-bottom:22px}
+.lights span{width:30px;height:30px;border-radius:50%;background:#1e1e26;border:3px solid #33333d;animation:light 4.5s infinite}
+.lights span:nth-child(2){animation-delay:.35s}.lights span:nth-child(3){animation-delay:.7s}.lights span:nth-child(4){animation-delay:1.05s}.lights span:nth-child(5){animation-delay:1.4s}
+@keyframes light{0%{background:#1e1e26}6%,45%{background:#ff2414;box-shadow:0 0 22px #ff2414}50%,100%{background:#1e1e26;box-shadow:none}}
+.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:28px;text-align:left}
+.faq div{background:var(--panel);border-radius:12px;padding:14px 16px}
+.faq b{display:block;margin-bottom:4px;color:#fff}
+.faq span{color:var(--mute);font-size:14px}
+footer{padding:36px 0 56px;color:var(--mute);font-size:14px;text-align:center;border-top:3px solid var(--red)}
+/* juego */
+#gameOv{position:fixed;inset:0;z-index:100;background:#000;display:none;flex-direction:column}
+#gameOv.show{display:flex}
+#gameOv .top{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--bg);border-bottom:3px solid var(--red)}
+#gameOv .top button{background:var(--panel);color:#fff;border:1px solid #44444e;border-radius:999px;padding:8px 16px;font:700 14px var(--font);cursor:pointer}
+#gameOv iframe{flex:1;border:0;width:100%;background:#000}
+#loader{position:absolute;inset:60px 0 0;display:flex;align-items:center;justify-content:center;color:#fff;font:900 22px var(--font);letter-spacing:.1em;text-transform:uppercase}
+#lb{position:fixed;inset:0;z-index:90;background:#000d;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+#lb.show{display:flex}
+#lb img{max-width:100%;max-height:92vh;border-radius:12px;border:2px solid var(--red)}
+/* cinemática de entrada */
+#siteIntro{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;cursor:pointer;transition:opacity .45s,visibility .45s}
+#siteIntro.gone{opacity:0;visibility:hidden}
+#siteIntro .lights span{width:clamp(30px,7vw,56px);height:clamp(30px,7vw,56px);animation:introLight 2s steps(1) forwards}
+#siteIntro .lights span:nth-child(1){animation-delay:.2s;animation-duration:1.6s}#siteIntro .lights span:nth-child(2){animation-delay:.42s;animation-duration:1.38s}#siteIntro .lights span:nth-child(3){animation-delay:.64s;animation-duration:1.16s}#siteIntro .lights span:nth-child(4){animation-delay:.86s;animation-duration:.94s}#siteIntro .lights span:nth-child(5){animation-delay:1.08s;animation-duration:.72s}
+@keyframes introLight{0%{background:#ff2414;box-shadow:0 0 30px #ff2414}100%{background:#1e1e26;box-shadow:none}}
+#siteIntro .plate{width:min(680px,92vw);padding:28px 36px 32px;opacity:0;animation:fadeUp .5s ease 1.85s forwards}
+#siteIntro .plate .bc-lines rect{animation-delay:1.95s}
+#siteIntro .title{font-size:clamp(40px,7.4vw,84px)}
+#siteIntro .title span{overflow:hidden}
+#siteIntro .title span i{display:block;font-style:normal;transform:translateY(105%);animation:line .55s cubic-bezier(.2,.9,.25,1) forwards}
+#siteIntro .year{opacity:0;animation:fadeUp .5s ease 2.75s forwards;font-size:clamp(34px,6vw,72px)}
+#siteIntro .skip{position:absolute;bottom:22px;right:22px;color:var(--mute);font-size:13px;font-weight:600}
+#siteIntro .gate{display:none;position:absolute;inset:0;z-index:3;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at 50% 50%,#2a0806,var(--bg) 65%)}
+#siteIntro .gate span{color:var(--mute);font-weight:600;letter-spacing:.1em;font-size:14px}
+#siteIntro .gate .btn{font-size:22px;padding:16px 50px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.05);box-shadow:0 10px 50px #e10600aa}}
+#siteIntro.wait .gate{display:none}
+#siSoundChip{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:9;opacity:0;pointer-events:none;font-weight:900;font-size:13px;letter-spacing:.08em;color:#fff;background:#15151ee6;border:1px solid #e10600;padding:8px 16px;transition:opacity .3s}
+#siSoundChip.show{opacity:1}
+@media (max-width:600px){#siSoundChip{bottom:auto;top:6px;white-space:nowrap;font-size:11px;padding:6px 12px}}
+#siteIntro.wait .lights span,#siteIntro.wait .plate,#siteIntro.wait .plate *{animation-play-state:paused!important}
+.sound-btn{margin-left:14px;background:var(--panel);color:#fff;border:1px solid #44444e;border-radius:999px;padding:6px 12px;font:700 14px var(--font);cursor:pointer}
+@keyframes line{to{transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* transición con auto */
+#carWipe{position:fixed;inset:0;z-index:300;pointer-events:none;overflow:hidden;visibility:hidden}
+#carWipe.on{visibility:visible;pointer-events:auto}
+#carWipe .stage{position:absolute;inset:0}
+#carWipe.rev .stage{transform:scaleX(-1)}
+#carWipe .panel{position:absolute;top:0;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#15151e,#1f1f27 70%,var(--red) 100%);transform:translateX(-102%);overflow:hidden}
+#carWipe .panel::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 70px,#ffffff10 70px 72px);animation:streak .25s linear infinite}
+@keyframes streak{to{background-position:72px 0}}
+#carWipe .sidecar{position:absolute;top:50%;left:0;width:min(300px,46vw);transform:translate(-100%,-50%);filter:drop-shadow(-30px 0 14px #e1060088)}
+#carWipe .msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 clamp(22px,4vw,40px) var(--font);letter-spacing:.2em;color:#fff;text-transform:uppercase;opacity:0;transition:opacity .2s}
+#carWipe.rev .msg{transform:scaleX(-1)}
+#carWipe.cover .msg{opacity:1}
+@media (max-width:860px){
+  nav .links a:not(.cta){display:none}
+  .hero-in,.modes,.gallery{grid-template-columns:1fr}
+  .ranks{grid-template-columns:1fr;gap:0}
+  .ranks::before{top:0;bottom:0;left:27px;right:auto;width:4px;height:auto;background:linear-gradient(var(--red),#fff)}
+  .rk{display:grid;grid-template-columns:56px 1fr;gap:14px;text-align:left;padding:8px 0}
+  .rk .n{margin:0}
+  section{padding:60px 0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.bc-lines rect{stroke-dashoffset:0}#siteIntro{display:none}}
+
+#siteIntro .ci-evo{position:absolute;inset:0;z-index:1}
+@keyframes ciFadeIn{to{opacity:1}}
+@keyframes ciSceneOut{to{opacity:0;visibility:hidden}}
+@keyframes ciVib{0%,100%{transform:translateY(0)}50%{transform:translateY(1px)}}
+#siteIntro.wait .ci-evo,#siteIntro.wait .ci-evo *{animation-play-state:paused!important}
+{{EVO_CSS}}
+</style>
+
+<div id="siteIntro" class="wait" onclick="introTap()" role="presentation">
+  <div class="gate"><button type="button" class="btn red" onclick="event.stopPropagation();introStart()">▶ Entrar</button><span>🔊 Con música y sonido</span></div>
+  <div class="lights"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="plate"><svg class="bc-lines" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="388" height="288" rx="60" pathLength="1" style="animation-delay:1.95s"/><rect x="18" y="18" width="364" height="264" rx="50" pathLength="1" style="animation-delay:2.07s"/><rect x="30" y="30" width="340" height="240" rx="40" pathLength="1" style="animation-delay:2.19s"/><rect x="42" y="42" width="316" height="216" rx="30" pathLength="1" style="animation-delay:2.31s"/></svg>
+    <div class="kick"><span class="badge">F1</span>TEAM PRESIDENT · CAREER MODE</div>
+    <div class="title"><span><i class="r" style="animation-delay:2.05s;color:var(--red)">FAWIWE</i></span><span><i style="animation-delay:2.22s">Racing Team</i></span><span><i style="animation-delay:2.39s">Career Mode</i></span></div>
+    <div class="year">1950–2026</div>
+  </div>
+  <div class="skip">Tocá para saltar ⏭</div>
+</div>
+<div id="carWipe" aria-hidden="true"><div class="stage"><div class="panel"><div class="msg">Cargando…</div></div><svg class="sidecar" viewBox="0 0 300 92" aria-hidden="true"><rect x="4" y="14" width="8" height="40" rx="2" fill="#111"/><rect x="2" y="10" width="30" height="9" rx="2" fill="#e10600"/><path d="M14 54 L58 42 L118 38 L146 27 L176 27 L192 39 L250 47 L294 55 L294 63 L14 66 Z" fill="#e10600"/><path d="M146 27 L176 27 L186 38 L140 38 Z" fill="#111"/><path d="M150 29 Q165 14 182 31" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/><rect x="60" y="48" width="180" height="5" fill="#fff"/><text x="105" y="47" font-family="Titillium Web,Arial" font-weight="900" font-style="italic" font-size="13" fill="#fff">FW</text><rect x="252" y="63" width="44" height="6" rx="2" fill="#111"/><circle cx="70" cy="66" r="20" fill="#111"/><circle cx="70" cy="66" r="8" fill="#5a5a66"/><circle cx="232" cy="68" r="17" fill="#111"/><circle cx="232" cy="68" r="7" fill="#5a5a66"/></svg></div></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="badge">F1</span><span><span class="r">FA</span>WIWE</span></a>
+  <div class="links"><a href="#modos">Modos</a><a href="#juego">El juego</a><a href="#piloto">Piloto</a><a href="#rangos">Rangos</a><a href="#jugar" class="cta">▶ Jugar</a><button type="button" class="sound-btn" id="navInstall" onclick="fwInstall()" aria-label="Instalar como app" title="Instalar como app" style="display:none">📲</button><button type="button" class="sound-btn" id="soundBtn" onclick="toggleSiteSound()" aria-label="Sonido">🔊</button></div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div class="plate"><svg class="bc-lines" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="388" height="288" rx="60" pathLength="1" style="animation-delay:0.30s"/><rect x="18" y="18" width="364" height="264" rx="50" pathLength="1" style="animation-delay:0.42s"/><rect x="30" y="30" width="340" height="240" rx="40" pathLength="1" style="animation-delay:0.54s"/><rect x="42" y="42" width="316" height="216" rx="30" pathLength="1" style="animation-delay:0.66s"/></svg>
+      <div class="kick"><span class="badge">F1</span>TEAM PRESIDENT · CAREER MODE</div>
+      <h1 class="title"><span class="r">FAWIWE</span><span>Racing Team</span><span>Career Mode</span></h1>
+      <div class="year">1950–2026</div>
+    </div>
+    <div class="hero-copy">
+      <div class="tag">Arrancás en el box. <em>Terminás siendo leyenda.</em></div>
+      <p>Empezá como ingeniero de equipo o como piloto, subí de rango temporada tras temporada y llevá a tu escudería a la cima de la Fórmula 1. Carreras en vivo con datos vuelta por vuelta, de 1950 a 2026.</p>
+      <div class="ctas"><button class="btn red" onclick="openGame()">▶ Jugar ahora</button><a class="btn ghost" href="#juego">Ver qué trae</a></div>
+    </div>
+  </div>
+  <div class="curb"></div>
+</header>
+
+<div class="ticker-wrap"><div class="ticker"><div>
+  <span>📺 CARRERA EN VIVO</span><b>●</b><span>🧰 SETUP</span><b>●</b><span>🔧 MOTORES</span><b>●</b><span>🏫 ACADEMIA</span><b>●</b><span>🛥️ YATES Y MANSIONES</span><b>●</b><span>⚡ SPRINTS</span><b>●</b><span>🏛️ DIRECTIVA</span><b>●</b><span>👥 MULTIJUGADOR</span><b>●</b>
+  <span>📺 CARRERA EN VIVO</span><b>●</b><span>🧰 SETUP</span><b>●</b><span>🔧 MOTORES</span><b>●</b><span>🏫 ACADEMIA</span><b>●</b><span>🛥️ YATES Y MANSIONES</span><b>●</b><span>⚡ SPRINTS</span><b>●</b><span>🏛️ DIRECTIVA</span><b>●</b><span>👥 MULTIJUGADOR</span><b>●</b>
+</div></div></div>
+
+<section>
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><b>2</b><span>modos de juego: Ingeniero y Piloto</span></div>
+      <div class="stat"><b>1950–2026</b><span>parrillas reales de cada época</span></div>
+      <div class="stat"><b>7</b><span>rangos para desbloquear todo</span></div>
+      <div class="stat"><b>30</b><span>compras con cinemática y 2 minijuegos cada una</span></div>
+      <div class="stat"><b>10</b><span>circuitos por temporada, con sprints</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="modos">
+  <div class="wrap">
+    <div class="sec-k reveal">ELEGÍ TU CAMINO</div>
+    <h2 class="reveal">Dos formas de vivir la F1</h2>
+    <p class="lead reveal">Podés dirigir todo desde el box o ponerte el casco y manejar. Cada modo tiene sus propios minijuegos.</p>
+    <div class="modes">
+      <div class="mode eng reveal">
+        <div class="big">🔧</div>
+        <h3>🔧 Modo Ingeniero</h3>
+        <div class="who">Del box a la presidencia del equipo</div>
+        <ul>
+          <li>🧰 Armá el setup: alerones y suspensión, probá en pista y escuchá al piloto</li>
+          <li>📺 Mirá la carrera en vivo y cantá las paradas, el Safety Car y la lluvia</li>
+          <li>🏭 Desarrollá el auto, elegí motor y traé paquetes de mejoras</li>
+          <li>👥 Fichá pilotos, pre-fichá chicos de F2 y armá tu academia</li>
+          <li>🏛️ Cumplí los objetivos de la directiva… o te echan</li>
+        </ul>
+      </div>
+      <div class="mode drv reveal">
+        <div class="big">🏎️</div>
+        <h3>🏎️ Modo Piloto</h3>
+        <div class="who">Del karting al campeonato mundial</div>
+        <ul>
+          <li>🚦 Minijuegos de reflejos: largada, frenado, trazada, neumáticos</li>
+          <li>🏁 Elegí un piloto real, una leyenda o creá el tuyo desde el karting</li>
+          <li>📰 Prensa, rivalidades y ofertas de otros equipos</li>
+          <li>🛥️ Gastá tu sueldo en autos, mansiones y yates (¡con cinemática!)</li>
+          <li>❤️ Cuidá tu salud, tu enfoque y tu popularidad</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="juego">
+  <div class="wrap">
+    <div class="sec-k reveal">ASÍ SE VE</div>
+    <h2 class="reveal">Adentro del juego</h2>
+    <div class="gallery">
+      <div class="shot wide reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_live}}" alt="Carrera en vivo con decisión de boxes" loading="lazy"><p><b>📺 Carrera en vivo.</b> Vuelta a vuelta, con el reloj corriendo: ¿undercut, overcut o seguís el plan?</p></div>
+      <div class="shot wide reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_laps}}" alt="Panel de vuelta por vuelta con gráfico de posiciones y tiempos" loading="lazy"><p><b>📊 Vuelta por vuelta.</b> Gráfico de posiciones, tiempos de cada vuelta, paradas en boxes y la vuelta más rápida.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_buy}}" alt="Cinemática de compra de un yate" loading="lazy"><p><b>🛥️ Cada compra tiene cinemática</b> y 2 minijuegos. Si te salen bien, descuento y bonus.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_result}}" alt="Resultado de carrera con podio" loading="lazy"><p><b>🏆 El resultado</b> con la parrilla completa, sanciones y el sprint del sábado.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_setup}}" alt="Centro del Ingeniero, pestaña de setup" loading="lazy"><p><b>🎛️ Centro del Ingeniero.</b> Setup, motor, desarrollo, pilotos, finanzas e historial.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_cine}}" alt="Cinemática de inicio: un auto de 1978 pasa frente al cartel 76 años de Fórmula 1" loading="lazy"><p><b>🎬 Cinemática de inicio.</b> Se prenden los boxes, pasan autos de cada época, el tacómetro sube al rojo y aparece el logo.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_evo}}" alt="Viaje en el tiempo: el año corre hasta 1988, la era turbo" loading="lazy"><p><b>🕰️ Viaje en el tiempo.</b> Al tocar Jugar, el año corre hasta tu temporada y te dice qué época vas a vivir.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_intro}}" alt="Credencial del paddock de Ayrton Senna en McLaren con el sello ACREDITADO" loading="lazy"><p><b>🪪 Tu credencial del paddock.</b> Con tu equipo, tu nombre y el auto de tu época… ¡ACREDITADO!</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_menu}}" alt="Menú con tarjetas animadas y barra de pasos" loading="lazy"><p><b>🎛️ Menú animado.</b> Tarjetas con mini-escenas y una barra que te dice qué te falta.</p></div>
+      <div class="shot wide reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img style="max-height:360px;object-position:center" src="{{IMG_go}}" alt="Semáforo de largada con luces rojas" loading="lazy"><p><b>🚦 Largada.</b> Se prenden las 5 luces, se apagan… ¡y a correr! (Antes de 1971, larga el comisario con la bandera.)</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="piloto">
+  <div class="wrap">
+    <div class="sec-k reveal">MODO PILOTO</div>
+    <h2 class="reveal">Ponete el casco</h2>
+    <p class="lead reveal">Del karting a la F1: largadas con semáforo, frenadas al límite y un sueldo para gastar en autos, mansiones y yates… cada uno con su cinemática.</p>
+    <div class="gallery">
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_drv_react}}" alt="Desafío del circuito: largada en Albert Park con las luces rojas encendidas" loading="lazy"><p><b>🚦 Largada del circuito.</b> Mantené las vueltas del motor en verde y largá apenas se apagan las luces (antes de 1971, con la bandera).</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_drv_brake}}" alt="Vuelta de clasificación: el auto llega al cartel de FRENÁ con el volante de 2026 al lado" loading="lazy"><p><b>⏱️ Vuelta de clasificación.</b> Frená en el cartel, doblá con el volante de la época y acelerá: cuanto más cerca de la pole, mejor largás.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_era}}" alt="Minijuego de manejo de época: usar el KERS en las rectas" loading="lazy"><p><b>🕰️ Manejo de época.</b> Cada época se maneja distinto: doble embrague, turbo, reabastecimiento, KERS, aero activa…</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_trk}}" alt="Desafío del circuito de Mónaco: esquivar guardarraíles cambiando de carril" loading="lazy"><p><b>🗺️ 5 desafíos por circuito.</b> Cambian cada temporada y según la época: eses de Suzuka, Monza, Mónaco, boxes, largadas con bandera…</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_nego}}" alt="Mesa de negociación de un fichaje con barras de zona azul para el jefe de equipo y el piloto" loading="lazy"><p><b>🤝 Negociaciones estilo F1 Manager.</b> Perfilá 30 días, negociá con el jefe de equipo y con el piloto hasta la zona azul.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_contract}}" alt="Contrato del piloto con cláusulas, derechos de imagen y plazo de respuesta" loading="lazy"><p><b>📝 Tu contrato de piloto.</b> Sueldo por temporadas, sponsors (pay driver), cláusulas y derechos de imagen.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_drv_buy}}" alt="Cinemática de compra de un auto deportivo" loading="lazy"><p><b>🚗 Tu primer auto deportivo</b> sale del concesionario en una cinemática.</p></div>
+      <div class="shot reveal" onclick="lb(this)"><div class="bar"><i></i><i></i><i></i></div><img src="{{IMG_drv_game}}" alt="Minijuego de compra: arrancar con la luz verde" loading="lazy"><p><b>🎮 Y después, 2 minijuegos:</b> si te salen bien, descuento y bonus.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="rangos">
+  <div class="wrap">
+    <div class="sec-k reveal">SUBÍ DE RANGO</div>
+    <h2 class="reveal">Cada rango abre una puerta nueva</h2>
+    <p class="lead reveal">Como en un equipo de verdad: un ingeniero no ficha pilotos. Ganate el puesto con puntos de licencia.</p>
+    <div class="ranks reveal">
+      <div class="rk"><div class="n">🔧</div><div><h4>Ingeniero de Equipo</h4><p>Setup, pit stops y la carrera en vivo</p></div></div>
+      <div class="rk"><div class="n">📐</div><div><h4>Ingeniero Jefe</h4><p>Desarrollo por áreas del auto</p></div></div>
+      <div class="rk"><div class="n">📋</div><div><h4>Director Deportivo</h4><p>Motores, estrategia y paquetes de mejoras</p></div></div>
+      <div class="rk"><div class="n">🎩</div><div><h4>Jefe de Escudería</h4><p>Fichajes, prospectos y academia</p></div></div>
+      <div class="rk"><div class="n">🏛️</div><div><h4>Presidente</h4><p>Directiva, presupuesto e instalaciones</p></div></div>
+      <div class="rk"><div class="n">💎</div><div><h4>Presidente de Élite</h4><p>Sponsors con objetivos</p></div></div>
+      <div class="rk"><div class="n">👑</div><div><h4>Leyenda de la F1</h4><p>La cima del paddock</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-k reveal">TODO LO QUE TRAE</div>
+    <h2 class="reveal">Una temporada no alcanza</h2>
+    <div class="feats">
+      <div class="feat reveal"><div class="ic">🕰️</div><h3>Cada época como fue</h3><p>Antes de 1980 el box te habla con la pizarra, el quiz no te pregunta del futuro y cada era tiene su auto: turbo, atmosféricos, híbridos, efecto suelo…</p></div>
+      <div class="feat reveal"><div class="ic">⚡</div><h3>Sprints y sanciones</h3><p>Fines de semana sprint (desde 2021), sanciones de 5 y 10 segundos y abandonos según la época: en los 50 se rompía casi la mitad de la grilla.</p></div>
+      <div class="feat reveal"><div class="ic">🌧️</div><h3>Clima que cambia todo</h3><p>El pronóstico puede fallar y la lluvia puede llegar en plena carrera.</p></div>
+      <div class="feat reveal"><div class="ic">✨</div><h3>Tu propio equipo</h3><p>Nombre, color, país y motor. Corre contra los equipos reales.</p></div>
+      <div class="feat reveal"><div class="ic">🛠️</div><h3>Editor de parrilla</h3><p>Cambiá equipos, pilotos, motores y el sistema de puntos. Guardá 3 plantillas.</p></div>
+      <div class="feat reveal"><div class="ic">🏫</div><h3>Academia</h3><p>Chicos desde los 14 años que crecen, se prestan o suben a la F1.</p></div>
+      <div class="feat reveal"><div class="ic">📜</div><h3>Reglamentos nuevos</h3><p>Cada 5 temporadas cambia todo y el orden de la parrilla se mezcla.</p></div>
+      <div class="feat reveal"><div class="ic">👥</div><h3>Multijugador local</h3><p>Dos jugadores en el mismo dispositivo, pantalla dividida.</p></div>
+      <div class="feat reveal"><div class="ic">🎚️</div><h3>Ajustes de realismo</h3><p>IA adaptativa, carreras al 25, 50 o 100% y daños que castigan cada error.</p></div>
+      <div class="feat reveal"><div class="ic">⏱️</div><h3>Doblás vos</h3><p>3 sectores en cinemática: frenás, doblás con el volante de la época hasta el vértice y acelerás. Si no doblás, al muro.</p></div>
+      <div class="feat reveal"><div class="ic">💥</div><h3>Colisiones</h3><p>Contactos, trompos y sanciones de 5 segundos. Y si te vas al muro: DNF en carrera o sin tiempo en la qualy.</p></div>
+      <div class="feat reveal"><div class="ic">🚦</div><h3>Carreras con rivales</h3><p>Largada con semáforo (o bandera), ataque con el empujón de cada época —rebufo, KERS, ERS, DRS o modo adelantamiento— y defensa cubriendo el lado del ataque.</p></div>
+      <div class="feat reveal"><div class="ic">💻</div><h3>El objeto del ingeniero</h3><p>Laptop, muro de boxes, tablet o teléfono según tu rango: radio, boxes y modo ataque.</p></div>
+      <div class="feat reveal"><div class="ic">🤝</div><h3>Relaciones en el paddock</h3><p>Tu compañero y tu reconocimiento cambian el ánimo, las ofertas y el sueldo.</p></div>
+      <div class="feat reveal"><div class="ic">⬇️</div><h3>Empezá desde abajo</h3><p>Fichá por el equipo más lento del año y hacé que cada punto valga oro.</p></div>
+      <div class="feat reveal"><div class="ic">💾</div><h3>Guardá tu partida</h3><p>5 ranuras por modo. Tu dinastía queda en el historial.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="jugar">
+  <div class="wrap">
+    <div class="play reveal"><svg class="bc-lines" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="388" height="288" rx="60" pathLength="1" style="animation-delay:0.30s"/><rect x="18" y="18" width="364" height="264" rx="50" pathLength="1" style="animation-delay:0.42s"/><rect x="30" y="30" width="340" height="240" rx="40" pathLength="1" style="animation-delay:0.54s"/><rect x="42" y="42" width="316" height="216" rx="30" pathLength="1" style="animation-delay:0.66s"/></svg>
+      <div class="lights"><span></span><span></span><span></span><span></span><span></span></div>
+      <h2>¿Listo para la largada?</h2>
+      <p class="lead" style="margin:0 auto 26px">Gratis, sin instalar nada. Funciona en compu y en celular.</p>
+      <div class="ctas"><button class="btn red" onclick="openGame()">▶ JUGAR AHORA</button></div>
+      <div class="faq">
+        <div><b>💾 ¿Se guarda mi partida?</b><span>Sí, en tu navegador. Si borrás los datos del navegador, se borran también.</span></div>
+        <div><b>📱 ¿Anda en el celu?</b><span>Sí. En pantallas chicas todo se acomoda en una columna.</span></div>
+        <div><b>🎮 ¿Por dónde arranco?</b><span>Elegí Solitario, un club y apretá Comenzar carrera.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:22px;justify-content:center"><span class="badge">F1</span><span><span class="r">FA</span>WIWE</span></div>
+    <p>Creado por Miluchino · Hecho con la ayuda de Claude 🤖 · Prototipo 1.5</p>
+    <p style="font-size:12px">Juego hecho por fans. No tiene relación oficial con la Fórmula 1, la FIA ni ninguna escudería.</p>
+  </div>
+</footer>
+
+<div id="lb" onclick="this.classList.remove('show')"><img alt=""></div>
+<div id="gameOv">
+  <div class="top"><span class="brand" style="font-size:20px"><span class="badge">F1</span><span><span class="r">FA</span>WIWE</span></span><button id="exitBtn" onclick="closeGame()">✕ Salir del juego</button></div>
+  <div id="loader">Cargando el juego…</div>
+  <iframe id="gameFrame" title="FAWIWE F1" allow="autoplay; fullscreen; accelerometer; gyroscope; vibrate" allowfullscreen></iframe>
+</div>
+
+<script id="gameData" type="text/plain">{{GAME_B64}}</script>
+<script>
+{{AUDIO_JS}}
+</script>
+<script>
+{{CARS_JS}}
+</script>
+<script>
+const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* sonido: se puede apagar con el botón 🔊 (se recuerda en este navegador) */
+let siteSound = true;
+try { siteSound = localStorage.getItem("fawiwe_site_sound") !== "off"; } catch (e) {}
+window.FW_SOUND_ON = () => siteSound;
+function toggleSiteSound() {
+  siteSound = !siteSound;
+  try { localStorage.setItem("fawiwe_site_sound", siteSound ? "on" : "off"); } catch (e) {}
+  document.getElementById("soundBtn").textContent = siteSound ? "🔊" : "🔇";
+  if (!siteSound) FWAudio.musicStop(0.3);
+}
+document.getElementById("soundBtn").textContent = siteSound ? "🔊" : "🔇";
+document.addEventListener("click", ev => {
+  const el = ev.target && ev.target.closest && ev.target.closest("a, button, .shot");
+  if (el && el.id !== "soundBtn") FWAudio.click();
+}, true);
+/* cinemática de entrada: arranca con "Entrar" (la música necesita un toque) */
+let introTimer = null, introSfx = [];
+/* "La evolución de la F1": 7 autos de distintas épocas antes del semáforo */
+const SI_EVO = { T0: 0.15, SLOT: 0.5 };
+SI_EVO.SHIFT = +(SI_EVO.T0 + SI_EVO.SLOT * FW_ERAS.length).toFixed(2);
+(function () {
+  const el = document.getElementById("siteIntro");
+  if (!el || typeof fwBuildEvolution !== "function") return;
+  el.querySelectorAll(".lights span,.plate,.plate *").forEach(n => {
+    const cs = getComputedStyle(n);
+    if (!cs.animationName || cs.animationName === "none") return;
+    n.style.animationDelay = cs.animationDelay.split(",").map(x => (parseFloat(x) + SI_EVO.SHIFT).toFixed(2) + "s").join(",");
+  });
+  const evo = fwBuildEvolution(el, SI_EVO.T0, SI_EVO.SLOT, "ci-evo");
+  const b = evo.querySelector(".bc-badge"); if (b) b.className = "badge";
+  el.insertBefore(evo, el.querySelector(".lights"));
+})();
+let siT0 = 0, siAudio = false, siEat = false;
+function siStartAudio() {
+  if (siAudio) return true;
+  try { FWAudio.unlock(); } catch (e) { return false; }
+  if (!FWAudio.ready()) return false;
+  siAudio = true;
+  const c = document.getElementById("siSoundChip"); if (c) c.classList.remove("show");
+  // la intro venía muda: la reiniciamos desde el segundo 0 con sonido
+  const cur = document.getElementById("siteIntro");
+  if (cur && !cur.classList.contains("gone") && performance.now() - siT0 > 300) {
+    const fresh = cur.cloneNode(true); cur.replaceWith(fresh);
+    siT0 = performance.now();
+    clearTimeout(introTimer); introTimer = setTimeout(introDone, 3900 + SI_EVO.SHIFT * 1000);
+  }
+  FWAudio.musicStart("full");
+  const el = document.getElementById("siteIntro");
+  if (el && !el.classList.contains("gone")) {
+    const e = performance.now() - siT0, sh = SI_EVO.SHIFT * 1000;
+    const at = (ms, fn) => { const d = ms - e; if (d > -30) introSfx.push(setTimeout(fn, Math.max(0, d))); };
+    FW_ERAS.forEach((x, k) => at((SI_EVO.T0 + k * SI_EVO.SLOT) * 1000 + 40, () => FWAudio.whoosh()));
+    [200, 420, 640, 860, 1080].forEach(ms => at(ms + sh, () => FWAudio.beep(false)));
+    at(1800 + sh, () => FWAudio.beep(true));
+  }
+  return true;
+}
+function introStart() {
+  const el = document.getElementById("siteIntro");
+  if (!el || !el.classList.contains("wait")) return;
+  el.classList.remove("wait");
+  siT0 = performance.now();
+  try { FWAudio.unlock(); } catch (e) {}
+  setTimeout(() => { if (!siStartAudio()) { const c = document.getElementById("siSoundChip"); if (c) c.classList.add("show"); } }, 120);
+  introTimer = setTimeout(introDone, 3900 + SI_EVO.SHIFT * 1000);
+}
+(function siAutoStart() {
+  const intro = document.getElementById("siteIntro");
+  if (intro && !document.getElementById("siSoundChip")) intro.insertAdjacentHTML("beforeend", '<div id="siSoundChip">🔇 Tocá para activar el sonido</div>');
+  const running = () => { const el = document.getElementById("siteIntro"); return el && !el.classList.contains("gone") && !el.classList.contains("wait"); };
+  const retry = () => [0, 60, 200, 450].forEach(ms => setTimeout(() => { if (!siAudio) siStartAudio(); }, ms));
+  const wake = ev => { if (siAudio) return; if (running()) { siEat = true; if (ev.type !== "keydown") ev.stopPropagation(); } siStartAudio(); retry(); };
+  ["pointerdown", "pointerup", "touchend", "keydown"].forEach(tp => document.addEventListener(tp, wake, true));
+  document.addEventListener("click", ev => { if (!siAudio) siStartAudio(); if (siEat) { siEat = false; ev.stopPropagation(); ev.preventDefault(); } }, true);
+  const go = () => { try { introStart(); } catch (e) {} };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else setTimeout(go, 0);
+})();
+function introTap() {
+  const el = document.getElementById("siteIntro");
+  if (el && el.classList.contains("wait")) introStart(); else introDone();
+}
+function introDone() {
+  clearTimeout(introTimer);
+  introSfx.forEach(clearTimeout); introSfx = [];
+  const el = document.getElementById("siteIntro");
+  if (!el || el.classList.contains("gone")) return;
+  carGo(() => el.classList.add("gone"), 1, "");
+  setTimeout(() => FWAudio.musicStop(1.6), 500);
+}
+if (reduceMotion) { const el = document.getElementById("siteIntro"); if (el) el.classList.add("gone"); }
+/* transición: un auto cruza la pantalla y tapa todo mientras carga */
+let wiping = false;
+function carGo(action, dir, msg) {
+  const w = document.getElementById("carWipe");
+  if (reduceMotion || !w || wiping) { action(); return; }
+  wiping = true;
+  FWAudio.whoosh();
+  const panel = w.querySelector(".panel"), car = w.querySelector(".sidecar");
+  w.querySelector(".msg").textContent = msg == null ? "Cargando…" : msg;
+  w.classList.toggle("rev", dir < 0);
+  w.classList.add("on");
+  const ease = "cubic-bezier(.7,0,.3,1)";
+  const T = 480;
+  panel.animate([{ transform: "translateX(-102%)" }, { transform: "translateX(0)" }], { duration: T, easing: ease, fill: "forwards" });
+  car.animate([{ left: "0%", transform: "translate(-100%,-50%)" }, { left: "100%", transform: "translate(-40%,-50%)" }], { duration: T, easing: ease, fill: "forwards" });
+  setTimeout(() => {
+    w.classList.add("cover");
+    try { action(); } catch (e) { console.error(e); }
+    setTimeout(() => {
+      w.classList.remove("cover");
+      panel.animate([{ transform: "translateX(0)" }, { transform: "translateX(102%)" }], { duration: T, easing: ease, fill: "forwards" });
+      car.animate([{ left: "100%", transform: "translate(-40%,-50%)" }, { left: "100%", transform: "translate(120%,-50%)" }], { duration: T * 0.6, easing: ease, fill: "forwards" });
+      setTimeout(() => { w.classList.remove("on", "rev"); wiping = false; }, T + 40);
+    }, 380);
+  }, T);
+}
+document.addEventListener("click", ev => {
+  const a = ev.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute("href").slice(1);
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return;
+  ev.preventDefault();
+  const dir = target.getBoundingClientRect().top >= 0 ? 1 : -1;
+  carGo(() => { const y = target.getBoundingClientRect().top + window.scrollY - 64; window.scrollTo({ top: id === "top" ? 0 : y, behavior: "instant" }); }, dir);
+});
+function lb(el){const i=el.querySelector('img');const box=document.getElementById('lb');box.querySelector('img').src=i.src;box.querySelector('img').alt=i.alt;box.classList.add('show');}
+let gameHtml=null;
+function getGame(){if(gameHtml)return gameHtml;const b=atob(document.getElementById('gameData').textContent.trim());const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);gameHtml=new TextDecoder('utf-8').decode(u);return gameHtml;}
+function openGame(){
+  FWAudio.musicStop(0.4);
+  carGo(() => {
+    const ov=document.getElementById('gameOv');const fr=document.getElementById('gameFrame');
+    ov.classList.add('show');document.body.style.overflow='hidden';
+    if(!fr.srcdoc){fr.onload=()=>{document.getElementById('loader').style.display='none';};fr.srcdoc=getGame();}
+  }, 1, "Cargando el juego…");
+}
+let exitArm=0;
+function closeGame(){
+  const b=document.getElementById('exitBtn');
+  if(Date.now()-exitArm>3500){exitArm=Date.now();b.textContent='¿Seguro? Lo no guardado se pierde · tocá otra vez';setTimeout(()=>{b.textContent='✕ Salir del juego';},3500);return;}
+  exitArm=0;b.textContent='✕ Salir del juego';
+  carGo(() => { document.getElementById('gameOv').classList.remove('show');document.body.style.overflow=''; }, -1, "");
+}
+
+// ===== celular: pantalla completa e instalar como app (pedidos desde el juego) =====
+let fwInstallEv=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();fwInstallEv=e;const b=document.getElementById('navInstall');if(b)b.style.display='';});
+function fwInstall(){
+  if(fwInstallEv){fwInstallEv.prompt();fwInstallEv=null;return;}
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  alert(ios?'En iPhone: tocá Compartir (□↑) y después «Agregar a inicio».':'En el menú del navegador (⋮) tocá «Instalar app» o «Agregar a la pantalla de inicio».');
+}
+window.addEventListener('message',e=>{
+  const d=e.data||{};
+  if(d.fw==='install')fwInstall();
+  if(d.fw==='fullscreen'){const el=document.getElementById('gameOv')||document.documentElement;const f=el.requestFullscreen||el.webkitRequestFullscreen;if(document.fullscreenElement){document.exitFullscreen();}else if(f){f.call(el);}}
+});
+</script>

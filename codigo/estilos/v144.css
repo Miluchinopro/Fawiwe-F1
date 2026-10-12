@@ -1,0 +1,29 @@
+/* ===== V144 · novedades del multijugador ===== */
+#v14Pass{position:fixed;inset:0;z-index:1000020;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#16161f,#050507);padding:20px 16px}
+#v14Pass.show{display:flex;animation:v11in .25s ease-out}
+.v14-pass{text-align:center;color:#fff;max-width:420px;width:100%;background:#111118;border:1px solid #2a2a33;border-top:6px solid #facc15;border-radius:18px;padding:26px 20px}
+#v14Pass.p2 .v14-pass{border-top-color:#38bdf8}
+.v14-pass-ic{font-size:46px;animation:v14spin 1.6s ease-in-out infinite}
+@keyframes v14spin{50%{transform:rotate(180deg)}}
+.v14-pass-k{font-size:12px;letter-spacing:.2em;color:#999;font-weight:900;margin-top:6px}
+.v14-pass-who{font-size:30px;font-weight:900;margin:6px 0 4px}
+.v14-pass p{color:#ccc;font-size:14px;margin:6px 0 16px}
+.v14-pass .lv-btn{min-height:52px;font-size:16px!important;width:100%}
+#duelTurn{background:radial-gradient(circle at 50% 40%,#16161f,#050507)!important}
+.v14-bets.p2{border-left-color:#38bdf8!important}
+.v14-halves{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.v14-half{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:110px;border-radius:14px!important;background:#16161f!important;background-image:none!important;border:2px solid #333!important;color:#fff!important;box-shadow:none!important;touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer;padding:10px!important}
+.v14-half.p1{border-color:#facc15!important}.v14-half.p2{border-color:#38bdf8!important}
+.v14-half b{font-size:16px}.v14-half span{font-size:12px;color:#aaa}.v14-half em{font-style:normal;font-weight:900;font-size:18px;min-height:22px}
+.v14-half.ok{background:#14532d!important}.v14-half.bad{background:#7f1d1d!important}.v14-half.done{background:#1f2937!important}
+.v14-pvp.p1{border-left-color:#facc15!important}.v14-pvp.p2{border-left-color:#38bdf8!important}
+.v14-bar .z.y{background:rgba(250,204,21,.35)!important;border:1px solid #facc15}
+.v14-bar .z.b{background:rgba(56,189,248,.35)!important;border:1px solid #38bdf8}
+.v14-cup{margin-top:14px;border-top:1px solid #2a2a33;padding-top:10px}
+.v14-cup h3{margin:0 0 6px}
+.v14-chart{width:100%;max-width:520px;height:auto;background:#0d0d12;border-radius:10px;display:block;margin:6px 0 10px}
+.v14-cups{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.v14-cups span{background:#16161f;border:1px solid #333;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}
+.v14-cups span.a{border-color:#facc15}.v14-cups span.b{border-color:#38bdf8}
+.v14-cupk{margin-top:10px;font-weight:900;letter-spacing:.14em;color:#facc15;font-size:13px}
+#duelChamp .v14-chart{max-width:360px;margin:8px auto}

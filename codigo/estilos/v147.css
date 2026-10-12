@@ -1,0 +1,72 @@
+/* ===== FAWIWE · Prototipo 1.5 ===== */
+/* minijuegos: mientras jugás no aparece la barra de abajo que tapaba los botones */
+body.v17-play #v12Nav,body.v17-play #dashToggle{display:none!important}
+body.v17-play{padding-bottom:0!important}
+/* la cinemática de la vuelta se achica si la pantalla es baja, así entran los controles */
+#eraStage #lcCine{height:clamp(170px,calc(100vh - 470px),320px)}
+#eraStage .mw{margin:8px auto 44px}
+#eraStage .mw-wrap .mw-keys{margin-top:2px}
+/* pantallas anchas: cinemática a la izquierda y controles a la derecha */
+@media (min-width:700px){
+  #eraStage:has(#lcCine){display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:14px;align-items:start}
+  #eraStage:has(#lcCine) > *{grid-column:2;min-width:0}
+  #eraStage:has(#lcCine) > #lcCine{grid-column:1;grid-row:1 / span 12;height:clamp(220px,calc(100vh - 150px),400px);align-self:start}
+  #eraStage:has(#lcCine) .mw-wrap .mw-keys{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:center;width:auto!important;max-width:100%}
+  #eraStage:has(#lcCine) .eo{margin:4px auto}
+}
+/* celular acostado (o ventana muy baja): todo más compacto */
+@media (max-height:520px){
+  #eraStage{padding:8px!important;margin:6px 0!important}
+  #eraStage:has(#lcCine) > #lcCine{height:calc(100vh - 40px)!important;max-height:330px}
+  #eraStage .mw-wrap .mw-keys,#eraStage .mw-tag,#eraStage .eo-tag,#eraStage .eo .mw-keys,#eraStage .em-assist{display:none!important}
+  #eraStage .mw{margin:2px auto 40px!important}
+  #eraStage .mw .mw-leds{display:none}
+  #eraStage .eo-dev{transform:scale(.8);transform-origin:top center;margin-bottom:-26px!important}
+  #eraStage .eo-btns{margin-top:4px}
+  #eraStage .era-stat{margin-bottom:4px}
+  #eraStage .em-car{transform:scale(.86);transform-origin:top center;margin-bottom:-30px}
+  #eraStage .era-row button{padding-top:10px!important;padding-bottom:10px!important}
+}
+/* multijugador acostado: cartel de pasar el celu siempre adentro de la pantalla */
+#v14Pass{box-sizing:border-box;max-width:100vw;overflow:auto}
+.v14-pass{box-sizing:border-box;max-width:min(420px,calc(100vw - 20px))}
+@media (max-height:520px){
+  #v14Pass{padding:8px 12px;align-items:center}
+  .v14-pass{padding:12px 16px}
+  .v14-pass-ic{font-size:28px}
+  .v14-pass-who{font-size:22px}
+  .v14-pass p{margin:4px 0 8px}
+  .v14-pass .lv-btn{min-height:44px}
+  /* largada a dos: las dos mitades más bajitas y lado a lado */
+  .v14-half{min-height:70px!important;padding:6px!important}
+  /* cinemática del duelo: entra entera y las rayas no tapan el marcador */
+  #duelCine,#duelChamp{justify-content:flex-start;gap:6px;padding:8px 12px}
+  #duelCine .dc-k{font-size:11px}
+  #duelCine .dc-p{padding:6px 8px}
+  #duelCine .dc-pos{font-size:34px}
+  #duelCine .dc-p b{font-size:15px}
+  #duelCine .dc-plate,#duelChamp .dc-plate{padding:10px 16px 12px;animation-delay:.4s}
+  #duelCine .dc-how{font-size:24px}
+  #duelCine .dc-score{font-size:17px;margin-top:6px}
+  #duelCine .dc-plate .bc-lines,#duelChamp .dc-plate .bc-lines{display:none}
+}
+/* barra de abajo del celu: cuando el juego te lleva a un botón, nunca queda escondido debajo */
+html:has(#v12Nav){scroll-padding-bottom:84px}
+html:has(body.v17-play){scroll-padding-bottom:0}
+@media (max-height:520px){
+  /* celu acostado: barra más finita (ocupa menos pantalla) */
+  #v12Nav{padding:2px 4px calc(2px + env(safe-area-inset-bottom))}
+  #v12Nav button{flex-direction:row!important;justify-content:center;gap:6px!important;padding:0!important;min-height:0!important;height:40px!important}
+  #v12Nav button i{font-size:17px}
+  body:has(#v12Nav){padding-bottom:62px!important}
+  html:has(#v12Nav){scroll-padding-bottom:64px}
+}
+/* antes de 1971: en vez de semáforo, el comisario levanta la bandera y la baja para largar */
+body.v17-flag .v7-lights i,body.v17-flag .lc-lights i{display:none!important}
+body.v17-flag .v7-lights,body.v17-flag .lc-lights{justify-content:center;align-items:center;height:auto!important;min-height:66px!important;overflow:hidden;padding-top:4px!important;padding-bottom:4px!important}
+body.v17-flag .v7-lights::after,body.v17-flag .lc-lights::after{content:"🚩";display:block;font-size:40px;line-height:1;transform-origin:20% 100%;transform:translateY(12px) rotate(-55deg);transition:transform .3s ease}
+body.v17-flag .v7-lights:has(i.on)::after,body.v17-flag .lc-lights:has(i.on)::after{transform:translateY(9px) rotate(-38deg)}
+body.v17-flag .v7-lights:has(i:nth-child(2).on)::after,body.v17-flag .lc-lights:has(i:nth-child(2).on)::after{transform:translateY(6px) rotate(-24deg)}
+body.v17-flag .v7-lights:has(i:nth-child(3).on)::after,body.v17-flag .lc-lights:has(i:nth-child(3).on)::after{transform:translateY(3px) rotate(-12deg)}
+body.v17-flag .v7-lights:has(i:nth-child(4).on)::after,body.v17-flag .lc-lights:has(i:nth-child(4).on)::after{transform:translateY(1px) rotate(-4deg)}
+body.v17-flag .v7-lights:has(i:nth-child(5).on)::after,body.v17-flag .lc-lights:has(i:nth-child(5).on)::after{transform:none}

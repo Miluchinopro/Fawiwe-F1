@@ -18,6 +18,7 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 - **Cada época con sus cosas**: el quiz no pregunta del futuro, antes de 1980 el box te habla con la pizarra (también en la carrera en vivo) y el piloto con señas, antes de 1971 se larga con la bandera del comisario, antes de 2011 se pasa con el rebufo y desde 2026 hay modo adelantamiento en vez de DRS.
 - **Modo piloto justo**: si elegís un piloto real arranca con su nivel de verdad, así que si jugás bien le ganás a tu compañero.
 - **Cada época con sus roturas**: en los años 50 abandonaba casi la mitad de la grilla; hoy casi nadie. Y cada partida tiene su propia suerte.
+- Antes de 1980 el box te habla con una **pizarra en código** (P3 · −0.4 · L12 · IN), como en la época.
 - **Escuderías leyenda** sin pilotos repetidos y **editor de grilla** que funciona en todas las épocas.
 - Carrera rápida, desafíos, "Toda una vida", temporada rápida y multijugador local.
 
@@ -41,6 +42,7 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 |---|---|
 | `index.html` | La página de FAWIWE F1, con el juego adentro |
 | `juego.html` | El juego solo |
+| `codigo/` | El código fuente ordenado en carpetas. Mirá `codigo/ESTRUCTURA.md` para ver qué hace cada archivo y cómo armar el juego |
 
 ## 📜 Licencia
 [Creative Commons Atribución-NoComercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/deed.es): podés compartirlo y modificarlo nombrando a **Miluchino**, pero sin fines comerciales. Mirá el archivo `LICENSE`.

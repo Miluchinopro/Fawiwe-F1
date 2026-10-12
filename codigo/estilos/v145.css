@@ -1,0 +1,53 @@
+/* ===== V145 · Prototipo 1.4 ===== */
+/* 7) carteles de resultado: si no entran en la pantalla, se recorren (no se cortan arriba) */
+#resultOverlay{align-items:flex-start!important;overflow-y:auto!important}
+#resultOverlay .result-card{margin:auto!important}
+/* 31) en la clasificación no hay puntos */
+#resultOverlay.v15-quali #resultGridTable th:nth-child(4),#resultOverlay.v15-quali #resultGridTable td:nth-child(4){display:none}
+/* 15 y 17) el aviso de girar el celu ya no aprieta el panel de la carrera */
+#v12Rot{position:fixed!important;left:10px!important;right:10px!important;bottom:10px!important;top:auto!important;z-index:99995!important;margin:0!important;width:auto!important;box-shadow:0 10px 30px #000c}
+#dlOverlay > .eng-live-card,#qlOverlay > .eng-live-card{flex:0 0 auto;width:min(1000px,100%)}
+/* 16) en el celu parado, la radio no tapa el título de la transmisión */
+@media (max-width:700px) and (orientation:portrait){
+  body:has(#fwRadioToast.show):not(.v10-dec) #dlOverlay.show,body:has(#fwRadioToast.show):not(.v10-dec) #qlOverlay.show{padding-top:84px!important;transition:padding-top .2s}
+  #dlOverlay,#qlOverlay{transition:padding-top .2s}
+}
+/* 14) en el celu, el botón ☰ flotante sobra: está "Más" en el menú de abajo */
+@media (max-width:700px){
+  body:has(#v12Nav) #dashToggle{display:none!important}
+  body:has(#v12Nav) #dashTop{padding-left:10px!important}
+}
+/* 18) conferencia de prensa en el celu */
+@media (max-width:700px){
+  #pressOverlay{padding:8px!important;align-items:flex-start!important}
+  .press-card{padding:18px 14px!important;max-height:none!important;margin:auto 0}
+  .press-kicker{font-size:11px!important;letter-spacing:2px!important;padding-right:44px}
+  .press-title{font-size:24px!important;margin:8px 0!important}
+  .press-body{font-size:15px!important}
+  .press-quote{font-size:14px!important;margin:12px auto!important;padding:10px!important}
+  .press-question{margin:12px 0!important;padding:12px!important}
+  .press-question h3{font-size:15px!important}
+  .press-options{grid-template-columns:1fr!important;gap:6px!important}
+  .press-option{font-size:14px!important;padding:10px!important}
+  .press-btn{font-size:16px!important;padding:11px 20px!important}
+  .press-close{width:36px!important;height:36px!important;font-size:18px!important;top:8px!important;right:8px!important}
+}
+/* 19) accesibilidad: cada casilla al lado de su texto */
+.v4-a11y label.ng-check{justify-content:flex-start!important;flex-wrap:nowrap!important;text-align:left}
+.v4-a11y label.ng-check span{flex:1}
+/* 20) historial con la misma letra que el resto */
+#log p{font-size:14px;line-height:1.45;margin:6px 0}
+@media (max-width:700px){#log p{font-size:13px}}
+/* 25) subida de rango: las líneas quedan detrás del texto, y "Continuar" es más grande */
+#rankCine .rc-plate .bc-lines{opacity:.35;width:30%!important}
+#rankCine .rc-old,#rankCine .rc-new,#rankCine .rc-ladder,#rankCine .rc-un{z-index:1}
+#rankCine .rc-go{font-size:17px!important;padding:14px 46px!important;min-height:48px}
+/* 30) el cartel "Gracias por jugar" no tapa el último texto */
+#setup{padding-bottom:42px}
+body.dash #game{padding-bottom:30px}
+/* 35) selector de dificultad sin cortar */
+#miniDiff,#inGameMiniDiff{text-overflow:ellipsis}
+/* 36) decisiones: qué cambia cada opción */
+.v15-fx{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:12px;font-weight:700}
+.v15-fx i{font-style:normal;padding:2px 7px;border-radius:999px;background:#0006}
+.v15-fx i.up{color:#86efac}.v15-fx i.dn{color:#fca5a5}
