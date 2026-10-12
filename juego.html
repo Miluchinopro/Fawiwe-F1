@@ -2383,6 +2383,17 @@ body.v17-play{padding-bottom:0!important}
   #duelCine .dc-score{font-size:17px;margin-top:6px}
   #duelCine .dc-plate .bc-lines,#duelChamp .dc-plate .bc-lines{display:none}
 }
+/* barra de abajo del celu: cuando el juego te lleva a un botón, nunca queda escondido debajo */
+html:has(#v12Nav){scroll-padding-bottom:84px}
+html:has(body.v17-play){scroll-padding-bottom:0}
+@media (max-height:520px){
+  /* celu acostado: barra más finita (ocupa menos pantalla) */
+  #v12Nav{padding:2px 4px calc(2px + env(safe-area-inset-bottom))}
+  #v12Nav button{flex-direction:row!important;justify-content:center;gap:6px!important;padding:0!important;min-height:0!important;height:40px!important}
+  #v12Nav button i{font-size:17px}
+  body:has(#v12Nav){padding-bottom:62px!important}
+  html:has(#v12Nav){scroll-padding-bottom:64px}
+}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
