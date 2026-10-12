@@ -2406,7 +2406,7 @@ body.v17-flag .v7-lights:has(i:nth-child(5).on)::after,body.v17-flag .lc-lights:
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body class=&quot;start-active&quot;&gt;
-&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.4 🏁&lt;/div&gt;
+&lt;div id=&quot;fwFooter&quot; style=&quot;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding:6px 10px;font-size:12px;color:#ffffff;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0));pointer-events:none;&quot;&gt;🏁 GRACIAS POR JUGAR A FAWIWE F1 · PROTOTIPO 1.5 🏁&lt;/div&gt;
 &lt;div id=&quot;introScreen&quot; class=&quot;ci-wait&quot; onclick=&quot;skipIntroCinematic(event)&quot;&gt;
   &lt;div class=&quot;ci-gate&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ci-gate-btn&quot; onclick=&quot;event.stopPropagation();ciBegin()&quot;&gt;▶ Tocá para empezar&lt;/button&gt;&lt;span&gt;🔊 Con música y sonido&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;ci-layer ci-present&quot;&gt;&lt;div class=&quot;bc-plate&quot;&gt;&lt;svg class=&quot;bc-lines&quot; viewBox=&quot;0 0 400 300&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;6&quot; y=&quot;6&quot; width=&quot;388&quot; height=&quot;288&quot; rx=&quot;60&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.25s&quot;/&gt;&lt;rect x=&quot;18&quot; y=&quot;18&quot; width=&quot;364&quot; height=&quot;264&quot; rx=&quot;50&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.37s&quot;/&gt;&lt;rect x=&quot;30&quot; y=&quot;30&quot; width=&quot;340&quot; height=&quot;240&quot; rx=&quot;40&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.49s&quot;/&gt;&lt;rect x=&quot;42&quot; y=&quot;42&quot; width=&quot;316&quot; height=&quot;216&quot; rx=&quot;30&quot; pathLength=&quot;1&quot; style=&quot;animation-delay:0.61s&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;k&quot;&gt;FAWIWE RACING TEAM&lt;/div&gt;&lt;b&gt;Presenta&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
@@ -28637,6 +28637,25 @@ function v16Go() {
     window.eraKers = eraKers;
   }
 
+  // el aviso de &quot;nueva era&quot; también usa las épocas bien marcadas
+  if (typeof v4EraName === &quot;function&quot;) {
+    v4EraName = function (y) { try { const e = v18Era(parseInt(y, 10) || 2026); return { y: e[0], cap: e[1] }; } catch (e) { return null; } };
+    window.v4EraName = v4EraName;
+  }
+  // credencial del paddock: antes de 1980 el ingeniero no usa auriculares de radio, usa cronómetro
+  try {
+    const watch = c =&gt; `&lt;svg viewBox=&quot;0 0 120 100&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;52&quot; y=&quot;6&quot; width=&quot;16&quot; height=&quot;10&quot; rx=&quot;3&quot; fill=&quot;#e5e7eb&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;58&quot; r=&quot;34&quot; fill=&quot;#f5f1e6&quot; stroke=&quot;${c}&quot; stroke-width=&quot;8&quot;/&gt;&lt;line x1=&quot;60&quot; y1=&quot;58&quot; x2=&quot;60&quot; y2=&quot;34&quot; stroke=&quot;#111&quot; stroke-width=&quot;5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;line x1=&quot;60&quot; y1=&quot;58&quot; x2=&quot;76&quot; y2=&quot;66&quot; stroke=&quot;#e10600&quot; stroke-width=&quot;4&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;58&quot; r=&quot;5&quot; fill=&quot;#111&quot;/&gt;&lt;/svg&gt;`;
+    new MutationObserver(recs =&gt; {
+      recs.forEach(r =&gt; r.addedNodes.forEach(n =&gt; {
+        if (!n || n.id !== &quot;v16Go&quot;) return;
+        const y = parseInt(document.getElementById(&quot;startYear&quot;)?.value || &quot;2026&quot;, 10) || 2026;
+        const drv = document.getElementById(&quot;playerModeSel&quot;)?.value === &quot;driver&quot;;
+        if (drv || y &gt;= 1980) return;
+        const ph = n.querySelector(&quot;.g-photo&quot;); if (ph) ph.innerHTML = watch(getComputedStyle(n).getPropertyValue(&quot;--tc&quot;) || &quot;#e10600&quot;);
+      }));
+    }).observe(document.body, { childList: true });
+  } catch (e) {}
+
   /* ---------- 4) novatos con nombres de su época ---------- */
   const OLD_F = [&quot;Piero&quot;, &quot;Jean&quot;, &quot;Hans&quot;, &quot;Bob&quot;, &quot;Mario&quot;, &quot;Henri&quot;, &quot;Tony&quot;, &quot;Wolfgang&quot;, &quot;Ricardo&quot;, &quot;Peter&quot;, &quot;Gianni&quot;, &quot;Jacques&quot;, &quot;Kurt&quot;, &quot;Roberto&quot;, &quot;Brian&quot;, &quot;Carlos&quot;, &quot;Helmut&quot;, &quot;Franco&quot;, &quot;Lucien&quot;, &quot;Derek&quot;, &quot;Sergio&quot;, &quot;Ernst&quot;, &quot;Raúl&quot;, &quot;Colin&quot;];
   const OLD_L = [&quot;Bellandi&quot;, &quot;Lambert&quot;, &quot;Hofmann&quot;, &quot;Whitfield&quot;, &quot;Duchamp&quot;, &quot;Moreau&quot;, &quot;Ferrante&quot;, &quot;Kessel&quot;, &quot;Ortega&quot;, &quot;Castelli&quot;, &quot;Brandt&quot;, &quot;Lacroix&quot;, &quot;Pemberton&quot;, &quot;Vossberg&quot;, &quot;Marchetti&quot;, &quot;Delacour&quot;, &quot;Rinaldi&quot;, &quot;Aldridge&quot;, &quot;Stenberg&quot;, &quot;Valdés&quot;, &quot;Montero&quot;, &quot;Fairbanks&quot;, &quot;Granville&quot;, &quot;Ruffino&quot;];
@@ -28644,7 +28663,9 @@ function v16Go() {
     const o = generateRookieName;
     generateRookieName = function (seedStr) {
       try {
-        if (yr() &lt; 1990) {
+        const m = String(seedStr || &quot;&quot;).match(/(19[5-9]\d|20[0-4]\d)/);
+        const y = m ? +m[1] : yr();
+        if (y &lt; 1990) {
           const h1 = Math.abs(deterministicHash(&quot;rookie1_&quot; + seedStr)), h2 = Math.abs(deterministicHash(&quot;rookie2_&quot; + seedStr));
           return OLD_F[h1 % OLD_F.length] + &quot; &quot; + OLD_L[h2 % OLD_L.length];
         }
