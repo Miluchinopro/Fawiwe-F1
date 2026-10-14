@@ -460,4 +460,91 @@
     };
     nextGP = w; window.nextGP = w;
   }
+
+  /* ---------- 12) tu casa: más actividades en cada ambiente (algunas según la época) ---------- */
+  if (typeof HOME_ROOMS !== "undefined" && typeof HOME_SCENES !== "undefined" && !HOME_ROOMS._v18) {
+    HOME_ROOMS._v18 = true;
+    const A = (id, icon, name, cine, fx, txt, from) => ({ id, icon, name, cine, fx, txt, from });
+    const MORE = {
+      cuarto: [
+        A("ordenar", "🧹", "Ordenar el cuarto", "tidy", { calma: 3, animo: 1 }, "Cuarto ordenado, cabeza ordenada."),
+        A("estirar", "🤸", "Estirar antes de dormir", "stretch", { salud: 3, calma: 1 }, "Diez minutos de estiramiento y la espalda te lo agradece."),
+        A("musicacama", "🎧", "Escuchar música tirado en la cama", "chill", { calma: 3, animo: 2 }, "Tus discos favoritos, uno atrás del otro.")],
+      cocina: [
+        A("desayuno", "🥞", "Desayuno completo", "breakfast", { salud: 3, animo: 2 }, "Frutas, tostadas y algo caliente: arrancás el día con todo."),
+        A("postre", "🍰", "Hacer un postre", "dessert", { animo: 4, salud: -1 }, "Te salió una torta que ni en la pastelería."),
+        A("mate", "🧉", "Mate con amigos", "mate", { animo: 3, carisma: 3 }, "Una ronda de mate y charla con amigos.")],
+      living: [
+        A("mesa", "🎲", "Juego de mesa en familia", "boardgame", { animo: 3, calma: 2, carisma: 1 }, "Hubo trampas, risas y revancha pendiente."),
+        A("rompe", "🧩", "Armar un rompecabezas", "puzzle", { calma: 4 }, "Mil piezas, una por una. Paciencia de campeón."),
+        A("futbol", "⚽", "Ver un partido de fútbol", "football", { animo: 4, carisma: 1 }, "Gritaste el gol como si fuera tuyo.")],
+      bano: [
+        A("ducha", "🚿", "Ducha fría", "shower", { salud: 2, animo: 2 }, "Agua fría de golpe: te despertaste del todo."),
+        A("cantar", "🎶", "Cantar en la ducha", "singshower", { animo: 4, carisma: 1 }, "El mejor concierto de tu vida, con el champú de micrófono."),
+        A("espejo", "🪞", "Lavarte la cara frente al espejo", "mirror", { calma: 3, carisma: 1 }, "Te mirás al espejo y te decís: «este fin de semana es tuyo»."),
+        A("pelo", "💇", "Cortarte el pelo", "haircut", { carisma: 4 }, "Corte nuevo para las fotos del fin de semana.")],
+      balcon: [
+        A("estrellas", "🔭", "Mirar las estrellas", "stars", { calma: 4, animo: 1 }, "Encontraste la Cruz del Sur y te quedaste un rato largo."),
+        A("cafe", "☕", "Café mirando la ciudad", "coffee", { calma: 3, animo: 2 }, "Un café tranquilo mientras la ciudad se despierta."),
+        A("dibujar", "🎨", "Dibujar el paisaje", "draw", { calma: 4, carisma: 1 }, "No sos Picasso, pero te quedó lindo.")],
+      musica: [
+        A("bateria", "🥁", "Tocar la batería", "drums", { animo: 5, calma: -1 }, "Los vecinos no opinan lo mismo, pero vos te sacaste la bronca de encima."),
+        A("componer", "🎹", "Componer una canción", "compose", { calma: 2, carisma: 3, animo: 1 }, "Escribiste una canción sobre la última carrera."),
+        A("grabar", "📹", "Grabar un video para tus fans", "record", { carisma: 5 }, "Tus fans enloquecieron con el video.", 2006)],
+      pile: [
+        A("nadar", "🏊", "Nadar unos largos", "swim", { salud: 4, calma: 2 }, "Treinta largos sin apuro."),
+        A("perro", "🐕", "Jugar con tu perro", "dog", { animo: 5, calma: 2 }, "Tu perro no sabe nada de F1 y te quiere igual."),
+        A("cena", "🍽️", "Cena bajo las estrellas", "dinner", { carisma: 3, animo: 3 }, "Una cena larga en el jardín con la gente que querés.")],
+      cine: [
+        A("clasico", "🎞️", "Ver un clásico del cine", "classic", { calma: 4, animo: 2 }, "Una película vieja que nunca falla."),
+        A("terror", "👻", "Noche de terror con amigos", "horror", { animo: 4, carisma: 2 }, "Gritaron todos. Vos más que nadie.")],
+      spa: [
+        A("jacuzzi", "🫧", "Jacuzzi", "jacuzzi", { calma: 4, salud: 2 }, "Burbujas calentitas y cero apuro."),
+        A("crio", "🧊", "Crioterapia", "cryo", { salud: 5, calma: -1 }, "Tres minutos a −110 °C: los músculos como nuevos.", 2008)],
+      terraza: [
+        A("velero", "⛵", "Paseo en yate", "boat", { animo: 5, calma: 2, carisma: 1 }, "Una vuelta por la costa con amigos."),
+        A("fuegos", "🎆", "Ver los fuegos artificiales", "fireworks", { animo: 4, carisma: 1 }, "Fuegos sobre el puerto, desde el mejor lugar.")]
+    };
+    const SC = {
+      tidy: { cls: "room", big: "🧹", floats: ["👕", "📦", "✨", "🧦"], title: "A ordenar", sub: "Cada cosa en su lugar", dur: 2800 },
+      stretch: { cls: "night", big: "🤸", floats: ["✨", "🌙", "✨"], title: "Estirando", sub: "Respirá y aflojá", dur: 3000 },
+      chill: { cls: "dusk", big: "🎧", floats: ["🎵", "🎶", "🎵"], title: "Música tranqui", sub: "Tu lista favorita", dur: 3000 },
+      breakfast: { cls: "kitchen", big: "🥞", floats: ["🍓", "☕", "🍌", "🥛"], title: "Buen día", sub: "Desayuno de campeón", dur: 2800 },
+      dessert: { cls: "kitchen", big: "🍰", floats: ["🍫", "🍓", "🥚", "✨"], title: "Al horno", sub: "40 minutos a fuego medio", dur: 3000 },
+      mate: { cls: "kitchen", big: "🧉", floats: ["♨️", "😂", "🧉", "💬"], title: "Mate y charla", sub: "¿Quién ceba?", dur: 3000 },
+      boardgame: { cls: "room", big: "🎲", floats: ["♟️", "🃏", "😂", "🏆"], title: "Noche de juegos", sub: "En familia", dur: 3000 },
+      puzzle: { cls: "dusk", big: "🧩", floats: ["🧩", "🧩", "✨"], title: "Pieza por pieza", sub: "Mil piezas", dur: 3200 },
+      football: { cls: "cinema", big: "📺", floats: ["⚽", "🥅", "🎉", "⚽"], title: "¡GOOOL!", sub: "Partido por la tele", dur: 3000 },
+      shower: { cls: "bath", big: "🚿", floats: ["💧", "🥶", "💧", "💧"], title: "¡Fría!", sub: "Despertador natural", dur: 2600 },
+      singshower: { cls: "bath", big: "🚿", floats: ["🎶", "🫧", "🎵", "🫧"], title: "Concierto en la ducha", sub: "Champú de micrófono", dur: 3000 },
+      mirror: { cls: "bath", big: "🪞", floats: ["💧", "😌", "✨"], title: "Frente al espejo", sub: "Cara lavada y cabeza fría", dur: 2800 },
+      haircut: { cls: "bath", big: "💇", floats: ["✂️", "✨", "💈"], title: "Corte nuevo", sub: "Listo para las fotos", dur: 2800 },
+      stars: { cls: "night", big: "🔭", floats: ["⭐", "✨", "🌠", "⭐"], title: "Mirando el cielo", sub: "Noche despejada", dur: 3400 },
+      coffee: { cls: "sunset", big: "☕", floats: ["♨️", "🏙️", "🕊️"], title: "Café en el balcón", sub: "La ciudad se despierta", dur: 2800 },
+      draw: { cls: "sunset", big: "🎨", floats: ["🖌️", "🌇", "✏️"], title: "Dibujando", sub: "El atardecer desde el balcón", dur: 3000 },
+      drums: { cls: "studio", big: "🥁", floats: ["💥", "🎵", "💥", "🎶"], title: "¡Batería!", sub: "Perdón, vecinos", dur: 3000 },
+      compose: { cls: "studio", big: "🎹", floats: ["🎼", "✍️", "🎵"], title: "Componiendo", sub: "Una canción nueva", dur: 3200 },
+      record: { cls: "studio", big: "📹", floats: ["❤️", "👍", "💬", "❤️"], title: "Grabando", sub: "Para tus fans", dur: 3000 },
+      swim: { cls: "garden", big: "🏊", floats: ["💦", "💦", "☀️"], title: "Al agua", sub: "Treinta largos", dur: 3000 },
+      dog: { cls: "garden", big: "🐕", floats: ["🎾", "🦴", "❤️", "🎾"], title: "¡Buscá la pelota!", sub: "Tu mejor amigo", dur: 3000 },
+      classic: { cls: "cinema", big: "🎞️", floats: ["🍿", "⭐", "🎬"], title: "Un clásico", sub: "Blanco y negro", dur: 3000 },
+      horror: { cls: "cinema", big: "👻", floats: ["😱", "🕷️", "🍿", "😱"], title: "Noche de terror", sub: "Con las luces apagadas", dur: 3000 },
+      jacuzzi: { cls: "bath", big: "🫧", floats: ["🫧", "♨️", "🫧", "😌"], title: "Jacuzzi", sub: "Burbujas", dur: 3000 },
+      cryo: { cls: "bath", big: "🧊", floats: ["❄️", "🥶", "❄️"], title: "Crioterapia", sub: "−110 °C · 3 minutos", dur: 2800 },
+      boat: { cls: "garden", big: "⛵", floats: ["🌊", "☀️", "🐬", "🌊"], title: "A navegar", sub: "Por la costa", dur: 3200 },
+      fireworks: { cls: "night", big: "🎆", floats: ["🎇", "✨", "🎆", "✨"], title: "¡Fuegos artificiales!", sub: "Sobre el puerto", dur: 3200 },
+      dinner: { cls: "night", big: "🍽️", floats: ["🕯️", "🍷", "⭐", "😊"], title: "Cena en el jardín", sub: "Con la gente que querés", dur: 3200 }
+    };
+    Object.assign(HOME_SCENES, SC);
+    // los videojuegos online no existían antes de fines de los 90: en esa época se juega a las cartas
+    const era = a => !a.from || (s.season || 2026) >= a.from;
+    HOME_ROOMS.forEach(r => {
+      (MORE[r.id] || []).forEach(a => { if (!r.acts.find(x => x.id === a.id)) r.acts.push(a); });
+      const vg = r.acts.find(x => x.id === "juegos"); if (vg) vg.from = 1999;
+      if (r.id === "living" && !r.acts.find(x => x.id === "cartas")) r.acts.push(A("cartas", "🃏", "Jugar a las cartas con amigos", "boardgame", { animo: 4, carisma: 2 }, "Truco con amigos: cantaste falta envido y ganaste.", null));
+      const cartas = r.acts.find(x => x.id === "cartas"); if (cartas) cartas.until = 1998;
+      const all = r.acts;
+      Object.defineProperty(r, "acts", { configurable: true, get() { return all.filter(a => era(a) && !(a.until && (s.season || 2026) > a.until)); } });
+    });
+  }
 })();
