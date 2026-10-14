@@ -28544,7 +28544,7 @@ function v16Go() {
       const d = (getDriversForYear(s.season) || []).find(x =&gt; x[0] === s.playedDriverName);
       if (!d) return;
       const r = Math.max(68, Math.min(97, Math.round(d[1] - 2)));
-      s.playedDriverRating = r; s.playedDriverBaseRating = r; s._v18Rate = true;
+      s.playedDriverRating = r; s.playedDriverBaseRating = r; s._v18Rate = true; s._ovrPrev = undefined;
     } catch (e) {}
   }
   if (typeof start === &quot;function&quot;) {
@@ -28794,6 +28794,98 @@ function v16Go() {
     };
     window.fwRadioToast = fwRadioToast;
   }
+
+  /* ---------- 7) sprints: siempre puntos del 8 al 1 (antes el modo ingeniero daba 25-18-15…) ---------- */
+  const SPR = [8, 7, 6, 5, 4, 3, 2, 1];
+  if (typeof simulateGrid === &quot;function&quot;) {
+    const o = simulateGrid;
+    const w = function (kind) {
+      const r = o.apply(this, arguments);
+      try {
+        if (kind === &quot;race&quot; &amp;&amp; Array.isArray(r) &amp;&amp; (s._engSimSprint || s._dlSprint)) {
+          r.forEach(x =&gt; { if (x.status || !x.pos) { x.pts = 0; return; } x.pts = x.pos &lt;= 8 ? SPR[x.pos - 1] : 0; });
+        }
+      } catch (e) {}
+      return r;
+    };
+    simulateGrid = w; window.simulateGrid = w;
+  }
+  // modo piloto sin transmisión (o salteando el finde): la sprint también se corre y suma
+  if (typeof finishRace === &quot;function&quot;) {
+    const o = finishRace;
+    const w = function () {
+      try {
+        if (s &amp;&amp; s.playerMode === &quot;driver&quot; &amp;&amp; s.session &gt;= 3 &amp;&amp; !s.raceDone &amp;&amp; typeof dlSprintWeekend === &quot;function&quot; &amp;&amp; dlSprintWeekend() &amp;&amp; typeof dlState === &quot;function&quot;) {
+          const st = dlState();
+          const live = typeof dlOn === &quot;function&quot; &amp;&amp; dlOn() &amp;&amp; !s._dlSkip &amp;&amp; s.drvLive !== false;
+          if (!st.sprintDone &amp;&amp; !live) {
+            st.sprintDone = true;
+            let grid; s._dlSprint = true;
+            try { grid = simulateGrid(&quot;race&quot;); } finally { s._dlSprint = false; }
+            if (!s.driverPoints) initDriverStandings();
+            if (!s.teamStandings) initTeamStandings();
+            let myPts = 0;
+            grid.forEach(x =&gt; { const b = x.name.replace(&quot; (reserva)&quot;, &quot;&quot;); s.driverPoints[b] = (s.driverPoints[b] || 0) + (x.pts || 0); if (x.mine) myPts += x.pts || 0; else s.teamStandings[x.team] = (s.teamStandings[x.team] || 0) + (x.pts || 0); });
+            s.points += myPts;
+            const me = grid.find(x =&gt; x.mine &amp;&amp; x.seat === 1);
+            st.sprintRes = me ? (me.status || &quot;P&quot; + me.pos) : &quot;—&quot;;
+            add(&quot;⚡ SPRINT en &quot; + ((trackData[s.gp] || {}).name || &quot;&quot;) + &quot;: gana &quot; + (grid[0] ? grid[0].name : &quot;—&quot;) + &quot;. Vos: &quot; + st.sprintRes + (me &amp;&amp; me.pts ? &quot; (+&quot; + me.pts + &quot; pts)&quot; : &quot;&quot;) + &quot;.&quot;);
+          }
+        }
+      } catch (e) {}
+      return o.apply(this, arguments);
+    };
+    finishRace = w; window.finishRace = w;
+  }
+
+  /* ---------- 8) modo piloto: un solo número (OVR) — el que se ve es el que corre ---------- */
+  function v18Ovr() {
+    try {
+      const nm = s.playedDriverName;
+      const R = typeof effectiveRating === &quot;function&quot; ? effectiveRating(nm, s.playedDriverRating || 75) : (s.playedDriverRating || 75);
+      const form = typeof ovrForm === &quot;function&quot; ? ovrForm() : 62;
+      const mind = ((+s.focus || 55) + (+s.health || 92)) / 2;
+      const fA = Math.max(-3, Math.min(3, (form - 62) / 38 * 3));
+      const mA = Math.max(-2, Math.min(1, (mind - 70) / 30 * 1.5));
+      return Math.max(40, Math.min(99, Math.round(R + fA + mA)));
+    } catch (e) { return s.playedDriverRating || 75; }
+  }
+  window.v18Ovr = v18Ovr;
+  const isDrv = () =&gt; { try { return s &amp;&amp; s.playerMode === &quot;driver&quot; &amp;&amp; !!s.playedDriverName; } catch (e) { return false; } };
+  if (typeof window.computeOVR === &quot;function&quot;) {
+    const o = window.computeOVR;
+    window.computeOVR = function () { if (isDrv()) return v18Ovr(); return o.apply(this, arguments); };
+  }
+  if (typeof myTeamLineup === &quot;function&quot;) {
+    const o = myTeamLineup;
+    myTeamLineup = function () {
+      const r = o.apply(this, arguments);
+      try { if (isDrv() &amp;&amp; !s._simulatingBackground &amp;&amp; Array.isArray(r) &amp;&amp; r[0] &amp;&amp; r[0].name === s.playedDriverName) r[0].rating = v18Ovr(); } catch (e) {}
+      return r;
+    };
+    window.myTeamLineup = myTeamLineup;
+  }
+  function v18FixRatingText() {
+    try {
+      if (!isDrv()) return;
+      const nm = s.playedDriverName, ovr = v18Ovr();
+      document.querySelectorAll(&quot;#originalDriversBody .driver-original&quot;).forEach(c =&gt; {
+        const b = c.querySelector(&quot;b&quot;); if (!b || !b.textContent.includes(nm)) return;
+        c.querySelectorAll(&quot;span.small&quot;).forEach(sp =&gt; { if (/^Rating \d+/.test(sp.textContent)) sp.innerHTML = sp.innerHTML.replace(/^Rating \d+/, &quot;OVR &quot; + ovr); });
+      });
+      const tb = document.getElementById(&quot;telemetryBody&quot;);
+      if (tb) tb.querySelectorAll(&quot;p, span, b, div&quot;).forEach(el =&gt; {
+        if (el.children.length &gt; 3) return;
+        el.childNodes.forEach(n =&gt; { if (n.nodeType === 3 &amp;&amp; n.nodeValue.includes(nm)) n.nodeValue = n.nodeValue.replace(new RegExp(nm.replace(/[.*+?^${}()|[\]\\]/g, &quot;\\$&amp;&quot;) + &quot; \\((?:rating|Rating) \\d+\\)&quot;), nm + &quot; (OVR &quot; + ovr + &quot;)&quot;); });
+      });
+    } catch (e) {}
+  }
+  [&quot;renderOriginalDrivers&quot;, &quot;render&quot;].forEach(fn =&gt; {
+    const o = window[fn]; if (typeof o !== &quot;function&quot;) return;
+    const w = function () { try { if (s &amp;&amp; s._v18OvrV !== 1 &amp;&amp; typeof window.computeOVR === &quot;function&quot;) { s._v18OvrV = 1; s._ovrPrev = window.computeOVR(); } } catch (e) {} const r = o.apply(this, arguments); v18FixRatingText(); return r; };
+    window[fn] = w;
+    try { if (fn === &quot;render&quot;) render = w; else renderOriginalDrivers = w; } catch (e) {}
+  });
 })();
 
 &lt;/script&gt;

@@ -18,7 +18,7 @@
       const d = (getDriversForYear(s.season) || []).find(x => x[0] === s.playedDriverName);
       if (!d) return;
       const r = Math.max(68, Math.min(97, Math.round(d[1] - 2)));
-      s.playedDriverRating = r; s.playedDriverBaseRating = r; s._v18Rate = true;
+      s.playedDriverRating = r; s.playedDriverBaseRating = r; s._v18Rate = true; s._ovrPrev = undefined;
     } catch (e) {}
   }
   if (typeof start === "function") {
@@ -268,4 +268,96 @@
     };
     window.fwRadioToast = fwRadioToast;
   }
+
+  /* ---------- 7) sprints: siempre puntos del 8 al 1 (antes el modo ingeniero daba 25-18-15…) ---------- */
+  const SPR = [8, 7, 6, 5, 4, 3, 2, 1];
+  if (typeof simulateGrid === "function") {
+    const o = simulateGrid;
+    const w = function (kind) {
+      const r = o.apply(this, arguments);
+      try {
+        if (kind === "race" && Array.isArray(r) && (s._engSimSprint || s._dlSprint)) {
+          r.forEach(x => { if (x.status || !x.pos) { x.pts = 0; return; } x.pts = x.pos <= 8 ? SPR[x.pos - 1] : 0; });
+        }
+      } catch (e) {}
+      return r;
+    };
+    simulateGrid = w; window.simulateGrid = w;
+  }
+  // modo piloto sin transmisión (o salteando el finde): la sprint también se corre y suma
+  if (typeof finishRace === "function") {
+    const o = finishRace;
+    const w = function () {
+      try {
+        if (s && s.playerMode === "driver" && s.session >= 3 && !s.raceDone && typeof dlSprintWeekend === "function" && dlSprintWeekend() && typeof dlState === "function") {
+          const st = dlState();
+          const live = typeof dlOn === "function" && dlOn() && !s._dlSkip && s.drvLive !== false;
+          if (!st.sprintDone && !live) {
+            st.sprintDone = true;
+            let grid; s._dlSprint = true;
+            try { grid = simulateGrid("race"); } finally { s._dlSprint = false; }
+            if (!s.driverPoints) initDriverStandings();
+            if (!s.teamStandings) initTeamStandings();
+            let myPts = 0;
+            grid.forEach(x => { const b = x.name.replace(" (reserva)", ""); s.driverPoints[b] = (s.driverPoints[b] || 0) + (x.pts || 0); if (x.mine) myPts += x.pts || 0; else s.teamStandings[x.team] = (s.teamStandings[x.team] || 0) + (x.pts || 0); });
+            s.points += myPts;
+            const me = grid.find(x => x.mine && x.seat === 1);
+            st.sprintRes = me ? (me.status || "P" + me.pos) : "—";
+            add("⚡ SPRINT en " + ((trackData[s.gp] || {}).name || "") + ": gana " + (grid[0] ? grid[0].name : "—") + ". Vos: " + st.sprintRes + (me && me.pts ? " (+" + me.pts + " pts)" : "") + ".");
+          }
+        }
+      } catch (e) {}
+      return o.apply(this, arguments);
+    };
+    finishRace = w; window.finishRace = w;
+  }
+
+  /* ---------- 8) modo piloto: un solo número (OVR) — el que se ve es el que corre ---------- */
+  function v18Ovr() {
+    try {
+      const nm = s.playedDriverName;
+      const R = typeof effectiveRating === "function" ? effectiveRating(nm, s.playedDriverRating || 75) : (s.playedDriverRating || 75);
+      const form = typeof ovrForm === "function" ? ovrForm() : 62;
+      const mind = ((+s.focus || 55) + (+s.health || 92)) / 2;
+      const fA = Math.max(-3, Math.min(3, (form - 62) / 38 * 3));
+      const mA = Math.max(-2, Math.min(1, (mind - 70) / 30 * 1.5));
+      return Math.max(40, Math.min(99, Math.round(R + fA + mA)));
+    } catch (e) { return s.playedDriverRating || 75; }
+  }
+  window.v18Ovr = v18Ovr;
+  const isDrv = () => { try { return s && s.playerMode === "driver" && !!s.playedDriverName; } catch (e) { return false; } };
+  if (typeof window.computeOVR === "function") {
+    const o = window.computeOVR;
+    window.computeOVR = function () { if (isDrv()) return v18Ovr(); return o.apply(this, arguments); };
+  }
+  if (typeof myTeamLineup === "function") {
+    const o = myTeamLineup;
+    myTeamLineup = function () {
+      const r = o.apply(this, arguments);
+      try { if (isDrv() && !s._simulatingBackground && Array.isArray(r) && r[0] && r[0].name === s.playedDriverName) r[0].rating = v18Ovr(); } catch (e) {}
+      return r;
+    };
+    window.myTeamLineup = myTeamLineup;
+  }
+  function v18FixRatingText() {
+    try {
+      if (!isDrv()) return;
+      const nm = s.playedDriverName, ovr = v18Ovr();
+      document.querySelectorAll("#originalDriversBody .driver-original").forEach(c => {
+        const b = c.querySelector("b"); if (!b || !b.textContent.includes(nm)) return;
+        c.querySelectorAll("span.small").forEach(sp => { if (/^Rating \d+/.test(sp.textContent)) sp.innerHTML = sp.innerHTML.replace(/^Rating \d+/, "OVR " + ovr); });
+      });
+      const tb = document.getElementById("telemetryBody");
+      if (tb) tb.querySelectorAll("p, span, b, div").forEach(el => {
+        if (el.children.length > 3) return;
+        el.childNodes.forEach(n => { if (n.nodeType === 3 && n.nodeValue.includes(nm)) n.nodeValue = n.nodeValue.replace(new RegExp(nm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + " \\((?:rating|Rating) \\d+\\)"), nm + " (OVR " + ovr + ")"); });
+      });
+    } catch (e) {}
+  }
+  ["renderOriginalDrivers", "render"].forEach(fn => {
+    const o = window[fn]; if (typeof o !== "function") return;
+    const w = function () { try { if (s && s._v18OvrV !== 1 && typeof window.computeOVR === "function") { s._v18OvrV = 1; s._ovrPrev = window.computeOVR(); } } catch (e) {} const r = o.apply(this, arguments); v18FixRatingText(); return r; };
+    window[fn] = w;
+    try { if (fn === "render") render = w; else renderOriginalDrivers = w; } catch (e) {}
+  });
 })();

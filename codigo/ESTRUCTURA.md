@@ -103,7 +103,7 @@ cd sitio && python3 build_site.py   # arma la página con el juego adentro
 | 49 | `v145.js` | parches | Prototipo 1.4 · 43 arreglos: grillas reales, calendarios y puntos de cada época, multijugador y textos | `calForSeason`, `currentTeamLineup`, `dashTeamPos`, `engReserveInfo`, `engSprintGPs`, `findRating`, `finishRace`, `formatMoney`, `fwRadioSay`, `getDriversForYear`, `getTeamsForYear`, `myTeamLineup` |
 | 50 | `v146.js` | parches | Prototipo 1.4 · cinemática de inicio y cinemática de Jugar (viaje en el tiempo y credencial del paddock) | `beginCareer`, `dismissIntro` |
 | 51 | `v147.js` | parches | Prototipo 1.5 · compañero alineado, sin pilotos repetidos, quiz y textos de época, pizarra antes de 1980, minijuegos enteros en pantalla, multijugador acostado | `currentTeamLineup`, `fwRadioSay`, `fwSquelch`, `myTeamLineup`, `pickF1Quiz`, `playRadioSound` |
-| 52 | `v148.js` | parches | Prototipo 1.5 · nivel real del piloto, abandonos por época, épocas y autos bien marcados, novatos de época, cuidar las gomas y pizarra en código corto | `eraKers`, `fwCarSvg`, `fwEra`, `fwEraCardHtml`, `fwEraIdx`, `fwRadioToast`, `generateRookieName`, `rollRaceStatus`, `start`, `trkTemp`, `v4EraName` |
+| 52 | `v148.js` | parches | Prototipo 1.5 · nivel real del piloto, abandonos por época, épocas y autos bien marcados, novatos de época, cuidar las gomas y pizarra en código corto | `computeOVR`, `eraKers`, `fwCarSvg`, `fwEra`, `fwEraCardHtml`, `fwEraIdx`, `fwRadioToast`, `generateRookieName`, `myTeamLineup`, `rollRaceStatus`, `start`, `trkTemp` |
 
 ## Funciones que más parches cambian
 
@@ -123,7 +123,7 @@ Si querés cambiar una de estas, mirá todos los parches que la tocan (la últim
 | `fwMapDraw` | 4 |
 | `v7QteFinish` | 4 |
 | `dlLap` | 4 |
+| `myTeamLineup` | 4 |
 | `engLiveTick` | 3 |
 | `triggerAIEventIfNeeded` | 3 |
-| `dlEnd` | 3 |
 
