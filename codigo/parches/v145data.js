@@ -93,3 +93,120 @@ const V15_HIST = {};
 (function () {
   try { for (let y = 2010; y <= 2015; y++) (driversByYear[y] || []).forEach(d => { if (d[3] === "Ferrari") d[3] = "Scuderia Ferrari"; }); } catch (e) {}
 })();
+
+/* =====================================================================================
+   FAWIWE · Prototipo 1.5 · CANTIDAD REAL DE AUTOS POR ÉPOCA
+   Hasta ahora cada año tenía solo los equipos de fábrica (en los 60, 10-12 autos). En la
+   F1 real largaban muchos más: equipos privados como Rob Walker, Centro Sud, Osella o ATS.
+   Acá se suman los privados reales de cada temporada hasta llegar a la grilla típica de ese año.
+   Formato de piloto: "Nombre@año" o "Nombre@desde-hasta" (varios tramos con ;).
+   ===================================================================================== */
+const V18_GRID_TARGET = { 1950: 20, 1951: 20, 1952: 22, 1953: 22, 1954: 20, 1955: 20, 1956: 20, 1957: 18, 1958: 20, 1959: 18, 1960: 20, 1961: 20, 1962: 20, 1963: 20, 1964: 20, 1965: 18, 1966: 18, 1967: 18, 1968: 20, 1969: 16, 1970: 22, 1971: 22, 1972: 24, 1973: 24, 1974: 26, 1975: 24, 1976: 26, 1977: 26, 1978: 24, 1979: 24, 1980: 24, 1981: 24, 1982: 26, 1983: 26, 1984: 26, 1985: 26, 1986: 26, 1987: 26, 1988: 26, 1989: 26, 1990: 26, 1991: 26, 1992: 26, 1993: 26, 1994: 26, 1995: 24, 1996: 22, 1997: 22, 1998: 22, 1999: 22 };
+const V18_PRIVATE = [
+  // [equipo, auto (1-5), [pilotos]]
+  ["ERA", 1.4, ["Bob Gerard@1950-1951", "Cuth Harrison@1950", "Peter Walker@1950"]],
+  ["Scuderia Ambrosiana", 1.5, ["David Hampshire@1950", "David Murray@1950-1951", "Reg Parnell@1950"]],
+  ["Enrico Platé", 1.6, ["Toulo de Graffenried@1950-1952", "Harry Schell@1951-1952"]],
+  ["Ecurie Belge", 1.5, ["Johnny Claes@1950-1953", "André Pilette@1951"]],
+  ["Alta", 1.2, ["Geoffrey Crossley@1950", "Joe Kelly@1950-1951"]],
+  ["OSCA", 1.6, ["Franco Rol@1951", "Elie Bayol@1952-1953", "Louis Chiron@1953"]],
+  ["Escuderia Bandeirantes", 1.4, ["Chico Landi@1952-1953", "Gino Bianco@1952", "Eitel Cantoni@1952"]],
+  ["Ecurie Espadon", 1.6, ["Rudi Fischer@1952", "Peter Hirt@1952"]],
+  ["Ecurie Ecosse", 1.4, ["David Murray@1952", "Ian Stewart@1953", "Jimmy Stewart@1953"]],
+  ["Ecurie Rosier", 1.8, ["Louis Rosier@1952-1956", "Robert Manzon@1954"]],
+  ["Ecurie Francorchamps", 1.4, ["Jacques Swaters@1952-1954", "Charles de Tornaco@1952-1953", "Roger Laurent@1952"]],
+  ["Gilby Engineering", 1.6, ["Roy Salvadori@1954-1956"]],
+  ["Equipe Nationale Belge", 1.6, ["Johnny Claes@1955", "Jacques Swaters@1955-1956", "André Pilette@1956"]],
+  ["Maserati privados", 2.0, ["Prince Bira@1954", "Roberto Mieres@1954", "Harry Schell@1954", "Horace Gould@1955-1957", "Bruce Halford@1956-1957", "Luigi Piotti@1956-1957", "Jo Bonnier@1957-1958", "Maria Teresa de Filippis@1958"]],
+  ["Equipe Moss", 3.0, ["Stirling Moss@1954"]],
+  ["Vanwall", 1.8, ["Peter Collins@1954"]],
+  ["HWM", 1.4, ["Lance Macklin@1954"]],
+  ["Connaught", 1.6, ["Stuart Lewis-Evans@1957", "Ivor Bueb@1957"]],
+  ["Scuderia Centro Sud", 1.8, ["Masten Gregory@1957;1960", "Hans Herrmann@1957-1958", "Ian Burgess@1960-1961", "Lorenzo Bandini@1961;1963", "Moisés Solana@1963-1964", "Giancarlo Baghetti@1964"]],
+  ["Rob Walker Racing", 3.0, ["Stirling Moss@1958-1961", "Maurice Trintignant@1958-1959;1962", "Jo Bonnier@1963-1965", "Jo Siffert@1965-1969", "Graham Hill@1970"]],
+  ["British Racing Partnership", 1.8, ["Hans Herrmann@1959", "Ivor Bueb@1959", "Innes Ireland@1963-1964", "Jim Hall@1963", "Trevor Taylor@1964"]],
+  ["Yeoman Credit Racing", 2.6, ["Tony Brooks@1960", "Chris Bristow@1960", "John Surtees@1961", "Roy Salvadori@1961"]],
+  ["Scarab", 1.2, ["Lance Reventlow@1960", "Chuck Daigh@1960"]],
+  ["UDT Laystall", 2.0, ["Henry Taylor@1961", "Cliff Allison@1961", "Masten Gregory@1961-1962", "Innes Ireland@1962"]],
+  ["Ecurie Maarsbergen", 1.4, ["Carel Godin de Beaufort@1959-1964", "Ben Pon@1962"]],
+  ["Reg Parnell Racing", 1.8, ["Chris Amon@1963-1964", "Mike Hailwood@1964", "Richard Attwood@1965", "Innes Ireland@1965", "Mike Spence@1966", "Chris Irwin@1967", "Piers Courage@1968", "Pedro Rodríguez@1969"]],
+  ["ATS (Italia)", 1.4, ["Phil Hill@1963", "Giancarlo Baghetti@1963"]],
+  ["Scirocco-Powell", 1.0, ["Tony Settember@1963", "Ian Burgess@1963"]],
+  ["Siffert Racing Team", 1.5, ["Jo Siffert@1962-1964"]],
+  ["DW Racing Enterprises", 1.3, ["Bob Anderson@1963-1967"]],
+  ["John Willment Automobiles", 1.3, ["Frank Gardner@1964-1965"]],
+  ["Joakim Bonnier Racing Team", 1.4, ["Jo Bonnier@1966-1971"]],
+  ["Guy Ligier Racing", 1.2, ["Guy Ligier@1966-1967"]],
+  ["Frank Williams Racing Cars", 1.8, ["Piers Courage@1969-1970", "Tim Schenken@1970", "Henri Pescarolo@1971-1972", "Carlos Pace@1972", "Howden Ganley@1973", "Nanni Galli@1973", "Arturo Merzario@1974-1975", "Jacques Laffite@1974-1975", "Jacky Ickx@1976", "Michel Leclère@1976"]],
+  ["Antique Automobiles", 1.3, ["Vic Elford@1969"]],
+  ["Silvio Moser Racing Team", 1.1, ["Silvio Moser@1968-1970"]],
+  ["Matra", 2.6, ["Chris Amon@1972"]],
+  ["Tecno", 1.3, ["Nanni Galli@1972", "Derek Bell@1972", "Chris Amon@1973"]],
+  ["March", 2.0, ["Jean-Pierre Jarier@1973", "Roger Williamson@1973", "Vittorio Brambilla@1977", "Ian Scheckter@1977", "Alex Ribeiro@1977", "Derek Daly@1981", "Eliseo Salazar@1981", "Jochen Mass@1982", "Raul Boesel@1982", "Ivan Capelli@1987"]],
+  ["Hesketh", 2.2, ["James Hunt@1973-1974", "Harald Ertl@1976-1977", "Guy Edwards@1976", "Rupert Keegan@1977", "Divina Galica@1978"]],
+  ["Ensign", 1.5, ["Rikky von Opel@1973-1974", "Chris Amon@1975-1976", "Clay Regazzoni@1977;1980", "Patrick Tambay@1977", "Derek Daly@1978", "Patrick Gaillard@1979", "Marc Surer@1979;1981", "Jan Lammers@1980", "Eliseo Salazar@1981", "Roberto Guerrero@1982"]],
+  ["Embassy Hill", 1.8, ["Graham Hill@1974-1975", "Rolf Stommelen@1974-1975", "Guy Edwards@1974", "Tony Brise@1975", "Alan Jones@1975"]],
+  ["Penske", 2.4, ["Mark Donohue@1974-1975", "John Watson@1975-1976"]],
+  ["Parnelli", 2.0, ["Mario Andretti@1974-1976"]],
+  ["Surtees", 1.6, ["John Watson@1975", "Alan Jones@1976", "Brett Lunger@1976", "Vittorio Brambilla@1977-1978", "Hans Binder@1977", "Rupert Keegan@1978"]],
+  ["Fittipaldi (Copersucar)", 2.2, ["Wilson Fittipaldi@1975", "Emerson Fittipaldi@1976-1980", "Ingo Hoffmann@1976-1977", "Keke Rosberg@1980-1981", "Chico Serra@1981-1982"]],
+  ["Ligier", 3.0, ["Jacques Laffite@1976-1978", "Jean-Pierre Jarier@1983", "Raul Boesel@1983", "René Arnoux@1989", "Olivier Grouillard@1989"]],
+  ["Wolf Racing", 4.0, ["Jody Scheckter@1977"]],
+  ["Renault F1", 2.2, ["Jean-Pierre Jabouille@1977-1978"]],
+  ["Williams", 2.2, ["Patrick Nève@1977", "Alan Jones@1978"]],
+  ["ATS", 1.5, ["Jean-Pierre Jarier@1977-1978", "Hans Binder@1977", "Jochen Mass@1978", "Hans-Joachim Stuck@1979", "Marc Surer@1980", "Jan Lammers@1980-1981", "Slim Borgudd@1981", "Manfred Winkelhock@1982-1984", "Eliseo Salazar@1982", "Gerhard Berger@1984"]],
+  ["Theodore Racing", 1.3, ["Keke Rosberg@1978", "Patrick Tambay@1981", "Marc Surer@1981", "Derek Daly@1982", "Jan Lammers@1982", "Roberto Guerrero@1983", "Johnny Cecotto@1983"]],
+  ["Merzario", 1.0, ["Arturo Merzario@1978-1979"]],
+  ["Alfa Romeo", 1.5, ["Bruno Giacomelli@1979", "Vittorio Brambilla@1979", "Riccardo Patrese@1985", "Eddie Cheever@1985"]],
+  ["Shadow Racing Cars", 1.2, ["Elio de Angelis@1979", "Jan Lammers@1979", "Geoff Lees@1980", "David Kennedy@1980"]],
+  ["Osella", 1.4, ["Eddie Cheever@1980", "Beppe Gabbiani@1981", "Jean-Pierre Jarier@1981-1982", "Riccardo Paletti@1982", "Piercarlo Ghinzani@1983-1986", "Corrado Fabi@1983", "Jo Gartner@1984", "Huub Rothengatter@1985", "Christian Danner@1986", "Alex Caffi@1987", "Nicola Larini@1988-1989", "Olivier Grouillard@1990"]],
+  ["Toleman", 1.2, ["Brian Henton@1981", "Derek Warwick@1981"]],
+  ["Arrows", 1.6, ["Marc Surer@1982", "Mauro Baldi@1982"]],
+  ["Tyrrell", 2.2, ["Martin Brundle@1984", "Stefan Bellof@1984"]],
+  ["RAM", 1.2, ["Eliseo Salazar@1983", "Jean-Louis Schlesser@1983", "Kenny Acheson@1983", "Philippe Alliot@1984-1985", "Jonathan Palmer@1984", "Manfred Winkelhock@1985"]],
+  ["Spirit", 1.2, ["Stefan Johansson@1983", "Mauro Baldi@1984-1985", "Huub Rothengatter@1984"]],
+  ["Zakspeed", 1.3, ["Jonathan Palmer@1985-1986", "Huub Rothengatter@1986", "Martin Brundle@1987", "Christian Danner@1987", "Piercarlo Ghinzani@1988", "Bernd Schneider@1988-1989", "Aguri Suzuki@1989"]],
+  ["Larrousse", 1.8, ["Philippe Alliot@1987-1990;1993", "Yannick Dalmas@1987-1988", "Michele Alboreto@1989", "Éric Bernard@1989-1990", "Aguri Suzuki@1990-1991", "Bertrand Gachot@1992", "Ukyo Katayama@1992", "Érik Comas@1993-1994", "Olivier Beretta@1994"]],
+  ["Scuderia Italia (Dallara)", 1.8, ["Alex Caffi@1988-1989", "Andrea de Cesaris@1989-1990", "Emanuele Pirro@1990-1991", "JJ Lehto@1991-1992", "Pierluigi Martini@1992", "Michele Alboreto@1993", "Luca Badoer@1993"]],
+  ["Leyton House", 2.0, ["Ivan Capelli@1991", "Maurício Gugelmin@1991"]],
+  ["Onyx", 1.6, ["Stefan Johansson@1989-1990", "Bertrand Gachot@1989", "JJ Lehto@1990"]],
+  ["AGS", 1.2, ["Ivan Capelli@1986", "Pascal Fabre@1987", "Roberto Moreno@1987", "Philippe Streiff@1988", "Gabriele Tarquini@1989-1991", "Yannick Dalmas@1990", "Fabrizio Barbazza@1991"]],
+  ["Rial", 1.3, ["Andrea de Cesaris@1988", "Christian Danner@1989", "Volker Weidler@1989"]],
+  ["Coloni", 1.0, ["Nicola Larini@1987", "Gabriele Tarquini@1988", "Roberto Moreno@1989", "Pierre-Henri Raphanel@1989", "Bertrand Gachot@1990", "Pedro Chaves@1991"]],
+  ["EuroBrun", 1.0, ["Oscar Larrauri@1988", "Stefano Modena@1988", "Gregor Foitek@1989", "Roberto Moreno@1990", "Claudio Langes@1990"]],
+  ["Brabham", 1.2, ["Eric van de Poele@1992", "Damon Hill@1992", "Giovanna Amati@1992"]],
+  ["Fondmetal", 1.2, ["Olivier Grouillard@1991", "Gabriele Tarquini@1992", "Andrea Chiesa@1992"]],
+  ["Simtek", 1.0, ["David Brabham@1994", "Roland Ratzenberger@1994", "Jos Verstappen@1995", "Domenico Schiattarella@1995"]],
+  ["Pacific", 1.0, ["Bertrand Gachot@1994-1995", "Paul Belmondo@1994", "Andrea Montermini@1995"]],
+  ["Forti", 1.0, ["Pedro Diniz@1995", "Roberto Moreno@1995", "Luca Badoer@1996", "Andrea Montermini@1996"]]
+];
+(function () {
+  const on = (spec, y) => spec.split(";").some(r => { const [a, b] = r.split("-").map(Number); return y >= a && y <= (b || a); });
+  Object.keys(V18_GRID_TARGET).forEach(k => {
+    const y = +k, H = V15_HIST[y]; if (!H) return;
+    const target = V18_GRID_TARGET[y];
+    const used = new Set(H.D.map(d => d[0]));
+    let cars = H.D.length;
+    V18_PRIVATE.forEach(([team, car, list]) => {
+      if (cars >= target || H.T.some(t => t[0] === team)) return;
+      const ds = list.map(x => x.split("@")).filter(([n, r]) => on(r, y) && !used.has(n)).map(([n]) => n).slice(0, Math.min(2, target - cars));
+      if (!ds.length) return;
+      H.T.push([team, car]);
+      ds.forEach(n => { H.D.push([n, 0, 0, team]); used.add(n); if (!(n in V15_RATING)) V15_RATING[n] = 72; });
+      cars += ds.length;
+    });
+  });
+  try {
+    Object.assign(teamColors, {
+      "Rob Walker Racing": "#0b2d6b", "Scuderia Centro Sud": "#c62828", "British Racing Partnership": "#2e7d32", "Yeoman Credit Racing": "#1b5e20", "UDT Laystall": "#7cb342",
+      "Reg Parnell Racing": "#455a64", "Frank Williams Racing Cars": "#1565c0", "Ensign": "#c62828", "Embassy Hill": "#f5f5f5", "Penske": "#e53935", "Parnelli": "#e53935",
+      "Fittipaldi (Copersucar)": "#f9a825", "ATS": "#ffd600", "ATS (Italia)": "#b71c1c", "Theodore Racing": "#c62828", "Osella": "#1e88e5", "RAM": "#e53935", "Spirit": "#fafafa",
+      "Zakspeed": "#e53935", "Larrousse": "#1565c0", "Scuderia Italia (Dallara)": "#d32f2f", "Leyton House": "#4dd0e1", "Onyx": "#00838f", "AGS": "#1e88e5", "Rial": "#1565c0",
+      "Coloni": "#fbc02d", "EuroBrun": "#e53935", "Fondmetal": "#212121", "Simtek": "#5e35b1", "Pacific": "#1e88e5", "Forti": "#fdd835", "Scarab": "#1565c0", "Tecno": "#d84315",
+      "Maserati privados": "#a6002c", "Ecurie Rosier": "#1f5fbf", "Enrico Platé": "#a6002c", "ERA": "#2e7d32", "Scuderia Ambrosiana": "#a6002c", "Ecurie Belge": "#fdd835",
+      "OSCA": "#c62828", "Escuderia Bandeirantes": "#2e7d32", "Ecurie Espadon": "#c62828", "Ecurie Ecosse": "#0d47a1", "Equipe Moss": "#2e7d32", "Alta": "#2e7d32",
+      "Ecurie Maarsbergen": "#ff8f00", "Ecurie Francorchamps": "#fdd835", "Gilby Engineering": "#2e7d32", "Equipe Nationale Belge": "#fdd835", "Siffert Racing Team": "#c62828", "DW Racing Enterprises": "#2e7d32", "John Willment Automobiles": "#2e7d32", "Joakim Bonnier Racing Team": "#1565c0",
+      "Guy Ligier Racing": "#0033a0", "Antique Automobiles": "#2e7d32", "Silvio Moser Racing Team": "#c62828", "Scirocco-Powell": "#1565c0", "Merzario": "#c62828"
+    });
+  } catch (e) {}
+})();

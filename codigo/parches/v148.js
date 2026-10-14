@@ -394,21 +394,24 @@
     };
     engBuildLaps = w; window.engBuildLaps = w;
   }
-  if (typeof engStartLive === "function") {
-    const o = engStartLive;
+  if (typeof engLiveRetarget === "function") {
+    const o = engLiveRetarget;
     const w = function () {
       const r = o.apply(this, arguments);
       try {
         const L = engLive;
-        if (L && crashNow()) {
+        if (L && L.target && crashNow()) {
           const tgt = ((typeof myTeamLineup === "function" && myTeamLineup()[0]) || {}).name;
-          const x = (L.target || []).find(e => e.name === tgt);
-          if (x && x.status === "DNF") { L.dnfTick[x.name] = 1; x.dnfReason = "💥 Se fue contra el muro: no frenó y el auto quedó destruido."; }
+          const x = L.target.find(e => e.name === tgt);
+          if (x && x.status === "DNF") {
+            if (!L._v18crash) { L._v18crash = true; L.dnfTick[x.name] = Math.max(1, L.tick + 1); }
+            x.dnfReason = "💥 Se fue contra el muro: no frenó y el auto quedó destruido.";
+          }
         }
       } catch (e) {}
       return r;
     };
-    engStartLive = w; window.engStartLive = w;
+    engLiveRetarget = w; window.engLiveRetarget = w;
   }
   // texto final de la transmisión: "Terminaste DNF" → "Abandonaste"
   if (typeof dlFeed === "function") {
@@ -547,4 +550,42 @@
       Object.defineProperty(r, "acts", { configurable: true, get() { return all.filter(a => era(a) && !(a.until && (s.season || 2026) > a.until)); } });
     });
   }
+
+  /* ---------- 13) clasificación: tu vuelta manda (una vuelta trágica ya no te da la pole) ---------- */
+  // antes: la decisión de cuándo salir pesaba 55% y la vuelta 45% → con buen auto, una vuelta mala igual era pole.
+  // ahora: la vuelta pesa 80% y, si fue muy mala (más de ~0,6s de la pole), perdés lugares de verdad.
+  const lapKey = () => s.season + "_" + s.gp;
+  if (typeof finalizeQuali === "function") {
+    const o = finalizeQuali;
+    const w = function (timing, risky, acc) {
+      if (s.playerMode !== "driver" || s.player2 || typeof acc !== "number" || typeof timingScore !== "function") return o.apply(this, arguments);
+      const k = s._crashQuali; const a = (k && k.key === lapKey()) ? 0 : Math.max(0, Math.min(1, acc));
+      s._v18Lap = { key: lapKey(), acc: a };
+      const ts = timingScore;
+      timingScore = function () { const T = ts.apply(this, arguments); return (0.2 * T + 0.35 * a * 100) / 0.55; };
+      try { return o.apply(this, arguments); } finally { timingScore = ts; }
+    };
+    finalizeQuali = w; window.finalizeQuali = w;
+  }
+  if (typeof simulateGrid === "function") {
+    const o = simulateGrid;
+    const w = function (kind) {
+      const r = o.apply(this, arguments);
+      try {
+        const L = s._v18Lap;
+        if (kind === "quali" && Array.isArray(r) && L && L.key === lapKey() && s.playerMode === "driver" && !s.player2 && L.acc < 0.5) {
+          const me = r.find(x => x.mine && x.seat === 1);
+          if (me && !me.noTime && !me._v18q) {
+            me._v18q = true; me.score -= (0.5 - L.acc) * 30;
+            const q = [...r.filter(x => !x.noTime).sort((a, b) => b.score - a.score), ...r.filter(x => x.noTime)];
+            q.forEach((x, i) => { x.pos = i + 1; });
+            return q;
+          }
+        }
+      } catch (e) {}
+      return r;
+    };
+    simulateGrid = w; window.simulateGrid = w;
+  }
+  if (typeof nextGP === "function") { const o = nextGP; const w = function () { s._v18Lap = null; return o.apply(this, arguments); }; nextGP = w; window.nextGP = w; }
 })();

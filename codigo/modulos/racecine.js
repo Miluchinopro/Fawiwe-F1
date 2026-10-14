@@ -70,7 +70,7 @@ function lcRun(mode) {
   const O = isDrv ? null : lcEngObject(tierIndex());
   E.mode = mode; E.c = 0; E.ph = 0; E.p = 0; E.loss = []; E.cur = 0; E.wait = 0; E.ers = 100; E.ersOn = false; E.brakeOn = false; E.ersGain = 0;
   E.gain = 0; E.cold = false; E.extra = 0;
-  E.startPos = Math.max(1, Math.min(20, (typeof s.qualiPos === "number" && s.qualiPos) || 8));
+  E.startPos = Math.max(1, Math.min(30, (typeof s.qualiPos === "number" && s.qualiPos) || 8));
   E.base = emParseLap(tr.record) + 0.45;
   E.pole = E.base - 0.05 + emRand(60) * 0.25;
   const w = 9 / sp * BK.w;

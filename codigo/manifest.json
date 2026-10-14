@@ -232,10 +232,10 @@
   "v142.js": "FAWIWE · V142 — paquete de CELULAR (16)",
   "v143.js": "FAWIWE · V143 — MULTIJUGADOR",
   "v144.js": "FAWIWE · V144 — NOVEDADES DEL MULTIJUGADOR",
-  "v145data.js": "Prototipo 1.4 · grillas reales año por año (1950–1999)",
+  "v145data.js": "Prototipo 1.4 · grillas reales año por año (1950–1999). Equipos privados reales para que cada año tenga la cantidad real de autos.",
   "v145.js": "Prototipo 1.4 · 43 arreglos: grillas reales, calendarios y puntos de cada época, multijugador y textos",
   "v146.js": "Prototipo 1.4 · cinemática de inicio y cinemática de Jugar (viaje en el tiempo y credencial del paddock)",
   "v147.js": "Prototipo 1.5 · compañero alineado, sin pilotos repetidos, quiz y textos de época, pizarra antes de 1980, minijuegos enteros en pantalla, multijugador acostado",
-  "v148.js": "Prototipo 1.5 · nivel real del piloto, abandonos por época, épocas y autos bien marcados, novatos de época, cuidar las gomas y pizarra en código corto. Choque en la carrera = abandono en la vuelta 1, contratos de hasta 4 temporadas y mánager a comisión (10% del sueldo). Tu casa: más actividades en cada ambiente, según la época."
+  "v148.js": "Prototipo 1.5 · nivel real del piloto, abandonos por época, épocas y autos bien marcados, novatos de época, cuidar las gomas y pizarra en código corto. Choque en la carrera = abandono en la vuelta 1, contratos de hasta 4 temporadas y mánager a comisión (10% del sueldo). Tu casa: más actividades en cada ambiente, según la época. En la clasificación manda tu vuelta (una vuelta mala ya no da la pole)."
  }
 }
