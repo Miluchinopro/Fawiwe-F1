@@ -360,4 +360,104 @@
     window[fn] = w;
     try { if (fn === "render") render = w; else renderOriginalDrivers = w; } catch (e) {}
   });
+
+  /* ---------- 9) contratos de hasta 4 temporadas (4 o 3+1) ---------- */
+  try {
+    if (typeof NG_YEARS !== "undefined" && Array.isArray(NG_YEARS) && !NG_YEARS.some(y => y[0] === "4")) {
+      const i3 = NG_YEARS.findIndex(y => y[0] === "3");
+      NG_YEARS.splice(i3 + 1, 0, ["4", "4 temporadas", 4, ""]);
+      NG_YEARS.push(["3+1", "3+1 (con opción)", 3, "opt"]);
+    }
+    if (typeof ngYearsHtml === "function") {
+      const o = ngYearsHtml;
+      ngYearsHtml = function () { return String(o.apply(this, arguments)).replace("Con 1+1 o 2+1,", "Con 1+1, 2+1 o 3+1,"); };
+      window.ngYearsHtml = ngYearsHtml;
+    }
+  } catch (e) {}
+
+  /* ---------- 10) si chocaste en el minijuego de la carrera, en la transmisión abandonás enseguida ---------- */
+  const crashNow = () => { try { const k = s._crashDNF; return !!(k && k.key === s.season + "_" + s.gp); } catch (e) { return false; } };
+  if (typeof engBuildLaps === "function") {
+    const o = engBuildLaps;
+    const w = function (entries, opt) {
+      try {
+        if (crashNow() && opt && opt.dnfLaps && typeof DL !== "undefined" && DL && DL.mode === "race") {
+          const me = (entries || []).find(x => x.mine && x.seat === 1);
+          if (me && me.status === "DNF") {
+            const lap = 1 + (Math.abs(deterministicHash("crashlap" + s.season + s.gp)) % 2);
+            opt.dnfLaps[me.name] = lap; if (DL.dnfLaps) DL.dnfLaps[me.name] = lap;
+            me.dnfReason = "💥 Te fuiste contra el muro: no frenaste y el auto quedó destruido.";
+          }
+        }
+      } catch (e) {}
+      return o.apply(this, arguments);
+    };
+    engBuildLaps = w; window.engBuildLaps = w;
+  }
+  if (typeof engStartLive === "function") {
+    const o = engStartLive;
+    const w = function () {
+      const r = o.apply(this, arguments);
+      try {
+        const L = engLive;
+        if (L && crashNow()) {
+          const tgt = ((typeof myTeamLineup === "function" && myTeamLineup()[0]) || {}).name;
+          const x = (L.target || []).find(e => e.name === tgt);
+          if (x && x.status === "DNF") { L.dnfTick[x.name] = 1; x.dnfReason = "💥 Se fue contra el muro: no frenó y el auto quedó destruido."; }
+        }
+      } catch (e) {}
+      return r;
+    };
+    engStartLive = w; window.engStartLive = w;
+  }
+  // texto final de la transmisión: "Terminaste DNF" → "Abandonaste"
+  if (typeof dlFeed === "function") {
+    const o = dlFeed;
+    const w = function (lap, txt) {
+      if (typeof txt === "string" && /^🏆 Terminaste (DNF|DNS)/.test(txt)) arguments[1] = txt.startsWith("🏆 Terminaste DNF") ? "💥 Abandonaste: no sumás puntos en esta carrera." : "🚫 No largaste (DNS): no sumás puntos en esta carrera.";
+      return o.apply(this, arguments);
+    };
+    dlFeed = w; window.dlFeed = w;
+  }
+
+  /* ---------- 11) mánager: como en la F1 real, cobra comisión de tu sueldo (no hay que pagar por adelantado) ---------- */
+  const MGR_PCT = 0.1, MGR_MIN = 0.03;
+  if (typeof v4MgrHire === "function") {
+    const w = function () {
+      if (v4Mgr()) return;
+      s.manager = { on: true, comm: true, name: v4Pick(V4_MGR, "mgr" + s.playedDriverName), since: s.season, paid: s.season, sponsorSeason: null };
+      add("🤵 Contrataste a " + s.manager.name + " como mánager: se queda con el 10% de tu sueldo de cada GP (mínimo $30K). Negocia tus contratos y te busca sponsors.");
+      render();
+    };
+    v4MgrHire = w; window.v4MgrHire = w;
+  }
+  if (typeof v4MgrCardHtml === "function") {
+    const o = v4MgrCardHtml;
+    const w = function () {
+      return String(o.apply(this, arguments)).replace("Cuesta $0,5M por temporada.", "No se paga por adelantado: se queda con el <b>10% de tu sueldo de cada GP</b> (mínimo $30K), como los mánagers de verdad.")
+        .replace("<p class=\"small\">✍️ Tus próximos contratos salen un 6% mejores.</p>", "<p class=\"small\">✍️ Tus próximos contratos salen un 6% mejores. 💸 Cobra el 10% de tu sueldo de cada GP.</p>");
+    };
+    v4MgrCardHtml = w; window.v4MgrCardHtml = w;
+  }
+  if (typeof nextGP === "function") {
+    const o = nextGP;
+    const w = function () {
+      const M = typeof v4Mgr === "function" ? v4Mgr() : null;
+      const before = s.season + "_" + s.gp;
+      if (M) { M.comm = true; M.paid = s.season + 1; } // ya no se cobra el pago fijo por temporada
+      const r = o.apply(this, arguments);
+      try {
+        const M2 = typeof v4Mgr === "function" ? v4Mgr() : null;
+        if (M2 && M2.comm && s.season + "_" + s.gp !== before && !s.gameOver) {
+          const sal = typeof salaryForGP === "function" ? salaryForGP() : 0;
+          const fee = Math.max(MGR_MIN, Math.round(sal * MGR_PCT * 100) / 100);
+          s.money = Math.round(((s.money || 0) - fee) * 100) / 100;
+          add("🤵 " + M2.name + " se quedó con su comisión: −" + formatMoney(fee) + ".");
+          if (typeof render === "function") render();
+        }
+      } catch (e) {}
+      return r;
+    };
+    nextGP = w; window.nextGP = w;
+  }
 })();
