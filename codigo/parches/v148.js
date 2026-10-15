@@ -588,4 +588,283 @@
     simulateGrid = w; window.simulateGrid = w;
   }
   if (typeof nextGP === "function") { const o = nextGP; const w = function () { s._v18Lap = null; return o.apply(this, arguments); }; nextGP = w; window.nextGP = w; }
+
+  /* ---------- 14) modo leyenda: arreglos ---------- */
+  // a) la escudería leyenda siempre tiene 2 pilotos distintos (antes, Jordan en 1985 quedaba con Gachot dos veces)
+  if (typeof getDriversForYear === "function") {
+    const o = getDriversForYear;
+    const w = function (year) {
+      let D = o.apply(this, arguments);
+      try {
+        if (typeof s === "undefined" || !s || s.season !== year || (typeof v15Tpl === "function" && v15Tpl())) return D;
+        const clubs = [s.team].concat(s.player2 && s.player2.club ? [s.player2.club] : []).filter(Boolean);
+        clubs.forEach(team => {
+          const have = D.filter(d => d[3] === team).length;
+          if (have >= 2 || !(getTeamsForYear(year) || []).some(t => t[0] === team)) return;
+          const used = new Set(D.map(d => d[0]));
+          const add = [];
+          const yrs = Object.keys(driversByYear).map(Number).filter(y => (driversByYear[y] || []).some(d => d[3] === team)).sort((a, b) => Math.abs(a - year) - Math.abs(b - year) || b - a);
+          for (const y of yrs) {
+            for (const d of driversByYear[y].filter(d => d[3] === team)) { if (have + add.length >= 2) break; if (!used.has(d[0])) { add.push([d[0], d[1], d[2], team]); used.add(d[0]); } }
+            if (have + add.length >= 2) break;
+          }
+          let k = 0;
+          while (have + add.length < 2 && k < 30) { const nm = generateRookieName("leg_" + team + "_" + year + "_" + k++); if (!used.has(nm)) { add.push([nm, 74, 4, team]); used.add(nm); } }
+          if (add.length) D = D.concat(add);
+        });
+      } catch (e) {}
+      return D;
+    };
+    getDriversForYear = w; window.getDriversForYear = w;
+  }
+  // b) en la lista de escuderías leyenda se ve el nivel REAL del auto para el año que elegiste
+  window.v18LegendRating = function (team, year) {
+    try {
+      const yrs = Object.keys(teamsByYear).map(Number).filter(y => (teamsByYear[y] || []).some(t => t[0] === team)).sort((a, b) => Math.abs(a - year) - Math.abs(b - year) || b - a);
+      if (yrs.length) { const r = teamsByYear[yrs[0]].find(t => t[0] === team); return { r: r[1], y: yrs[0] }; }
+    } catch (e) {}
+    const L = (typeof legendTeams !== "undefined" ? legendTeams : []).find(t => t[0] === team);
+    return { r: L ? L[1] : 2.5, y: null };
+  };
+  if (typeof refreshTeamLists === "function") {
+    const o = refreshTeamLists;
+    const w = function () {
+      const r = o.apply(this, arguments);
+      try {
+        if (typeof selectedMode !== "undefined" && selectedMode === "legend") {
+          const year = parseInt(document.getElementById("startYear")?.value || "2026");
+          ["club", "club2"].forEach(id => {
+            const sel = document.getElementById(id); if (!sel) return;
+            [...sel.options].forEach(op => {
+              const L = v18LegendRating(op.value, year);
+              const real = (getTeamsForYear(year) || []).some(t => t[0] === op.value);
+              op.textContent = op.value + " — ⭐ " + L.r.toFixed(1) + "/5" + (real ? " · corre en " + year : L.y ? " · auto de " + L.y : "");
+            });
+          });
+          const info = document.getElementById("modeInfo");
+          if (info) info.textContent = "Modo Leyenda: elegí una escudería histórica. Si ese año no corría, vuelve con el auto y los pilotos de su temporada más cercana y compite contra la parrilla real de " + year + " como un equipo más. Las estrellas muestran cómo arranca el auto: tu trabajo es devolverla a la cima.";
+        }
+      } catch (e) {}
+      return r;
+    };
+    refreshTeamLists = w; window.refreshTeamLists = w;
+  }
+  // c) modo piloto + leyenda: elegir un piloto ya no te cambia la escudería que elegiste
+  if (typeof autoSelectDriverTeam === "function") {
+    const o = autoSelectDriverTeam;
+    const w = function () {
+      const legend = typeof selectedMode !== "undefined" && selectedMode === "legend";
+      const club = document.getElementById("club"), keep = club ? club.value : null;
+      const r = o.apply(this, arguments);
+      if (legend && club && keep) club.value = keep;
+      return r;
+    };
+    autoSelectDriverTeam = w; window.autoSelectDriverTeam = w;
+  }
+
+  /* ---------- 15) números reales de los pilotos según la época ---------- */
+  // 2014 en adelante: número permanente de cada piloto (el campeón puede usar el 1).
+  // 1996-2013: cada equipo tenía un par según el campeonato anterior (el campeón llevaba el 1; el 13 no se usaba).
+  // 1974-1995: cada equipo tenía su par casi fijo (Tyrrell 3/4, Ferrari 27/28, Williams 5/6…).
+  // Antes de 1974: el organizador asignaba el número en cada carrera, así que no había uno fijo.
+  const PERM = [["Hamilton", 44], ["Nico Rosberg", 6], ["Vettel", 5], ["Räikkönen", 7], ["Alonso", 14], ["Button", 22], ["Massa", 19], ["Bottas", 77], ["Ricciardo", 3], ["Kvyat", 26],
+    ["Max Verstappen", 33], ["Pérez", 11], ["Perez", 11], ["Hülkenberg", 27], ["Hulkenberg", 27], ["Grosjean", 8], ["Maldonado", 13], ["Kevin Magnussen", 20], ["Ocon", 31], ["Sainz", 55],
+    ["Stroll", 18], ["Vandoorne", 2], ["Gasly", 10], ["Leclerc", 16], ["Norris", 4], ["Russell", 63], ["Albon", 23], ["Latifi", 6], ["Giovinazzi", 99], ["Tsunoda", 22],
+    ["Mick Schumacher", 47], ["Mazepin", 9], ["Guanyu", 24], ["Zhou", 24], ["Piastri", 81], ["Sargeant", 2], ["de Vries", 21], ["Lawson", 30], ["Bearman", 87], ["Colapinto", 43],
+    ["Doohan", 7], ["Antonelli", 12], ["Bortoleto", 5], ["Hadjar", 6], ["Chilton", 4], ["Bianchi", 17], ["Sutil", 99], ["Kobayashi", 10], ["Ericsson", 9], ["Gutiérrez", 21],
+    ["Vergne", 25], ["Nasr", 12], ["Merhi", 98], ["Stevens", 28], ["Haryanto", 88], ["Wehrlein", 94], ["Jolyon Palmer", 30], ["Kubica", 88], ["Hartley", 28], ["Sirotkin", 35]];
+  const permOf = (name, y) => {
+    if (y === 2014 && /Vettel/.test(name)) return 1;
+    if (y >= 2022 && y <= 2025 && /Max Verstappen/.test(name)) return 1;
+    if (y >= 2026 && /Norris/.test(name)) return 1;
+    if (y >= 2026 && /Max Verstappen/.test(name)) return 3;
+    const hit = PERM.find(([k]) => name.includes(k));
+    return hit ? hit[1] : null;
+  };
+  const T96 = {
+    1996: { "Scuderia Ferrari": [1, 2], "Benetton": [3, 4], "Williams": [5, 6], "McLaren": [7, 8], "Ligier": [9, 10], "Jordan Grand Prix": [11, 12], "Sauber Clásico": [14, 15], "Footwork": [16, 17], "Tyrrell": [18, 19], "Minardi": [20, 21], "Forti": [22, 23] },
+    1997: { "Arrows": [1, 2], "Williams": [3, 4], "Scuderia Ferrari": [5, 6], "Benetton": [7, 8], "McLaren": [9, 10], "Jordan Grand Prix": [11, 12], "Prost Grand Prix": [14, 15], "Sauber Clásico": [16, 17], "Tyrrell": [18, 19], "Minardi": [20, 21], "Stewart Grand Prix": [22, 23] },
+    1998: { "Williams": [1, 2], "Scuderia Ferrari": [3, 4], "Benetton": [5, 6], "McLaren": [7, 8, "Coulthard"], "Jordan Grand Prix": [9, 10], "Prost Grand Prix": [11, 12], "Sauber Clásico": [14, 15], "Arrows": [16, 17], "Stewart Grand Prix": [18, 19], "Tyrrell": [20, 21], "Minardi": [22, 23] },
+    1999: { "McLaren": [1, 2], "Scuderia Ferrari": [3, 4], "Williams": [5, 6], "Jordan Grand Prix": [7, 8], "Benetton": [9, 10], "Sauber Clásico": [11, 12], "Arrows": [14, 15], "Stewart Grand Prix": [16, 17], "Prost Grand Prix": [18, 19], "Minardi": [20, 21], "BAR Honda": [22, 23] },
+    2000: { "McLaren": [1, 2], "Scuderia Ferrari": [3, 4], "Jordan": [5, 6], "Jaguar Racing": [7, 8], "Williams": [9, 10], "Benetton": [11, 12], "Prost": [14, 15], "Sauber": [16, 17], "Arrows": [18, 19], "Minardi": [20, 21], "BAR Honda": [22, 23] },
+    2001: { "Scuderia Ferrari": [1, 2], "McLaren": [3, 4], "Williams": [5, 6], "Benetton": [7, 8], "BAR Honda": [9, 10], "Jordan": [11, 12], "Arrows": [14, 15], "Sauber": [16, 17], "Jaguar Racing": [18, 19], "Minardi": [20, 21], "Prost": [22, 23] },
+    2002: { "Scuderia Ferrari": [1, 2], "McLaren": [3, 4], "Williams": [5, 6], "Sauber": [7, 8], "Jordan": [9, 10], "BAR Honda": [11, 12], "Renault F1": [14, 15], "Jaguar Racing": [16, 17], "Arrows": [20, 21], "Minardi": [22, 23], "Toyota F1": [24, 25] },
+    2003: { "Scuderia Ferrari": [1, 2], "Williams": [3, 4], "McLaren": [5, 6], "Renault F1": [7, 8], "Sauber": [9, 10], "Jordan": [11, 12], "Jaguar Racing": [14, 15], "BAR Honda": [16, 17], "Minardi": [18, 19], "Toyota F1": [20, 21] },
+    2004: { "Scuderia Ferrari": [1, 2], "Williams": [3, 4], "McLaren": [5, 6], "Renault F1": [7, 8], "BAR Honda": [9, 10], "Sauber": [11, 12], "Jaguar Racing": [14, 15], "Toyota F1": [16, 17], "Jordan": [18, 19], "Minardi": [20, 21] },
+    2005: { "Scuderia Ferrari": [1, 2], "BAR Honda": [3, 4], "Renault F1": [5, 6], "Williams": [7, 8], "McLaren": [9, 10], "Sauber": [11, 12], "RBR": [14, 15], "Toyota F1": [16, 17], "Jordan": [18, 19], "Minardi": [20, 21] },
+    2006: { "Renault F1": [1, 2], "McLaren": [3, 4], "Scuderia Ferrari": [5, 6], "Toyota F1": [7, 8], "Williams": [9, 10], "Honda F1": [11, 12], "Red Bull Racing": [14, 15], "BMW Sauber": [16, 17], "MF1 Racing": [18, 19], "Toro Rosso": [20, 21], "Super Aguri": [22, 23] },
+    2007: { "McLaren": [1, 2], "Renault F1": [3, 4], "Scuderia Ferrari": [5, 6, "Massa"], "Honda F1": [7, 8], "BMW Sauber": [9, 10], "Toyota F1": [11, 12], "Red Bull Racing": [14, 15], "Williams": [16, 17], "Toro Rosso": [18, 19], "Spyker": [20, 21], "Super Aguri": [22, 23] },
+    2008: { "Scuderia Ferrari": [1, 2], "BMW Sauber": [3, 4, "Heidfeld"], "Renault F1": [5, 6], "Williams": [7, 8], "Red Bull Racing": [9, 10, "Coulthard"], "Toyota F1": [11, 12], "Toro Rosso": [14, 15], "Honda F1": [16, 17], "Super Aguri": [18, 19], "Force India": [20, 21], "McLaren": [22, 23] },
+    2009: { "McLaren": [1, 2], "Scuderia Ferrari": [3, 4, "Massa"], "BMW Sauber": [5, 6], "Renault F1": [7, 8], "Toyota F1": [9, 10], "Toro Rosso": [11, 12], "Red Bull Racing": [14, 15], "Williams": [16, 17], "Force India": [20, 21], "Brawn GP": [22, 23] },
+    2010: { "McLaren": [1, 2], "Mercedes AMG": [3, 4], "Red Bull Racing": [5, 6], "Scuderia Ferrari": [7, 8, "Massa"], "Williams": [9, 10], "Renault F1": [11, 12], "Force India": [14, 15], "Toro Rosso": [16, 17], "Lotus Racing": [18, 19], "HRT": [20, 21], "Sauber": [22, 23], "Virgin Racing": [24, 25] },
+    2011: { "Red Bull Racing": [1, 2], "McLaren": [3, 4], "Scuderia Ferrari": [5, 6], "Mercedes AMG": [7, 8], "Renault F1": [9, 10], "Williams": [11, 12], "Force India": [14, 15], "Sauber": [16, 17], "Toro Rosso": [18, 19], "Lotus": [20, 21], "HRT": [22, 23], "Virgin Racing": [24, 25] },
+    2012: { "Red Bull Racing": [1, 2], "McLaren": [3, 4], "Scuderia Ferrari": [5, 6], "Mercedes AMG": [7, 8], "Lotus F1": [9, 10], "Force India": [11, 12], "Sauber": [14, 15], "Toro Rosso": [16, 17], "Williams": [18, 19], "Caterham": [20, 21], "HRT": [22, 23], "Marussia": [24, 25] },
+    2013: { "Red Bull Racing": [1, 2], "Scuderia Ferrari": [3, 4], "McLaren": [5, 6], "Lotus F1": [7, 8], "Mercedes AMG": [9, 10], "Sauber": [11, 12], "Force India": [14, 15], "Williams": [16, 17], "Toro Rosso": [18, 19], "Caterham": [20, 21], "Marussia": [22, 23] }
+  };
+  const T74 = {
+    "Tyrrell": [[1974, 1995, 3, 4]],
+    "Scuderia Ferrari": [[1974, 1975, 11, 12], [1976, 1976, 1, 2], [1977, 1979, 11, 12], [1980, 1980, 1, 2], [1981, 1989, 27, 28], [1990, 1990, 1, 2], [1991, 1995, 27, 28]],
+    "McLaren": [[1974, 1974, 5, 6], [1975, 1975, 1, 2], [1976, 1976, 11, 12], [1977, 1977, 1, 2], [1978, 1984, 7, 8], [1985, 1987, 1, 2], [1988, 1988, 11, 12, "Prost"], [1989, 1989, 1, 2], [1990, 1990, 27, 28], [1991, 1992, 1, 2], [1993, 1995, 7, 8]],
+    "Team Lotus": [[1974, 1974, 1, 2], [1975, 1978, 5, 6], [1979, 1979, 1, 2], [1980, 1987, 11, 12], [1988, 1988, 1, 2], [1989, 1994, 11, 12]],
+    "Brabham": [[1974, 1977, 7, 8], [1978, 1978, 1, 2], [1979, 1981, 5, 6], [1982, 1982, 1, 2], [1983, 1983, 5, 6], [1984, 1984, 1, 2], [1985, 1992, 7, 8]],
+    "Williams": [[1977, 1980, 27, 28], [1981, 1981, 1, 2], [1982, 1982, 5, 6, "Reutemann"], [1983, 1983, 1, 2], [1984, 1992, 5, 6], [1993, 1994, 0, 2, "Hill"], [1995, 1995, 5, 6]],
+    "Benetton": [[1986, 1992, 19, 20], [1993, 1994, 5, 6], [1995, 1995, 1, 2]],
+    "Ligier": [[1976, 1995, 25, 26]],
+    "Renault F1": [[1977, 1985, 15, 16]],
+    "Arrows": [[1978, 1978, 35, 36], [1979, 1983, 29, 30], [1984, 1989, 17, 18], [1990, 1990, 9, 10]],
+    "Footwork": [[1991, 1995, 9, 10]],
+    "Alfa Romeo": [[1979, 1985, 22, 23]],
+    "Toleman": [[1981, 1983, 35, 36], [1984, 1985, 19, 20]],
+    "ATS": [[1977, 1984, 9, 10]],
+    "March": [[1975, 1977, 9, 10], [1981, 1982, 17, 18], [1987, 1989, 15, 16, "Gugelmin"], [1992, 1992, 16, 17]],
+    "Leyton House": [[1990, 1991, 15, 16]],
+    "Shadow Racing Cars": [[1974, 1980, 16, 17]],
+    "Surtees": [[1974, 1978, 18, 19]],
+    "Minardi": [[1986, 1995, 23, 24]],
+    "Larrousse": [[1987, 1992, 29, 30], [1993, 1994, 19, 20]],
+    "Scuderia Italia (Dallara)": [[1988, 1993, 21, 22]],
+    "Jordan Grand Prix": [[1991, 1992, 32, 33], [1993, 1995, 14, 15]],
+    "Sauber Clásico": [[1993, 1995, 29, 30]],
+    "Simtek": [[1994, 1994, 31, 32], [1995, 1995, 11, 12]],
+    "Pacific": [[1994, 1994, 33, 34]],
+    "Forti": [[1995, 1995, 21, 22]]
+  };
+  const CHAMP = { 1975: "Emerson Fittipaldi", 1976: "Niki Lauda", 1977: "James Hunt", 1978: "Niki Lauda", 1979: "Mario Andretti", 1980: "Jody Scheckter", 1981: "Alan Jones", 1982: "Nelson Piquet", 1983: "Keke Rosberg", 1984: "Nelson Piquet", 1985: "Niki Lauda", 1986: "Alain Prost", 1987: "Alain Prost", 1988: "Nelson Piquet", 1989: "Ayrton Senna", 1990: "Alain Prost", 1991: "Ayrton Senna", 1992: "Ayrton Senna", 1995: "Michael Schumacher",
+    1996: "Michael Schumacher", 1997: "Damon Hill", 1998: "Jacques Villeneuve", 1999: "Mika Häkkinen", 2000: "Mika Häkkinen", 2001: "Michael Schumacher", 2002: "Michael Schumacher", 2003: "Michael Schumacher", 2004: "Michael Schumacher", 2005: "Michael Schumacher", 2006: "Fernando Alonso", 2007: "Fernando Alonso", 2008: "Kimi Räikkönen", 2009: "Lewis Hamilton", 2010: "Jenson Button", 2011: "Sebastian Vettel", 2012: "Sebastian Vettel", 2013: "Sebastian Vettel" };
+  window.v18RealNumber = function (name, year, team) {
+    try {
+      if (!name) return null;
+      if (year >= 2014) return permOf(name, year);
+      if (year < 1974) return null;
+      if (!team) { const d = getDriversForYear(year).find(x => x[0] === name); team = d && d[3]; }
+      if (!team) return null;
+      let pair = null;
+      if (year >= 1996) pair = (T96[year] || {})[team] || null;
+      else { const r = (T74[team] || []).find(x => year >= x[0] && year <= x[1]); if (r) pair = [r[2], r[3], r[4]]; }
+      if (!pair) return null;
+      const mates = getDriversForYear(year).filter(d => d[3] === team).map(d => d[0]);
+      let first = mates[0];
+      if (pair[2]) first = mates.find(n => n.includes(pair[2])) || first;
+      if ((pair[0] === 1 || pair[1] === 1) && CHAMP[year] && mates.includes(CHAMP[year])) first = CHAMP[year];
+      if (name === first) return pair[0];
+      return mates.includes(name) ? pair[1] : null;
+    } catch (e) { return null; }
+  };
+  if (typeof takenNumbersForSeason === "function") {
+    const w = function () {
+      const year = parseInt(document.getElementById("startYear")?.value || "2026");
+      const used = new Set();
+      getDriversForYear(year).forEach(d => {
+        const n = v18RealNumber(d[0], year, d[3]);
+        used.add(n != null ? n : 2 + (Math.abs(deterministicHash("num_" + d[0] + "_" + year)) % 98));
+      });
+      return used;
+    };
+    takenNumbersForSeason = w; window.takenNumbersForSeason = w;
+  }
+  if (typeof refreshDriverNumberOptions === "function") {
+    const w = function () {
+      const sel = document.getElementById("driverNumberSel"); if (!sel) return;
+      const year = parseInt(document.getElementById("startYear")?.value || "2026");
+      const used = takenNumbersForSeason();
+      const type = document.getElementById("driverTypeSel")?.value || "actual";
+      const chosen = document.getElementById("playedDriverSel")?.value || "";
+      const racing = getDriversForYear(year).some(d => d[0] === chosen);
+      let own = null, note = "";
+      if (chosen && racing) {
+        own = v18RealNumber(chosen, year);
+        if (own != null) { used.delete(own); note = " (el tuyo real en " + year + ")"; }
+        else if (year < 1974) { own = 2 + (Math.abs(deterministicHash("num_" + chosen + "_" + year)) % 98); used.delete(own); note = " (en " + year + " el número cambiaba en cada carrera)"; }
+      }
+      let opts = "";
+      const from = own === 0 ? 0 : 1;
+      for (let n = from; n <= 99; n++) if (!used.has(n) || n === own) opts += `<option value="${n}" ${n === own ? "selected" : ""}>#${n}${n === own ? note : ""}</option>`;
+      sel.innerHTML = opts;
+    };
+    refreshDriverNumberOptions = w; window.refreshDriverNumberOptions = w;
+  }
+
+  /* ---------- 16) modo leyenda: la historia de cada escudería ---------- */
+  const LEG_INFO = {
+    "Team Lotus": "7 títulos de constructores (1963-1978) con Clark, Hill, Rindt, Fittipaldi y Andretti. Cerró en 1994.",
+    "Brabham": "Jack Brabham fue campeón en 1966 con su propio auto; después Hulme (1967) y Piquet (1981 y 1983). Cerró en 1992.",
+    "Benetton": "Campeón con Michael Schumacher en 1994 y 1995 (constructores en 1995). En 2002 pasó a ser Renault.",
+    "Brawn GP": "Una sola temporada, 2009, y la ganó toda: títulos de pilotos (Button) y de constructores. Después fue Mercedes.",
+    "Tyrrell": "Ken Tyrrell ganó tres títulos con Jackie Stewart (1969, 1971 y 1973) y el de constructores en 1971. Cerró en 1998.",
+    "Renault F1": "Trajo el turbo a la F1 en 1977 y fue campeón con Fernando Alonso en 2005 y 2006.",
+    "BRM": "Campeón con Graham Hill en 1962. Corrió de 1951 a 1977.",
+    "Cooper Car Company": "Puso el motor atrás y cambió la F1: campeón con Jack Brabham en 1959 y 1960.",
+    "Matra": "Campeón en 1969 con Jackie Stewart, en el equipo de Ken Tyrrell.",
+    "Vanwall": "El primer campeón de constructores de la historia, en 1958, con Moss y Brooks.",
+    "BAR Honda": "Subcampeón de constructores en 2004 con Jenson Button. En 2006 pasó a ser Honda.",
+    "Jordan Grand Prix": "Ganó 4 carreras (la primera en Spa 1998) y fue 3.° en 1999. Ahí debutó Michael Schumacher en 1991.",
+    "Toyota F1": "Corrió de 2002 a 2009 con un presupuesto gigante y nunca ganó una carrera.",
+    "Honda F1": "Ganó en los 60 con Ginther y Surtees, y en 2006 con Button en Hungría. En 2009 pasó a ser Brawn GP.",
+    "Stewart Grand Prix": "El equipo de Jackie Stewart (1997-1999): ganó una carrera, Nürburgring 1999 con Herbert. Después fue Jaguar.",
+    "Ligier": "El equipo francés de Guy Ligier: 9 victorias entre 1977 y 1996, con Laffite como gran figura.",
+    "Jaguar Racing": "De 2000 a 2004, con 2 podios y ninguna victoria. En 2005 se convirtió en Red Bull Racing.",
+    "Toleman": "Ahí debutó Ayrton Senna en 1984 (2.° en Mónaco bajo la lluvia). En 1986 pasó a ser Benetton.",
+    "Wolf Racing": "Ganó en su primera carrera (Argentina 1977, con Scheckter) y 3 veces ese año.",
+    "Sauber Clásico": "El equipo suizo de Peter Sauber, que debutó en 1993 y siempre fue de mitad de tabla.",
+    "Prost Grand Prix": "El equipo de Alain Prost (1997-2001): algunos podios, ninguna victoria.",
+    "March": "Ganó con Stewart (1970), Brambilla (1975) y Peterson (1976).",
+    "Surtees": "El equipo del único campeón en motos y en autos, John Surtees (1970-1978).",
+    "Lola": "Fabricante de autos de carrera que entró a la F1 varias veces; nunca ganó con su propio equipo.",
+    "Arrows": "Corrió 382 carreras entre 1978 y 2002 y nunca ganó.",
+    "Shadow Racing Cars": "Ganó una sola carrera: Austria 1977, con Alan Jones.",
+    "Eagle Racing": "El equipo de Dan Gurney: ganó en Bélgica 1967 con Gurney al volante.",
+    "Footwork": "Arrows con otro nombre (1991-1996), con apoyo de Porsche y Mugen.",
+    "Hesketh": "El equipo de Lord Hesketh: ganó en Holanda 1975 con James Hunt.",
+    "Minardi": "El chico simpático de Faenza: 21 temporadas (1985-2005) sin ganar. Ahí debutó Alonso.",
+    "Connaught": "Equipo británico de los 50: ganó en Siracusa 1955 con Tony Brooks, una carrera fuera del campeonato.",
+    "Caterham": "Corrió de 2012 a 2014 y nunca sumó puntos.",
+    "Spyker": "Una sola temporada, 2007: sumó 1 punto con Sutil en Japón.",
+    "Marussia": "Sumó sus primeros puntos en Mónaco 2014 con Jules Bianchi.",
+    "Super Aguri": "El equipo de Aguri Suzuki (2006-2008): 4 puntos con Takuma Sato.",
+    "HRT": "Corrió de 2010 a 2012, siempre al fondo, y nunca sumó puntos."
+  };
+  window.v18LegendInfo = team => LEG_INFO[team] || "";
+  const legInfoShow = () => {
+    try {
+      if (typeof selectedMode === "undefined" || selectedMode !== "legend") return;
+      const club = document.getElementById("club"), info = document.getElementById("modeInfo");
+      if (!club || !info) return;
+      const year = parseInt(document.getElementById("startYear")?.value || "2026");
+      const L = v18LegendRating(club.value, year), real = (getTeamsForYear(year) || []).some(t => t[0] === club.value);
+      info.innerHTML = "🏆 <b>" + club.value + "</b>: " + (LEG_INFO[club.value] || "escudería histórica de la F1.") + "<br>" + (real ? "En " + year + " corría de verdad: vas con su auto real (⭐" + L.r.toFixed(1) + ")." : "En " + year + " ya no corría: vuelve con el auto de " + (L.y || "su época") + " (⭐" + L.r.toFixed(1) + ") como un equipo más de la grilla. Tu misión: devolverla a la cima.");
+    } catch (e) {}
+  };
+  if (typeof refreshTeamLists === "function") {
+    const o = refreshTeamLists;
+    const w = function () { const r = o.apply(this, arguments); legInfoShow(); return r; };
+    refreshTeamLists = w; window.refreshTeamLists = w;
+  }
+  try { document.addEventListener("change", e => { if (e.target && (e.target.id === "club" || e.target.id === "startYear")) legInfoShow(); }); } catch (e) {}
+  if (typeof start === "function") {
+    const o = start;
+    const w = function () {
+      const legend = typeof selectedMode !== "undefined" && selectedMode === "legend";
+      const r = o.apply(this, arguments);
+      try { if (legend && s && s.team && LEG_INFO[s.team]) { add("🏆 Volvió " + s.team + ": " + LEG_INFO[s.team]); render(); } } catch (e) {}
+      return r;
+    };
+    start = w; window.start = w;
+  }
+
+  /* ---------- 17) antes de 2006 la clasificación era una sola tanda: el registro no habla de Q1/Q2/Q3 ---------- */
+  if (typeof add === "function") {
+    const o = add;
+    const w = function (txt) {
+      try { if (typeof txt === "string" && /^⏱️ .*Q[123] · P\d/.test(txt) && typeof v17OneQ === "function" && v17OneQ()) arguments[0] = txt.replace(/Q[123] · P/, "Clasificación · P"); } catch (e) {}
+      return o.apply(this, arguments);
+    };
+    add = w; window.add = w;
+  }
+
+  /* ---------- 18) clasificación en vivo: los tiempos provisorios ya no te muestran mucho más adelante de lo que vas a terminar ---------- */
+  if (typeof qlSessionStart === "function") {
+    const o = qlSessionStart;
+    const w = function () { const r = o.apply(this, arguments); try { Object.keys(QL.prov || {}).forEach(k => { QL.prov[k] = 0.2 + (QL.prov[k] - 0.25) * 0.4; }); } catch (e) {} return r; };
+    qlSessionStart = w; window.qlSessionStart = w;
+  }
 })();

@@ -191,7 +191,7 @@ const V18_PRIVATE = [
       if (cars >= target || H.T.some(t => t[0] === team)) return;
       const ds = list.map(x => x.split("@")).filter(([n, r]) => on(r, y) && !used.has(n)).map(([n]) => n).slice(0, Math.min(2, target - cars));
       if (!ds.length) return;
-      H.T.push([team, car]);
+      H.T.push([team, team === "Rob Walker Racing" && y >= 1962 ? 2.4 : car]);
       ds.forEach(n => { H.D.push([n, 0, 0, team]); used.add(n); if (!(n in V15_RATING)) V15_RATING[n] = 72; });
       cars += ds.length;
     });
