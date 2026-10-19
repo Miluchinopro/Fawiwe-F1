@@ -28920,7 +28920,8 @@ function v16Go() {
       const r = o.apply(this, arguments);
       try {
         if (kind === &quot;race&quot; &amp;&amp; Array.isArray(r) &amp;&amp; (s._engSimSprint || s._dlSprint)) {
-          r.forEach(x =&gt; { if (x.status || !x.pos) { x.pts = 0; return; } x.pts = x.pos &lt;= 8 ? SPR[x.pos - 1] : 0; });
+          const P = s.season === 2021 ? [3, 2, 1] : SPR; // 2021: la &quot;clasificación sprint&quot; daba solo 3-2-1
+          r.forEach(x =&gt; { if (x.status || !x.pos) { x.pts = 0; return; } x.pts = x.pos &lt;= P.length ? P[x.pos - 1] : 0; });
         }
       } catch (e) {}
       return r;
@@ -29510,6 +29511,243 @@ function v16Go() {
     const w = function () { const r = o.apply(this, arguments); try { Object.keys(QL.prov || {}).forEach(k =&gt; { QL.prov[k] = 0.2 + (QL.prov[k] - 0.25) * 0.4; }); } catch (e) {} return r; };
     qlSessionStart = w; window.qlSessionStart = w;
   }
+
+  /* ---------- 19) NUEVO: &quot;¿Sabías que…?&quot; de cada circuito, en el pronóstico del fin de semana ---------- */
+  const TRIVIA = {
+    &quot;Bahréin&quot;: &quot;fue la primera carrera de F1 en Medio Oriente, en 2004.&quot;,
+    &quot;Arabia Saudita&quot;: &quot;Jeddah es el callejero más rápido del calendario: se promedian más de 250 km/h.&quot;,
+    &quot;Australia&quot;: &quot;Albert Park rodea un lago; de 1985 a 1995 el GP de Australia se corría en Adelaida.&quot;,
+    &quot;Japón&quot;: &quot;Suzuka es el único circuito en forma de 8: una parte de la pista pasa por arriba de la otra.&quot;,
+    &quot;China&quot;: &quot;el trazado de Shanghái tiene la forma del carácter chino «shang» (上).&quot;,
+    &quot;Miami&quot;: &quot;el circuito da vueltas alrededor del estadio de los Miami Dolphins.&quot;,
+    &quot;San Marino&quot;: &quot;Imola se llama «Enzo e Dino Ferrari», por el fundador de Ferrari y su hijo.&quot;,
+    &quot;Emilia-Romaña&quot;: &quot;Imola volvió en 2020, 14 años después del último GP de San Marino.&quot;,
+    &quot;Mónaco&quot;: &quot;es el circuito más corto y más lento del calendario, y casi no se puede adelantar.&quot;,
+    &quot;Canadá&quot;: &quot;a la salida de la última chicana está el «Muro de los Campeones»: en 1999 chocaron ahí Hill, Schumacher y Villeneuve.&quot;,
+    &quot;España&quot;: &quot;Montmeló se usó durante años para las pruebas de pretemporada: los equipos se lo saben de memoria.&quot;,
+    &quot;Austria&quot;: &quot;en el Red Bull Ring la vuelta dura poco más de 1 minuto: es de las más cortas del año.&quot;,
+    &quot;Gran Bretaña&quot;: &quot;en Silverstone se corrió la primera carrera del Mundial de F1, el 13 de mayo de 1950.&quot;,
+    &quot;Hungría&quot;: &quot;en 1986 fue la primera carrera de F1 detrás de la Cortina de Hierro.&quot;,
+    &quot;Bélgica&quot;: &quot;Spa es el circuito más largo del calendario, y Eau Rouge-Raidillon se sube a fondo.&quot;,
+    &quot;Países Bajos&quot;: &quot;Zandvoort tiene curvas peraltadas: la última está inclinada 18 grados.&quot;,
+    &quot;Italia&quot;: &quot;Monza es el «Templo de la Velocidad»: ahí se marcó la vuelta con el promedio más alto de la historia.&quot;,
+    &quot;Azerbaiyán&quot;: &quot;Bakú tiene una recta de más de 2 km y una curva angostísima junto a la muralla de la ciudad vieja.&quot;,
+    &quot;Singapur&quot;: &quot;fue la primera carrera nocturna de la F1, en 2008.&quot;,
+    &quot;Estados Unidos&quot;: &quot;la curva 1 del COTA está arriba de una subida muy empinada: se frena casi a ciegas.&quot;,
+    &quot;México&quot;: &quot;el autódromo está a más de 2.200 metros de altura: con el aire fino los autos tienen menos carga.&quot;,
+    &quot;Brasil&quot;: &quot;Interlagos se corre al revés de las agujas del reloj y lleva el nombre de José Carlos Pace.&quot;,
+    &quot;Las Vegas&quot;: &quot;se corre de noche por el Strip, con una recta de casi 2 km frente a los casinos.&quot;,
+    &quot;Qatar&quot;: &quot;Losail se construyó para las motos; la F1 llegó recién en 2021.&quot;,
+    &quot;Abu Dhabi&quot;: &quot;en Yas Marina la salida de boxes pasa por un túnel debajo de la pista.&quot;,
+    &quot;Argentina&quot;: &quot;en el Autódromo de Buenos Aires Fangio ganó 4 veces el GP de su país (1954-1957).&quot;,
+    &quot;Malasia&quot;: &quot;en Sepang la lluvia tropical podía caer de golpe en cualquier momento de la carrera.&quot;,
+    &quot;Turquía&quot;: &quot;la curva 8 de Istanbul Park es una izquierda larguísima con cuatro vértices.&quot;,
+    &quot;Portugal&quot;: &quot;en Estoril Ayrton Senna ganó su primera carrera de F1, bajo la lluvia, en 1985.&quot;,
+    &quot;Alemania&quot;: &quot;el viejo Nürburgring medía más de 22 km: Jackie Stewart lo bautizó «el Infierno Verde».&quot;,
+    &quot;Francia&quot;: &quot;Paul Ricard tiene escapatorias con rayas azules y rojas que frenan a los autos que se salen.&quot;
+  };
+  window.v18Trivia = name =&gt; TRIVIA[name] || &quot;&quot;;
+  if (typeof renderWeekendForecast === &quot;function&quot;) {
+    const o = renderWeekendForecast;
+    const w = function () {
+      const h = o.apply(this, arguments);
+      try {
+        const nm = trackData[s.gp] &amp;&amp; trackData[s.gp].name, tv = TRIVIA[nm];
+        if (h &amp;&amp; tv) return h.replace(/&lt;\/div&gt;\s*$/, `&lt;br&gt;&lt;span class=&quot;small&quot;&gt;💡 &lt;b&gt;¿Sabías que…?&lt;/b&gt; ${tv.charAt(0).toUpperCase() + tv.slice(1)}&lt;/span&gt;&lt;/div&gt;`);
+      } catch (e) {}
+      return h;
+    };
+    renderWeekendForecast = w; window.renderWeekendForecast = w;
+  }
+
+  /* ---------- 20) NUEVO: &quot;La historia real&quot; — qué pasó de verdad esa temporada ---------- */
+  const REAL = {
+    1950: [&quot;Giuseppe Farina&quot;, &quot;Alfa Romeo&quot;, null], 1951: [&quot;Juan Manuel Fangio&quot;, &quot;Alfa Romeo&quot;, null], 1952: [&quot;Alberto Ascari&quot;, &quot;Ferrari&quot;, null], 1953: [&quot;Alberto Ascari&quot;, &quot;Ferrari&quot;, null],
+    1954: [&quot;Juan Manuel Fangio&quot;, &quot;Maserati y Mercedes&quot;, null], 1955: [&quot;Juan Manuel Fangio&quot;, &quot;Mercedes&quot;, null], 1956: [&quot;Juan Manuel Fangio&quot;, &quot;Ferrari&quot;, null], 1957: [&quot;Juan Manuel Fangio&quot;, &quot;Maserati&quot;, null],
+    1958: [&quot;Mike Hawthorn&quot;, &quot;Ferrari&quot;, &quot;Vanwall&quot;], 1959: [&quot;Jack Brabham&quot;, &quot;Cooper&quot;, &quot;Cooper&quot;], 1960: [&quot;Jack Brabham&quot;, &quot;Cooper&quot;, &quot;Cooper&quot;], 1961: [&quot;Phil Hill&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;],
+    1962: [&quot;Graham Hill&quot;, &quot;BRM&quot;, &quot;BRM&quot;], 1963: [&quot;Jim Clark&quot;, &quot;Lotus&quot;, &quot;Lotus&quot;], 1964: [&quot;John Surtees&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 1965: [&quot;Jim Clark&quot;, &quot;Lotus&quot;, &quot;Lotus&quot;],
+    1966: [&quot;Jack Brabham&quot;, &quot;Brabham&quot;, &quot;Brabham&quot;], 1967: [&quot;Denny Hulme&quot;, &quot;Brabham&quot;, &quot;Brabham&quot;], 1968: [&quot;Graham Hill&quot;, &quot;Lotus&quot;, &quot;Lotus&quot;], 1969: [&quot;Jackie Stewart&quot;, &quot;Matra&quot;, &quot;Matra&quot;],
+    1970: [&quot;Jochen Rindt&quot;, &quot;Lotus&quot;, &quot;Lotus&quot;], 1971: [&quot;Jackie Stewart&quot;, &quot;Tyrrell&quot;, &quot;Tyrrell&quot;], 1972: [&quot;Emerson Fittipaldi&quot;, &quot;Lotus&quot;, &quot;Lotus&quot;], 1973: [&quot;Jackie Stewart&quot;, &quot;Tyrrell&quot;, &quot;Lotus&quot;],
+    1974: [&quot;Emerson Fittipaldi&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;], 1975: [&quot;Niki Lauda&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 1976: [&quot;James Hunt&quot;, &quot;McLaren&quot;, &quot;Ferrari&quot;], 1977: [&quot;Niki Lauda&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;],
+    1978: [&quot;Mario Andretti&quot;, &quot;Lotus&quot;, &quot;Lotus&quot;], 1979: [&quot;Jody Scheckter&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 1980: [&quot;Alan Jones&quot;, &quot;Williams&quot;, &quot;Williams&quot;], 1981: [&quot;Nelson Piquet&quot;, &quot;Brabham&quot;, &quot;Williams&quot;],
+    1982: [&quot;Keke Rosberg&quot;, &quot;Williams&quot;, &quot;Ferrari&quot;], 1983: [&quot;Nelson Piquet&quot;, &quot;Brabham&quot;, &quot;Ferrari&quot;], 1984: [&quot;Niki Lauda&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;], 1985: [&quot;Alain Prost&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;],
+    1986: [&quot;Alain Prost&quot;, &quot;McLaren&quot;, &quot;Williams&quot;], 1987: [&quot;Nelson Piquet&quot;, &quot;Williams&quot;, &quot;Williams&quot;], 1988: [&quot;Ayrton Senna&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;], 1989: [&quot;Alain Prost&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;],
+    1990: [&quot;Ayrton Senna&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;], 1991: [&quot;Ayrton Senna&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;], 1992: [&quot;Nigel Mansell&quot;, &quot;Williams&quot;, &quot;Williams&quot;], 1993: [&quot;Alain Prost&quot;, &quot;Williams&quot;, &quot;Williams&quot;],
+    1994: [&quot;Michael Schumacher&quot;, &quot;Benetton&quot;, &quot;Williams&quot;], 1995: [&quot;Michael Schumacher&quot;, &quot;Benetton&quot;, &quot;Benetton&quot;], 1996: [&quot;Damon Hill&quot;, &quot;Williams&quot;, &quot;Williams&quot;], 1997: [&quot;Jacques Villeneuve&quot;, &quot;Williams&quot;, &quot;Williams&quot;],
+    1998: [&quot;Mika Häkkinen&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;], 1999: [&quot;Mika Häkkinen&quot;, &quot;McLaren&quot;, &quot;Ferrari&quot;], 2000: [&quot;Michael Schumacher&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 2001: [&quot;Michael Schumacher&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;],
+    2002: [&quot;Michael Schumacher&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 2003: [&quot;Michael Schumacher&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 2004: [&quot;Michael Schumacher&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 2005: [&quot;Fernando Alonso&quot;, &quot;Renault&quot;, &quot;Renault&quot;],
+    2006: [&quot;Fernando Alonso&quot;, &quot;Renault&quot;, &quot;Renault&quot;], 2007: [&quot;Kimi Räikkönen&quot;, &quot;Ferrari&quot;, &quot;Ferrari&quot;], 2008: [&quot;Lewis Hamilton&quot;, &quot;McLaren&quot;, &quot;Ferrari&quot;], 2009: [&quot;Jenson Button&quot;, &quot;Brawn&quot;, &quot;Brawn&quot;],
+    2010: [&quot;Sebastian Vettel&quot;, &quot;Red Bull&quot;, &quot;Red Bull&quot;], 2011: [&quot;Sebastian Vettel&quot;, &quot;Red Bull&quot;, &quot;Red Bull&quot;], 2012: [&quot;Sebastian Vettel&quot;, &quot;Red Bull&quot;, &quot;Red Bull&quot;], 2013: [&quot;Sebastian Vettel&quot;, &quot;Red Bull&quot;, &quot;Red Bull&quot;],
+    2014: [&quot;Lewis Hamilton&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;], 2015: [&quot;Lewis Hamilton&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;], 2016: [&quot;Nico Rosberg&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;], 2017: [&quot;Lewis Hamilton&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;],
+    2018: [&quot;Lewis Hamilton&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;], 2019: [&quot;Lewis Hamilton&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;], 2020: [&quot;Lewis Hamilton&quot;, &quot;Mercedes&quot;, &quot;Mercedes&quot;], 2021: [&quot;Max Verstappen&quot;, &quot;Red Bull&quot;, &quot;Mercedes&quot;],
+    2022: [&quot;Max Verstappen&quot;, &quot;Red Bull&quot;, &quot;Red Bull&quot;], 2023: [&quot;Max Verstappen&quot;, &quot;Red Bull&quot;, &quot;Red Bull&quot;], 2024: [&quot;Max Verstappen&quot;, &quot;Red Bull&quot;, &quot;McLaren&quot;], 2025: [&quot;Lando Norris&quot;, &quot;McLaren&quot;, &quot;McLaren&quot;]
+  };
+  window.v18RealSeason = function (y) {
+    const R = REAL[y]; if (!R) return &quot;&quot;;
+    return &quot;En la vida real, el campeón de &quot; + y + &quot; fue &quot; + R[0] + &quot; (&quot; + R[1] + &quot;)&quot; + (R[2] ? &quot; y &quot; + R[2] + &quot; ganó el de constructores.&quot; : &quot;. Todavía no existía el campeonato de constructores (llegó en 1958).&quot;);
+  };
+  if (typeof v15SeasonEnd === &quot;function&quot;) {
+    const o = v15SeasonEnd;
+    const w = function () {
+      const r = o.apply(this, arguments);
+      try {
+        const real = v18RealSeason(s.season);
+        if (real &amp;&amp; Array.isArray(r)) {
+          const R = REAL[s.season], me = s.playerMode === &quot;driver&quot; ? s.playedDriverName : null;
+          const dp = s.driverPoints || {}, champ = Object.keys(dp).sort((a, b) =&gt; dp[b] - dp[a])[0];
+          let cmp = &quot;&quot;;
+          if (me &amp;&amp; champ === me &amp;&amp; me !== R[0]) cmp = &quot; ¡Le cambiaste la historia!&quot;;
+          else if (me &amp;&amp; me === R[0] &amp;&amp; champ !== me) cmp = &quot; Esta vez la historia fue distinta.&quot;;
+          else if (champ &amp;&amp; champ === R[0]) cmp = &quot; Esta vez también.&quot;;
+          r[1] = (r[1] ? r[1] + &quot; · &quot; : &quot;&quot;) + &quot;📜 &quot; + real + cmp;
+          if (s._v18RealLog !== s.season) { s._v18RealLog = s.season; add(&quot;📜 La historia real: &quot; + real + cmp); }
+        }
+      } catch (e) {}
+      return r;
+    };
+    v15SeasonEnd = w; window.v15SeasonEnd = w;
+  }
+  // al empezar: qué pasó de verdad ese año (para que sepas contra qué historia jugás)
+  if (typeof start === &quot;function&quot;) {
+    const o = start;
+    const w = function () {
+      const r = o.apply(this, arguments);
+      try { if (s &amp;&amp; REAL[s.season] &amp;&amp; !s.player2) { add(&quot;📜 &quot; + v18RealSeason(s.season) + &quot; ¿Lo podés cambiar?&quot;); render(); } } catch (e) {}
+      return r;
+    };
+    start = w; window.start = w;
+  }
+
+  /* ---------- 21) NUEVO: práctica libre (modo piloto) — vueltas sin consecuencias para mejorar en cada circuito ---------- */
+  const pracOk = () =&gt; {
+    try {
+      if (s.playerMode !== &quot;driver&quot; || s.player2 || s.gameOver) return false;
+      if ((typeof ERA !== &quot;undefined&quot; &amp;&amp; ERA) || s.miniStarted || s.advancing) return false;
+      if ((typeof DL !== &quot;undefined&quot; &amp;&amp; DL) || (typeof QL !== &quot;undefined&quot; &amp;&amp; QL)) return false;
+      return (s.session || 0) &lt; 2 || !!s.raceDone;
+    } catch (e) { return false; }
+  };
+  window.v18PracCardHtml = function () {
+    const tr = (trackData[s.gp] || {}).name || &quot;&quot;, B = s.pracBest || {}, best = B[tr];
+    const list = Object.keys(B).sort().map(k =&gt; `&lt;span class=&quot;pill&quot;&gt;${k}: ${emFmtLap(B[k])}&lt;/span&gt;`).join(&quot; &quot;);
+    const ok = pracOk();
+    return `&lt;h2&gt;🎮 Práctica libre&lt;/h2&gt;
+      &lt;p class=&quot;small&quot;&gt;Girá todas las vueltas que quieras en &lt;b&gt;${tr}&lt;/b&gt; antes de la clasificación. No cuenta para nada: es para aprender dónde frenar y cuándo usar ${s.season &gt;= 2014 ? &quot;el ERS&quot; : s.season &gt;= 2009 ? &quot;el KERS&quot; : &quot;el rebufo&quot;}.&lt;/p&gt;
+      ${best ? `&lt;p&gt;⏱️ Tu mejor vuelta de práctica en ${tr}: &lt;b&gt;${emFmtLap(best)}&lt;/b&gt;&lt;/p&gt;` : &quot;&quot;}
+      ${TRIVIA[tr] ? `&lt;p class=&quot;small&quot;&gt;💡 &lt;b&gt;¿Sabías que…?&lt;/b&gt; ${TRIVIA[tr].charAt(0).toUpperCase() + TRIVIA[tr].slice(1)}&lt;/p&gt;` : &quot;&quot;}
+      &lt;button type=&quot;button&quot; class=&quot;era-btn hot&quot; ${ok ? &quot;&quot; : &quot;disabled&quot;} onclick=&quot;v18Practice()&quot;&gt;⏱️ Salir a pista${ok ? &quot;&quot; : &quot; (ahora no: estás en plena sesión)&quot;}&lt;/button&gt;
+      ${list ? `&lt;p class=&quot;small&quot; style=&quot;margin-top:8px&quot;&gt;🏁 Tus mejores vueltas: ${list}&lt;/p&gt;` : &quot;&quot;}`;
+  };
+  window.v18Practice = function () {
+    if (!pracOk() || typeof emFrame !== &quot;function&quot;) return;
+    const tr = trackData[s.gp] || {};
+    const keep = { q: s._crashQuali, d: s._crashDNF, acc: window.__emLapAcc };
+    window.__v18Prac = true;
+    const done = () =&gt; {
+      try {
+        const txt = (document.getElementById(&quot;eTime&quot;) || {}).innerText || &quot;&quot;;
+        const m = txt.match(/(\d+):(\d+\.\d+)/), name = tr.name || &quot;&quot;;
+        s._crashQuali = keep.q; s._crashDNF = keep.d; window.__emLapAcc = keep.acc; s.miniStarted = false; window.__v18Prac = false;
+        let msg = &quot;🎮 Práctica terminada.&quot;;
+        if (m &amp;&amp; !/SIN TIEMPO/i.test(txt)) {
+          const lap = +m[1] * 60 + +m[2];
+          s.pracBest = s.pracBest || {};
+          const prev = s.pracBest[name];
+          if (!prev || lap &lt; prev) { s.pracBest[name] = lap; msg = &quot;🎮 Práctica en &quot; + name + &quot;: &quot; + emFmtLap(lap) + (prev ? &quot; · ¡nuevo récord personal! (−&quot; + (prev - lap).toFixed(3) + &quot;)&quot; : &quot; · primera vuelta registrada.&quot;); }
+          else msg = &quot;🎮 Práctica en &quot; + name + &quot;: &quot; + emFmtLap(lap) + &quot; (tu mejor sigue siendo &quot; + emFmtLap(prev) + &quot;).&quot;;
+        } else msg = &quot;🎮 Práctica en &quot; + name + &quot;: vuelta sin tiempo. Probá de nuevo.&quot;;
+        add(msg);
+      } catch (e) {}
+      setTimeout(() =&gt; { try { render(); document.getElementById(&quot;v18PracCard&quot;)?.scrollIntoView({ block: &quot;center&quot; }); } catch (e) {} }, 1800);
+    };
+    emFrame(`&lt;div class=&quot;mini-explain&quot;&gt;&lt;b&gt;🎮 PRÁCTICA LIBRE&lt;/b&gt; · No cuenta para el campeonato. &lt;button type=&quot;button&quot; class=&quot;dark&quot; onclick=&quot;eraStop&amp;&amp;eraStop();s.miniStarted=false;window.__v18Prac=false;render()&quot;&gt;✕ Volver a boxes&lt;/button&gt;&lt;/div&gt;`,
+      &quot;⏱️&quot;, &quot;Práctica libre en &quot; + (tr.name || &quot;&quot;), &quot;Una vuelta lanzada para practicar: frená en los carteles, doblá con ◀ ▶ y &quot; + (s.season &gt;= 2009 ? &quot;usá el &quot; + (s.season &gt;= 2014 ? &quot;ERS&quot; : &quot;KERS&quot;) + &quot; solo en las rectas.&quot; : &quot;aprovechá el rebufo en las rectas.&quot;), &quot;emLap&quot;, done, &quot;practice_&quot; + Date.now());
+    try { document.getElementById(&quot;jobArea&quot;)?.scrollIntoView({ block: &quot;start&quot; }); } catch (e) {}
+  };
+  if (typeof render === &quot;function&quot;) {
+    const o = render;
+    const w = function () {
+      const r = o.apply(this, arguments);
+      try { if (typeof v3Card === &quot;function&quot;) v3Card(&quot;v18PracCard&quot;, v18PracCardHtml, typeof v3Game === &quot;function&quot; &amp;&amp; v3Game() &amp;&amp; s.playerMode === &quot;driver&quot; &amp;&amp; !s.player2, &quot;#jobCard&quot;); } catch (e) {}
+      return r;
+    };
+    render = w; window.render = w;
+  }
+
+  /* ---------- 22) vuelta rápida: una sola verdad, y el punto extra también lo pueden ganar los rivales ---------- */
+  // Antes: la transmisión podía decir &quot;vuelta más rápida: Hamilton&quot; y el resultado dártela a vos,
+  // y cuando la hacía otro piloto nunca sumaba el punto (1950-59 y 2019-24 lo daban).
+  if (typeof dlFeed === &quot;function&quot;) {
+    const o = dlFeed;
+    const w = function (lap, txt) {
+      try { const m = typeof txt === &quot;string&quot; &amp;&amp; txt.match(/^⏱️ Vuelta más rápida: (.+?) · /); if (m) s._v18FL = { key: s.season + &quot;_&quot; + s.gp, name: m[1] }; } catch (e) {}
+      return o.apply(this, arguments);
+    };
+    dlFeed = w; window.dlFeed = w;
+  }
+  if (typeof finishRace === &quot;function&quot;) {
+    const o = finishRace;
+    const w = function () {
+      const key = s.season + &quot;_&quot; + s.gp;
+      let H = null;
+      try {
+        if (s._v18FL &amp;&amp; s._v18FL.key === key) H = s._v18FL.name;
+        else if (typeof engLastLaps !== &quot;undefined&quot; &amp;&amp; engLastLaps &amp;&amp; typeof engKey === &quot;function&quot; &amp;&amp; engLastLaps.key === engKey() &amp;&amp; engLastLaps.fastest) H = engLastLaps.fastest.name;
+      } catch (e) {}
+      let me = null;
+      try { me = s.playerMode === &quot;driver&quot; ? s.playedDriverName : ((myTeamLineup()[0] || {}).name); } catch (e) {}
+      const logLen = (s.log || []).length, before = s.raceDone;
+      const dh = deterministicHash;
+      if (H) deterministicHash = function (txt) { if (String(txt).startsWith(&quot;fastestlap_&quot;)) return H === me ? 0 : 99; return dh.apply(this, arguments); };
+      let r;
+      try { r = o.apply(this, arguments); } finally { deterministicHash = dh; }
+      try {
+        if (s.raceDone &amp;&amp; !before &amp;&amp; !s.player2 &amp;&amp; typeof v15FLPoint === &quot;function&quot; &amp;&amp; v15FLPoint()) {
+          const mine = (s.log || []).slice(logLen).some(l =&gt; String(l).includes(&quot;Vuelta rápida de la carrera&quot;));
+          const g = (s._v4Grid || []).filter(x =&gt; !x.status &amp;&amp; x.pos);
+          const okPos = x =&gt; x.pos &lt;= 10 || (typeof v15FLAnyPos === &quot;function&quot; &amp;&amp; v15FLAnyPos());
+          if (!mine &amp;&amp; g.length) {
+            let hold = H ? g.find(x =&gt; x.name === H) : null;
+            if (!H) { const front = g.filter(x =&gt; !x.mine &amp;&amp; okPos(x)).sort((a, b) =&gt; a.pos - b.pos).slice(0, 6); hold = front[Math.abs(dh(&quot;v18fl&quot; + key)) % Math.max(1, front.length)] || null; }
+            if (hold &amp;&amp; !hold.mine &amp;&amp; okPos(hold) &amp;&amp; s.driverPoints) {
+              s.driverPoints[hold.name] = (s.driverPoints[hold.name] || 0) + 1;
+              if (s.teamStandings &amp;&amp; hold.team &amp;&amp; hold.team !== s.team) s.teamStandings[hold.team] = (s.teamStandings[hold.team] || 0) + 1;
+              hold.pts = (hold.pts || 0) + 1;
+              add(&quot;⏱️ Vuelta rápida: &quot; + hold.name + &quot; se lleva el punto extra.&quot;);
+            }
+          }
+        }
+      } catch (e) {}
+      return r;
+    };
+    finishRace = w; window.finishRace = w;
+  }
+
+  // en 2021 la sprint daba 3-2-1: el aviso de la transmisión lo dice bien
+  if (typeof dlFeed === &quot;function&quot;) {
+    const o = dlFeed;
+    const w = function (lap, txt) { if (typeof txt === &quot;string&quot; &amp;&amp; s.season === 2021) arguments[1] = txt.replace(&quot;Puntos del 8 al 1.&quot;, &quot;Puntos 3-2-1 (así era la «clasificación sprint» de 2021).&quot;); return o.apply(this, arguments); };
+    dlFeed = w; window.dlFeed = w;
+  }
+
+  // en la práctica libre, los mensajes de choque no hablan de la clasificación
+  if (typeof add === &quot;function&quot;) {
+    const o = add;
+    const w = function (txt) {
+      if (window.__v18Prac &amp;&amp; typeof txt === &quot;string&quot;) arguments[0] = txt.replace(&quot;: sin tiempo en la clasificación.&quot;, &quot; en la práctica libre (no cuenta para nada).&quot;);
+      return o.apply(this, arguments);
+    };
+    add = w; window.add = w;
+  }
+  // y el cartel del final tampoco dice &quot;largás desde el fondo&quot;
+  try {
+    new MutationObserver(() =&gt; {
+      if (!window.__v18Prac) return;
+      const el = document.getElementById(&quot;eTime&quot;);
+      if (el &amp;&amp; /largás desde el fondo|SIN TIEMPO/.test(el.innerHTML) &amp;&amp; !el.dataset.v18) { el.dataset.v18 = 1; el.innerHTML = el.innerHTML.replace(/vuelta terminada contra las barreras/, &quot;te fuiste contra las barreras en la práctica (no cuenta)&quot;); }
+      document.querySelectorAll(&quot;#eraMsg&quot;).forEach(m =&gt; { if (/largás desde el fondo/.test(m.textContent)) m.textContent = &quot;💥 Al muro en la práctica: no pasa nada, probá otra vez.&quot;; });
+    }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  } catch (e) {}
 })();
 
 &lt;/script&gt;
