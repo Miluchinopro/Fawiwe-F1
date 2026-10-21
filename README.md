@@ -1,4 +1,4 @@
-# 🏎️ FAWIWE F1 · Prototipo 1.5
+# 🏎️ FAWIWE F1 · Versión 1.0
 
 Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**, de 1950 a 2026.
 
@@ -20,6 +20,10 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 - **Cada época con sus roturas**: en los años 50 abandonaba casi la mitad de la grilla; hoy casi nadie. Y cada partida tiene su propia suerte.
 - Antes de 1980 el box te habla con una **pizarra en código** (P3 · −0.4 · L12 · IN), como en la época.
 - **Escuderías leyenda** sin pilotos repetidos y **editor de grilla** que funciona en todas las épocas.
+- **La grilla real de cada año**: con los equipos privados de verdad (Rob Walker, Osella, Minardi…), la cantidad real de autos de cada época y el número real de cada piloto.
+- **¿Cambiás la historia?**: al empezar te cuenta quién fue campeón de verdad ese año y al final te dice si se la cambiaste.
+- **Práctica libre** en cada circuito, con tu mejor vuelta guardada y un dato curioso de cada pista.
+- **Modo leyenda**: traé de vuelta a Lotus, Brabham o Minardi con su historia y el auto de su época.
 - Carrera rápida, desafíos, "Toda una vida", temporada rápida y multijugador local.
 
 ## 👥 Multijugador
@@ -48,3 +52,7 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 [Creative Commons Atribución-NoComercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/deed.es): podés compartirlo y modificarlo nombrando a **Miluchino**, pero sin fines comerciales. Mirá el archivo `LICENSE`.
 
 > FAWIWE F1 es un proyecto de fan, gratis y sin fines de lucro. No tiene relación oficial con la Fórmula 1, la FIA ni ningún equipo o piloto. Los nombres reales se usan solo como referencia.
+
+## 📜 Versiones
+- **Versión 1.0** (octubre 2026): la versión final. Grillas reales con equipos privados, números reales, práctica libre, la historia real de cada temporada, modo leyenda mejorado y más de 100 arreglos.
+- Prototipos 1.0 a 1.5: todo lo anterior.

@@ -1,6 +1,6 @@
 # 🏎️ FAWIWE F1 · cómo está armado el código
 
-Versión: **Prototipo 1.5**. El juego final es **una sola página** (`juego.html`), pero se arma a partir de estos archivos.
+Versión: **Versión 1.0**. El juego final es **una sola página** (`juego.html`), pero se arma a partir de estos archivos.
 
 ## Cómo armar el juego
 

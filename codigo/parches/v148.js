@@ -1065,10 +1065,11 @@
           const okPos = x => x.pos <= 10 || (typeof v15FLAnyPos === "function" && v15FLAnyPos());
           if (!mine && g.length) {
             let hold = H ? g.find(x => x.name === H) : null;
-            if (!H) { const front = g.filter(x => !x.mine && okPos(x)).sort((a, b) => a.pos - b.pos).slice(0, 6); hold = front[Math.abs(dh("v18fl" + key)) % Math.max(1, front.length)] || null; }
-            if (hold && !hold.mine && okPos(hold) && s.driverPoints) {
+            if (!H) { const front = g.filter(x => x.name !== me && okPos(x)).sort((a, b) => a.pos - b.pos).slice(0, 6); hold = front[Math.abs(dh("v18fl" + key)) % Math.max(1, front.length)] || null; }
+            if (hold && hold.name !== me && okPos(hold) && s.driverPoints) {
               s.driverPoints[hold.name] = (s.driverPoints[hold.name] || 0) + 1;
-              if (s.teamStandings && hold.team && hold.team !== s.team) s.teamStandings[hold.team] = (s.teamStandings[hold.team] || 0) + 1;
+              if (hold.mine || hold.team === s.team) { s.points = (s.points || 0) + 1; if (s.teamStandings) s.teamStandings[s.team] = s.points; } // tu compañero: suma para tu equipo
+              else if (s.teamStandings && hold.team) s.teamStandings[hold.team] = (s.teamStandings[hold.team] || 0) + 1;
               hold.pts = (hold.pts || 0) + 1;
               add("⏱️ Vuelta rápida: " + hold.name + " se lleva el punto extra.");
             }
@@ -1105,4 +1106,13 @@
       document.querySelectorAll("#eraMsg").forEach(m => { if (/largás desde el fondo/.test(m.textContent)) m.textContent = "💥 Al muro en la práctica: no pasa nada, probá otra vez."; });
     }).observe(document.body, { childList: true, subtree: true, characterData: true });
   } catch (e) {}
+
+  /* ---------- 23) Versión 1.0: aviso una sola vez ---------- */
+  setTimeout(() => {
+    try {
+      if (localStorage.getItem("fw_v1_seen")) return;
+      localStorage.setItem("fw_v1_seen", "1");
+      if (typeof v9Toast === "function") v9Toast("🏁 FAWIWE F1 · VERSIÓN 1.0 — la versión final: grillas reales, números reales, práctica libre y la historia real de cada año. ¡Gracias por jugar!");
+    } catch (e) {}
+  }, 4500);
 })();
