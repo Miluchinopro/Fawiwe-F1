@@ -1,14 +1,25 @@
 {
+  "id": "/Fawiwe-F1/",
   "name": "FAWIWE F1",
   "short_name": "FAWIWE F1",
-  "description": "Juego de Fórmula 1: ingeniero, jefe de equipo o piloto, de 1950 a 2026.",
+  "description": "Juego de Fórmula 1 gratis: ingeniero, jefe de equipo o piloto, de 1950 a 2026. Carreras en vivo, grillas reales de cada época y multijugador.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
   "orientation": "any",
   "background_color": "#0b0b10",
   "theme_color": "#e10600",
   "lang": "es",
+  "dir": "ltr",
+  "categories": [
+    "games",
+    "sports",
+    "entertainment"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
@@ -25,6 +36,56 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "shot-wide-1.jpg",
+      "sizes": "1200x750",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "FAWIWE F1"
+    },
+    {
+      "src": "shot-wide-2.jpg",
+      "sizes": "1200x750",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "FAWIWE F1"
+    },
+    {
+      "src": "shot-wide-3.jpg",
+      "sizes": "1280x760",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "FAWIWE F1"
+    },
+    {
+      "src": "shot-narrow-1.jpg",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "FAWIWE F1"
+    },
+    {
+      "src": "shot-narrow-2.jpg",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "FAWIWE F1"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jugar ahora",
+      "short_name": "Jugar",
+      "url": "./juego.html",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
