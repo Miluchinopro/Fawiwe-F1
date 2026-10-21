@@ -1,15 +1,43 @@
 # 🏎️ FAWIWE F1 · Versión 1.0
 
-Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**, de 1950 a 2026.
+**Juego de Fórmula 1 gratis que se juega en el navegador**, en español. Sos **ingeniero, jefe de equipo o piloto** en cualquier temporada de **1950 a 2026**, con las grillas, los calendarios y las reglas reales de cada época.
+
+**▶ Jugar ahora: https://miluchinopro.github.io/Fawiwe-F1/**
 
 **Creado por Miluchino.** Hecho con la ayuda de [Claude](https://claude.ai) 🤖.
 
-## 🎮 Jugar
-- Abrí `index.html` (la página con el juego adentro) o `juego.html` (solo el juego).
-- Funciona en compu y en celular. No hace falta instalar nada.
-- Las partidas se guardan en tu navegador.
+---
 
-## ✨ Qué trae
+## 🧐 ¿Qué es FAWIWE F1?
+Un juego de carreras y gestión de Fórmula 1 hecho como **aplicación web** (se juega desde el navegador y se puede instalar como app). Elegís un año, un equipo y un rol:
+
+| Rol | Qué hacés |
+|---|---|
+| 🔧 **Ingeniero / jefe de equipo** | Manejás la estrategia, el desarrollo del auto, los pilotos, el presupuesto y las órdenes por radio durante la carrera. |
+| 🏎️ **Piloto** | Elegís un piloto real, una leyenda o creás el tuyo: clasificás, largás, peleás posiciones, negociás contratos y vivís la carrera fuera de la pista. |
+| 👥 **Multijugador** | Dos jugadores en la misma compu o celular, cada uno con su equipo o su piloto. |
+
+Cada temporada tiene los pilotos, los equipos (también los privados), los circuitos, el sistema de puntos y las reglas de su época: en los 50 se rompía media grilla, antes de 1980 el box te habla con la pizarra y desde 2026 hay modo adelantamiento.
+
+## 🚀 Cómo se juega / cómo se instala
+**No hace falta instalar nada.** Abrí el link y jugá:
+- **En la compu:** entrá a https://miluchinopro.github.io/Fawiwe-F1/ con Chrome, Edge, Firefox o Safari.
+- **En el celular (como app):** abrí el link y tocá **«Instalar app»** (Android/Chrome) o **Compartir → «Agregar a pantalla de inicio»** (iPhone/Safari). Queda con su ícono y funciona **sin internet** después de la primera vez.
+- **Sin internet desde el código:** descargá el repositorio (botón verde *Code → Download ZIP*) y abrí `index.html` o `juego.html` con doble clic.
+
+Las partidas se guardan en tu navegador (5 ranuras para piloto y 5 para ingeniero).
+
+## 🎮 Cómo se usa
+1. Tocá **START ENGINE** en la pantalla de inicio.
+2. Elegí tu **rol** (ingeniero o piloto) y si jugás **solo o de a dos**.
+3. Elegí la **década, el año y el equipo** (o una **escudería leyenda** como Lotus o Brabham).
+4. Cada Gran Premio tiene **prácticas, clasificación y carrera**. En cada sesión hay minijuegos y decisiones; la carrera se ve **en vivo, vuelta por vuelta**, y vos decidís paradas, ataques y estrategia.
+5. Entre carreras: prensa, contratos, sponsors, tu casa, el desarrollo del auto y el mercado de pilotos.
+6. Al final de la temporada, el juego te cuenta **quién fue campeón de verdad ese año** y si le cambiaste la historia.
+
+El juego tiene un **tutorial** integrado (botón 📖) que explica cada modo.
+
+## ✨ Todo lo que trae
 - **Modo Ingeniero y Modo Piloto**, con minijuegos en cada sesión.
 - **Carrera en vivo** vuelta por vuelta: estrategia, largada, pases y defensas jugables, entrada a boxes, Safety Car, VSC, lluvia con radar y radio con voz.
 - **Rival de la temporada**, cara a cara y vuelta de enfriamiento.
@@ -41,12 +69,47 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 - Los minijuegos entran enteros en la pantalla, también con el celu acostado.
 - Elegí **cómo doblar** (botones, deslizar el dedo o inclinar el celu), vibración, ahorro de batería y modo una mano en Accesibilidad.
 
-## 📂 Archivos
+## 🛠️ En qué está programado
+| Parte | Tecnología |
+|---|---|
+| El juego | **JavaScript** (sin frameworks ni librerías), **HTML5** y **CSS3** |
+| Gráficos | **SVG** y CSS dibujados por código (autos, circuitos, cinemáticas) |
+| Sonido y voz | **Web Audio API** (motores, efectos y música generados en el navegador) y **Web Speech API** (la radio del equipo con voz) |
+| App instalable | **PWA**: `manifest.json` + *service worker* (`sw.js`) para jugar sin internet |
+| Armado | Un script en **Python** (`codigo/build.py`) junta todos los archivos en una sola página |
+| Publicación | **GitHub Pages** |
+
+Son unas **30.000 líneas** de código: unos 50 archivos de JavaScript (módulos y parches por versión) y 20 de estilos.
+
+## 🧑‍💻 Para desarrolladores
+El código fuente está ordenado en `codigo/` (mirá **`codigo/ESTRUCTURA.md`** para saber qué hace cada archivo):
+
+```
+codigo/
+├── base/      → la página base del juego (game.html) y pedazos de HTML
+├── estilos/   → los CSS, en orden de carga
+├── modulos/   → las partes grandes: modo ingeniero, carrera en vivo, minijuegos, cinemáticas, sonido…
+├── parches/   → las mejoras de cada versión (envuelven funciones anteriores: el orden importa)
+├── sitio/     → la página de presentación y sus capturas
+├── logo/      → logo e íconos de la app
+├── manifest.json → qué archivos entran y en qué orden
+└── build.py   → arma el juego
+```
+
+**Armar el juego desde el código** (necesitás Python 3):
+```bash
+cd codigo
+python3 build.py                     # arma game_new.html (el juego en una sola página)
+cd sitio && python3 build_site.py    # arma la página de presentación con el juego adentro
+```
+
+## 📂 Archivos de esta carpeta
 | Archivo | Qué es |
 |---|---|
 | `index.html` | La página de FAWIWE F1, con el juego adentro |
 | `juego.html` | El juego solo |
-| `codigo/` | El código fuente ordenado en carpetas. Mirá `codigo/ESTRUCTURA.md` para ver qué hace cada archivo y cómo armar el juego |
+| `manifest.json`, `sw.js`, `icon-*.png`, `shot-*.jpg` | Lo que hace que se pueda instalar como app |
+| `codigo/` | El código fuente ordenado en carpetas |
 
 ## 📜 Licencia
 [Creative Commons Atribución-NoComercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/deed.es): podés compartirlo y modificarlo nombrando a **Miluchino**, pero sin fines comerciales. Mirá el archivo `LICENSE`.
@@ -54,5 +117,5 @@ Juego de Fórmula 1 en el navegador: sos **ingeniero, jefe de equipo o piloto**,
 > FAWIWE F1 es un proyecto de fan, gratis y sin fines de lucro. No tiene relación oficial con la Fórmula 1, la FIA ni ningún equipo o piloto. Los nombres reales se usan solo como referencia.
 
 ## 📜 Versiones
-- **Versión 1.0** (octubre 2026): la versión final. Grillas reales con equipos privados, números reales, práctica libre, la historia real de cada temporada, modo leyenda mejorado y más de 100 arreglos.
+- **Versión 1.0** (octubre 2026): la versión final. Grillas reales con equipos privados, números reales de los pilotos, práctica libre, la historia real de cada temporada, modo leyenda mejorado y más de 100 arreglos.
 - Prototipos 1.0 a 1.5: todo lo anterior.
