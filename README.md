@@ -1,10 +1,12 @@
 # 🏎️ FAWIWE F1 · Versión 1.0
 
-**Juego de Fórmula 1 gratis que se juega en el navegador**, en español. Sos **ingeniero, jefe de equipo o piloto** en cualquier temporada de **1950 a 2026**, con las grillas, los calendarios y las reglas reales de cada época.
+**Juego de Fórmula 1 gratis que se juega en el navegador**, en español y en inglés. Sos **ingeniero, jefe de equipo o piloto** en cualquier temporada de **1950 a 2026**, con las grillas, los calendarios y las reglas reales de cada época.
 
 **▶ Jugar ahora: https://miluchinopro.github.io/Fawiwe-F1/**
 
 **Creado por Miluchino.** Hecho con la ayuda de [Claude](https://claude.ai) 🤖.
+
+> 🇬🇧 **English:** FAWIWE F1 is a free Formula 1 racing and management game that runs in your browser. Be an **engineer, team principal or driver** in any season from **1950 to 2026**, with the real grids, calendars and rules of each era. The whole game is available in English: **▶ [Play in English](https://miluchinopro.github.io/Fawiwe-F1/en/)** (or use the 🌐 **ES / EN** button on the menu).
 
 ---
 
@@ -26,6 +28,8 @@ Cada temporada tiene los pilotos, los equipos (también los privados), los circu
 - **Sin internet desde el código:** descargá el repositorio (botón verde *Code → Download ZIP*) y abrí `index.html` o `juego.html` con doble clic.
 
 Las partidas se guardan en tu navegador (5 ranuras para piloto y 5 para ingeniero).
+
+**Idioma:** el juego está en **español** y en **inglés**. Si tu navegador está en otro idioma arranca solo en inglés; lo cambiás cuando quieras con el botón 🌐 **ES / EN** del menú (o con `?lang=en` / `?lang=es` al final del link).
 
 ## 🎮 Cómo se usa
 1. Tocá **START ENGINE** en la pantalla de inicio.
@@ -90,6 +94,7 @@ codigo/
 ├── estilos/   → los CSS, en orden de carga
 ├── modulos/   → las partes grandes: modo ingeniero, carrera en vivo, minijuegos, cinemáticas, sonido…
 ├── parches/   → las mejoras de cada versión (envuelven funciones anteriores: el orden importa)
+├── idiomas/   → la traducción al inglés (diccionario + módulo que traduce la pantalla)
 ├── sitio/     → la página de presentación y sus capturas
 ├── logo/      → logo e íconos de la app
 ├── manifest.json → qué archivos entran y en qué orden
@@ -107,6 +112,7 @@ cd sitio && python3 build_site.py    # arma la página de presentación con el j
 | Archivo | Qué es |
 |---|---|
 | `index.html` | La página de FAWIWE F1, con el juego adentro |
+| `en/index.html` | La misma página en inglés |
 | `juego.html` | El juego solo |
 | `manifest.json`, `sw.js`, `icon-*.png`, `shot-*.jpg` | Lo que hace que se pueda instalar como app |
 | `codigo/` | El código fuente ordenado en carpetas |
@@ -117,5 +123,6 @@ cd sitio && python3 build_site.py    # arma la página de presentación con el j
 > FAWIWE F1 es un proyecto de fan, gratis y sin fines de lucro. No tiene relación oficial con la Fórmula 1, la FIA ni ningún equipo o piloto. Los nombres reales se usan solo como referencia.
 
 ## 📜 Versiones
+- **Versión 1.0 · English** (octubre 2026): todo el juego y la página también en inglés, con botón 🌐 ES / EN.
 - **Versión 1.0** (octubre 2026): la versión final. Grillas reales con equipos privados, números reales de los pilotos, práctica libre, la historia real de cada temporada, modo leyenda mejorado y más de 100 arreglos.
 - Prototipos 1.0 a 1.5: todo lo anterior.

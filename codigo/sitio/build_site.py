@@ -10,6 +10,8 @@ for k in ['live','buy','result','setup','intro','cine','menu','go','drv_react','
 p=p.replace('{{GAME_B64}}', base64.b64encode(open(buscar('game_new.html'),'rb').read()).decode())
 css=open(buscar('cine.css'),encoding='utf-8').read(); css=css[:css.index('/* ---- compras')]
 p=p.replace('{{EVO_CSS}}', css).replace('{{CARS_JS}}', open(buscar('cars.js'),encoding='utf-8').read())
+import json
+p=p.replace('{{LAND_EN}}', json.dumps(json.load(open('land_en.json',encoding='utf-8')), ensure_ascii=False).replace('</','<\\/'))
 p=p.replace('{{AUDIO_JS}}', open(buscar('audio.js'),encoding='utf-8').read())
 open('fawiwe-f1-web.html','w',encoding='utf-8').write(p)
 print(len(p)/1e6,'MB')
