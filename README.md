@@ -1,12 +1,14 @@
 # 🏎️ FAWIWE F1 · Versión 1.0
 
-**Juego de Fórmula 1 gratis que se juega en el navegador**, en español y en inglés. Sos **ingeniero, jefe de equipo o piloto** en cualquier temporada de **1950 a 2026**, con las grillas, los calendarios y las reglas reales de cada época.
+**Juego de Fórmula 1 gratis que se juega en el navegador**, en español, inglés y portugués. Sos **ingeniero, jefe de equipo o piloto** en cualquier temporada de **1950 a 2026**, con las grillas, los calendarios y las reglas reales de cada época.
 
 **▶ Jugar ahora: https://miluchinopro.github.io/Fawiwe-F1/**
 
 **Creado por Miluchino.** Hecho con la ayuda de [Claude](https://claude.ai) 🤖.
 
-> 🇬🇧 **English:** FAWIWE F1 is a free Formula 1 racing and management game that runs in your browser. Be an **engineer, team principal or driver** in any season from **1950 to 2026**, with the real grids, calendars and rules of each era. The whole game is available in English: **▶ [Play in English](https://miluchinopro.github.io/Fawiwe-F1/en/)** (or use the 🌐 **ES / EN** button on the menu).
+> 🇬🇧 **English:** FAWIWE F1 is a free Formula 1 racing and management game that runs in your browser. Be an **engineer, team principal or driver** in any season from **1950 to 2026**, with the real grids, calendars and rules of each era. The whole game is available in English: **▶ [Play in English](https://miluchinopro.github.io/Fawiwe-F1/en/)** (or use the 🌐 **ES / EN / PT** button on the menu).
+
+> 🇧🇷 **Português:** FAWIWE F1 é um jogo grátis de corrida e gestão de Fórmula 1 que roda no navegador. Seja **engenheiro, chefe de equipe ou piloto** em qualquer temporada de **1950 a 2026**. O jogo inteiro está em português: **▶ [Jogar em português](https://miluchinopro.github.io/Fawiwe-F1/pt/)** (ou use o botão 🌐 **ES / EN / PT** do menu).
 
 ---
 
@@ -29,7 +31,7 @@ Cada temporada tiene los pilotos, los equipos (también los privados), los circu
 
 Las partidas se guardan en tu navegador (5 ranuras para piloto y 5 para ingeniero).
 
-**Idioma:** el juego está en **español** y en **inglés**. Si tu navegador está en otro idioma arranca solo en inglés; lo cambiás cuando quieras con el botón 🌐 **ES / EN** del menú (o con `?lang=en` / `?lang=es` al final del link).
+**Idioma:** el juego está en **español**, **inglés** y **portugués**. Si tu navegador está en portugués arranca en portugués, y si está en otro idioma, en inglés; lo cambiás cuando quieras con el botón 🌐 **ES / EN / PT** del menú (o con `?lang=es`, `?lang=en` o `?lang=pt` al final del link).
 
 ## 🎮 Cómo se usa
 1. Tocá **START ENGINE** en la pantalla de inicio.
@@ -94,7 +96,7 @@ codigo/
 ├── estilos/   → los CSS, en orden de carga
 ├── modulos/   → las partes grandes: modo ingeniero, carrera en vivo, minijuegos, cinemáticas, sonido…
 ├── parches/   → las mejoras de cada versión (envuelven funciones anteriores: el orden importa)
-├── idiomas/   → la traducción al inglés (diccionario + módulo que traduce la pantalla)
+├── idiomas/   → las traducciones al inglés y al portugués (diccionarios + módulo que traduce la pantalla)
 ├── sitio/     → la página de presentación y sus capturas
 ├── logo/      → logo e íconos de la app
 ├── manifest.json → qué archivos entran y en qué orden
@@ -113,6 +115,7 @@ cd sitio && python3 build_site.py    # arma la página de presentación con el j
 |---|---|
 | `index.html` | La página de FAWIWE F1, con el juego adentro |
 | `en/index.html` | La misma página en inglés |
+| `pt/index.html` | La misma página en portugués |
 | `juego.html` | El juego solo |
 | `manifest.json`, `sw.js`, `icon-*.png`, `shot-*.jpg` | Lo que hace que se pueda instalar como app |
 | `codigo/` | El código fuente ordenado en carpetas |
@@ -124,5 +127,6 @@ cd sitio && python3 build_site.py    # arma la página de presentación con el j
 
 ## 📜 Versiones
 - **Versión 1.0 · English** (octubre 2026): todo el juego y la página también en inglés, con botón 🌐 ES / EN.
+- **Versión 1.0 · Português + minijuegos** (octubre 2026): todo el juego y la página en portugués (botón 🌐 ES / EN / PT y página `/pt/`), y minijuegos nuevos en el camino de karting, F4, F3 y F2: clasificación + carrera en cada fecha, distintos según la categoría y la época (arranque a empujón, caja en H o levas, bandera o semáforo, rebufo, DRS, parada en boxes…).
 - **Versión 1.0** (octubre 2026): la versión final. Grillas reales con equipos privados, números reales de los pilotos, práctica libre, la historia real de cada temporada, modo leyenda mejorado y más de 100 arreglos.
 - Prototipos 1.0 a 1.5: todo lo anterior.

@@ -12,6 +12,7 @@ css=open(buscar('cine.css'),encoding='utf-8').read(); css=css[:css.index('/* ---
 p=p.replace('{{EVO_CSS}}', css).replace('{{CARS_JS}}', open(buscar('cars.js'),encoding='utf-8').read())
 import json
 p=p.replace('{{LAND_EN}}', json.dumps(json.load(open('land_en.json',encoding='utf-8')), ensure_ascii=False).replace('</','<\\/'))
+p=p.replace('{{LAND_PT}}', json.dumps(json.load(open('land_pt.json',encoding='utf-8')), ensure_ascii=False).replace('</','<\\/'))
 p=p.replace('{{AUDIO_JS}}', open(buscar('audio.js'),encoding='utf-8').read())
 open('fawiwe-f1-web.html','w',encoding='utf-8').write(p)
 print(len(p)/1e6,'MB')

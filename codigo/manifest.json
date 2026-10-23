@@ -20,7 +20,8 @@
   "v145.css",
   "v146.css",
   "v147.css",
-  "v148.css"
+  "v148.css",
+  "v149.css"
  ],
  "js": [
   "audio.js",
@@ -75,7 +76,9 @@
   "v146.js",
   "v147.js",
   "v148.js",
+  "v149.js",
   "i18n_en_dict.js",
+  "i18n_pt_dict.js",
   "i18n_en.js"
  ],
  "insertos": [
@@ -166,7 +169,10 @@
   "v147.js": "parches",
   "v148.js": "parches",
   "i18n_en_dict.js": "idiomas",
-  "i18n_en.js": "idiomas"
+  "i18n_pt_dict.js": "idiomas",
+  "i18n_en.js": "idiomas",
+  "v149.js": "parches",
+  "v149.css": "estilos"
  },
  "descripcion": {
   "eng.css": "Centro del Ingeniero",
@@ -242,6 +248,9 @@
   "v147.js": "Prototipo 1.5 · compañero alineado, sin pilotos repetidos, quiz y textos de época, pizarra antes de 1980, minijuegos enteros en pantalla, multijugador acostado",
   "v148.js": "Prototipo 1.5 · nivel real del piloto, abandonos por época, épocas y autos bien marcados, novatos de época, cuidar las gomas y pizarra en código corto. Choque en la carrera = abandono en la vuelta 1, contratos de hasta 4 temporadas y mánager a comisión (10% del sueldo). Tu casa: más actividades en cada ambiente, según la época. En la clasificación manda tu vuelta (una vuelta mala ya no da la pole). Modo leyenda arreglado (pilotos repetidos, nivel real del auto, historia de cada escudería) y números reales de los pilotos según la época. Nuevo: práctica libre, \"¿Sabías que…?\" de cada circuito y la historia real de cada temporada. Vuelta rápida con una sola verdad (y punto para los rivales) y sprints de 2021 con 3-2-1.",
   "i18n_en_dict.js": "Diccionario español → inglés (generado)",
-  "i18n_en.js": "FAWIWE · ENGLISH: traducción de la pantalla al inglés y botón de idioma"
+  "i18n_pt_dict.js": "Diccionario español → portugués (generado)",
+  "i18n_en.js": "FAWIWE · ENGLISH: traducción de la pantalla al inglés y botón de idioma",
+  "v149.js": "Versión 1.0 · minijuegos del camino a la F1 según categoría y época",
+  "v149.css": "Versión 1.0 · estilos de los minijuegos del camino a la F1"
  }
 }

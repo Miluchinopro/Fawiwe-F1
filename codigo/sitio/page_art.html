@@ -24,7 +24,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .badge{display:inline-block;padding:1px 10px;background:var(--red);color:#fff;font:900 italic 18px var(--font);transform:skewX(-12deg);border-radius:3px;letter-spacing:.02em}
 nav .links a{margin-left:20px;text-decoration:none;color:var(--mute);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.06em}
 nav .links a:hover{color:#fff}
-nav .lang-btn{font:800 13px/1 Inter,Arial,sans-serif;letter-spacing:.06em;width:auto;padding:0 10px}
+nav .lang-btn{font:800 13px/1 Inter,Arial,sans-serif;letter-spacing:.06em;width:auto;padding:8px 12px;white-space:nowrap}
 nav .links a.cta{color:#fff;background:var(--red);padding:8px 16px;border-radius:999px}
 /* líneas rojas de pista que se dibujan */
 .bc-lines{position:absolute;pointer-events:none;overflow:visible}
@@ -372,30 +372,32 @@ footer{padding:36px 0 56px;color:var(--mute);font-size:14px;text-align:center;bo
 
 <script id="gameData" type="text/plain">{{GAME_B64}}</script>
 <script>
-/* ES / EN: la página (y el juego) se ven en inglés si el navegador no está en español, con ?lang=en, en /en/ o tocando el botón */
+/* ES / EN / PT: la página (y el juego) se ven en inglés o portugués según el navegador, con ?lang=en|pt, en /en/ o /pt/, o tocando el botón 🌐 */
 (function () {
-  const EN = {{LAND_EN}};
-  const KEY = "fw_ui_lang";
+  const ALL = { en: {{LAND_EN}}, pt: {{LAND_PT}} };
+  const KEY = "fw_ui_lang", OK = x => x === "es" || x === "en" || x === "pt";
   function pick() {
     if (window.FW_FORCE_LANG) { try { localStorage.setItem(KEY, window.FW_FORCE_LANG); } catch (e) {} return window.FW_FORCE_LANG; }
-    try { const q = new URLSearchParams(location.search).get("lang"); if (q === "en" || q === "es") { try { localStorage.setItem(KEY, q); } catch (e) {} return q; } } catch (e) {}
-    try { const v = localStorage.getItem(KEY); if (v === "en" || v === "es") return v; } catch (e) {}
+    try { const q = new URLSearchParams(location.search).get("lang"); if (OK(q)) { try { localStorage.setItem(KEY, q); } catch (e) {} return q; } } catch (e) {}
+    try { const v = localStorage.getItem(KEY); if (OK(v)) return v; } catch (e) {}
     try { if (navigator.webdriver) return "es"; } catch (e) {}
-    try { return String((navigator.languages && navigator.languages[0]) || navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en"; } catch (e) { return "es"; }
+    try { const nl = String((navigator.languages && navigator.languages[0]) || navigator.language || "es").toLowerCase(); return nl.startsWith("es") ? "es" : nl.startsWith("pt") ? "pt" : "en"; } catch (e) { return "es"; }
   }
   const L = pick();
   window.FW_LANG = L;
-  window.fwLandLang = function () {
-    const to = L === "en" ? "es" : "en";
+  const NEXT = { es: "en", en: "pt", pt: "es" }, NAME = { es: "Español", en: "English", pt: "Português" };
+  window.fwLandLang = function (to) {
+    to = OK(to) ? to : NEXT[L];
     try { localStorage.setItem(KEY, to); } catch (e) {}
     const m = document.querySelector('meta[name="fw-' + to + '-url"]');
     if (m) { location.href = m.content; return; }
-    try { const u = new URL(location.href); u.searchParams.delete("lang"); location.replace(u.toString()); } catch (e) { location.reload(); }
+    try { const u = new URL(location.href); u.searchParams.set("lang", to); location.replace(u.toString()); } catch (e) { location.reload(); }
   };
   const b = document.getElementById("langBtn");
-  if (b) { b.textContent = L === "en" ? "ES" : "EN"; b.title = b.ariaLabel = L === "en" ? "Español" : "English"; b.setAttribute("aria-label", b.title); }
-  if (L !== "en") return;
-  document.documentElement.lang = "en";
+  if (b) { b.textContent = "🌐 " + L.toUpperCase(); b.title = "Idioma · Language · " + NAME[NEXT[L]]; b.setAttribute("aria-label", "Idioma / Language: " + NAME[L] + " → " + NAME[NEXT[L]]); }
+  const EN = ALL[L];
+  if (!EN) return;
+  document.documentElement.lang = L === "pt" ? "pt-BR" : "en";
   const norm = t => t.replace(/\s+/g, " ").trim();
   const trT = n => { const v = n.nodeValue; if (!v || !/[A-Za-zÀ-ÿ]/.test(v)) return; const k = norm(v); let e = EN[k]; if (!e) { const m = k.match(/^([^A-Za-zÀ-ÿ¿¡]+)(.+)$/); if (m && EN[m[2]]) e = m[1] + EN[m[2]]; } if (e) n.nodeValue = v.replace(/^(\s*)[\s\S]*?(\s*)$/, (m, a, z) => a + e + z); };
   const trA = el => { ["alt", "title", "aria-label", "placeholder"].forEach(a => { const v = el.getAttribute && el.getAttribute(a); if (v && EN[norm(v)]) el.setAttribute(a, EN[norm(v)]); }); };

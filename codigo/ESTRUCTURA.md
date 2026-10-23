@@ -47,6 +47,7 @@ cd sitio && python3 build_site.py   # arma la página con el juego adentro
 | 18 | `v146.css` | estilos | Prototipo 1.4 · estilos de las dos cinemáticas nuevas |  |
 | 19 | `v147.css` | estilos | Prototipo 1.5 · minijuegos enteros en pantalla, celular acostado y largada con bandera |  |
 | 20 | `v148.css` | estilos | Prototipo 1.5 · estilo de la pizarra del box (antes de 1980) |  |
+| 21 | `v149.css` | estilos | Versión 1.0 · estilos de los minijuegos del camino a la F1 |  |
 
 ## Módulos y parches (en orden de carga)
 
@@ -104,8 +105,10 @@ cd sitio && python3 build_site.py   # arma la página con el juego adentro
 | 50 | `v146.js` | parches | Prototipo 1.4 · cinemática de inicio y cinemática de Jugar (viaje en el tiempo y credencial del paddock) | `beginCareer`, `dismissIntro` |
 | 51 | `v147.js` | parches | Prototipo 1.5 · compañero alineado, sin pilotos repetidos, quiz y textos de época, pizarra antes de 1980, minijuegos enteros en pantalla, multijugador acostado | `currentTeamLineup`, `fwRadioSay`, `fwSquelch`, `myTeamLineup`, `pickF1Quiz`, `playRadioSound` |
 | 52 | `v148.js` | parches | Prototipo 1.5 · nivel real del piloto, abandonos por época, épocas y autos bien marcados, novatos de época, cuidar las gomas y pizarra en código corto. Choque en la carrera = abandono en la vuelta 1, contratos de hasta 4 temporadas y mánager a comisión (10% del sueldo). Tu casa: más actividades en cada ambiente, según la época. En la clasificación manda tu vuelta (una vuelta mala ya no da la pole). Modo leyenda arreglado (pilotos repetidos, nivel real del auto, historia de cada escudería) y números reales de los pilotos según la época. Nuevo: práctica libre, "¿Sabías que…?" de cada circuito y la historia real de cada temporada. Vuelta rápida con una sola verdad (y punto para los rivales) y sprints de 2021 con 3-2-1. | `computeOVR`, `deterministicHash`, `eraKers`, `fwCarSvg`, `fwEra`, `fwEraCardHtml`, `fwEraIdx`, `fwRadioToast`, `generateRookieName`, `myTeamLineup`, `ngYearsHtml`, `rollRaceStatus` |
-| 53 | `i18n_en_dict.js` | idiomas | Diccionario español → inglés (generado) |  |
-| 54 | `i18n_en.js` | idiomas | FAWIWE · ENGLISH: traducción de la pantalla al inglés y botón de idioma |  |
+| 53 | `v149.js` | parches | Versión 1.0 · minijuegos del camino a la F1 según categoría y época | `advanceJuniorRace`, `renderJuniorStep` |
+| 54 | `i18n_en_dict.js` | idiomas | Diccionario español → inglés (generado) |  |
+| 55 | `i18n_pt_dict.js` | idiomas | Diccionario español → portugués (generado) |  |
+| 56 | `i18n_en.js` | idiomas | FAWIWE · ENGLISH: traducción de la pantalla al inglés y botón de idioma |  |
 
 ## Funciones que más parches cambian
 
