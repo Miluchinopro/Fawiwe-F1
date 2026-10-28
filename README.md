@@ -48,7 +48,7 @@ El juego tiene un **tutorial** integrado (botón 📖) que explica cada modo.
 - **Carrera en vivo** vuelta por vuelta: estrategia, largada, pases y defensas jugables, entrada a boxes, Safety Car, VSC, lluvia con radar y radio con voz.
 - **Rival de la temporada**, cara a cara y vuelta de enfriamiento.
 - **Todas las épocas, como fueron**: los pilotos de cada año (de Fangio a hoy), los calendarios de cada temporada, el sistema de puntos de cada época, la vuelta rápida cuando daba punto, reglas, paradas y clasificación.
-- **Cinemáticas**: una intro con 76 años de autos y el tacómetro al rojo, y al empezar tu carrera viajás en el tiempo hasta tu año con tu credencial del paddock.
+- **Cinemáticas**: al tocar «Jugar ahora» arranca una sola intro: los boxes se prenden, pasan los autos de las 7 épocas de la F1 con un dato real de cada una (se frena para que leas; tocá para avanzar), elegís camino, se apaga el semáforo y aparece el logo. Y al empezar tu carrera viajás en el tiempo hasta tu año con tu credencial del paddock.
 - **Cada época con sus cosas**: el quiz no pregunta del futuro, antes de 1980 el box te habla con la pizarra (también en la carrera en vivo) y el piloto con señas, antes de 1971 se larga con la bandera del comisario, antes de 2011 se pasa con el rebufo y desde 2026 hay modo adelantamiento en vez de DRS.
 - **Modo piloto justo**: si elegís un piloto real arranca con su nivel de verdad, así que si jugás bien le ganás a tu compañero.
 - **Cada época con sus roturas**: en los años 50 abandonaba casi la mitad de la grilla; hoy casi nadie. Y cada partida tiene su propia suerte.
@@ -128,5 +128,6 @@ cd sitio && python3 build_site.py    # arma la página de presentación con el j
 ## 📜 Versiones
 - **Versión 1.0 · English** (octubre 2026): todo el juego y la página también en inglés, con botón 🌐 ES / EN.
 - **Versión 1.0 · Português + minijuegos** (octubre 2026): todo el juego y la página en portugués (botón 🌐 ES / EN / PT y página `/pt/`), y minijuegos nuevos en el camino de karting, F4, F3 y F2: clasificación + carrera en cada fecha, distintos según la categoría y la época (arranque a empujón, caja en H o levas, bandera o semáforo, rebufo, DRS, parada en boxes…).
+- **Versión 1.0 · Cinemática nueva** (octubre 2026): la página ya no tiene intro al entrar; al tocar «Jugar ahora» hay una sola cinemática que mezcla las dos de antes, con datos de cada época.
 - **Versión 1.0** (octubre 2026): la versión final. Grillas reales con equipos privados, números reales de los pilotos, práctica libre, la historia real de cada temporada, modo leyenda mejorado y más de 100 arreglos.
 - Prototipos 1.0 a 1.5: todo lo anterior.

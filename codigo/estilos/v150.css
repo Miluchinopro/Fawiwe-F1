@@ -1,0 +1,100 @@
+/* FAWIWE · V150 · cinemática única de entrada (boxes → evolución de la F1 → caminos → semáforo → logo) */
+#v16Intro.v50 .v16-stage{display:none!important}
+#v16Intro.v50 .v50-stage{display:none;position:absolute;inset:0;overflow:hidden}
+#v16Intro.v50.play .v50-stage{display:block}
+.v50-b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,26px);padding:70px 18px 90px;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s}
+.v50-b.on{opacity:1;visibility:visible}
+.v50-b.off{opacity:0;visibility:hidden}
+/* líneas de velocidad de fondo */
+.v50-speed{position:absolute;inset:0;opacity:.0;background:repeating-linear-gradient(90deg,transparent 0 120px,#ffffff0d 120px 122px);animation:v50Streak .35s linear infinite;transition:opacity .4s}
+#v16Intro[data-b="era"] .v50-speed,#v16Intro[data-b="start"] .v50-speed{opacity:1}
+@keyframes v50Streak{to{background-position:-122px 0}}
+
+/* 1 · boxes de noche */
+.v50-pit .v16-garages em{animation:none}
+.v50-pit.on .v16-garages em{animation:v16LightOn .25s ease calc(.15s + var(--i) * .14s) forwards}
+.v50-present{font-weight:700;letter-spacing:.42em;font-size:clamp(12px,2.2vw,18px);color:#a1a1aa;text-transform:uppercase;opacity:0}
+.v50-present span{color:#fff;font-weight:900}
+.v50-sub{font-weight:900;font-size:clamp(20px,4.4vw,40px);letter-spacing:.04em;text-align:center;opacity:0}
+.v50-pit.on .v50-present{animation:v50Up .45s ease .9s forwards}
+.v50-pit.on .v50-sub{animation:v50Up .45s ease 1.15s forwards}
+
+/* 2 · la evolución: cada auto llega, frena con el texto y se va */
+.v50-top,.v50-bar{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;pointer-events:none}
+#v16Intro[data-b="era"] .v50-top,#v16Intro[data-b="era"] .v50-bar{opacity:1}
+.v50-top{top:clamp(14px,3vh,26px);gap:10px;font-weight:700;letter-spacing:.3em;font-size:clamp(10px,1.8vw,14px);color:#d4d4d8}
+.v50-bar{bottom:clamp(54px,8vh,70px);gap:10px;font-weight:900;font-size:12px;color:#a1a1aa}
+.v50-bar div{width:min(420px,58vw);height:6px;border-radius:9px;background:#26262e;overflow:hidden}
+.v50-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c0392b,#e10600);transition:width .45s ease}
+.v50-era{gap:clamp(6px,1.6vh,14px)}
+.v50-ghost{position:absolute;left:50%;top:50%;transform:translate(-50%,-62%);font-weight:900;font-size:clamp(110px,30vw,300px);line-height:1;color:transparent;-webkit-text-stroke:2px #ffffff12;letter-spacing:.02em;pointer-events:none}
+.v50-track{position:relative;width:100%;display:flex;flex-direction:column;align-items:center}
+.v50-road{width:100%;margin-top:-6px;height:4px;background:repeating-linear-gradient(90deg,#ffffff30 0 40px,transparent 40px 80px);animation:v50Streak .3s linear infinite}
+.v50-car{position:relative;width:min(560px,86vw);transform:translateX(-140vw);filter:drop-shadow(0 18px 18px #000a)}
+.v50-car .v50-svg{width:100%;height:auto;display:block}
+.v50-era.on .v50-car{animation:v50CarIn .38s cubic-bezier(.15,.85,.3,1) forwards,v50Vib .09s linear .38s infinite}
+.v50-era.leave .v50-car{animation:v50CarOut .3s cubic-bezier(.6,0,.9,.4) forwards}
+.v50-cap{position:relative;max-width:min(620px,92vw);text-align:center;opacity:0;transform:translateY(14px)}
+.v50-era.on .v50-cap{animation:v50Up .3s ease .26s forwards}
+.v50-era.leave .v50-cap{animation:v50Fade .2s ease reverse forwards;opacity:1;transform:none}
+.v50-yr{font-weight:900;font-size:clamp(40px,9vw,78px);line-height:1;color:var(--c,#e10600);text-shadow:0 0 30px #000;font-variant-numeric:tabular-nums}
+.v50-cap b{display:block;margin-top:6px;font-weight:900;font-size:clamp(18px,3.6vw,28px);letter-spacing:.01em}
+.v50-cap p{margin:8px auto 0;max-width:520px;color:#d4d4d8;font-size:clamp(14px,2.4vw,17px);line-height:1.4}
+
+/* 3 · los tres caminos */
+.v50-kick{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3em;font-size:clamp(11px,2vw,15px);color:#d4d4d8;opacity:0}
+.v50-roles.on .v50-kick{animation:v50Up .4s ease .05s forwards}
+.v50-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.8vw,16px);width:min(760px,94vw)}
+.v50-card{background:#15151ee8;border:1px solid #33333d;border-top:3px solid #e10600;border-radius:14px;padding:clamp(12px,2.4vw,20px) 10px;text-align:center;opacity:0;transform:translateY(26px) scale(.96)}
+.v50-roles.on .v50-card{animation:v50Up .4s cubic-bezier(.2,1.3,.4,1) calc(.25s + var(--i) * .26s) forwards}
+.v50-card i{display:block;font-style:normal;font-size:clamp(26px,5vw,40px)}
+.v50-card b{display:block;margin-top:6px;font-weight:900;font-size:clamp(14px,2.6vw,20px)}
+.v50-card span{display:block;margin-top:4px;color:#a1a1aa;font-size:clamp(11px,2vw,14px);line-height:1.3}
+.v50-facts{color:#a1a1aa;font-weight:700;letter-spacing:.06em;font-size:clamp(11px,2vw,14px);text-align:center;opacity:0}
+.v50-roles.on .v50-facts{animation:v50Up .4s ease 1.2s forwards}
+
+/* 4 · semáforo + tacómetro */
+.v50-lights{display:flex;gap:clamp(8px,2vw,16px)}
+.v50-lights span{width:clamp(30px,7vw,56px);height:clamp(30px,7vw,56px);border-radius:50%;background:#1e1e26;border:3px solid #33333d}
+.v50-start.on .v50-lights span{animation:v50LightOn .1s steps(1) calc(.3s + var(--i) * .33s) forwards}
+#v16Intro.flash .v50-lights span{animation:none;background:#1e1e26;box-shadow:none}
+.v50-start .v16-tacho{animation:none}
+.v50-start.on .v16-tacho{animation:v16Shake .08s linear 1.6s 6}
+.v50-arc{stroke-dasharray:1;stroke-dashoffset:1}
+.v50-start.on .v50-arc{animation:v50Arc 1.8s cubic-bezier(.4,0,.2,1) .15s forwards}
+.v50-needle{transform-origin:100px 110px;transform:rotate(-90deg)}
+.v50-start.on .v50-needle{animation:v50Needle 1.8s cubic-bezier(.4,0,.2,1) .15s forwards}
+.v50-go{font-weight:900;font-size:clamp(34px,8vw,72px);letter-spacing:.06em;color:#fff;opacity:0;transform:scale(1.6)}
+#v16Intro.flash .v50-go{animation:v50Pop .35s cubic-bezier(.2,1.4,.4,1) forwards}
+.v50-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#v16Intro.flash .v50-flash{animation:v16Flash .45s ease forwards}
+
+.v50-hint{position:absolute;left:14px;bottom:18px;color:#a1a1aa;font-size:12px;font-weight:700;letter-spacing:.06em;opacity:.85;transition:opacity .5s}
+#v16Intro.hinted .v50-hint{opacity:0}
+
+@keyframes v50Up{to{opacity:1;transform:none}}
+@keyframes v50Fade{from{opacity:0}to{opacity:1}}
+@keyframes v50CarIn{from{transform:translateX(-140vw)}to{transform:translateX(0)}}
+@keyframes v50CarOut{from{transform:translateX(0)}to{transform:translateX(150vw)}}
+@keyframes v50Vib{0%,100%{translate:0 0}50%{translate:0 1px}}
+@keyframes v50LightOn{to{background:#ff2414;border-color:#ff5a4a;box-shadow:0 0 26px #ff2414}}
+@keyframes v50Arc{to{stroke-dashoffset:0}}
+@keyframes v50Needle{to{transform:rotate(88deg)}}
+@keyframes v50Pop{to{opacity:1;transform:none}}
+@media (max-width:560px){
+  .v50-cards{grid-template-columns:1fr;width:min(360px,92vw)}
+  .v50-card{display:grid;grid-template-columns:44px 1fr;text-align:left;align-items:center;column-gap:10px;padding:10px 12px}
+  .v50-card i{grid-row:span 2;font-size:30px;text-align:center}
+  .v50-card b{margin-top:0}
+  .v50-b{padding:56px 14px 84px}
+}
+@media (max-height:520px){
+  .v50-b{padding:44px 14px 56px;gap:8px}
+  .v50-car{width:min(380px,60vw)}
+  .v50-yr{font-size:clamp(30px,8vh,52px)}
+  .v50-cap p{font-size:12px;margin-top:4px;max-width:80vw}
+  .v50-ghost{display:none}
+  .v50-cards{width:min(640px,80vw)}
+  .v50-card{padding:8px}
+  .v50-bar{bottom:12px}
+}

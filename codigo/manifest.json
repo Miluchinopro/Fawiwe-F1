@@ -21,7 +21,8 @@
   "v146.css",
   "v147.css",
   "v148.css",
-  "v149.css"
+  "v149.css",
+  "v150.css"
  ],
  "js": [
   "audio.js",
@@ -77,6 +78,7 @@
   "v147.js",
   "v148.js",
   "v149.js",
+  "v150.js",
   "i18n_en_dict.js",
   "i18n_pt_dict.js",
   "i18n_en.js"
@@ -172,7 +174,9 @@
   "i18n_pt_dict.js": "idiomas",
   "i18n_en.js": "idiomas",
   "v149.js": "parches",
-  "v149.css": "estilos"
+  "v149.css": "estilos",
+  "v150.js": "parches",
+  "v150.css": "estilos"
  },
  "descripcion": {
   "eng.css": "Centro del Ingeniero",
@@ -251,6 +255,8 @@
   "i18n_pt_dict.js": "Diccionario español → portugués (generado)",
   "i18n_en.js": "FAWIWE · ENGLISH: traducción de la pantalla al inglés y botón de idioma",
   "v149.js": "Versión 1.0 · minijuegos del camino a la F1 según categoría y época",
-  "v149.css": "Versión 1.0 · estilos de los minijuegos del camino a la F1"
+  "v149.css": "Versión 1.0 · estilos de los minijuegos del camino a la F1",
+  "v150.js": "Versión 1.0 · una sola cinemática al entrar: boxes, evolución de la F1, caminos y semáforo",
+  "v150.css": "Versión 1.0 · estilos de la cinemática de entrada"
  }
 }
