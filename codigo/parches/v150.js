@@ -102,7 +102,7 @@ function v16IntroBuild() {
   v16SndSync();
 }
 // duración de cada escena: lo justo para leer el texto
-const V50_DUR = { pit: 1700, era: 1900, roles: 2300, start: 2500 };
+const V50_DUR = { pit: 1250, era: 1550, roles: 1800, start: 2000 };   // en total, unos 16 segundos
 
 function v16IntroPlay(withSound) {
   const ov = document.getElementById("v16Intro"); if (!ov || !ov.classList.contains("gate")) return;
@@ -131,23 +131,23 @@ function v50Next() {
   const dur = V50_DUR[cur.b] || 2000;
   v50At(dur, v50Next);
   if (cur.b === "pit") {
-    [0, 1, 2, 3, 4, 5].forEach(i => v50At(150 + i * 140, () => v16Snd("click")));
+    [0, 1, 2, 3, 4, 5].forEach(i => v50At(100 + i * 100, () => v16Snd("click")));
   } else if (cur.b === "era") {
     v16Snd("whoosh");
     // el año corre desde la época anterior mientras el auto llega
     const yr = cur.el.querySelector(".v50-yr"), a = +yr.dataset.from, z = +yr.dataset.to, t0 = performance.now();
-    const step = () => { const p = Math.min(1, (performance.now() - t0) / 400); yr.textContent = Math.round(a + (z - a) * (1 - Math.pow(1 - p, 3))); if (p < 1) V50.raf = requestAnimationFrame(step); };
+    const step = () => { const p = Math.min(1, (performance.now() - t0) / 300); yr.textContent = Math.round(a + (z - a) * (1 - Math.pow(1 - p, 3))); if (p < 1) V50.raf = requestAnimationFrame(step); };
     step();
     const bar = ov.querySelector(".v50-bar i"); if (bar) bar.style.width = ((cur.k + 1) / V50.eras * 100) + "%";
-    v50At(dur - 280, () => { cur.el.classList.add("leave"); });
+    v50At(dur - 240, () => { cur.el.classList.add("leave"); });
   } else if (cur.b === "roles") {
-    [0, 1, 2].forEach(i => v50At(250 + i * 260, () => v16Snd("click")));
+    [0, 1, 2].forEach(i => v50At(150 + i * 180, () => v16Snd("click")));
   } else if (cur.b === "start") {
     // la música entra en "tensión" con el semáforo y explota cuando se apagan las luces
-    try { const e = (performance.now() - V50.musicT0) / 1000; if (V50.musicT0) FWAudio.introTimes({ h0: e + 0.2, h1: e + 2.1 }); } catch (e) {}
-    v50At(150, () => v16Snd("rev"));
-    [0, 1, 2, 3, 4].forEach(i => v50At(300 + i * 330, () => v16Snd("beep", false)));
-    v50At(2050, () => { v16Snd("beep", true); v16Snd("rev"); ov.classList.add("flash"); });
+    try { const e = (performance.now() - V50.musicT0) / 1000; if (V50.musicT0) FWAudio.introTimes({ h0: e + 0.15, h1: e + 1.6 }); } catch (e) {}
+    v50At(100, () => v16Snd("rev"));
+    [0, 1, 2, 3, 4].forEach(i => v50At(200 + i * 260, () => v16Snd("beep", false)));
+    v50At(1600, () => { v16Snd("beep", true); v16Snd("rev"); ov.classList.add("flash"); });
   }
 }
 function v16IntroFinal(natural) {
