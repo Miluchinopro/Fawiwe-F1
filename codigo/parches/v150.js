@@ -102,7 +102,7 @@ function v16IntroBuild() {
   v16SndSync();
 }
 // duración de cada escena: lo justo para leer el texto
-const V50_DUR = { pit: 1900, era: 2300, roles: 2600, start: 2500 };
+const V50_DUR = { pit: 1700, era: 1900, roles: 2300, start: 2500 };
 
 function v16IntroPlay(withSound) {
   const ov = document.getElementById("v16Intro"); if (!ov || !ov.classList.contains("gate")) return;
