@@ -2,9 +2,9 @@
 #v16Intro.v50 .v16-stage{display:none!important}
 #v16Intro.v50 .v50-stage{display:none;position:absolute;inset:0;overflow:hidden}
 #v16Intro.v50.play .v50-stage{display:block}
-.v50-b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,26px);padding:70px 18px 90px;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s}
+.v50-b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,26px);padding:70px 18px 90px;opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s}
 .v50-b.on{opacity:1;visibility:visible}
-.v50-b.off{opacity:0;visibility:hidden}
+.v50-b.on.off,.v50-b.off{opacity:0;visibility:hidden}
 /* líneas de velocidad de fondo */
 .v50-speed{position:absolute;inset:0;opacity:.0;background:repeating-linear-gradient(90deg,transparent 0 120px,#ffffff0d 120px 122px);animation:v50Streak .35s linear infinite;transition:opacity .4s}
 #v16Intro[data-b="era"] .v50-speed,#v16Intro[data-b="start"] .v50-speed{opacity:1}
@@ -20,7 +20,7 @@
 .v50-pit.on .v50-sub{animation:v50Up .35s ease .65s forwards}
 
 /* 2 · la evolución: cada auto llega, frena con el texto y se va */
-.v50-top,.v50-bar{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;pointer-events:none}
+.v50-top,.v50-bar{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;pointer-events:none}
 #v16Intro[data-b="era"] .v50-top,#v16Intro[data-b="era"] .v50-bar{opacity:1}
 .v50-top{top:clamp(14px,3vh,26px);gap:10px;font-weight:700;letter-spacing:.3em;font-size:clamp(10px,1.8vw,14px);color:#d4d4d8}
 .v50-bar{bottom:clamp(54px,8vh,70px);gap:10px;font-weight:900;font-size:12px;color:#a1a1aa}
@@ -32,11 +32,11 @@
 .v50-road{width:100%;margin-top:-6px;height:4px;background:repeating-linear-gradient(90deg,#ffffff30 0 40px,transparent 40px 80px);animation:v50Streak .3s linear infinite}
 .v50-car{position:relative;width:min(560px,86vw);transform:translateX(-140vw);filter:drop-shadow(0 18px 18px #000a)}
 .v50-car .v50-svg{width:100%;height:auto;display:block}
-.v50-era.on .v50-car{animation:v50CarIn .2s cubic-bezier(.15,.85,.3,1) forwards,v50Vib .09s linear .2s infinite}
-.v50-era.leave .v50-car{animation:v50CarOut .16s cubic-bezier(.6,0,.9,.4) forwards}
+.v50-era.on .v50-car{animation:v50CarIn .2s cubic-bezier(.2,.8,.3,1) forwards,v50Vib .09s linear .2s infinite}
+.v50-era.on.leave .v50-car{animation:v50CarOut .2s cubic-bezier(.55,0,.8,.45) forwards}
 .v50-cap{position:relative;max-width:min(620px,92vw);text-align:center;opacity:0;transform:translateY(14px)}
-.v50-era.on .v50-cap{animation:v50Up .15s ease .08s forwards}
-.v50-era.leave .v50-cap{animation:v50Fade .15s ease reverse forwards;opacity:1;transform:none}
+.v50-era.on .v50-cap{animation:v50Up .16s ease .05s forwards}
+.v50-era.on.leave .v50-cap{animation:v50Fade .2s ease reverse forwards;opacity:1;transform:none}
 .v50-yr{font-weight:900;font-size:clamp(40px,9vw,78px);line-height:1;color:var(--c,#e10600);text-shadow:0 0 30px #000;font-variant-numeric:tabular-nums}
 .v50-cap b{display:block;margin-top:6px;font-weight:900;font-size:clamp(18px,3.6vw,28px);letter-spacing:.01em}
 .v50-cap p{margin:8px auto 0;max-width:520px;color:#d4d4d8;font-size:clamp(14px,2.4vw,17px);line-height:1.4}

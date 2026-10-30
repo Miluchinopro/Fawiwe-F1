@@ -102,7 +102,7 @@ function v16IntroBuild() {
   v16SndSync();
 }
 // duración de cada escena: lo justo para leer el texto
-const V50_DUR = { pit: 1250, era: 900, roles: 1600, start: 2000 };   // en total, unos 11 segundos
+const V50_DUR = { pit: 1250, era: 700, roles: 1800, start: 2000 };   // en total, unos 10 segundos
 
 function v16IntroPlay(withSound) {
   const ov = document.getElementById("v16Intro"); if (!ov || !ov.classList.contains("gate")) return;
@@ -122,7 +122,8 @@ function v50Next() {
   V50.i++;
   const cur = V50.beats[V50.i];
   if (!cur) return v16IntroFinal(true);
-  if (prev) { prev.el.classList.remove("on", "leave"); prev.el.classList.add("off"); }
+  // fundido cruzado de 0,2 s: la escena anterior se desvanece tal como estaba mientras entra la nueva
+  if (prev) { const pe = prev.el; pe.classList.add("off"); setTimeout(() => { if (pe.classList.contains("off")) pe.classList.remove("on", "leave"); }, 220); }
   cur.el.classList.remove("off", "leave");
   void cur.el.offsetWidth;   // reinicia las animaciones de la escena
   cur.el.classList.add("on");
@@ -136,10 +137,10 @@ function v50Next() {
     v16Snd("whoosh");
     // el año corre desde la época anterior mientras el auto llega
     const yr = cur.el.querySelector(".v50-yr"), a = +yr.dataset.from, z = +yr.dataset.to, t0 = performance.now();
-    const step = () => { const p = Math.min(1, (performance.now() - t0) / 200); yr.textContent = Math.round(a + (z - a) * (1 - Math.pow(1 - p, 3))); if (p < 1) V50.raf = requestAnimationFrame(step); };
+    const step = () => { const p = Math.min(1, (performance.now() - t0) / 180); yr.textContent = Math.round(a + (z - a) * (1 - Math.pow(1 - p, 3))); if (p < 1) V50.raf = requestAnimationFrame(step); };
     step();
     const bar = ov.querySelector(".v50-bar i"); if (bar) bar.style.width = ((cur.k + 1) / V50.eras * 100) + "%";
-    v50At(dur - 160, () => { cur.el.classList.add("leave"); });
+    v50At(dur - 80, () => { cur.el.classList.add("leave"); });   // el auto arranca a irse y sigue durante el fundido
   } else if (cur.b === "roles") {
     [0, 1, 2].forEach(i => v50At(100 + i * 140, () => v16Snd("click")));
   } else if (cur.b === "start") {
