@@ -31,7 +31,7 @@ Cada temporada tiene los pilotos, los equipos (también los privados), los circu
 
 Las partidas se guardan en tu navegador (5 ranuras para piloto y 5 para ingeniero).
 
-**Idioma:** el juego está en **español**, **inglés** y **portugués**. Si tu navegador está en portugués arranca en portugués, y si está en otro idioma, en inglés; lo cambiás cuando quieras con el botón 🌐 **ES / EN / PT** del menú (o con `?lang=es`, `?lang=en` o `?lang=pt` al final del link).
+**Idioma:** el juego está en **español**, **inglés** y **portugués**. Si tu navegador está en portugués arranca en portugués, y si está en otro idioma, en inglés; lo cambiás cuando quieras con el botón 🌐 **ES / EN / PT** del menú, al instante y sin reiniciar el juego (o con `?lang=es`, `?lang=en` o `?lang=pt` al final del link).
 
 ## 🎮 Cómo se usa
 1. Tocá **START ENGINE** en la pantalla de inicio.

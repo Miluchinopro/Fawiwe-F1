@@ -7,7 +7,8 @@
    - Para que los parches que leen la pantalla sigan funcionando, textContent / innerHTML /
      outerHTML devuelven el texto original en español de los nodos traducidos.
    - Idioma: ?lang=es|en|pt en la dirección, o el botón 🌐 del menú (se guarda). La primera vez
-     se elige solo según el idioma del navegador.
+     se elige solo según el idioma del navegador. Cambiarlo con el botón NO recarga el juego:
+     se devuelve la pantalla al español original y se vuelve a traducir al idioma nuevo.
    ===================================================================================== */
 (function () {
   const KEY = "fw_ui_lang";
@@ -21,15 +22,8 @@
     try { const nl = String((navigator.languages && navigator.languages[0]) || navigator.language || "es").toLowerCase(); return nl.startsWith("es") ? "es" : nl.startsWith("pt") ? "pt" : "en"; } catch (e) {}
     return "es";
   }
-  const LANG = pickLang();
+  let LANG = pickLang();
   window.FW_LANG = LANG;
-  window.fwSetLang = function (l) {
-    if (l !== "en" && l !== "es" && l !== "pt") return;
-    try { localStorage.setItem(KEY, l); } catch (e) {}
-    try { if (typeof autoSave === "function" && typeof s !== "undefined" && s && s.season) autoSave(); } catch (e) {}
-    try { const u = new URL(location.href); if (u.searchParams.has("lang")) { u.searchParams.set("lang", l); location.replace(u.toString()); return; } } catch (e) {}
-    location.reload();
-  };
 
   /* ---------- botón de idioma (se ve en el menú, no en plena partida) ---------- */
   function langPill() {
@@ -40,6 +34,7 @@
       b.setAttribute("data-noi18n", "1");
       b.innerHTML = `<span class="fl-ico" aria-hidden="true">🌐</span><button type="button" data-l="es" class="${LANG === "es" ? "on" : ""}" aria-label="Español">ES</button><button type="button" data-l="en" class="${LANG === "en" ? "on" : ""}" aria-label="English">EN</button><button type="button" data-l="pt" class="${LANG === "pt" ? "on" : ""}" aria-label="Português">PT</button>`;
       b.addEventListener("click", ev => { const l = ev.target && ev.target.getAttribute && ev.target.getAttribute("data-l"); if (l && l !== LANG) window.fwSetLang(l); });
+      b.fwSync = () => b.querySelectorAll("button[data-l]").forEach(x => x.classList.toggle("on", x.getAttribute("data-l") === LANG));
       document.body.appendChild(b);
       const st = document.createElement("style");
       st.textContent = `#fwLangPill{position:fixed;top:10px;right:10px;z-index:99990;display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:rgba(10,12,18,.82);border:1px solid rgba(255,255,255,.18);box-shadow:0 6px 18px rgba(0,0,0,.35);font:700 12px/1 Inter,Arial,sans-serif;backdrop-filter:blur(6px)}
@@ -56,27 +51,31 @@ body.fw-ingame #fwLangPill{display:none}
   }
   if (document.body) langPill(); else document.addEventListener("DOMContentLoaded", langPill);
 
-  if (LANG === "es") return;
-
   /* ============================ INGLÉS / PORTUGUÉS ============================ */
-  const PT = LANG === "pt";
   // lo que cambia de un idioma a otro (además del diccionario)
-  const LX = PT ? {
+  const LXS = { pt: {
     html: "pt-BR", and: "e", voice: /^pt/i, pref: ["pt-BR", "pt-PT"], deflang: "pt-BR", lap: "volta", plus: "mais $1 segundos",
     era: { slip: [[/\bABRIR DRS\b/g, "BUSCAR O VÁCUO"], [/\b(o )?DRS\b/g, "o vácuo"]], ovt: [[/\bABRIR DRS\b/g, "ATIVAR ULTRAPASSAGEM"], [/\bDRS\b/g, "modo de ultrapassagem"]],
       board: [[/\b(pelo|no) rádio\b/gi, "com a placa"], [/\bRÁDIO\b/g, "PLACA"], [/\bRádio\b/g, "Placa"], [/\brádio\b/g, "placa"], [/📻/g, "🪧"], [/🎧/g, "📋"]],
       flag: [[/LUZES APAGADAS/g, "BANDEIRA BAIXADA"], [/as (5 )?luzes se apagarem/g, "a bandeira baixar"], [/as (5 )?luzes se apagam/g, "a bandeira baixa"], [/as (5 )?luzes/g, "a bandeira"], [/\bLuzes\b/g, "Bandeira"], [/🚦/g, "🚩"]],
       yel: [[/Safety Car e clima/g, "bandeiras amarelas e clima"], [/\(chuva, Safety Car/g, "(chuva, bandeiras amarelas"]] }
-  } : {
+  }, en: {
     html: "en", and: "and", voice: /^en/i, pref: ["en-GB", "en-US", "en-AU", "en-IE", "en-CA"], deflang: "en-US", lap: "lap", plus: "plus $1 seconds",
     era: { slip: [[/\bOPEN DRS\b/g, "LOOK FOR THE SLIPSTREAM"], [/\b(the )?DRS\b/g, "the slipstream"]], ovt: [[/\bOPEN DRS\b/g, "ACTIVATE OVERTAKE"], [/\bDRS\b/g, "overtake mode"]],
       board: [[/Radio check\. Loud and clear\./g, "Pit board ready. It reads clearly."], [/\b(on|over|by) (the )?radio\b/g, "with the pit board"], [/\bRADIO\b/g, "PIT BOARD"], [/\bRadio\b/g, "Pit board"], [/\bradio\b/g, "pit board"], [/📻/g, "🪧"], [/🎧/g, "📋"]],
       flag: [[/LIGHTS OUT/g, "FLAG DOWN"], [/the (5 )?lights go out/g, "the flag drops"], [/the (5 )?lights went out/g, "the flag dropped"], [/the (5 )?lights/g, "the flag"], [/\bLights\b/g, "Flag"], [/🚦/g, "🚩"]],
       yel: [[/Safety Car and weather/g, "yellow flags and weather"], [/\(rain, Safety Car/g, "(rain, yellow flags"]] }
-  };
-  try { document.documentElement.lang = LX.html; } catch (e) {}
-  const RAW = (PT ? window.FW_PT_DICT : window.FW_EN_DICT) || {};
-  const D = new Map();
+  } };
+  const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let LX = LXS.en, D = new Map(), PAT = [], B = new Map();
+  function build() {
+  LX = LXS[LANG] || LXS.en;
+  try { document.documentElement.lang = LANG === "es" ? "es" : LX.html; } catch (e) {}
+  D = new Map(); PAT = []; B = new Map();
+  try { cache.clear(); } catch (e) {}
+  eraK = "";
+  if (LANG === "es") return;
+  const RAW = (LANG === "pt" ? window.FW_PT_DICT : window.FW_EN_DICT) || {};
   for (const k in RAW) { const v = RAW[k]; if (v && v !== "=" && v !== k) D.set(k, v); }
   // variantes de mayúsculas: "PILOTO" (con text-transform o escrito así) y "Fue la…" (primera letra en mayúscula)
   {
@@ -100,8 +99,6 @@ body.fw-ingame #fwLangPill{display:none}
   }
 
   // textos con {gp} / {nextgp}: se traducen como patrón
-  const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const PAT = [];
   for (const [k, v] of D) {
     if (!/\{(gp|nextgp)\}/.test(k)) continue;
     const names = [...k.matchAll(/\{(gp|nextgp)\}/g)].map(m => m[1]);
@@ -110,7 +107,6 @@ body.fw-ingame #fwLangPill{display:none}
   }
 
   // fragmentos: claves agrupadas por sus dos primeras letras, de la más larga a la más corta
-  const B = new Map();
   for (const k of D.keys()) {
     if (k.length < 3 || /\{(gp|nextgp)\}/.test(k) || !/[A-Za-zÀ-ÿ]/.test(k)) continue;
     const h = k.slice(0, 2);
@@ -118,6 +114,7 @@ body.fw-ingame #fwLangPill{display:none}
     B.get(h).push(k);
   }
   for (const a of B.values()) a.sort((x, y) => y.length - x.length);
+  }
   const isL = c => !!c && /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(c);
 
   function matchAt(s, i) {
@@ -188,7 +185,7 @@ body.fw-ingame #fwLangPill{display:none}
     eraR = R; return R;
   }
   function tr(t, noRules) {
-    if (!t || !HASW.test(t)) return t;
+    if (LANG === "es" || !t || !HASW.test(t)) return t;
     const rules = !noRules && TRIG.test(t) && typeof window.v17Rules === "function";
     if (!rules) { const h = cache.get(t); if (h !== undefined) return h; }
     let src = t;
@@ -208,6 +205,7 @@ body.fw-ingame #fwLangPill{display:none}
     return out;
   }
   window.fwT = s => tr(String(s == null ? "" : s));
+  build();
 
   /* ---------- lo que la lógica lee de la pantalla sigue en español ---------- */
   const ORIG = new WeakMap();   // texto → { es, en }
@@ -221,13 +219,13 @@ body.fw-ingame #fwLangPill{display:none}
     const v = n.nodeValue;
     if (!v || !HASW.test(v)) return;
     const rec = ORIG.get(n);
-    if (rec && rec.en === v) return;
+    if (rec && rec.en === v && rec.l === LANG) return;
     const p = n.parentNode;
     if (!p || p.nodeType !== 1 || SKIPTAG[p.tagName]) return;
     if (p.closest && p.closest("[data-noi18n]")) return;
     const r = tr(v, TRIG.test(v) && noRulesFor(p));
-    if (r !== v) { ORIG.set(n, { es: v, en: r }); n.nodeValue = r; }
-    else ORIG.set(n, { es: v, en: v });
+    if (r !== v) { ORIG.set(n, { es: v, en: r, l: LANG }); n.nodeValue = r; }
+    else ORIG.set(n, { es: v, en: v, l: LANG });
   }
   const ATTRS = ["title", "placeholder", "aria-label", "alt", "data-tip"];
   function doAttrs(el) {
@@ -237,9 +235,9 @@ body.fw-ingame #fwLangPill{display:none}
       const v = el.getAttribute(a);
       if (!v || !HASW.test(v)) continue;
       let m = ORIGA.get(el);
-      if (m && m[a] && m[a].en === v) continue;
+      if (m && m[a] && m[a].en === v && m[a].l === LANG) continue;
       const r = tr(v, true);
-      if (r !== v) { if (!m) { m = {}; ORIGA.set(el, m); } m[a] = { es: v, en: r }; el.setAttribute(a, r); }
+      if (r !== v) { if (!m) { m = {}; ORIGA.set(el, m); } m[a] = { es: v, en: r, l: LANG }; el.setAttribute(a, r); }
     }
   }
   function walk(root) {
@@ -255,7 +253,7 @@ body.fw-ingame #fwLangPill{display:none}
     while ((x = w.nextNode())) { if (x.nodeType === 3) doText(x); else doAttrs(x); }
   }
   function onRecs(recs) {
-    if (busy) return;
+    if (busy || LANG === "es") return;   // en español no hay nada que traducir
     busy = true;
     try {
       for (const m of recs) {
@@ -266,14 +264,51 @@ body.fw-ingame #fwLangPill{display:none}
     } catch (e) {} finally { busy = false; }
   }
   const mo = new MutationObserver(onRecs);
+  let started = false, titleEs = "", hooked = false;
   function start() {
+    if (started || !document.body) return;
+    started = true;
     try { walk(document.body); } catch (e) {}
     mo.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS });
-    try { const tt = document.querySelector("title"); if (tt) { document.title = tr(document.title); new MutationObserver(() => { const t = tr(document.title); if (t !== document.title) document.title = t; }).observe(tt, { childList: true, characterData: true, subtree: true }); } } catch (e) {}
+    try { const tt = document.querySelector("title"); if (tt) { titleEs = document.title; document.title = tr(document.title); new MutationObserver(() => { if (LANG === "es") return; const t = tr(document.title); if (t !== document.title) document.title = t; }).observe(tt, { childList: true, characterData: true, subtree: true }); } } catch (e) {}
   }
-  if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
+  function boot() { if (LANG !== "es") { installHooks(); start(); } }
+  if (document.body) boot(); else document.addEventListener("DOMContentLoaded", boot);
+
+  // vuelve toda la pantalla al español original (para cambiar de idioma sin recargar)
+  function restoreAll() {
+    const root = document.body; if (!root) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
+    let x;
+    while ((x = w.nextNode())) {
+      if (x.nodeType === 3) { const r = ORIG.get(x); if (r) { if (r.en === x.nodeValue && r.es !== r.en) x.nodeValue = r.es; ORIG.delete(x); } }
+      else { const m = ORIGA.get(x); if (m) { for (const k in m) if (x.getAttribute(k) === m[k].en) x.setAttribute(k, m[k].es); ORIGA.delete(x); } }
+    }
+    try { if (titleEs) document.title = titleEs; } catch (e) {}
+  }
+  window.fwSetLang = function (l) {
+    if ((l !== "en" && l !== "es" && l !== "pt") || l === LANG) return;
+    try { localStorage.setItem(KEY, l); } catch (e) {}
+    busy = true;
+    try { if (LANG !== "es") restoreAll(); } catch (e) {}
+    try { if (started) mo.takeRecords(); } catch (e) {}
+    busy = false;
+    LANG = l; window.FW_LANG = l;
+    build();
+    if (l !== "es") {
+      installHooks();
+      if (!started) start();
+      else { busy = true; try { walk(document.body); document.title = tr(titleEs || document.title); mo.takeRecords(); } catch (e) {} busy = false; }
+    }
+    try { const p = document.getElementById("fwLangPill"); if (p && p.fwSync) p.fwSync(); } catch (e) {}
+    try { if (typeof FW_RADIO !== "undefined" && typeof fwRadioVoices === "function") fwRadioVoices(); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent("fw-lang", { detail: l })); } catch (e) {}
+  };
 
   // lecturas: textContent / innerHTML / outerHTML devuelven el español original
+  function installHooks() {
+  if (hooked) return;
+  hooked = true;
   function hasTr(el) {
     if (ORIGA.has(el)) return true;
     const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
@@ -302,6 +337,7 @@ body.fw-ingame #fwLangPill{display:none}
     Object.defineProperty(Node.prototype, "textContent", {
       configurable: true, enumerable: dTC.enumerable, set: dTC.set,
       get: function () {
+        if (LANG === "es") return dTC.get.call(this);
         if (this.nodeType === 3) { const r = ORIG.get(this); const v = this.nodeValue; return r && r.en === v ? r.es : v; }
         if (this.nodeType !== 1 && this.nodeType !== 11) return dTC.get.call(this);
         let out = "", any = false;
@@ -314,17 +350,17 @@ body.fw-ingame #fwLangPill{display:none}
     const dIH = Object.getOwnPropertyDescriptor(Element.prototype, "innerHTML");
     Object.defineProperty(Element.prototype, "innerHTML", {
       configurable: true, enumerable: dIH.enumerable, set: dIH.set,
-      get: function () { try { if (hasTr(this)) return dIH.get.call(esClone(this)); } catch (e) {} return dIH.get.call(this); }
+      get: function () { try { if (LANG !== "es" && hasTr(this)) return dIH.get.call(esClone(this)); } catch (e) {} return dIH.get.call(this); }
     });
     const dOH = Object.getOwnPropertyDescriptor(Element.prototype, "outerHTML");
     Object.defineProperty(Element.prototype, "outerHTML", {
       configurable: true, enumerable: dOH.enumerable, set: dOH.set,
-      get: function () { try { if (hasTr(this)) return dOH.get.call(esClone(this)); } catch (e) {} return dOH.get.call(this); }
+      get: function () { try { if (LANG !== "es" && hasTr(this)) return dOH.get.call(esClone(this)); } catch (e) {} return dOH.get.call(this); }
     });
     const dIT = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "innerText");
     if (dIT) Object.defineProperty(HTMLElement.prototype, "innerText", {
       configurable: true, enumerable: dIT.enumerable, set: dIT.set,
-      get: function () { const v = dIT.get.call(this); try { if (hasTr(this)) { let t = v; const w = document.createTreeWalker(this, NodeFilter.SHOW_TEXT); let x; while ((x = w.nextNode())) { const r = ORIG.get(x); if (r && r.en === x.nodeValue && r.es !== r.en) t = t.split(r.en.trim()).join(r.es.trim()); } return t; } } catch (e) {} return v; }
+      get: function () { const v = dIT.get.call(this); try { if (LANG !== "es" && hasTr(this)) { let t = v; const w = document.createTreeWalker(this, NodeFilter.SHOW_TEXT); let x; while ((x = w.nextNode())) { const r = ORIG.get(x); if (r && r.en === x.nodeValue && r.es !== r.en) t = t.split(r.en.trim()).join(r.es.trim()); } return t; } } catch (e) {} return v; }
     });
   } catch (e) {}
 
@@ -361,11 +397,14 @@ body.fw-ingame #fwLangPill{display:none}
       } catch (e) { return []; }
     };
     if (typeof FW_RADIO !== "undefined") {
-      window.fwRadioVoices = fwRadioVoices = function () { FW_RADIO.voices = enVoices(); return FW_RADIO.voices; };
+      const oVoices = typeof fwRadioVoices === "function" ? fwRadioVoices : null;
+      window.fwRadioVoices = fwRadioVoices = function () { if (LANG === "es" && oVoices) return oVoices.apply(this, arguments); FW_RADIO.voices = enVoices(); return FW_RADIO.voices; };
       try { fwRadioVoices(); if (window.speechSynthesis) speechSynthesis.onvoiceschanged = fwRadioVoices; } catch (e) {}
     }
     if (typeof fwRadioClean === "function") {
+      const oClean = fwRadioClean;
       window.fwRadioClean = fwRadioClean = function (t) {
+        if (LANG === "es") return oClean.apply(this, arguments);
         let v = String(t || "").replace(/<[^>]+>/g, " ");
         v = tr(v);
         return v
@@ -382,11 +421,12 @@ body.fw-ingame #fwLangPill{display:none}
     if (window.speechSynthesis) {
       const real = speechSynthesis.getVoices.bind(speechSynthesis);
       let inSay = 0;
-      try { speechSynthesis.getVoices = function () { const a = real(); if (inSay && a.length && !a.some(v => /^es/i.test(v.lang)) && a.some(v => LX.voice.test(v.lang))) return a.concat([{ lang: "es-XX", name: "-" }]); return a; }; } catch (e) {}
+      try { speechSynthesis.getVoices = function () { const a = real(); if (LANG !== "es" && inSay && a.length && !a.some(v => /^es/i.test(v.lang)) && a.some(v => LX.voice.test(v.lang))) return a.concat([{ lang: "es-XX", name: "-" }]); return a; }; } catch (e) {}
       if (typeof fwRadioSay === "function") {
         const o = fwRadioSay;
         let lastK = "", lastT = 0;
         window.fwRadioSay = fwRadioSay = function (text, who, opt) {
+          if (LANG === "es") return o.apply(this, arguments);
           try {
             const k = fwRadioClean(text).toLowerCase();
             if (k && k === lastK && Date.now() - lastT < 4000) return;
@@ -401,11 +441,12 @@ body.fw-ingame #fwLangPill{display:none}
         const U0 = window.SpeechSynthesisUtterance;
         if (U0) {
           const desc = Object.getOwnPropertyDescriptor(U0.prototype, "lang");
-          class U extends U0 { constructor(t) { super(t); try { desc.set.call(this, LX.deflang); } catch (e) {} } }
-          if (desc && desc.set) Object.defineProperty(U.prototype, "lang", { configurable: true, get() { return desc.get.call(this); }, set(v) { desc.set.call(this, /^es/i.test(String(v)) ? LX.deflang : v); } });
+          class U extends U0 { constructor(t) { super(t); try { if (LANG !== "es") desc.set.call(this, LX.deflang); } catch (e) {} } }
+          if (desc && desc.set) Object.defineProperty(U.prototype, "lang", { configurable: true, get() { return desc.get.call(this); }, set(v) { desc.set.call(this, LANG !== "es" && /^es/i.test(String(v)) ? LX.deflang : v); } });
           window.SpeechSynthesisUtterance = U;
         }
       } catch (e) {}
     }
   } catch (e) {}
+  }
 })();

@@ -30332,7 +30332,8 @@ window.FW_PT_DICT = {&quot;&#x27;Ese no era&#x27;&quot;:&quot;&#x27;Não era ess
    - Para que los parches que leen la pantalla sigan funcionando, textContent / innerHTML /
      outerHTML devuelven el texto original en español de los nodos traducidos.
    - Idioma: ?lang=es|en|pt en la dirección, o el botón 🌐 del menú (se guarda). La primera vez
-     se elige solo según el idioma del navegador.
+     se elige solo según el idioma del navegador. Cambiarlo con el botón NO recarga el juego:
+     se devuelve la pantalla al español original y se vuelve a traducir al idioma nuevo.
    ===================================================================================== */
 (function () {
   const KEY = &quot;fw_ui_lang&quot;;
@@ -30346,15 +30347,8 @@ window.FW_PT_DICT = {&quot;&#x27;Ese no era&#x27;&quot;:&quot;&#x27;Não era ess
     try { const nl = String((navigator.languages &amp;&amp; navigator.languages[0]) || navigator.language || &quot;es&quot;).toLowerCase(); return nl.startsWith(&quot;es&quot;) ? &quot;es&quot; : nl.startsWith(&quot;pt&quot;) ? &quot;pt&quot; : &quot;en&quot;; } catch (e) {}
     return &quot;es&quot;;
   }
-  const LANG = pickLang();
+  let LANG = pickLang();
   window.FW_LANG = LANG;
-  window.fwSetLang = function (l) {
-    if (l !== &quot;en&quot; &amp;&amp; l !== &quot;es&quot; &amp;&amp; l !== &quot;pt&quot;) return;
-    try { localStorage.setItem(KEY, l); } catch (e) {}
-    try { if (typeof autoSave === &quot;function&quot; &amp;&amp; typeof s !== &quot;undefined&quot; &amp;&amp; s &amp;&amp; s.season) autoSave(); } catch (e) {}
-    try { const u = new URL(location.href); if (u.searchParams.has(&quot;lang&quot;)) { u.searchParams.set(&quot;lang&quot;, l); location.replace(u.toString()); return; } } catch (e) {}
-    location.reload();
-  };
 
   /* ---------- botón de idioma (se ve en el menú, no en plena partida) ---------- */
   function langPill() {
@@ -30365,6 +30359,7 @@ window.FW_PT_DICT = {&quot;&#x27;Ese no era&#x27;&quot;:&quot;&#x27;Não era ess
       b.setAttribute(&quot;data-noi18n&quot;, &quot;1&quot;);
       b.innerHTML = `&lt;span class=&quot;fl-ico&quot; aria-hidden=&quot;true&quot;&gt;🌐&lt;/span&gt;&lt;button type=&quot;button&quot; data-l=&quot;es&quot; class=&quot;${LANG === &quot;es&quot; ? &quot;on&quot; : &quot;&quot;}&quot; aria-label=&quot;Español&quot;&gt;ES&lt;/button&gt;&lt;button type=&quot;button&quot; data-l=&quot;en&quot; class=&quot;${LANG === &quot;en&quot; ? &quot;on&quot; : &quot;&quot;}&quot; aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;button type=&quot;button&quot; data-l=&quot;pt&quot; class=&quot;${LANG === &quot;pt&quot; ? &quot;on&quot; : &quot;&quot;}&quot; aria-label=&quot;Português&quot;&gt;PT&lt;/button&gt;`;
       b.addEventListener(&quot;click&quot;, ev =&gt; { const l = ev.target &amp;&amp; ev.target.getAttribute &amp;&amp; ev.target.getAttribute(&quot;data-l&quot;); if (l &amp;&amp; l !== LANG) window.fwSetLang(l); });
+      b.fwSync = () =&gt; b.querySelectorAll(&quot;button[data-l]&quot;).forEach(x =&gt; x.classList.toggle(&quot;on&quot;, x.getAttribute(&quot;data-l&quot;) === LANG));
       document.body.appendChild(b);
       const st = document.createElement(&quot;style&quot;);
       st.textContent = `#fwLangPill{position:fixed;top:10px;right:10px;z-index:99990;display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:rgba(10,12,18,.82);border:1px solid rgba(255,255,255,.18);box-shadow:0 6px 18px rgba(0,0,0,.35);font:700 12px/1 Inter,Arial,sans-serif;backdrop-filter:blur(6px)}
@@ -30381,27 +30376,31 @@ body.fw-ingame #fwLangPill{display:none}
   }
   if (document.body) langPill(); else document.addEventListener(&quot;DOMContentLoaded&quot;, langPill);
 
-  if (LANG === &quot;es&quot;) return;
-
   /* ============================ INGLÉS / PORTUGUÉS ============================ */
-  const PT = LANG === &quot;pt&quot;;
   // lo que cambia de un idioma a otro (además del diccionario)
-  const LX = PT ? {
+  const LXS = { pt: {
     html: &quot;pt-BR&quot;, and: &quot;e&quot;, voice: /^pt/i, pref: [&quot;pt-BR&quot;, &quot;pt-PT&quot;], deflang: &quot;pt-BR&quot;, lap: &quot;volta&quot;, plus: &quot;mais $1 segundos&quot;,
     era: { slip: [[/\bABRIR DRS\b/g, &quot;BUSCAR O VÁCUO&quot;], [/\b(o )?DRS\b/g, &quot;o vácuo&quot;]], ovt: [[/\bABRIR DRS\b/g, &quot;ATIVAR ULTRAPASSAGEM&quot;], [/\bDRS\b/g, &quot;modo de ultrapassagem&quot;]],
       board: [[/\b(pelo|no) rádio\b/gi, &quot;com a placa&quot;], [/\bRÁDIO\b/g, &quot;PLACA&quot;], [/\bRádio\b/g, &quot;Placa&quot;], [/\brádio\b/g, &quot;placa&quot;], [/📻/g, &quot;🪧&quot;], [/🎧/g, &quot;📋&quot;]],
       flag: [[/LUZES APAGADAS/g, &quot;BANDEIRA BAIXADA&quot;], [/as (5 )?luzes se apagarem/g, &quot;a bandeira baixar&quot;], [/as (5 )?luzes se apagam/g, &quot;a bandeira baixa&quot;], [/as (5 )?luzes/g, &quot;a bandeira&quot;], [/\bLuzes\b/g, &quot;Bandeira&quot;], [/🚦/g, &quot;🚩&quot;]],
       yel: [[/Safety Car e clima/g, &quot;bandeiras amarelas e clima&quot;], [/\(chuva, Safety Car/g, &quot;(chuva, bandeiras amarelas&quot;]] }
-  } : {
+  }, en: {
     html: &quot;en&quot;, and: &quot;and&quot;, voice: /^en/i, pref: [&quot;en-GB&quot;, &quot;en-US&quot;, &quot;en-AU&quot;, &quot;en-IE&quot;, &quot;en-CA&quot;], deflang: &quot;en-US&quot;, lap: &quot;lap&quot;, plus: &quot;plus $1 seconds&quot;,
     era: { slip: [[/\bOPEN DRS\b/g, &quot;LOOK FOR THE SLIPSTREAM&quot;], [/\b(the )?DRS\b/g, &quot;the slipstream&quot;]], ovt: [[/\bOPEN DRS\b/g, &quot;ACTIVATE OVERTAKE&quot;], [/\bDRS\b/g, &quot;overtake mode&quot;]],
       board: [[/Radio check\. Loud and clear\./g, &quot;Pit board ready. It reads clearly.&quot;], [/\b(on|over|by) (the )?radio\b/g, &quot;with the pit board&quot;], [/\bRADIO\b/g, &quot;PIT BOARD&quot;], [/\bRadio\b/g, &quot;Pit board&quot;], [/\bradio\b/g, &quot;pit board&quot;], [/📻/g, &quot;🪧&quot;], [/🎧/g, &quot;📋&quot;]],
       flag: [[/LIGHTS OUT/g, &quot;FLAG DOWN&quot;], [/the (5 )?lights go out/g, &quot;the flag drops&quot;], [/the (5 )?lights went out/g, &quot;the flag dropped&quot;], [/the (5 )?lights/g, &quot;the flag&quot;], [/\bLights\b/g, &quot;Flag&quot;], [/🚦/g, &quot;🚩&quot;]],
       yel: [[/Safety Car and weather/g, &quot;yellow flags and weather&quot;], [/\(rain, Safety Car/g, &quot;(rain, yellow flags&quot;]] }
-  };
-  try { document.documentElement.lang = LX.html; } catch (e) {}
-  const RAW = (PT ? window.FW_PT_DICT : window.FW_EN_DICT) || {};
-  const D = new Map();
+  } };
+  const esc = x =&gt; x.replace(/[.*+?^${}()|[\]\\]/g, &quot;\\$&amp;&quot;);
+  let LX = LXS.en, D = new Map(), PAT = [], B = new Map();
+  function build() {
+  LX = LXS[LANG] || LXS.en;
+  try { document.documentElement.lang = LANG === &quot;es&quot; ? &quot;es&quot; : LX.html; } catch (e) {}
+  D = new Map(); PAT = []; B = new Map();
+  try { cache.clear(); } catch (e) {}
+  eraK = &quot;&quot;;
+  if (LANG === &quot;es&quot;) return;
+  const RAW = (LANG === &quot;pt&quot; ? window.FW_PT_DICT : window.FW_EN_DICT) || {};
   for (const k in RAW) { const v = RAW[k]; if (v &amp;&amp; v !== &quot;=&quot; &amp;&amp; v !== k) D.set(k, v); }
   // variantes de mayúsculas: &quot;PILOTO&quot; (con text-transform o escrito así) y &quot;Fue la…&quot; (primera letra en mayúscula)
   {
@@ -30425,8 +30424,6 @@ body.fw-ingame #fwLangPill{display:none}
   }
 
   // textos con {gp} / {nextgp}: se traducen como patrón
-  const esc = x =&gt; x.replace(/[.*+?^${}()|[\]\\]/g, &quot;\\$&amp;&quot;);
-  const PAT = [];
   for (const [k, v] of D) {
     if (!/\{(gp|nextgp)\}/.test(k)) continue;
     const names = [...k.matchAll(/\{(gp|nextgp)\}/g)].map(m =&gt; m[1]);
@@ -30435,7 +30432,6 @@ body.fw-ingame #fwLangPill{display:none}
   }
 
   // fragmentos: claves agrupadas por sus dos primeras letras, de la más larga a la más corta
-  const B = new Map();
   for (const k of D.keys()) {
     if (k.length &lt; 3 || /\{(gp|nextgp)\}/.test(k) || !/[A-Za-zÀ-ÿ]/.test(k)) continue;
     const h = k.slice(0, 2);
@@ -30443,6 +30439,7 @@ body.fw-ingame #fwLangPill{display:none}
     B.get(h).push(k);
   }
   for (const a of B.values()) a.sort((x, y) =&gt; y.length - x.length);
+  }
   const isL = c =&gt; !!c &amp;&amp; /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(c);
 
   function matchAt(s, i) {
@@ -30513,7 +30510,7 @@ body.fw-ingame #fwLangPill{display:none}
     eraR = R; return R;
   }
   function tr(t, noRules) {
-    if (!t || !HASW.test(t)) return t;
+    if (LANG === &quot;es&quot; || !t || !HASW.test(t)) return t;
     const rules = !noRules &amp;&amp; TRIG.test(t) &amp;&amp; typeof window.v17Rules === &quot;function&quot;;
     if (!rules) { const h = cache.get(t); if (h !== undefined) return h; }
     let src = t;
@@ -30533,6 +30530,7 @@ body.fw-ingame #fwLangPill{display:none}
     return out;
   }
   window.fwT = s =&gt; tr(String(s == null ? &quot;&quot; : s));
+  build();
 
   /* ---------- lo que la lógica lee de la pantalla sigue en español ---------- */
   const ORIG = new WeakMap();   // texto → { es, en }
@@ -30546,13 +30544,13 @@ body.fw-ingame #fwLangPill{display:none}
     const v = n.nodeValue;
     if (!v || !HASW.test(v)) return;
     const rec = ORIG.get(n);
-    if (rec &amp;&amp; rec.en === v) return;
+    if (rec &amp;&amp; rec.en === v &amp;&amp; rec.l === LANG) return;
     const p = n.parentNode;
     if (!p || p.nodeType !== 1 || SKIPTAG[p.tagName]) return;
     if (p.closest &amp;&amp; p.closest(&quot;[data-noi18n]&quot;)) return;
     const r = tr(v, TRIG.test(v) &amp;&amp; noRulesFor(p));
-    if (r !== v) { ORIG.set(n, { es: v, en: r }); n.nodeValue = r; }
-    else ORIG.set(n, { es: v, en: v });
+    if (r !== v) { ORIG.set(n, { es: v, en: r, l: LANG }); n.nodeValue = r; }
+    else ORIG.set(n, { es: v, en: v, l: LANG });
   }
   const ATTRS = [&quot;title&quot;, &quot;placeholder&quot;, &quot;aria-label&quot;, &quot;alt&quot;, &quot;data-tip&quot;];
   function doAttrs(el) {
@@ -30562,9 +30560,9 @@ body.fw-ingame #fwLangPill{display:none}
       const v = el.getAttribute(a);
       if (!v || !HASW.test(v)) continue;
       let m = ORIGA.get(el);
-      if (m &amp;&amp; m[a] &amp;&amp; m[a].en === v) continue;
+      if (m &amp;&amp; m[a] &amp;&amp; m[a].en === v &amp;&amp; m[a].l === LANG) continue;
       const r = tr(v, true);
-      if (r !== v) { if (!m) { m = {}; ORIGA.set(el, m); } m[a] = { es: v, en: r }; el.setAttribute(a, r); }
+      if (r !== v) { if (!m) { m = {}; ORIGA.set(el, m); } m[a] = { es: v, en: r, l: LANG }; el.setAttribute(a, r); }
     }
   }
   function walk(root) {
@@ -30580,7 +30578,7 @@ body.fw-ingame #fwLangPill{display:none}
     while ((x = w.nextNode())) { if (x.nodeType === 3) doText(x); else doAttrs(x); }
   }
   function onRecs(recs) {
-    if (busy) return;
+    if (busy || LANG === &quot;es&quot;) return;   // en español no hay nada que traducir
     busy = true;
     try {
       for (const m of recs) {
@@ -30591,14 +30589,51 @@ body.fw-ingame #fwLangPill{display:none}
     } catch (e) {} finally { busy = false; }
   }
   const mo = new MutationObserver(onRecs);
+  let started = false, titleEs = &quot;&quot;, hooked = false;
   function start() {
+    if (started || !document.body) return;
+    started = true;
     try { walk(document.body); } catch (e) {}
     mo.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS });
-    try { const tt = document.querySelector(&quot;title&quot;); if (tt) { document.title = tr(document.title); new MutationObserver(() =&gt; { const t = tr(document.title); if (t !== document.title) document.title = t; }).observe(tt, { childList: true, characterData: true, subtree: true }); } } catch (e) {}
+    try { const tt = document.querySelector(&quot;title&quot;); if (tt) { titleEs = document.title; document.title = tr(document.title); new MutationObserver(() =&gt; { if (LANG === &quot;es&quot;) return; const t = tr(document.title); if (t !== document.title) document.title = t; }).observe(tt, { childList: true, characterData: true, subtree: true }); } } catch (e) {}
   }
-  if (document.body) start(); else document.addEventListener(&quot;DOMContentLoaded&quot;, start);
+  function boot() { if (LANG !== &quot;es&quot;) { installHooks(); start(); } }
+  if (document.body) boot(); else document.addEventListener(&quot;DOMContentLoaded&quot;, boot);
+
+  // vuelve toda la pantalla al español original (para cambiar de idioma sin recargar)
+  function restoreAll() {
+    const root = document.body; if (!root) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
+    let x;
+    while ((x = w.nextNode())) {
+      if (x.nodeType === 3) { const r = ORIG.get(x); if (r) { if (r.en === x.nodeValue &amp;&amp; r.es !== r.en) x.nodeValue = r.es; ORIG.delete(x); } }
+      else { const m = ORIGA.get(x); if (m) { for (const k in m) if (x.getAttribute(k) === m[k].en) x.setAttribute(k, m[k].es); ORIGA.delete(x); } }
+    }
+    try { if (titleEs) document.title = titleEs; } catch (e) {}
+  }
+  window.fwSetLang = function (l) {
+    if ((l !== &quot;en&quot; &amp;&amp; l !== &quot;es&quot; &amp;&amp; l !== &quot;pt&quot;) || l === LANG) return;
+    try { localStorage.setItem(KEY, l); } catch (e) {}
+    busy = true;
+    try { if (LANG !== &quot;es&quot;) restoreAll(); } catch (e) {}
+    try { if (started) mo.takeRecords(); } catch (e) {}
+    busy = false;
+    LANG = l; window.FW_LANG = l;
+    build();
+    if (l !== &quot;es&quot;) {
+      installHooks();
+      if (!started) start();
+      else { busy = true; try { walk(document.body); document.title = tr(titleEs || document.title); mo.takeRecords(); } catch (e) {} busy = false; }
+    }
+    try { const p = document.getElementById(&quot;fwLangPill&quot;); if (p &amp;&amp; p.fwSync) p.fwSync(); } catch (e) {}
+    try { if (typeof FW_RADIO !== &quot;undefined&quot; &amp;&amp; typeof fwRadioVoices === &quot;function&quot;) fwRadioVoices(); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent(&quot;fw-lang&quot;, { detail: l })); } catch (e) {}
+  };
 
   // lecturas: textContent / innerHTML / outerHTML devuelven el español original
+  function installHooks() {
+  if (hooked) return;
+  hooked = true;
   function hasTr(el) {
     if (ORIGA.has(el)) return true;
     const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
@@ -30627,6 +30662,7 @@ body.fw-ingame #fwLangPill{display:none}
     Object.defineProperty(Node.prototype, &quot;textContent&quot;, {
       configurable: true, enumerable: dTC.enumerable, set: dTC.set,
       get: function () {
+        if (LANG === &quot;es&quot;) return dTC.get.call(this);
         if (this.nodeType === 3) { const r = ORIG.get(this); const v = this.nodeValue; return r &amp;&amp; r.en === v ? r.es : v; }
         if (this.nodeType !== 1 &amp;&amp; this.nodeType !== 11) return dTC.get.call(this);
         let out = &quot;&quot;, any = false;
@@ -30639,17 +30675,17 @@ body.fw-ingame #fwLangPill{display:none}
     const dIH = Object.getOwnPropertyDescriptor(Element.prototype, &quot;innerHTML&quot;);
     Object.defineProperty(Element.prototype, &quot;innerHTML&quot;, {
       configurable: true, enumerable: dIH.enumerable, set: dIH.set,
-      get: function () { try { if (hasTr(this)) return dIH.get.call(esClone(this)); } catch (e) {} return dIH.get.call(this); }
+      get: function () { try { if (LANG !== &quot;es&quot; &amp;&amp; hasTr(this)) return dIH.get.call(esClone(this)); } catch (e) {} return dIH.get.call(this); }
     });
     const dOH = Object.getOwnPropertyDescriptor(Element.prototype, &quot;outerHTML&quot;);
     Object.defineProperty(Element.prototype, &quot;outerHTML&quot;, {
       configurable: true, enumerable: dOH.enumerable, set: dOH.set,
-      get: function () { try { if (hasTr(this)) return dOH.get.call(esClone(this)); } catch (e) {} return dOH.get.call(this); }
+      get: function () { try { if (LANG !== &quot;es&quot; &amp;&amp; hasTr(this)) return dOH.get.call(esClone(this)); } catch (e) {} return dOH.get.call(this); }
     });
     const dIT = Object.getOwnPropertyDescriptor(HTMLElement.prototype, &quot;innerText&quot;);
     if (dIT) Object.defineProperty(HTMLElement.prototype, &quot;innerText&quot;, {
       configurable: true, enumerable: dIT.enumerable, set: dIT.set,
-      get: function () { const v = dIT.get.call(this); try { if (hasTr(this)) { let t = v; const w = document.createTreeWalker(this, NodeFilter.SHOW_TEXT); let x; while ((x = w.nextNode())) { const r = ORIG.get(x); if (r &amp;&amp; r.en === x.nodeValue &amp;&amp; r.es !== r.en) t = t.split(r.en.trim()).join(r.es.trim()); } return t; } } catch (e) {} return v; }
+      get: function () { const v = dIT.get.call(this); try { if (LANG !== &quot;es&quot; &amp;&amp; hasTr(this)) { let t = v; const w = document.createTreeWalker(this, NodeFilter.SHOW_TEXT); let x; while ((x = w.nextNode())) { const r = ORIG.get(x); if (r &amp;&amp; r.en === x.nodeValue &amp;&amp; r.es !== r.en) t = t.split(r.en.trim()).join(r.es.trim()); } return t; } } catch (e) {} return v; }
     });
   } catch (e) {}
 
@@ -30686,11 +30722,14 @@ body.fw-ingame #fwLangPill{display:none}
       } catch (e) { return []; }
     };
     if (typeof FW_RADIO !== &quot;undefined&quot;) {
-      window.fwRadioVoices = fwRadioVoices = function () { FW_RADIO.voices = enVoices(); return FW_RADIO.voices; };
+      const oVoices = typeof fwRadioVoices === &quot;function&quot; ? fwRadioVoices : null;
+      window.fwRadioVoices = fwRadioVoices = function () { if (LANG === &quot;es&quot; &amp;&amp; oVoices) return oVoices.apply(this, arguments); FW_RADIO.voices = enVoices(); return FW_RADIO.voices; };
       try { fwRadioVoices(); if (window.speechSynthesis) speechSynthesis.onvoiceschanged = fwRadioVoices; } catch (e) {}
     }
     if (typeof fwRadioClean === &quot;function&quot;) {
+      const oClean = fwRadioClean;
       window.fwRadioClean = fwRadioClean = function (t) {
+        if (LANG === &quot;es&quot;) return oClean.apply(this, arguments);
         let v = String(t || &quot;&quot;).replace(/&lt;[^&gt;]+&gt;/g, &quot; &quot;);
         v = tr(v);
         return v
@@ -30707,11 +30746,12 @@ body.fw-ingame #fwLangPill{display:none}
     if (window.speechSynthesis) {
       const real = speechSynthesis.getVoices.bind(speechSynthesis);
       let inSay = 0;
-      try { speechSynthesis.getVoices = function () { const a = real(); if (inSay &amp;&amp; a.length &amp;&amp; !a.some(v =&gt; /^es/i.test(v.lang)) &amp;&amp; a.some(v =&gt; LX.voice.test(v.lang))) return a.concat([{ lang: &quot;es-XX&quot;, name: &quot;-&quot; }]); return a; }; } catch (e) {}
+      try { speechSynthesis.getVoices = function () { const a = real(); if (LANG !== &quot;es&quot; &amp;&amp; inSay &amp;&amp; a.length &amp;&amp; !a.some(v =&gt; /^es/i.test(v.lang)) &amp;&amp; a.some(v =&gt; LX.voice.test(v.lang))) return a.concat([{ lang: &quot;es-XX&quot;, name: &quot;-&quot; }]); return a; }; } catch (e) {}
       if (typeof fwRadioSay === &quot;function&quot;) {
         const o = fwRadioSay;
         let lastK = &quot;&quot;, lastT = 0;
         window.fwRadioSay = fwRadioSay = function (text, who, opt) {
+          if (LANG === &quot;es&quot;) return o.apply(this, arguments);
           try {
             const k = fwRadioClean(text).toLowerCase();
             if (k &amp;&amp; k === lastK &amp;&amp; Date.now() - lastT &lt; 4000) return;
@@ -30726,13 +30766,14 @@ body.fw-ingame #fwLangPill{display:none}
         const U0 = window.SpeechSynthesisUtterance;
         if (U0) {
           const desc = Object.getOwnPropertyDescriptor(U0.prototype, &quot;lang&quot;);
-          class U extends U0 { constructor(t) { super(t); try { desc.set.call(this, LX.deflang); } catch (e) {} } }
-          if (desc &amp;&amp; desc.set) Object.defineProperty(U.prototype, &quot;lang&quot;, { configurable: true, get() { return desc.get.call(this); }, set(v) { desc.set.call(this, /^es/i.test(String(v)) ? LX.deflang : v); } });
+          class U extends U0 { constructor(t) { super(t); try { if (LANG !== &quot;es&quot;) desc.set.call(this, LX.deflang); } catch (e) {} } }
+          if (desc &amp;&amp; desc.set) Object.defineProperty(U.prototype, &quot;lang&quot;, { configurable: true, get() { return desc.get.call(this); }, set(v) { desc.set.call(this, LANG !== &quot;es&quot; &amp;&amp; /^es/i.test(String(v)) ? LX.deflang : v); } });
           window.SpeechSynthesisUtterance = U;
         }
       } catch (e) {}
     }
   } catch (e) {}
+  }
 })();
 
 &lt;/script&gt;
